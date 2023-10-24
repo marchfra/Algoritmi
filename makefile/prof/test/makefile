@@ -1,4 +1,4 @@
-OBJ = main.o swap.o
+OBJ = main.o test.o
 
 CXX = g++
 CFLAGS = -c
