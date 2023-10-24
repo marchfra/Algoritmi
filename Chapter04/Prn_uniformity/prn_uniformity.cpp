@@ -1,6 +1,6 @@
 #include <iostream>
 #include <iomanip>
-#include <math.h>
+#include <cmath>
 #include <fstream>
 
 using namespace std;
