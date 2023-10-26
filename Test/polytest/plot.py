@@ -27,5 +27,5 @@ ax.set_ylabel('')
 ax.legend()
 
 fig.tight_layout()
-# fig.savefig('.png', dpi=200)
-plt.show()
+fig.savefig('test1.png', dpi=200)
+# plt.show()

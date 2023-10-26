@@ -23,8 +23,8 @@ int main() {
 	double x = -4.0;
 	double dx = 0.1;
 
-	#if 0
-		double a[] = {1.0, 5.0, -3.0, 1.0};
+	#if 1
+		double a[] = {1.0, -3.0, 5.0, 1.0};
 		int n = sizeof(a) / sizeof(a[0]) - 1;
 		cout << "x,pol,horn" << endl;
 		while (x <= 4.0) {
@@ -43,12 +43,13 @@ int main() {
 		}
 	#endif
 
-	#if 1
+	#if 0
 		double a[] = {1.0, 3.0, 0, 2.0};
 		int n = sizeof(a) / sizeof(a[0]) - 1;
+		// cout << n << endl;
 		cout << "x,pol,horn" << endl;
 		while (x <= 4.0) {
-			cout << x << "," << f2(x) << "," << horner_pol(x, a, n) << endl;
+			cout << x << "," << f3(x) << "," << horner_pol(x, a, n) << endl;
 			x += dx;
 		}
 	#endif

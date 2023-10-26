@@ -47,7 +47,7 @@ int bisection(double (*f)(double), double xa, double xb, const double xtol, cons
 
 
 	if (fa * fb < 0) {		// Necessary condition
-		for (int k = 0; k < max_ntry; k++) {
+		for (int k = 1; k <= max_ntry; k++) {
 			// Function midpoint
 			xm = 0.5 * (xa + xb);
 			fm = f(xm);
@@ -68,9 +68,9 @@ int bisection(double (*f)(double), double xa, double xb, const double xtol, cons
 				fa = fm;
 			}
 
-			// #if DEBUG == TRUE
-			// cout << scientific << "bisection(): k = " << k << "; [a, b] = [" << xa << ", " << xb << "]; xm = " << xm << "; err = " << err << "; fm = " << fm << endl;
-			// #endif
+			#if DEBUG == TRUE
+			cout << scientific << "bisection(): k = " << k << "; [a, b] = [" << xa << ", " << xb << "]; xm = " << xm << "; err = " << fabs(xb - xa) << "; fm = " << fm << endl;
+			#endif
 
 		}
 
@@ -124,7 +124,7 @@ int false_position(double (*f)(double), double xa, double xb, const double xtol,
 
 
 	if (fa * fb < 0) {		// Necessary condition
-		for (int k = 0; k < max_ntry; k++) {
+		for (int k = 1; k <= max_ntry; k++) {
 			// Linear intersection
 			xm = (xa * fb - xb * fa) / (fb - fa);
 			fm = f(xm);
@@ -193,12 +193,12 @@ int secant(double (*f)(double), double xa, double xb, const double xtol, const d
 		return 0;
 	}
 
-	for (int k = 0; k < max_ntry; k++) {
+	for (int k = 1; k <= max_ntry; k++) {
 		dx = fb * (xb - xa) / (fb - fa);	// Compute increment
 
-		// #if DEBUG == TRUE
-		// cout << scientific << "k = " << k << "; xa = " << xa << "; xb = " << xb << "; dx = " << dx << endl;
-		// #endif
+		#if DEBUG
+		cout << scientific << "secant(): k = " << k << "; xa = " << xa << "; xb = " << xb << "; dx = " << dx << endl;
+		#endif
 
 		// Shift values
 		xa = xb;
@@ -225,13 +225,13 @@ int newton(double (*f)(double), double (*dfdx)(double), double xa, double xb, co
 	// Find the root of a function f(x) in a given interval [xa, xb]
 	// using secant method.
 
-	// *f       [in]    pointer to the function
-	// *dfdx    [in]    pointer to the derivative of the function
-	// xa, xb   [in]    initial interval (containing the root)
-	// xtol     [in]    x-tolerance
-	// ftol     [in]    f(x)-tolerance
-	// root     [out]   the root of f(x)
-	// ntry     [out]   number of iterations achieved
+	// *f       [in]  : pointer to the function
+	// *dfdx    [in]  : pointer to the derivative of the function
+	// xa, xb   [in]  : initial interval (containing the root)
+	// xtol     [in]  : x-tolerance
+	// ftol     [in]  : f(x)-tolerance
+	// root     [out] : the root of f(x)
+	// ntry     [out] : number of iterations achieved
 	//
 	// On output the function returns 0 (success) or 1 (too many steps).
 	//
@@ -244,7 +244,6 @@ int newton(double (*f)(double), double (*dfdx)(double), double xa, double xb, co
 	double fb = f(xb);
 	double fc, dx;
 	double xc = 0.5 * (xa + xb);
-	// double dx = xb - xa;
 
 	// Handle fa, fb = 0
 	if (fa == 0.0) {
@@ -258,19 +257,19 @@ int newton(double (*f)(double), double (*dfdx)(double), double xa, double xb, co
 	}
 
 	if (fa * fb < 0) {	// Check that interval contains a solution REMOVE FOR EVEN MULTIPLICITY
-		for (int k = 0; k < max_ntry; k++) {
+		for (int k = 1; k <= max_ntry; k++) {
 			fc = f(xc);
 			dx = fc / dfdx(xc);
 			xc -= dx;
 
-			// #if DEBUG == TRUE
-			// cout << scientific << "k = " << k << "; xa = " << xa << "; xb = " << xb << "; dx = " << dx << endl;
-			// #endif
+			#if DEBUG
+			cout << scientific << "newton(): k = " << k << "; xc = " << xc << "; dx = " << dx << endl;
+			#endif
 
 			// Check convergence
 			if (fabs(dx) < xtol || fabs(fc) < ftol) {
 				ntry = k;
-				root = xb;
+				root = xc;
 				return 0;
 			}
 		}
