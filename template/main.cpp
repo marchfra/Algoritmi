@@ -5,7 +5,7 @@
 
 #include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/quad.hpp"
 #include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/swap.hpp"
-#include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/polynomial.hpp"
+#include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/polynomials.hpp"
 
 using namespace std;
 
