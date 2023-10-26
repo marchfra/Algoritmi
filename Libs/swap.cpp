@@ -1,3 +1,4 @@
+#include "debug.hpp"
 #include "swap.hpp"
 
 void swap(int& a, int& b) {

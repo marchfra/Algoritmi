@@ -13,4 +13,4 @@ CFLAGS = -Wall -O2
 .PHONY: clean
 clean:
 	@rm -f *.o
-	@echo make clean: done
+	@echo make clean lib: done

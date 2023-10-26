@@ -1,47 +1,50 @@
 #include <iostream>
 
+using namespace std;
+
+#include "debug.hpp"
 #include "execution_time.hpp"
 
-void time_test(void (*f)(), const std::string f_name, const long int executions) {
-	auto start = std::chrono::high_resolution_clock::now();
+void time_test(void (*f)(), const string f_name, const long int executions) {
+	auto start = chrono::high_resolution_clock::now();
 	for (long int i = 0; i < executions; i++) {
 		f();
 	}
-	auto stop = std::chrono::high_resolution_clock::now();	
-	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
+	auto stop = chrono::high_resolution_clock::now();	
+	auto duration = chrono::duration_cast<chrono::nanoseconds>(stop - start);
 
-	std::cout << f_name << " execution time: " << duration.count() / executions << " ns" << std::endl;
+	cout << f_name << " execution time: " << duration.count() / executions << " ns" << endl;
 }
 
-void time_test(double (*f)(), const std::string f_name, const long int executions) {
-	auto start = std::chrono::high_resolution_clock::now();
+void time_test(double (*f)(), const string f_name, const long int executions) {
+	auto start = chrono::high_resolution_clock::now();
 	for (long int i = 0; i < executions; i++) {
 		f();
 	}
-	auto stop = std::chrono::high_resolution_clock::now();	
-	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
+	auto stop = chrono::high_resolution_clock::now();	
+	auto duration = chrono::duration_cast<chrono::nanoseconds>(stop - start);
 
-	std::cout << f_name << " execution time: " << duration.count() / executions << " ns" << std::endl;
+	cout << f_name << " execution time: " << duration.count() / executions << " ns" << endl;
 }
 
-void time_test(double (*f)(double (*)(double), double, double, int), double(*func)(double), const double a, const double b, int N, const std::string f_name, const long int executions) {
-	auto start = std::chrono::high_resolution_clock::now();
+void time_test(double (*f)(double (*)(double), double, double, int), double(*func)(double), const double a, const double b, int N, const string f_name, const long int executions) {
+	auto start = chrono::high_resolution_clock::now();
 	for (long int i = 0; i < executions; i++) {
 		f(func, a, b, N);
 	}
-	auto stop = std::chrono::high_resolution_clock::now();	
-	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
+	auto stop = chrono::high_resolution_clock::now();	
+	auto duration = chrono::duration_cast<chrono::nanoseconds>(stop - start);
 
-	std::cout << f_name << " execution time: " << duration.count() / executions << " ns" << std::endl;
+	cout << f_name << " execution time: " << duration.count() / executions << " ns" << endl;
 }
 
-void time_test(double (*f)(double (*)(double), double, double, int, int), double(*func)(double), const double a, const double b, int N, int Ng, const std::string f_name, const long int executions) {
-	auto start = std::chrono::high_resolution_clock::now();
+void time_test(double (*f)(double (*)(double), double, double, int, int), double(*func)(double), const double a, const double b, int N, int Ng, const string f_name, const long int executions) {
+	auto start = chrono::high_resolution_clock::now();
 	for (long int i = 0; i < executions; i++) {
 		f(func, a, b, N, Ng);
 	}
-	auto stop = std::chrono::high_resolution_clock::now();	
-	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start);
+	auto stop = chrono::high_resolution_clock::now();	
+	auto duration = chrono::duration_cast<chrono::nanoseconds>(stop - start);
 
-	std::cout << f_name << " execution time: " << duration.count() / executions << " ns" << std::endl;
+	cout << f_name << " execution time: " << duration.count() / executions << " ns" << endl;
 }

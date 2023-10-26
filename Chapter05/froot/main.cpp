@@ -17,49 +17,61 @@ double f2(double);
 double df2dx(double);
 
 int main() {
-	double zero;
-	double a = -1.0;
-	double b =  1.0;
+	double root;
 	double tol = 1.0e-7;
-	int n = 0.0;
-
-	int flag;
-
-	// for (int i = 0; i < 100; i++) {
-	// 	double x = -4.0 + i * (8.0 / 100);
-	// 	cout << x << " " << f2(x) << " " << x*x*x - 3*x*x + x + 5 << endl;
-	// }
+	int n;
 
 	cout << "--------- Root finders test ---------" << endl;
+	double a = -1.0;
+	double b =  1.0;
 
-	flag = bisection(f1, a, b, tol, -1.0, zero, n);
-	cout << flag << "; bisection (#" << n << ") =      " << zero << endl;
+	bisection(f1, a, b, tol, root, n);
+	cout << "bisection (#" << n << ") = " << root << endl;
 
-	flag = false_position(f1, a, b, tol, -1.0, zero, n);
-	cout << flag << "; false_position (#" << n << ") = " << zero << endl;
+	false_position(f1, a, b, tol, root, n);
+	cout << "false_position (#" << n << ") = " << root << endl;
 
-	flag = secant(f1, a, b, tol, -1.0, zero, n);
-	cout << flag << "; secant (#" << n << ") =         " << zero << endl;
+	secant(f1, a, b, tol, root, n);
+	cout << "secant (#" << n << ") = " << root << endl;
 
-	flag = newton(f1, df1dx, a, b, tol, -1.0, zero, n);
-	cout << flag << "; newton (#" << n << ") =         " << zero << endl;
+	newton(f1, df1dx, a, b, tol, root, n);
+	cout << "newton (#" << n << ") = " << root << endl;
 
 	cout << "\n------ Polynomial root finding ------" << endl;
+	tol = 1.0e-8;
+	a = -5;
+	b =  0;
+
+	cout << "Interval [a, b] = [" << a << ", " << b << "]" << endl;
+
+	bisection(f2, a, b, tol, root, n);
+	cout << "bisection (#" << n << ") = " << root << endl;
+
+	false_position(f2, a, b, tol, root, n);
+	cout << "false_position (#" << n << ") = " << root << endl;
+
+	secant(f2, a, b, tol, root, n);
+	cout << "secant (#" << n << ") = " << root << endl;
+
+	newton(f2, df2dx, a, b, tol, root, n);
+	cout << "newton (#" << n << ") = " << root << endl;
+
+	cout << endl;
 	a = -2;
 	b =  0;
-	tol = 1.0e-8;
+	cout << "Interval [a, b] = [" << a << ", " << b << "]" << endl;
 
-	flag = bisection(f2, a, b, tol, -1.0, zero, n);
-	cout << flag << "; bisection (#" << n << ") =      " << zero << endl;
+	bisection(f2, a, b, tol, root, n);
+	cout << "bisection (#" << n << ") = " << root << endl;
 
-	flag = false_position(f2, a, b, tol, -1.0, zero, n);
-	cout << flag << "; false_position (#" << n << ") = " << zero << endl;
+	false_position(f2, a, b, tol, root, n);
+	cout << "false_position (#" << n << ") = " << root << endl;
 
-	flag = secant(f2, a, b, tol, -1.0, zero, n);
-	cout << flag << "; secant (#" << n << ") =         " << zero << endl;
+	secant(f2, a, b, tol, root, n);
+	cout << "secant (#" << n << ") = " << root << endl;
 
-	flag = newton(f2, df2dx, a, b, tol, -1.0, zero, n);
-	cout << flag << "; newton (#" << n << ") =         " << zero << endl;
+	newton(f2, df2dx, a, b, tol, root, n);
+	cout << "newton (#" << n << ") = " << root << endl;
 
 	return 0;
 }

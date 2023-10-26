@@ -21,3 +21,7 @@ main: main.o
 clean:
 	@rm -f *.o
 	@echo make clean: done
+
+.PHONY: cleanlib
+cleanlib:
+	@$(MAKE) clean -C $(LIBDIR)

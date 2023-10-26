@@ -3,9 +3,12 @@
 
 using namespace std;
 
+#include "debug.hpp"
 #include "root_finder.hpp"
 
-// #define DEBUG FALSE
+// =====================================================================================================================
+// Bisection method
+// =====================================================================================================================
 
 int bisection(double (*f)(double), double xa, double xb, const double xtol, const double ftol, double& root, int& ntry) {
 
@@ -52,8 +55,17 @@ int bisection(double (*f)(double), double xa, double xb, const double xtol, cons
 			xm = 0.5 * (xa + xb);
 			fm = f(xm);
 
+			#if DEBUG == TRUE
+			cout << setiosflags(ios::scientific);
+			cout << "bisection(): k = " << setw(log10(max_ntry) + 1) << k << "; "
+				 << "[a, b] = [" << setw(13) << xa << ", " << setw(13) << xb << "]; xm = " << setw(13) << xm << ";\n"
+				 << "                   " << setw(log10(max_ntry) + 1) << ""
+				 << "err = " << fabs(xb - xa) << "; fm = " << setw(13) << fm << endl;
+			cout << resetiosflags(ios::scientific);
+			#endif
+
 			// Check convergence
-			if (fabs(xb - xa) < xtol || fabs(fm) < ftol) {
+			if (fabs(xb - xa) < xtol || fabs(fm) < ftol || fm == 0.0) {
 				ntry = k;
 				root = xm;
 				return 0;
@@ -68,10 +80,6 @@ int bisection(double (*f)(double), double xa, double xb, const double xtol, cons
 				fa = fm;
 			}
 
-			#if DEBUG == TRUE
-			cout << scientific << "bisection(): k = " << k << "; [a, b] = [" << xa << ", " << xb << "]; xm = " << xm << "; err = " << fabs(xb - xa) << "; fm = " << fm << endl;
-			#endif
-
 		}
 
 		cout << "! bisection(): too many steps\n" << endl;
@@ -82,6 +90,45 @@ int bisection(double (*f)(double), double xa, double xb, const double xtol, cons
 	cout << "! bisection(): initial interval does not contain any root\n" << endl;
 	return 2;
 }
+
+int bisection(double (*f)(double), double xa, double xb, const double xtol, double& root) {
+
+	// ///////////////////////////////////////////////////////////
+	//
+	// Overloading of bisection() without ntry and ftol parameters
+	//
+	// ///////////////////////////////////////////////////////////
+	
+	int n;
+	return bisection(f, xa, xb, xtol, -1.0, root, n);
+}
+
+int bisection(double (*f)(double), double xa, double xb, const double xtol, double& root, int& ntry) {
+
+	// /////////////////////////////////////////////////
+	//
+	// Overloading of bisection() without ftol parameter
+	//
+	// /////////////////////////////////////////////////
+	
+	return bisection(f, xa, xb, xtol, -1.0, root, ntry);
+}
+
+int bisection(double (*f)(double), double xa, double xb, const double xtol, const double ftol, double& root) {
+
+	// /////////////////////////////////////////////////
+	//
+	// Overloading of bisection() without ntry parameter
+	//
+	// /////////////////////////////////////////////////
+	
+	int n;
+	return bisection(f, xa, xb, xtol, ftol, root, n);
+}
+
+// =====================================================================================================================
+// False position method
+// =====================================================================================================================
 
 int false_position(double (*f)(double), double xa, double xb, const double xtol, const double ftol, double& root, int& ntry) {
 
@@ -129,6 +176,16 @@ int false_position(double (*f)(double), double xa, double xb, const double xtol,
 			xm = (xa * fb - xb * fa) / (fb - fa);
 			fm = f(xm);
 
+			#if DEBUG == TRUE
+			cout << setiosflags(ios::scientific);
+			cout << "false_position(): k = " << setw(log10(max_ntry) + 1) << k << "; "
+				 << "[a, b] = [" << setw(13) << xa << ", " << setw(13) << xb << "]; xm = " << setw(13) << xm << "; "
+				 << "fm = " << setw(13) << fm << ";\n"
+				 << "                        " << setw(log10(max_ntry) + 1) << ""
+				 << "err = " << fabs(del) << endl;
+			cout << resetiosflags(ios::scientific);
+			#endif
+
 			// Redefine interval
 			if (fm * fa < 0) {
 				del = xb - xm;
@@ -141,7 +198,7 @@ int false_position(double (*f)(double), double xa, double xb, const double xtol,
 			}
 
 			// Check convergence
-			if (fabs(del) < xtol || fabs(fm) < ftol) {
+			if (fabs(del) < xtol || fabs(fm) < ftol || fm == 0.0) {
 				ntry = k;
 				root = xm;
 				return 0;
@@ -156,6 +213,45 @@ int false_position(double (*f)(double), double xa, double xb, const double xtol,
 	cout << "! false_position(): initial interval does not contain any root\n" << endl;
 	return 2;
 }
+
+int false_position(double (*f)(double), double xa, double xb, const double xtol, double& root) {
+
+	// ////////////////////////////////////////////////////////////////
+	//
+	// Overloading of false_position() without ntry and ftol parameters
+	//
+	// ////////////////////////////////////////////////////////////////
+	
+	int n;
+	return false_position(f, xa, xb, xtol, -1.0, root, n);
+}
+
+int false_position(double (*f)(double), double xa, double xb, const double xtol, double& root, int& ntry) {
+
+	// //////////////////////////////////////////////////////
+	//
+	// Overloading of false_position() without ftol parameter
+	//
+	// //////////////////////////////////////////////////////
+	
+	return false_position(f, xa, xb, xtol, -1.0, root, ntry);
+}
+
+int false_position(double (*f)(double), double xa, double xb, const double xtol, const double ftol, double& root) {
+
+	// //////////////////////////////////////////////////////
+	//
+	// Overloading of false_position() without ntry parameter
+	//
+	// //////////////////////////////////////////////////////
+	
+	int n;
+	return false_position(f, xa, xb, xtol, ftol, root, n);
+}
+
+// =====================================================================================================================
+// Secant method
+// =====================================================================================================================
 
 int secant(double (*f)(double), double xa, double xb, const double xtol, const double ftol, double& root, int& ntry) {
 
@@ -196,8 +292,11 @@ int secant(double (*f)(double), double xa, double xb, const double xtol, const d
 	for (int k = 1; k <= max_ntry; k++) {
 		dx = fb * (xb - xa) / (fb - fa);	// Compute increment
 
-		#if DEBUG
-		cout << scientific << "secant(): k = " << k << "; xa = " << xa << "; xb = " << xb << "; dx = " << dx << endl;
+		#if DEBUG == TRUE
+		cout << setiosflags(ios::scientific);
+		cout << "secant(): k = " << setw(log10(max_ntry) + 1) << k << "; "
+			 << "[a, b] = [" << setw(13) << xa << ", " << setw(13) << xb << "]; err = " << setw(13) << dx << endl;
+		cout << resetiosflags(ios::scientific);
 		#endif
 
 		// Shift values
@@ -207,7 +306,7 @@ int secant(double (*f)(double), double xa, double xb, const double xtol, const d
 		fb = f(xb);
 
 		// Check convergence
-		if (fabs(dx) < xtol || fabs(fb) < ftol) {
+		if (fabs(dx) < xtol || fabs(fb) < ftol || fb == 0.0) {
 			ntry = k;
 			root = xb;
 			return 0;
@@ -218,12 +317,51 @@ int secant(double (*f)(double), double xa, double xb, const double xtol, const d
 	return 1;
 }
 
+int secant(double (*f)(double), double xa, double xb, const double xtol, double& root) {
+
+	// ////////////////////////////////////////////////////////
+	//
+	// Overloading of secant() without ntry and ftol parameters
+	//
+	// ////////////////////////////////////////////////////////
+	
+	int n;
+	return secant(f, xa, xb, xtol, -1.0, root, n);
+}
+
+int secant(double (*f)(double), double xa, double xb, const double xtol, double& root, int& ntry) {
+
+	// //////////////////////////////////////////////
+	//
+	// Overloading of secant() without ftol parameter
+	//
+	// //////////////////////////////////////////////
+	
+	return secant(f, xa, xb, xtol, -1.0, root, ntry);
+}
+
+int secant(double (*f)(double), double xa, double xb, const double xtol, const double ftol, double& root) {
+
+	// //////////////////////////////////////////////
+	//
+	// Overloading of secant() without ntry parameter
+	//
+	// //////////////////////////////////////////////
+	
+	int n;
+	return secant(f, xa, xb, xtol, ftol, root, n);
+}
+
+// =====================================================================================================================
+// Newton's method
+// =====================================================================================================================
+
 int newton(double (*f)(double), double (*dfdx)(double), double xa, double xb, const double xtol, const double ftol, double& root, int& ntry) {
 
 	// /////////////////////////////////////////////////////////////////
 	//
 	// Find the root of a function f(x) in a given interval [xa, xb]
-	// using secant method.
+	// using Newton's method.
 
 	// *f       [in]  : pointer to the function
 	// *dfdx    [in]  : pointer to the derivative of the function
@@ -262,12 +400,15 @@ int newton(double (*f)(double), double (*dfdx)(double), double xa, double xb, co
 			dx = fc / dfdx(xc);
 			xc -= dx;
 
-			#if DEBUG
-			cout << scientific << "newton(): k = " << k << "; xc = " << xc << "; dx = " << dx << endl;
+			#if DEBUG == TRUE
+			cout << setiosflags(ios::scientific);
+			cout << "newton(): k = " << setw(log10(max_ntry) + 1) << k << "; "
+				 << "xc = " << setw(13) << xc << "; dx = " << setw(13) << dx << endl;
+			cout << resetiosflags(ios::scientific);
 			#endif
 
 			// Check convergence
-			if (fabs(dx) < xtol || fabs(fc) < ftol) {
+			if (fabs(dx) < xtol || fabs(fc) < ftol || fc == 0.0) {
 				ntry = k;
 				root = xc;
 				return 0;
@@ -277,4 +418,39 @@ int newton(double (*f)(double), double (*dfdx)(double), double xa, double xb, co
 
 	cout << "! newton(): too many steps\n" << endl;
 	return 1;
+}
+
+int newton(double (*f)(double), double(*dfdx)(double), double xa, double xb, const double xtol, double& root) {
+
+	// ////////////////////////////////////////////////////////
+	//
+	// Overloading of newton() without ntry and ftol parameters
+	//
+	// ////////////////////////////////////////////////////////
+	
+	int n;
+	return newton(f, dfdx, xa, xb, xtol, -1.0, root, n);
+}
+
+int newton(double (*f)(double), double(*dfdx)(double), double xa, double xb, const double xtol, double& root, int& ntry) {
+
+	// //////////////////////////////////////////////
+	//
+	// Overloading of newton() without ftol parameter
+	//
+	// //////////////////////////////////////////////
+	
+	return newton(f, dfdx, xa, xb, xtol, -1.0, root, ntry);
+}
+
+int newton(double (*f)(double), double(*dfdx)(double), double xa, double xb, const double xtol, const double ftol, double& root) {
+
+	// //////////////////////////////////////////////
+	//
+	// Overloading of newton() without ntry parameter
+	//
+	// //////////////////////////////////////////////
+	
+	int n;
+	return newton(f, dfdx, xa, xb, xtol, ftol, root, n);
 }

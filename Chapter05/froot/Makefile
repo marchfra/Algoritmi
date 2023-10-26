@@ -1,8 +1,8 @@
 CXX = g++
 CFLAGS = -Wall -O2
-LIBDIR = /Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/
-LIB = $(LIBDIR)/*.o
 VPATH = ./:$(LIBDIR)
+LIBDIR = /Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs
+LIB = $(LIBDIR)/*.o
 INCLUDE_DIRS = -I. -I$(LIBDIR)
 LDFLAGS = -lm
 
@@ -11,7 +11,8 @@ all: main
 
 main: main.o
 	$(MAKE) -C $(LIBDIR)
-	$(CXX) $^ $(LDFLAGS) $(LIB) -o $@
+	$(CXX) -std=c++17 $^ $(LDFLAGS) $(LIB) -o $@
+	@rm -f main.o
 
 %.o: %.cpp
 	$(CXX) -c $(CFLAGS) $(INCLUDE_DIRS) $^
@@ -20,3 +21,7 @@ main: main.o
 clean:
 	@rm -f *.o
 	@echo make clean: done
+
+.PHONY: cleanlib
+cleanlib:
+	@$(MAKE) clean -C $(LIBDIR)
