@@ -1,8 +1,3 @@
-#include <iostream>
-#include <cmath>
-
-using namespace std;
-
 #include "debug.hpp"
 #include "quad.hpp"
 
@@ -39,7 +34,7 @@ double trapezoidal_quad(double (*F)(double), const double a, const double b, con
 double simpson_quad(double (*F)(double), const double a, const double b, const int n) {
 	// n must be even!
 	if (n % 2 != 0) {
-		cout << "simpson_quad(): Invalid argument: n must be even." << endl;
+		std::cout << "simpson_quad(): Invalid argument: n must be even." << std::endl;
 		exit(1);
 	}
 	
@@ -87,7 +82,7 @@ double gauss_legendre_quad(double (*F)(double), const double a, const double b, 
 		root[4] = -1.0 / 3.0 * sqrt(5 + 2 * sqrt(10.0 / 7.0));		weight[4] = (322.0 - 13.0 * sqrt(70.0)) / 900.0;
 		break;
 	default:
-		cout << "gauss_legendre_quad(): Invalid argument: Ng must be in [1, 5]." << endl;
+		std::cout << "gauss_legendre_quad(): Invalid argument: Ng must be in [1, 5]." << std::endl;
 		exit(1);
 	}
 
@@ -138,7 +133,7 @@ double gauss_legendre_quad2D(double (*F)(double, double), const double xa, const
 		root[4] = -1.0 / 3.0 * sqrt(5 + 2 * sqrt(10.0 / 7.0));		weight[4] = (322.0 - 13.0 * sqrt(70.0)) / 900.0;
 		break;
 	default:
-		cout << "gauss_legendre_quad(): Invalid argument: Ng must be in [1, 5]." << endl;
+		std::cout << "gauss_legendre_quad(): Invalid argument: Ng must be in [1, 5]." << std::endl;
 		exit(1);
 	}
 

@@ -1,3 +1,5 @@
+#include <iostream>
+
 void time_test(void (*)(), const std::string, const long int = 1e6);
 
 void time_test(double (*)(), const std::string, const long int = 1e6);

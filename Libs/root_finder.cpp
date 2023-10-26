@@ -1,8 +1,3 @@
-#include <iostream>
-#include <iomanip>
-
-using namespace std;
-
 #include "debug.hpp"
 #include "root_finder.hpp"
 
@@ -56,12 +51,12 @@ int bisection(double (*f)(double), double xa, double xb, const double xtol, cons
 			fm = f(xm);
 
 			#if DEBUG == TRUE
-			cout << setiosflags(ios::scientific);
-			cout << "bisection(): k = " << setw(log10(max_ntry) + 1) << k << "; "
-				 << "[a, b] = [" << setw(13) << xa << ", " << setw(13) << xb << "]; xm = " << setw(13) << xm << ";\n"
-				 << "                   " << setw(log10(max_ntry) + 1) << ""
-				 << "err = " << fabs(xb - xa) << "; fm = " << setw(13) << fm << endl;
-			cout << resetiosflags(ios::scientific);
+			std::cout << std::setiosflags(std::ios::scientific);
+			std::cout << "bisection(): k = " << std::setw(log10(max_ntry) + 1) << k << "; "
+				 << "[a, b] = [" << std::setw(13) << xa << ", " << std::setw(13) << xb << "]; xm = " << std::setw(13) << xm << ";\n"
+				 << "                   " << std::setw(log10(max_ntry) + 1) << ""
+				 << "err = " << fabs(xb - xa) << "; fm = " << std::setw(13) << fm << std::endl;
+			std::cout << restd::setiosflags(std::ios::scientific);
 			#endif
 
 			// Check convergence
@@ -82,12 +77,14 @@ int bisection(double (*f)(double), double xa, double xb, const double xtol, cons
 
 		}
 
-		cout << "! bisection(): too many steps\n" << endl;
+		std::cout << "! bisection(): too many steps\n" << std::endl;
+		ntry = -1;
+		root = nan("");
 		return 1;
 
 	} 
 
-	cout << "! bisection(): initial interval does not contain any root\n" << endl;
+	std::cout << "! bisection(): initial interval does not contain any root\n" << std::endl;
 	return 2;
 }
 
@@ -177,13 +174,13 @@ int false_position(double (*f)(double), double xa, double xb, const double xtol,
 			fm = f(xm);
 
 			#if DEBUG == TRUE
-			cout << setiosflags(ios::scientific);
-			cout << "false_position(): k = " << setw(log10(max_ntry) + 1) << k << "; "
-				 << "[a, b] = [" << setw(13) << xa << ", " << setw(13) << xb << "]; xm = " << setw(13) << xm << "; "
-				 << "fm = " << setw(13) << fm << ";\n"
-				 << "                        " << setw(log10(max_ntry) + 1) << ""
-				 << "err = " << fabs(del) << endl;
-			cout << resetiosflags(ios::scientific);
+			std::cout << std::setiosflags(std::ios::scientific);
+			std::cout << "false_position(): k = " << std::setw(log10(max_ntry) + 1) << k << "; "
+				 << "[a, b] = [" << std::setw(13) << xa << ", " << std::setw(13) << xb << "]; xm = " << std::setw(13) << xm << "; "
+				 << "fm = " << std::setw(13) << fm << ";\n"
+				 << "                        " << std::setw(log10(max_ntry) + 1) << ""
+				 << "err = " << fabs(del) << std::endl;
+			std::cout << restd::setiosflags(std::ios::scientific);
 			#endif
 
 			// Redefine interval
@@ -205,12 +202,18 @@ int false_position(double (*f)(double), double xa, double xb, const double xtol,
 			}
 		}
 
-		cout << "! false_position(): too many steps\n" << endl;
+		std::cout << "! false_position(): too many steps\n" << std::endl;
+		ntry = -1;
+		root = nan("");
+
 		return 1;
 
 	} 
 
-	cout << "! false_position(): initial interval does not contain any root\n" << endl;
+	std::cout << "! false_position(): initial interval does not contain any root\n" << std::endl;
+	ntry = -1;
+	root = nan("");
+
 	return 2;
 }
 
@@ -293,10 +296,10 @@ int secant(double (*f)(double), double xa, double xb, const double xtol, const d
 		dx = fb * (xb - xa) / (fb - fa);	// Compute increment
 
 		#if DEBUG == TRUE
-		cout << setiosflags(ios::scientific);
-		cout << "secant(): k = " << setw(log10(max_ntry) + 1) << k << "; "
-			 << "[a, b] = [" << setw(13) << xa << ", " << setw(13) << xb << "]; err = " << setw(13) << dx << endl;
-		cout << resetiosflags(ios::scientific);
+		std::cout << std::setiosflags(std::ios::scientific);
+		std::cout << "secant(): k = " << std::setw(log10(max_ntry) + 1) << k << "; "
+			 << "[a, b] = [" << std::setw(13) << xa << ", " << std::setw(13) << xb << "]; err = " << std::setw(13) << dx << std::endl;
+		std::cout << restd::setiosflags(std::ios::scientific);
 		#endif
 
 		// Shift values
@@ -313,7 +316,9 @@ int secant(double (*f)(double), double xa, double xb, const double xtol, const d
 		}
 	}
 
-	cout << "! secant(): too many steps\n" << endl;
+	std::cout << "! secant(): too many steps\n" << std::endl;
+	ntry = -1;
+	root = nan("");
 	return 1;
 }
 
@@ -401,10 +406,10 @@ int newton(double (*f)(double), double (*dfdx)(double), double xa, double xb, co
 			xc -= dx;
 
 			#if DEBUG == TRUE
-			cout << setiosflags(ios::scientific);
-			cout << "newton(): k = " << setw(log10(max_ntry) + 1) << k << "; "
-				 << "xc = " << setw(13) << xc << "; dx = " << setw(13) << dx << endl;
-			cout << resetiosflags(ios::scientific);
+			std::cout << std::setiosflags(std::ios::scientific);
+			std::cout << "newton(): k = " << std::setw(log10(max_ntry) + 1) << k << "; "
+				 << "xc = " << std::setw(13) << xc << "; dx = " << std::setw(13) << dx << std::endl;
+			std::cout << restd::setiosflags(std::ios::scientific);
 			#endif
 
 			// Check convergence
@@ -416,7 +421,9 @@ int newton(double (*f)(double), double (*dfdx)(double), double xa, double xb, co
 		}
 	}
 
-	cout << "! newton(): too many steps\n" << endl;
+	std::cout << "! newton(): too many steps\n" << std::endl;
+	ntry = -1;
+	root = nan("");
 	return 1;
 }
 

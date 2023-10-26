@@ -1,3 +1,6 @@
+#include <iostream>
+#include <iomanip>
+
 int bisection(double (*)(double), double, double, const double, const double, double&, int&);
 int bisection(double (*)(double), double, double, const double, double&);
 int bisection(double (*)(double), double, double, const double, double&, int&);

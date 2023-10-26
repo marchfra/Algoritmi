@@ -1,3 +1,6 @@
+#include <iostream>
+#include <cmath>
+
 double rectangular_quad(double (*)(double), const double, const double, const int);
 
 double midpoint_quad(double (*)(double), const double, const double, const int);
