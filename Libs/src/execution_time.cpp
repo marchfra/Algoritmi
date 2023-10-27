@@ -1,5 +1,5 @@
-#include "debug.hpp"
-#include "execution_time.hpp"
+#include "../include/debug.hpp"
+#include "../include/execution_time.hpp"
 
 void time_test(void (*f)(), const std::string f_name, const long int executions) {
 	auto start = std::chrono::high_resolution_clock::now();

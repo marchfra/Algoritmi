@@ -1,9 +1,11 @@
 CXX = g++
 CFLAGS = -Wall -O2
 VPATH = ./:$(LIBDIR)
-LIBDIR = /Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs
-LIB = $(LIBDIR)/*.o
-INCLUDE_DIRS = -I. -I$(LIBDIR)
+LIBDIR = /Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/
+INCDIR = /Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/include
+OBJDIR = /Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/obj
+LIB = $(OBJDIR)/*.o
+INCLUDE_DIRS = -I. -I$(INCDIR)
 LDFLAGS = -lm
 
 .PHONY: all

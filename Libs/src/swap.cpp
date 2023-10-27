@@ -1,14 +1,8 @@
-#include "debug.hpp"
-#include "swap.hpp"
+#include "../include/debug.hpp"
+#include "../include/swap.hpp"
 
 void swap(int& a, int& b) {
 	int temp = a;
-	a = b;
-	b = temp;
-}
-
-void swap(float& a, float& b) {
-	float temp = a;
 	a = b;
 	b = temp;
 }

@@ -1,4 +1,4 @@
-DEPS = ./*.o
+DEPS = ./obj/*.o
 
 .PHONY: all
 all: $(DEPS)
@@ -7,10 +7,11 @@ all: $(DEPS)
 CXX = g++
 CFLAGS = -Wall -O2
 
-%.o: %.cpp
+./obj/%.o: ./src/%.cpp
 	$(CXX) -std=c++17 -c $(CFLAGS) $(INCLUDE_DIRS) $^
+	@mv *.o obj
 
 .PHONY: clean
 clean:
-	@rm -f *.o
+	@rm -f ./obj/*.o
 	@echo make clean lib: done

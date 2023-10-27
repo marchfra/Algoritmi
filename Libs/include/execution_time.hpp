@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 
 void time_test(void (*)(), const std::string, const long int = 1e6);

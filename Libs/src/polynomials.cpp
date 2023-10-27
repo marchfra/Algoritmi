@@ -1,5 +1,5 @@
-#include "debug.hpp"
-#include "polynomials.hpp"
+#include "../include/debug.hpp"
+#include "../include/polynomials.hpp"
 
 double horner_pol(const double x, const double a[], const int degree, double& dpdx) {
 

@@ -1,5 +1,5 @@
-#include "debug.hpp"
-#include "quad.hpp"
+#include "../include/debug.hpp"
+#include "../include/quad.hpp"
 
 double rectangular_quad(double (*F)(double), const double a, const double b, const int n) {
 	double sum = 0.0;

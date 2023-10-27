@@ -1,5 +1,123 @@
-#include "debug.hpp"
-#include "root_finder.hpp"
+// For a more 'classy' approach ;-)
+// https://thoughts-on-coding.com/2019/06/06/numerical-methods-with-cpp-part-3-root-approximation-algorithms/
+
+#include "../include/debug.hpp"
+#include "../include/root_finder.hpp"
+
+int find_roots(double (*f)(double), double(*dfdx)(double), const double xa, const double xb, const double tol, double roots[], int& n_roots, const int N, const std::string method) {
+
+	// ////////////////////////////////////////////////////////////////
+	//
+	// Find the roots of a function f(x) in a given interval [xa, xb]
+	// using the specified method. Works by first bracketing the roots
+	// and then applying the method on every sub-interval.
+	//
+	// *f       [in]  : pointer to the function
+	// xa, xb   [in]  : interval containing many roots
+	// tol      [in]  : x-tolerance
+	// roots    [out] : array with the roots of f(x)
+	// n_roots  [out] : the number of roots found
+	// N        [in]  : the number of sub-intervals
+	// method   [in]  : the root finding method.
+	//                  Acceptable values are:
+	//                  - bisection
+	//                  - false_position
+	//                  - secant
+	//                  - newton
+	//
+	// On output the function returns 0 (success), 1 (too many steps)
+	// or 2 (initial interval doesn't contain any root).
+	//
+	// Last modified: 27 Oct 2023
+	//
+	// ////////////////////////////////////////////////////////////////
+
+	if (N > 128) throw std::invalid_argument("N must be less than 128");
+
+	double xL[128], xR[128];
+
+	bracket(f, xa, xb, xL, xR, N, n_roots);
+
+	if (n_roots == 0) {
+		std::cout << "! find_roots(): The interval does not contain any roots:" << std::endl;
+		return 2;
+	}
+
+	int flag;
+	for (int i = 0; i < n_roots; i++) {
+		if (method == "bisection") flag = bisection(f, xL[i], xR[i], tol, roots[i]);
+		else if (method == "false_position") flag = false_position(f, xL[i], xR[i], tol, roots[i]);
+		else if (method == "secant") flag = secant(f, xL[i], xR[i], tol, roots[i]);
+		else if (method == "newton") flag = newton(f, dfdx, xL[i], xR[i], tol, roots[i]);
+		else throw std::invalid_argument("Invalid method argument");
+
+		#if DEBUG == TRUE
+			std::cout << "roots[" << i << "] = " << roots[i] << std::endl;
+		#endif
+	}
+
+	return flag;
+}
+
+int find_roots(double (*f)(double), const double xa, const double xb, const double tol, double roots[], int& n_roots, const int N, const std::string method) {
+
+	// ///////////////////////////////////////////////////
+	//
+	// Overloading of find_roots() without Newton's method
+	//
+	// ///////////////////////////////////////////////////
+
+	if (method == "newton") throw std::invalid_argument("Newton method is invalid");
+
+	return find_roots(f, nullptr, xa, xb, tol, roots, n_roots, N, method);
+}
+
+void bracket(double (*f)(double), const double xa, const double xb, double xL[], double xR[], const int N, int& n_roots) {
+
+	// ////////////////////////////////////////////////////////////////
+	//
+	// Find the roots of a function f(x) in a given interval [xa, xb]
+	// using the specified method. Works by first bracketing the roots
+	// and then applying the method on every sub-interval.
+	//
+	// *f       [in]  : pointer to the function
+	// xa, xb   [in]  : interval containing many roots
+	// xL, xR   [out] : arrays with the left and right endpoints of
+	//                  of the intervals containing a root
+	// N        [in]  : the number of sub-intervals
+	// n_roots  [out] : the number of roots found
+	//
+	// Last modified: 27 Oct 2023
+	//
+	// ////////////////////////////////////////////////////////////////
+
+	double dx = (xb - xa) / N;
+	double xi = xa;
+	double xi_plus_one = xi + dx;
+	int root_counter = 0;
+
+	double fL = f(xi), fR;
+	for (int i = 0; i < N; i++) {
+		fR = f(xi_plus_one);
+		if (fL == 0.0 || fL * fR < 0) {		// Check if there's a root in [xi, xi_plus_one)
+			xL[root_counter] = xi;
+			xR[root_counter] = xi_plus_one;
+			
+			#if DEBUG == TRUE
+				std::cout << "found root in [a, b) = [" << xL[root_counter] << ", " << xR[root_counter] << ")" << std::endl;
+			#endif
+			
+			root_counter++;
+		}
+
+		// Shift interval
+		fL = fR;
+		xi = xi_plus_one;
+		xi_plus_one += dx;
+	}
+
+	n_roots = root_counter;
+}
 
 // =====================================================================================================================
 // Bisection method
@@ -11,7 +129,7 @@ int bisection(double (*f)(double), double xa, double xb, const double xtol, cons
 	//
 	// Find the root of a function f(x) in a given interval [xa, xb]
 	// using bisection method.
-
+	//
 	// *f       [in]  : pointer to the function
 	// xa, xb   [in]  : initial interval (containing the root)
 	// xtol     [in]  : x-tolerance
@@ -25,7 +143,6 @@ int bisection(double (*f)(double), double xa, double xb, const double xtol, cons
 	// Last modified: 26 Oct 2023
 	//
 	// //////////////////////////////////////////////////////////////
-
 
 	int max_ntry = 128;
 	double fa = f(xa);
@@ -51,12 +168,17 @@ int bisection(double (*f)(double), double xa, double xb, const double xtol, cons
 			fm = f(xm);
 
 			#if DEBUG == TRUE
-			std::cout << std::setiosflags(std::ios::scientific);
-			std::cout << "bisection(): k = " << std::setw(log10(max_ntry) + 1) << k << "; "
-				 << "[a, b] = [" << std::setw(13) << xa << ", " << std::setw(13) << xb << "]; xm = " << std::setw(13) << xm << ";\n"
-				 << "                   " << std::setw(log10(max_ntry) + 1) << ""
-				 << "err = " << fabs(xb - xa) << "; fm = " << std::setw(13) << fm << std::endl;
-			std::cout << restd::setiosflags(std::ios::scientific);
+			std::cout.setf(std::ios::scientific | std::ios::showpos);
+
+			std::cout << "bisection(): k = " << std::setw(log10(max_ntry) + 1) << k << "; err = " << fabs(xb - xa) << std::endl
+				<< "                   " << std::setw(log10(max_ntry) + 1) << ""
+				<< "xa = " << std::setw(13) << xa << "\t fa = " << fa << "\n"
+				<< "                   " << std::setw(log10(max_ntry) + 1) << ""
+				<< "xm = " << xm << "\t fm = " << fm << "\n"
+				<< "                   " << std::setw(log10(max_ntry) + 1) << ""
+				<< "xb = " << xb << "\t fb = " << fb << "\n";
+
+			std::cout << std::resetiosflags(std::ios::scientific | std::ios::showpos);
 			#endif
 
 			// Check convergence
@@ -133,7 +255,7 @@ int false_position(double (*f)(double), double xa, double xb, const double xtol,
 	//
 	// Find the root of a function f(x) in a given interval [xa, xb]
 	// using false_position method.
-
+	//
 	// *f       [in]  : pointer to the function
 	// xa, xb   [in]  : initial interval (containing the root)
 	// xtol     [in]  : x-tolerance
@@ -174,13 +296,13 @@ int false_position(double (*f)(double), double xa, double xb, const double xtol,
 			fm = f(xm);
 
 			#if DEBUG == TRUE
-			std::cout << std::setiosflags(std::ios::scientific);
+			std::cout.setf(std::ios::scientific | std::ios::showpos);
 			std::cout << "false_position(): k = " << std::setw(log10(max_ntry) + 1) << k << "; "
-				 << "[a, b] = [" << std::setw(13) << xa << ", " << std::setw(13) << xb << "]; xm = " << std::setw(13) << xm << "; "
-				 << "fm = " << std::setw(13) << fm << ";\n"
+				 << "[a, b] = [" << xa << ", " << xb << "]; xm = " << xm << "; "
+				 << "fm = " << fm << ";\n"
 				 << "                        " << std::setw(log10(max_ntry) + 1) << ""
 				 << "err = " << fabs(del) << std::endl;
-			std::cout << restd::setiosflags(std::ios::scientific);
+			std::cout << std::resetiosflags(std::ios::scientific | std::ios::showpos);
 			#endif
 
 			// Redefine interval
@@ -262,7 +384,7 @@ int secant(double (*f)(double), double xa, double xb, const double xtol, const d
 	//
 	// Find the root of a function f(x) in a given interval [xa, xb]
 	// using secant method.
-
+	//
 	// *f       [in]    pointer to the function
 	// xa, xb   [in]    initial interval (containing the root)
 	// xtol     [in]    x-tolerance
@@ -296,10 +418,10 @@ int secant(double (*f)(double), double xa, double xb, const double xtol, const d
 		dx = fb * (xb - xa) / (fb - fa);	// Compute increment
 
 		#if DEBUG == TRUE
-		std::cout << std::setiosflags(std::ios::scientific);
+		std::cout.setf(std::ios::scientific | std::ios::showpos);
 		std::cout << "secant(): k = " << std::setw(log10(max_ntry) + 1) << k << "; "
-			 << "[a, b] = [" << std::setw(13) << xa << ", " << std::setw(13) << xb << "]; err = " << std::setw(13) << dx << std::endl;
-		std::cout << restd::setiosflags(std::ios::scientific);
+			 << "[a, b] = [" << xa << ", " << xb << "]; err = " << dx << std::endl;
+		std::cout << std::resetiosflags(std::ios::scientific | std::ios::showpos);
 		#endif
 
 		// Shift values
@@ -367,7 +489,7 @@ int newton(double (*f)(double), double (*dfdx)(double), double xa, double xb, co
 	//
 	// Find the root of a function f(x) in a given interval [xa, xb]
 	// using Newton's method.
-
+	//
 	// *f       [in]  : pointer to the function
 	// *dfdx    [in]  : pointer to the derivative of the function
 	// xa, xb   [in]  : initial interval (containing the root)
@@ -399,27 +521,27 @@ int newton(double (*f)(double), double (*dfdx)(double), double xa, double xb, co
 		return 0;
 	}
 
-	if (fa * fb < 0) {	// Check that interval contains a solution REMOVE FOR EVEN MULTIPLICITY
-		for (int k = 1; k <= max_ntry; k++) {
-			fc = f(xc);
-			dx = fc / dfdx(xc);
-			xc -= dx;
+	// if (fa * fb < 0) {	// Check that interval contains a solution REMOVE FOR EVEN MULTIPLICITY
+	for (int k = 1; k <= max_ntry; k++) {
+		fc = f(xc);
+		dx = fc / dfdx(xc);
+		xc -= dx;
 
-			#if DEBUG == TRUE
-			std::cout << std::setiosflags(std::ios::scientific);
-			std::cout << "newton(): k = " << std::setw(log10(max_ntry) + 1) << k << "; "
-				 << "xc = " << std::setw(13) << xc << "; dx = " << std::setw(13) << dx << std::endl;
-			std::cout << restd::setiosflags(std::ios::scientific);
-			#endif
+		#if DEBUG == TRUE
+		std::cout.setf(std::ios::scientific | std::ios::showpos);
+		std::cout << "newton(): k = " << std::setw(log10(max_ntry) + 1) << k << "; "
+			 << "xc = " << std::setw(13) << xc << "; dx = " << std::setw(13) << dx << std::endl;
+		std::cout << std::resetiosflags(std::ios::scientific | std::ios::showpos);
+		#endif
 
-			// Check convergence
-			if (fabs(dx) < xtol || fabs(fc) < ftol || fc == 0.0) {
-				ntry = k;
-				root = xc;
-				return 0;
-			}
+		// Check convergence
+		if (fabs(dx) < xtol || fabs(fc) < ftol || fc == 0.0) {
+			ntry = k;
+			root = xc;
+			return 0;
 		}
 	}
+	// }
 
 	std::cout << "! newton(): too many steps\n" << std::endl;
 	ntry = -1;
