@@ -39,7 +39,7 @@ int find_roots(double (*f)(double), double(*dfdx)(double), const double xa, cons
 	bracket(f, xa, xb, xL, xR, N, n_roots);
 
 	if (n_roots == 0) {
-		std::cout << "! find_roots(): The interval does not contain any roots:" << std::endl;
+		std::cerr << "! find_roots(): The interval does not contain any roots:" << std::endl;
 		return 2;
 	}
 
@@ -51,11 +51,13 @@ int find_roots(double (*f)(double), double(*dfdx)(double), const double xa, cons
 		else if (method == "newton") flag = newton(f, dfdx, xL[i], xR[i], tol, roots[i]);
 		else throw std::invalid_argument("Invalid method argument");
 
+
 		#if DEBUG == TRUE
 			std::cout << "roots[" << i << "] = " << roots[i] << std::endl;
 		#endif
 	}
 
+	std::cout << "Method used: " << method << std::endl;
 	return flag;
 }
 
@@ -199,14 +201,14 @@ int bisection(double (*f)(double), double xa, double xb, const double xtol, cons
 
 		}
 
-		std::cout << "! bisection(): too many steps\n" << std::endl;
+		std::cerr << "! bisection(): too many steps\n" << std::endl;
 		ntry = -1;
 		root = nan("");
 		return 1;
 
 	} 
 
-	std::cout << "! bisection(): initial interval does not contain any root\n" << std::endl;
+	std::cerr << "! bisection(): initial interval does not contain any root\n" << std::endl;
 	return 2;
 }
 
@@ -324,7 +326,7 @@ int false_position(double (*f)(double), double xa, double xb, const double xtol,
 			}
 		}
 
-		std::cout << "! false_position(): too many steps\n" << std::endl;
+		std::cerr << "! false_position(): too many steps\n" << std::endl;
 		ntry = -1;
 		root = nan("");
 
@@ -332,7 +334,7 @@ int false_position(double (*f)(double), double xa, double xb, const double xtol,
 
 	} 
 
-	std::cout << "! false_position(): initial interval does not contain any root\n" << std::endl;
+	std::cerr << "! false_position(): initial interval does not contain any root\n" << std::endl;
 	ntry = -1;
 	root = nan("");
 
@@ -438,7 +440,7 @@ int secant(double (*f)(double), double xa, double xb, const double xtol, const d
 		}
 	}
 
-	std::cout << "! secant(): too many steps\n" << std::endl;
+	std::cerr << "! secant(): too many steps\n" << std::endl;
 	ntry = -1;
 	root = nan("");
 	return 1;
@@ -543,7 +545,7 @@ int newton(double (*f)(double), double (*dfdx)(double), double xa, double xb, co
 	}
 	// }
 
-	std::cout << "! newton(): too many steps\n" << std::endl;
+	std::cerr << "! newton(): too many steps\n" << std::endl;
 	ntry = -1;
 	root = nan("");
 	return 1;

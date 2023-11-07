@@ -3,8 +3,8 @@
 #include <iomanip>
 #include <cmath>
 
-// #include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/swap.hpp"
-// #include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/quad.hpp"
+// #include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/include/swap.hpp"
+// #include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/include/quad.hpp"
 #include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/include/polynomials.hpp"
 #include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/include/root_finder.hpp"
 
@@ -28,10 +28,6 @@ int main() {
 	double root;
 	double tol = 1.0e-7;
 	int n;
-
-	string A = "abc", B = "123";
-	swap(A, B);
-	cout << A << " " << B << endl;
 
 	cout << "--------- Root finders test ---------" << endl;
 	double a = -1.0;
@@ -70,7 +66,7 @@ int main() {
 		cout << "root[" << i << "] = " << roots[i] << endl;
 	}
 
-	return 0;
+	return 1;
 }
 
 void test_methods(double (*f)(double), double (*dfdx)(double), const double a, const double b, const double tol, double& root, int& n) {

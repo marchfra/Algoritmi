@@ -1,7 +1,9 @@
+#include <iostream>
+
 #include "../include/debug.hpp"
 #include "../include/polynomials.hpp"
 
-double horner_pol(const double x, const double a[], const int degree, double& dpdx) {
+double horner_pol(const double& x, const double a[], const int degree, double& dpdx) {
 
 	// //////////////////////////////////////////////////////////////
 	//
@@ -29,13 +31,34 @@ double horner_pol(const double x, const double a[], const int degree, double& dp
 	return p;
 }
 
-double horner_pol(const double x, const double a[], const int degree) {
+double horner_pol(const double& x, const double a[], const int degree) {
 
 	// /////////////////////////////////////////////////////////////
 	//
 	// Overloading of horner_pol() without derivative implementation
 	//
 	// /////////////////////////////////////////////////////////////
+
+	double p = a[degree];
+	for (int i = degree-1; i >= 0; i--) {
+		p = p * x + a[i];
+	}
+	return p;
+}
+
+double horner_pol(const double& x, const double a[]) {
+
+	// /////////////////////////////////////////////////////////////
+	//
+	// Overloading of horner_pol() without derivative implementation
+	// and with automatic degree detection
+	//
+	// /////////////////////////////////////////////////////////////
+
+	std::cout << "! horner_pol(): this overloading doesn't work" << std::endl;
+	exit(1);
+
+	const int degree = static_cast<int>(sizeof(*a)) / static_cast<int>(sizeof(a[0]));
 
 	double p = a[degree];
 	for (int i = degree-1; i >= 0; i--) {
