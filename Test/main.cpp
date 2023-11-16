@@ -1,30 +1,30 @@
 #include <iostream>
+#include <fstream>
+#include <iomanip>
+#include <cmath>
 
-using namespace std;
+// #include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/include/swap.hpp"
+// #include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/include/quad.hpp"
+// #include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/include/polynomials.hpp"
+// #include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/include/root_finder.hpp"
+// #include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/include/derivative.hpp"
+// #include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/include/ode_solver.hpp"
+#include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/include/sort.hpp"
 
-int array_size(double arr[]);
+using std::cout;
+using std::cin;
+using std::cerr;
+using std::endl;
 
 int main() {
-	double arr[15];
+	cout << "Hello World!" << endl;
 
-	int nSize = sizeof(arr) / sizeof(arr[0]);
+	srand(time(NULL));
 
-	cout << "main()" << endl;
-	cout << "sizeof(arr)    = " << sizeof(arr) << endl;
-	cout << "sizeof(arr[0]) = " << sizeof(arr[0]) << endl;
-	cout << "nSize from main: " << nSize << endl << endl;
-
-	array_size(arr);
+	for (int i = 0; i < 1000000; i++) {
+		int x = rand() % 58;
+		cout << (x <= 57 ? "" : " XXX \n");
+	}
 
 	return 0;
-}
-
-int array_size(double arr[]) {
-	int nSize = sizeof(*arr) / sizeof(arr[0]);
-	cout << "array_size()" << endl;
-	cout << "sizeof(arr)    = " << sizeof(arr) << endl;
-	cout << "sizeof(*arr)   = " << sizeof(*arr) << endl;
-	cout << "sizeof(arr[0]) = " << sizeof(arr[0]) << endl;
-	cout << "nSize from func: " << nSize << endl;
-	return nSize;
 }

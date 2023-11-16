@@ -48,7 +48,7 @@ int main() {
 	// Euler integration
 	double t = t0;
 	for (int i = 0; i < 2; i++) y[i] = y0[i];
-	while (t <= te) {
+	for (int i = 0; i < nStep; i++) {
 		EulerStep(t, y, R, h, 2);
 		t += h;
 		out << t << "," << y[0] << "," << y[1] << ",Euler" << endl;
@@ -57,7 +57,7 @@ int main() {
 	// RK2 integration
 	t = t0;
 	for (int i = 0; i < 2; i++) y[i] = y0[i];
-	while (t <= te) {
+	for (int i = 0; i < nStep; i++) {
 		RK2Step(t, y, R, h, 2);
 		t += h;
 		out << t << "," << y[0] << "," << y[1] << ",RK2" << endl;
@@ -66,7 +66,7 @@ int main() {
 	// RK4 integration
 	t = t0;
 	for (int i = 0; i < 2; i++) y[i] = y0[i];
-	while (t <= te) {
+	for (int i = 0; i < nStep; i++) {
 		RK4Step(t, y, R, h, 2);
 		t += h;
 		out << t << "," << y[0] << "," << y[1] << ",RK4" << endl;

@@ -27,6 +27,7 @@ ax.set_aspect(1)
 ax.legend()
 
 fig.tight_layout()
+fig.savefig('fig1.png', dpi=200)
 
 fig2, ax2 = plt.subplots(2, 1, sharex=True, figsize=(8,8))
 ax2[0].plot(dfgroup.get_group('RK4')['t'], dfgroup.get_group('RK4')['x'], label='RK4')
@@ -49,7 +50,7 @@ ax2[0].legend()
 ax2[1].legend()
 
 fig2.tight_layout()
-
+fig2.savefig('fig2.png', dpi=200)
 
 df = pd.read_csv('convergence.csv')
 
@@ -70,5 +71,5 @@ ax3.set_ylabel('err')
 ax3.legend(handles=[eul, rk2, rk4])
 
 fig3.tight_layout()
-# fig.savefig('.png', dpi=200)
-plt.show()
+fig3.savefig('convergence.png', dpi=200)
+# plt.show()

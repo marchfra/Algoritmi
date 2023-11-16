@@ -5,3 +5,7 @@ void EulerStep(double t, double Y[], void (*RHSFunc)(double t, double Y[], doubl
 void RK2Step(double t, double Y[], void (*RHSFunc)(double t, double Y[], double R[]), double dt, int neq, bool rule = false);
 
 void RK4Step(double t, double Y[], void (*RHSFunc)(double t, double Y[], double R[]), double dt, int neq);
+
+void pVerlet(double t, double Y[], void (*RHSFunc)(double Y[], double R[]), double dt, int neq);
+
+void vVerlet(double t, double Y[], void (*RHSFunc)(double Y[], double R[]), double dt, int neq);

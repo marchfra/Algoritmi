@@ -1,13 +1,37 @@
+/**
+ * @file execution_time.hpp
+ * 
+ * @brief Implementetion of execution time utility functions.
+ */
 #pragma once
 
 #include <iostream>
 
-void time_test(void (*)(), const std::string, const long int = 1e6);
+/**
+ * @brief Measure execution time of a function.
+ * 
+ * Measure average execution time of a function over a number of executions.
+ * 
+ * @param[in] f The function to be measured.
+ * @param[in] f_name The name of the function.
+ * @param[in] executions The number of executions.
+ * @param[in] print Print the execution time in addition to returning it.
+ * 
+ * @returns Average execution time.
+ */
+double time_test(void (*)(), const std::string&, const long int = 1e6, bool = false);
 
-void time_test(double (*)(), const std::string, const long int = 1e6);
-
-// Time test for Rectangular, Midpoint, Trapezoid, Simpson quad
-void time_test(double (*)(double (*)(double), double, double, int), double(*)(double), const double, const double, int, const std::string, const long int = 1e6);
-
-// Time test for Gauss quad
-void time_test(double (*)(double (*)(double), double, double, int, int), double(*)(double), const double, const double, int, int, const std::string, const long int = 1e6);
+/**
+ * @overload
+ * 
+ * @brief Measure execution time of a function.
+ * 
+ * Measure average execution time of a function over a number of executions.
+ * 
+ * @param[in] f The function to be measured.
+ * @param[in] executions The number of executions.
+ * @param[in] print Print the execution time in addition to returning it.
+ * 
+ * @returns Average execution time.
+ */
+double time_test(void (*)(), const long int = 1e6, bool = false);
