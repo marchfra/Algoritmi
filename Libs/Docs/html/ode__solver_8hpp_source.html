@@ -5,10 +5,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Numerical Algorithms for Physics Library: include/ode_solver.hpp Source File</title>
+<title>Numerical Algorithms for Physics Library: /Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/include/ode_solver.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -51,6 +55,23 @@ $(function() {
 $(document).ready(function() { init_codefold(0); });
 /* @license-end */
 </script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('ode__solver_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -72,30 +93,37 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle"><div class="title">ode_solver.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keywordtype">void</span> EulerStep(<span class="keywordtype">double</span> t, <span class="keywordtype">double</span> Y[], <span class="keywordtype">void</span> (*RHSFunc)(<span class="keywordtype">double</span> t, <span class="keywordtype">double</span> Y[], <span class="keywordtype">double</span> R[]), <span class="keywordtype">double</span> dt, <span class="keywordtype">int</span> neq);</div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keywordtype">void</span> RK2Step(<span class="keywordtype">double</span> t, <span class="keywordtype">double</span> Y[], <span class="keywordtype">void</span> (*RHSFunc)(<span class="keywordtype">double</span> t, <span class="keywordtype">double</span> Y[], <span class="keywordtype">double</span> R[]), <span class="keywordtype">double</span> dt, <span class="keywordtype">int</span> neq, <span class="keywordtype">bool</span> rule = <span class="keyword">false</span>);</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keywordtype">void</span> RK4Step(<span class="keywordtype">double</span> t, <span class="keywordtype">double</span> Y[], <span class="keywordtype">void</span> (*RHSFunc)(<span class="keywordtype">double</span> t, <span class="keywordtype">double</span> Y[], <span class="keywordtype">double</span> R[]), <span class="keywordtype">double</span> dt, <span class="keywordtype">int</span> neq);</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keywordtype">void</span> pVerlet(<span class="keywordtype">double</span> t, <span class="keywordtype">double</span> Y[], <span class="keywordtype">void</span> (*RHSFunc)(<span class="keywordtype">double</span> Y[], <span class="keywordtype">double</span> R[]), <span class="keywordtype">double</span> dt, <span class="keywordtype">int</span> neq);</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keywordtype">void</span> vVerlet(<span class="keywordtype">double</span> t, <span class="keywordtype">double</span> Y[], <span class="keywordtype">void</span> (*RHSFunc)(<span class="keywordtype">double</span> Y[], <span class="keywordtype">double</span> R[]), <span class="keywordtype">double</span> dt, <span class="keywordtype">int</span> neq);</div>
+<a href="ode__solver_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keywordtype">void</span> <a class="code hl_function" href="ode__solver_8hpp.html#af8754f865380a2c0f099ef5327f78602">EulerStep</a>(<span class="keywordtype">double</span>, <span class="keywordtype">double</span>[], <span class="keywordtype">void</span> (*)(<span class="keywordtype">double</span>, <span class="keywordtype">double</span>[], <span class="keywordtype">double</span>[]), <span class="keywordtype">double</span>, <span class="keywordtype">int</span>);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keywordtype">void</span> <a class="code hl_function" href="ode__solver_8hpp.html#a99db22fcd965bd8a8901ff941b0f3aee">RK2Step</a>(<span class="keywordtype">double</span>, <span class="keywordtype">double</span>[], <span class="keywordtype">void</span> (*)(<span class="keywordtype">double</span>, <span class="keywordtype">double</span>[], <span class="keywordtype">double</span>[]), <span class="keywordtype">double</span>, <span class="keywordtype">int</span>, <span class="keywordtype">bool</span> = <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keywordtype">void</span> <a class="code hl_function" href="ode__solver_8hpp.html#a3679dacd53c2f96dbaecebf71208958e">RK4Step</a>(<span class="keywordtype">double</span>, <span class="keywordtype">double</span>[], <span class="keywordtype">void</span> (*)(<span class="keywordtype">double</span>, <span class="keywordtype">double</span>[], <span class="keywordtype">double</span>[]), <span class="keywordtype">double</span>, <span class="keywordtype">int</span>);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="keywordtype">void</span> <a class="code hl_function" href="ode__solver_8hpp.html#a6ab79642d47b341f708abf0af4d9a7fe">pVerlet</a>(<span class="keywordtype">double</span>, <span class="keywordtype">double</span>[], <span class="keywordtype">void</span> (*)(<span class="keywordtype">double</span>[], <span class="keywordtype">double</span>[]), <span class="keywordtype">double</span>, <span class="keywordtype">int</span>);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="keywordtype">void</span> <a class="code hl_function" href="ode__solver_8hpp.html#a61759f374e54375227d303f5c36242e1">vVerlet</a>(<span class="keywordtype">double</span>, <span class="keywordtype">double</span>[], <span class="keywordtype">void</span> (*)(<span class="keywordtype">double</span>[], <span class="keywordtype">double</span>[]), <span class="keywordtype">double</span>, <span class="keywordtype">int</span>);</div>
+<div class="ttc" id="aode__solver_8hpp_html_a3679dacd53c2f96dbaecebf71208958e"><div class="ttname"><a href="ode__solver_8hpp.html#a3679dacd53c2f96dbaecebf71208958e">RK4Step</a></div><div class="ttdeci">void RK4Step(double, double[], void(*)(double, double[], double[]), double, int)</div><div class="ttdoc">Runge-Kutta 4 method step.</div><div class="ttdef"><b>Definition</b> ode_solver.cpp:46</div></div>
+<div class="ttc" id="aode__solver_8hpp_html_a61759f374e54375227d303f5c36242e1"><div class="ttname"><a href="ode__solver_8hpp.html#a61759f374e54375227d303f5c36242e1">vVerlet</a></div><div class="ttdeci">void vVerlet(double, double[], void(*)(double[], double[]), double, int)</div><div class="ttdoc">Velocity Verlet method step.</div><div class="ttdef"><b>Definition</b> ode_solver.cpp:111</div></div>
+<div class="ttc" id="aode__solver_8hpp_html_a6ab79642d47b341f708abf0af4d9a7fe"><div class="ttname"><a href="ode__solver_8hpp.html#a6ab79642d47b341f708abf0af4d9a7fe">pVerlet</a></div><div class="ttdeci">void pVerlet(double, double[], void(*)(double[], double[]), double, int)</div><div class="ttdoc">Position Verlet method step.</div><div class="ttdef"><b>Definition</b> ode_solver.cpp:73</div></div>
+<div class="ttc" id="aode__solver_8hpp_html_a99db22fcd965bd8a8901ff941b0f3aee"><div class="ttname"><a href="ode__solver_8hpp.html#a99db22fcd965bd8a8901ff941b0f3aee">RK2Step</a></div><div class="ttdeci">void RK2Step(double, double[], void(*)(double, double[], double[]), double, int, bool=false)</div><div class="ttdoc">Runge-Kutta 2 method step.</div><div class="ttdef"><b>Definition</b> ode_solver.cpp:15</div></div>
+<div class="ttc" id="aode__solver_8hpp_html_af8754f865380a2c0f099ef5327f78602"><div class="ttname"><a href="ode__solver_8hpp.html#af8754f865380a2c0f099ef5327f78602">EulerStep</a></div><div class="ttdeci">void EulerStep(double, double[], void(*)(double, double[], double[]), double, int)</div><div class="ttdoc">Euler method step.</div><div class="ttdef"><b>Definition</b> ode_solver.cpp:4</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_85c7b6b4ce4677f321c6e6fe726c1dfb.html">include</a></li><li class="navelem"><a class="el" href="ode__solver_8hpp.html">ode_solver.hpp</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
 </body>
 </html>

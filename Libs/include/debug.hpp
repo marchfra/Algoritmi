@@ -6,8 +6,8 @@
 #pragma once
 
 #ifndef TRUE
-	#define TRUE 1
-	#define FALSE 0
+	#define TRUE 1	///< @brief Define TRUE to be 1
+	#define FALSE 0	///< @brief Define FALSE to be 0
 #endif
 
 /**

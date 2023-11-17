@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['false_5fposition_0',['false_position',['../root__finder_8hpp.html#a1d2f636d2719b3d64444e1c8aac06644',1,'false_position(double(*)(double), double, double, const double, const double, double &amp;, int &amp;):&#160;root_finder.cpp'],['../root__finder_8hpp.html#ae95d2b0590c0b41b7a156214659624e1',1,'false_position(double(*)(double), double, double, const double, double &amp;):&#160;root_finder.cpp'],['../root__finder_8hpp.html#a09195787500380ccec3afa4265a3ae8c',1,'false_position(double(*)(double), double, double, const double, double &amp;, int &amp;):&#160;root_finder.cpp'],['../root__finder_8hpp.html#a3bcd1fe3c08f8a01ad363e2becee15c4',1,'false_position(double(*)(double), double, double, const double, const double, double &amp;):&#160;root_finder.cpp']]],
-  ['find_5froots_1',['find_roots',['../root__finder_8hpp.html#a7efc8765cd653693c8a10ed266e099fd',1,'find_roots(double(*)(double), double(*)(double), const double, const double, const double, double[], int &amp;, const int=128, const std::string=&quot;newton&quot;):&#160;root_finder.cpp'],['../root__finder_8hpp.html#ac4738bd951650ff853f89129d9825845',1,'find_roots(double(*)(double), const double, const double, const double, double[], int &amp;, const int=128, const std::string=&quot;bisection&quot;):&#160;root_finder.cpp']]],
-  ['forwarddiff_2',['ForwardDiff',['../derivative_8hpp.html#a547191cbc76ed6be42594e2bb446e450',1,'derivative.cpp']]],
-  ['forwarddiff2_3',['ForwardDiff2',['../derivative_8hpp.html#af31ca503923a3115cf88ca6ad16c878d',1,'derivative.cpp']]]
+  ['eulerstep_0',['EulerStep',['../ode__solver_8hpp.html#af8754f865380a2c0f099ef5327f78602',1,'ode_solver.cpp']]],
+  ['execution_5ftime_2ehpp_1',['execution_time.hpp',['../execution__time_8hpp.html',1,'']]]
 ];

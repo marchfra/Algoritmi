@@ -16,7 +16,12 @@ using std::cerr;
 using std::endl;
 
 int main() {
+	std::ofstream out;
+	out.open("data.csv");
+	if (!out) exit(5);
+	
 	cout << "Hello World!" << endl;
 
+	out.close();
 	return 0;
 }

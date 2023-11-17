@@ -88,7 +88,7 @@ void bracket(double (*)(double), const double, const double, double[], double[],
  * 
  * @param[in] f Pointer to the function.
  * @param[in] xa, xb Interval (containing the root).
- * @param[in] tol x-tolerance.
+ * @param[in] xtol x-tolerance.
  * @param[in] ftol f(x)-tolerance: the values of f(x) that are considered 0.
  * @param[out] root The root of f(x).
  * @param[out] ntry The number of iterations achieved.
@@ -107,7 +107,7 @@ int bisection(double (*)(double), double, double, const double, const double, do
  * 
  * @param[in] f Pointer to the function
  * @param[in] xa, xb Interval (containing the root)
- * @param[in] tol x-tolerance
+ * @param[in] xtol x-tolerance
  * @param[out] root The root of f(x)
  *
  * @retval 0 Success.
@@ -124,7 +124,7 @@ int bisection(double (*)(double), double, double, const double, double&);
  * 
  * @param[in] f Pointer to the function.
  * @param[in] xa, xb Interval (containing the root).
- * @param[in] tol x-tolerance.
+ * @param[in] xtol x-tolerance.
  * @param[out] root The root of f(x).
  * @param[out] ntry The number of iterations achieved.
  *
@@ -142,7 +142,7 @@ int bisection(double (*)(double), double, double, const double, double&, int&);
  * 
  * @param[in] f Pointer to the function.
  * @param[in] xa, xb Interval (containing the root).
- * @param[in] tol x-tolerance.
+ * @param[in] xtol x-tolerance.
  * @param[in] ftol f(x)-tolerance: the values of f(x) that are considered 0.
  * @param[out] root The root of f(x).
  *
@@ -161,7 +161,7 @@ int bisection(double (*)(double), double, double, const double, const double, do
  *
  * @param[in] f Pointer to the function.
  * @param[in] xa, xb Interval (containing the root).
- * @param[in] tol x-tolerance.
+ * @param[in] xtol x-tolerance.
  * @param[in] ftol f(x)-tolerance: the values of f(x) that are considered 0.
  * @param[out] root The root of f(x).
  * @param[out] ntry The number of iterations achieved.
@@ -180,7 +180,7 @@ int false_position(double (*)(double), double, double, const double, const doubl
  *
  * @param[in] f Pointer to the function.
  * @param[in] xa, xb Interval (containing the root).
- * @param[in] tol x-tolerance.
+ * @param[in] xtol x-tolerance.
  * @param[out] root The root of f(x).
  *
  * @retval 0 Success.
@@ -197,7 +197,7 @@ int false_position(double (*)(double), double, double, const double, double&);
  *
  * @param[in] f Pointer to the function.
  * @param[in] xa, xb Interval (containing the root).
- * @param[in] tol x-tolerance.
+ * @param[in] xtol x-tolerance.
  * @param[out] root The root of f(x).
  * @param[out] ntry The number of iterations achieved.
  *
@@ -215,7 +215,7 @@ int false_position(double (*)(double), double, double, const double, double&, in
  *
  * @param[in] f Pointer to the function.
  * @param[in] xa, xb Interval (containing the root).
- * @param[in] tol x-tolerance.
+ * @param[in] xtol x-tolerance.
  * @param[in] ftol f(x)-tolerance: the values of f(x) that are considered 0.
  * @param[out] root The root of f(x).
  *
@@ -235,7 +235,7 @@ int false_position(double (*)(double), double, double, const double, const doubl
  *
  * @param[in] f Pointer to the function.
  * @param[in] xa, xb Interval (containing the root).
- * @param[in] tol x-tolerance.
+ * @param[in] xtol x-tolerance.
  * @param[in] ftol f(x)-tolerance: the values of f(x) that are considered 0.
  * @param[out] root The root of f(x).
  * @param[out] ntry The number of iterations achieved.
@@ -253,7 +253,7 @@ int secant(double (*)(double), double, double, const double, const double, doubl
  *
  * @param[in] f Pointer to the function.
  * @param[in] xa, xb Interval (containing the root).
- * @param[in] tol x-tolerance.
+ * @param[in] xtol x-tolerance.
  * @param[out] root The root of f(x).
  *
  * @retval 0 Success.
@@ -269,7 +269,7 @@ int secant(double (*)(double), double, double, const double, double&);
  *
  * @param[in] f Pointer to the function.
  * @param[in] xa, xb Interval (containing the root).
- * @param[in] tol x-tolerance.
+ * @param[in] xtol x-tolerance.
  * @param[out] root The root of f(x).
  * @param[out] ntry The number of iterations achieved.
  *
@@ -286,7 +286,7 @@ int secant(double (*)(double), double, double, const double, double&, int&);
  *
  * @param[in] f Pointer to the function.
  * @param[in] xa, xb Interval (containing the root).
- * @param[in] tol x-tolerance.
+ * @param[in] xtol x-tolerance.
  * @param[in] ftol f(x)-tolerance: the values of f(x) that are considered 0.
  * @param[out] root The root of f(x).
  *
@@ -305,7 +305,7 @@ int secant(double (*)(double), double, double, const double, const double, doubl
  * @param[in] f Pointer to the function.
  * @param[in] dfdx Pointer to the derivative of the function.
  * @param[in] xa, xb Interval (containing the root).
- * @param[in] tol x-tolerance.
+ * @param[in] xtol x-tolerance.
  * @param[in] ftol f(x)-tolerance: the values of f(x) that are considered 0.
  * @param[out] root The root of f(x).
  * @param[out] ntry The number of iterations achieved.
@@ -324,7 +324,7 @@ int newton(double (*)(double), double (*)(double), double, double, const double,
  * @param[in] f Pointer to the function.
  * @param[in] dfdx Pointer to the derivative of the function.
  * @param[in] xa, xb Interval (containing the root).
- * @param[in] tol x-tolerance.
+ * @param[in] xtol x-tolerance.
  * @param[out] root The root of f(x).
  *
  * @retval 0 Success.
@@ -341,7 +341,7 @@ int newton(double (*)(double), double (*)(double), double, double, const double,
  * @param[in] f Pointer to the function.
  * @param[in] dfdx Pointer to the derivative of the function.
  * @param[in] xa, xb Interval (containing the root).
- * @param[in] tol x-tolerance.
+ * @param[in] xtol x-tolerance.
  * @param[out] root The root of f(x).
  * @param[out] ntry The number of iterations achieved.
  *
@@ -359,7 +359,7 @@ int newton(double (*)(double), double (*)(double), double, double, const double,
  * @param[in] f Pointer to the function.
  * @param[in] dfdx Pointer to the derivative of the function.
  * @param[in] xa, xb Interval (containing the root).
- * @param[in] tol x-tolerance.
+ * @param[in] xtol x-tolerance.
  * @param[in] ftol f(x)-tolerance: the values of f(x) that are considered 0.
  * @param[out] root The root of f(x).
  *

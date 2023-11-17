@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quad_2ehpp_0',['quad.hpp',['../quad_8hpp.html',1,'']]]
+  ['ode_5fsolver_2ehpp_0',['ode_solver.hpp',['../ode__solver_8hpp.html',1,'']]]
 ];

@@ -22,7 +22,7 @@ ax.set_title('')
 ax.set_xlabel('')
 ax.set_ylabel('')
 
-ax.legend()
+# ax.legend()
 
 fig.tight_layout()
 # fig.savefig('.png', dpi=200)

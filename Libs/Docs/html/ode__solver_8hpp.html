@@ -5,10 +5,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Numerical Algorithms for Physics Library: include/ode_solver.hpp File Reference</title>
+<title>Numerical Algorithms for Physics Library: /Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/include/ode_solver.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -46,6 +50,23 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('ode__solver_8hpp.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -67,11 +88,6 @@ $(function() {
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
@@ -79,36 +95,347 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of the ODE solver steps.  
+<p>Implementation of the ODE Solvers step functions.  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
+</div>
 <p><a href="ode__solver_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:abe2ee0c8b7cd6aa141343ac689ee3267" id="r_abe2ee0c8b7cd6aa141343ac689ee3267"><td class="memItemLeft" align="right" valign="top"><a id="abe2ee0c8b7cd6aa141343ac689ee3267" name="abe2ee0c8b7cd6aa141343ac689ee3267"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>EulerStep</b> (double t, double Y[], void(*RHSFunc)(double t, double Y[], double R[]), double dt, int neq)</td></tr>
-<tr class="memdesc:abe2ee0c8b7cd6aa141343ac689ee3267"><td class="mdescLeft">&#160;</td><td class="mdescRight">Brief description. <br /></td></tr>
-<tr class="separator:abe2ee0c8b7cd6aa141343ac689ee3267"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31d3767ddba827622b87b2a5b0df2d7d" id="r_a31d3767ddba827622b87b2a5b0df2d7d"><td class="memItemLeft" align="right" valign="top"><a id="a31d3767ddba827622b87b2a5b0df2d7d" name="a31d3767ddba827622b87b2a5b0df2d7d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>RK2Step</b> (double t, double Y[], void(*RHSFunc)(double t, double Y[], double R[]), double dt, int neq, bool rule=false)</td></tr>
-<tr class="separator:a31d3767ddba827622b87b2a5b0df2d7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac88f80ff18f71d686bc3f7b698b06d3e" id="r_ac88f80ff18f71d686bc3f7b698b06d3e"><td class="memItemLeft" align="right" valign="top"><a id="ac88f80ff18f71d686bc3f7b698b06d3e" name="ac88f80ff18f71d686bc3f7b698b06d3e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>RK4Step</b> (double t, double Y[], void(*RHSFunc)(double t, double Y[], double R[]), double dt, int neq)</td></tr>
-<tr class="separator:ac88f80ff18f71d686bc3f7b698b06d3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c723dcbdaf6acc9ec92cd864c9d24ca" id="r_a0c723dcbdaf6acc9ec92cd864c9d24ca"><td class="memItemLeft" align="right" valign="top"><a id="a0c723dcbdaf6acc9ec92cd864c9d24ca" name="a0c723dcbdaf6acc9ec92cd864c9d24ca"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>pVerlet</b> (double t, double Y[], void(*RHSFunc)(double Y[], double R[]), double dt, int neq)</td></tr>
-<tr class="separator:a0c723dcbdaf6acc9ec92cd864c9d24ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a074cb42cd5303a55497cdf14879fab" id="r_a1a074cb42cd5303a55497cdf14879fab"><td class="memItemLeft" align="right" valign="top"><a id="a1a074cb42cd5303a55497cdf14879fab" name="a1a074cb42cd5303a55497cdf14879fab"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>vVerlet</b> (double t, double Y[], void(*RHSFunc)(double Y[], double R[]), double dt, int neq)</td></tr>
-<tr class="separator:a1a074cb42cd5303a55497cdf14879fab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8754f865380a2c0f099ef5327f78602" id="r_af8754f865380a2c0f099ef5327f78602"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ode__solver_8hpp.html#af8754f865380a2c0f099ef5327f78602">EulerStep</a> (double, double[], void(*)(double, double[], double[]), double, int)</td></tr>
+<tr class="memdesc:af8754f865380a2c0f099ef5327f78602"><td class="mdescLeft">&#160;</td><td class="mdescRight">Euler method step.  <br /></td></tr>
+<tr class="separator:af8754f865380a2c0f099ef5327f78602"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99db22fcd965bd8a8901ff941b0f3aee" id="r_a99db22fcd965bd8a8901ff941b0f3aee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ode__solver_8hpp.html#a99db22fcd965bd8a8901ff941b0f3aee">RK2Step</a> (double, double[], void(*)(double, double[], double[]), double, int, bool=false)</td></tr>
+<tr class="memdesc:a99db22fcd965bd8a8901ff941b0f3aee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runge-Kutta 2 method step.  <br /></td></tr>
+<tr class="separator:a99db22fcd965bd8a8901ff941b0f3aee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3679dacd53c2f96dbaecebf71208958e" id="r_a3679dacd53c2f96dbaecebf71208958e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ode__solver_8hpp.html#a3679dacd53c2f96dbaecebf71208958e">RK4Step</a> (double, double[], void(*)(double, double[], double[]), double, int)</td></tr>
+<tr class="memdesc:a3679dacd53c2f96dbaecebf71208958e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runge-Kutta 4 method step.  <br /></td></tr>
+<tr class="separator:a3679dacd53c2f96dbaecebf71208958e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ab79642d47b341f708abf0af4d9a7fe" id="r_a6ab79642d47b341f708abf0af4d9a7fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ode__solver_8hpp.html#a6ab79642d47b341f708abf0af4d9a7fe">pVerlet</a> (double, double[], void(*)(double[], double[]), double, int)</td></tr>
+<tr class="memdesc:a6ab79642d47b341f708abf0af4d9a7fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position Verlet method step.  <br /></td></tr>
+<tr class="separator:a6ab79642d47b341f708abf0af4d9a7fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61759f374e54375227d303f5c36242e1" id="r_a61759f374e54375227d303f5c36242e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ode__solver_8hpp.html#a61759f374e54375227d303f5c36242e1">vVerlet</a> (double, double[], void(*)(double[], double[]), double, int)</td></tr>
+<tr class="memdesc:a61759f374e54375227d303f5c36242e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Velocity Verlet method step.  <br /></td></tr>
+<tr class="separator:a61759f374e54375227d303f5c36242e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of the ODE solver steps. </p>
-</div></div><!-- contents -->
+<div class="textblock"><p>Implementation of the ODE Solvers step functions. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Fix RK4Step.<br  />
+ Improve pVerlet using pointers to improve readability.<br  />
+ Fix vVerlet and rewrite using pointers. </dd></dl>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="af8754f865380a2c0f099ef5327f78602" name="af8754f865380a2c0f099ef5327f78602"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8754f865380a2c0f099ef5327f78602">&#9670;&#160;</a></span>EulerStep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EulerStep </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>Y</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(double, double[], double[])&#160;</td>
+          <td class="paramname"><em>RHSFunc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>neq</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Euler method step. </p>
+<p>Takes one step in time (or whatever the independent variable is) using Euler method. The system of first order ODEs is dY_i/dt = R_i(t, Y).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>The value of time from which to take the step. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">Y</td><td>Array containing all the dependent variables. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">RHSFunc</td><td>Pointer to the function containing all the Right Hand Sides of the system of equations. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>The step size. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">neq</td><td>The number of equations (ie the number of independent variables) in the system. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a99db22fcd965bd8a8901ff941b0f3aee" name="a99db22fcd965bd8a8901ff941b0f3aee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99db22fcd965bd8a8901ff941b0f3aee">&#9670;&#160;</a></span>RK2Step()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RK2Step </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>Y</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(double, double[], double[])&#160;</td>
+          <td class="paramname"><em>RHSFunc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>neq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>rule</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Runge-Kutta 2 method step. </p>
+<p>Takes one step in time (or whatever the independent variable is) using Runge-Kutta 2 method. The system of first order ODEs is dY_i/dt = R_i(t, Y).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>The value of time from which to take the step. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">Y</td><td>Array containing all the dependent variables. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">RHSFunc</td><td>Pointer to the function containing all the Right Hand Sides of the system of equations. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>The step size. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">neq</td><td>The number of equations (ie the number of independent variables) in the system. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">rule</td><td>If <code>false</code> use Midpoint method (default). If <code>true</code> use Modified Euler method. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3679dacd53c2f96dbaecebf71208958e" name="a3679dacd53c2f96dbaecebf71208958e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3679dacd53c2f96dbaecebf71208958e">&#9670;&#160;</a></span>RK4Step()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RK4Step </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>Y</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(double, double[], double[])&#160;</td>
+          <td class="paramname"><em>RHSFunc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>neq</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Runge-Kutta 4 method step. </p>
+<p>Takes one step in time (or whatever the independent variable is) using Runge-Kutta 4 method. The system of first order ODEs is dY_i/dt = R_i(t, Y).</p>
+<dl class="bug"><dt><b><a class="el" href="bug.html#_bug000001">Bug:</a></b></dt><dd>This method converges rather than diverging.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>The value of time from which to take the step. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">Y</td><td>Array containing all the dependent variables. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">RHSFunc</td><td>Pointer to the function containing all the Right Hand Sides of the system of equations. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>The step size. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">neq</td><td>The number of equations (ie the number of independent variables) in the system. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6ab79642d47b341f708abf0af4d9a7fe" name="a6ab79642d47b341f708abf0af4d9a7fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ab79642d47b341f708abf0af4d9a7fe">&#9670;&#160;</a></span>pVerlet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void pVerlet </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>Y</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(double[], double[])&#160;</td>
+          <td class="paramname"><em>RHSFunc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>neq</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Position Verlet method step. </p>
+<p>Takes one step in time using Position Verlet method. The system of first order ODEs is dY_i/dt = R_i(Y), where all equations are derived from second order ODEs in the form F = ma.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>The value of time from which to take the step. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">Y</td><td>Array containing all the dependent variables. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">RHSFunc</td><td>Pointer to the function containing all the Right Hand Sides of the system of equations. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>The step size. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">neq</td><td>The number of equations (ie the number of independent variables) in the system. Must be even. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a61759f374e54375227d303f5c36242e1" name="a61759f374e54375227d303f5c36242e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61759f374e54375227d303f5c36242e1">&#9670;&#160;</a></span>vVerlet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void vVerlet </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>Y</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(double[], double[])&#160;</td>
+          <td class="paramname"><em>RHSFunc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>dt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>neq</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Velocity Verlet method step. </p>
+<p>Takes one step in time using Velocity Verlet method. The system of first order ODEs is dY_i/dt = R_i(Y), where all equations are derived from second order ODEs in the form F = ma.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>The value of time from which to take the step. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Y</td><td>Array containing all the dependent variables. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">RHSFunc</td><td>Pointer to the function containing all the Right Hand Sides of the system of equations. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dt</td><td>The step size. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">neq</td><td>The number of equations (ie the number of independent variables) in the system. Must be even. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_85c7b6b4ce4677f321c6e6fe726c1dfb.html">include</a></li><li class="navelem"><a class="el" href="ode__solver_8hpp.html">ode_solver.hpp</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
 </body>
 </html>

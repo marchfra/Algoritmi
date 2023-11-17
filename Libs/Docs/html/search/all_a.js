@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['polynomials_2ehpp_0',['polynomials.hpp',['../polynomials_8hpp.html',1,'']]]
+  ['newton_0',['newton',['../root__finder_8hpp.html#a640855288cce17db9fba9ff1bd507872',1,'newton(double(*)(double), double(*)(double), double, double, const double, const double, double &amp;, int &amp;):&#160;root_finder.cpp'],['../root__finder_8hpp.html#ac9a667120014fbfe59b951aceb32b74b',1,'newton(double(*)(double), double(*)(double), double, double, const double, double &amp;):&#160;root_finder.cpp'],['../root__finder_8hpp.html#aa68d5d2002dc8c7a28fa2af893a81890',1,'newton(double(*)(double), double(*)(double), double, double, const double, double &amp;, int &amp;):&#160;root_finder.cpp'],['../root__finder_8hpp.html#a2e8063c509653fc64fc269a778951805',1,'newton(double(*)(double), double(*)(double), double, double, const double, const double, double &amp;):&#160;root_finder.cpp']]]
 ];

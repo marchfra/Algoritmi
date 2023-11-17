@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['rectangular_5fquad_0',['rectangular_quad',['../quad_8hpp.html#a49d2365537c155413914c536df8b5241',1,'quad.cpp']]],
-  ['root_5ffinder_2ehpp_1',['root_finder.hpp',['../root__finder_8hpp.html',1,'']]]
+  ['polynomials_2ehpp_0',['polynomials.hpp',['../polynomials_8hpp.html',1,'']]],
+  ['pverlet_1',['pVerlet',['../ode__solver_8hpp.html#a6ab79642d47b341f708abf0af4d9a7fe',1,'ode_solver.cpp']]]
 ];
