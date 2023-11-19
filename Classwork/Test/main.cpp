@@ -52,14 +52,14 @@ int main() {
 	double dXA = 0.0, dXB = 5.0;
 	int nN = 6;
 	cout << "Integral from 0 to 5 of f(x) = x^2 - 2" << endl;
-	cout << "Rectangle: " << rectangular_quad(f, dXA, dXB, nN) << endl;
+	cout << "Rectangle: " << rectangularQuad(f, dXA, dXB, nN) << endl;
 	cout << "Trapezoid: " << trapezoidal_quad(f, dXA, dXB, nN) << endl;
 	cout << "Simpson:   " << simpson_quad(f, dXA, dXB, nN) << endl;
 	cout << "Gauss:     " << gauss_legendre_quad(f, dXA, dXB, nN) << endl;
 
 	cout << "\n---------- Test poly ----------" << endl;
 	cout << "Integral from 0 to 5 of f(x) = x^2 - 2" << endl;
-	cout << "Rectangle: " << rectangular_quad(pol, dXA, dXB, nN) << endl;
+	cout << "Rectangle: " << rectangularQuad(pol, dXA, dXB, nN) << endl;
 	cout << "Trapezoid: " << trapezoidal_quad(pol, dXA, dXB, nN) << endl;
 	cout << "Simpson:   " << simpson_quad(pol, dXA, dXB, nN) << endl;
 	cout << "Gauss:     " << gauss_legendre_quad(pol, dXA, dXB, nN) << endl;

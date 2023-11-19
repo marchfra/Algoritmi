@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['backwarddiff_0',['BackwardDiff',['../derivative_8hpp.html#a2525e8a66e20393d2d44d0bb33edc9fa',1,'derivative.cpp']]],
-  ['backwarddiff2_1',['BackwardDiff2',['../derivative_8hpp.html#a61a67221a8c789e6ea7b6d936ec6bba5',1,'derivative.cpp']]],
-  ['bisection_2',['bisection',['../root__finder_8hpp.html#a60520d9449644bffa6d3fd237e5be435',1,'bisection(double(*)(double), double, double, const double, const double, double &amp;, int &amp;):&#160;root_finder.cpp'],['../root__finder_8hpp.html#af297d31d958c4c141ea20fff70abfdcf',1,'bisection(double(*)(double), double, double, const double, double &amp;):&#160;root_finder.cpp'],['../root__finder_8hpp.html#a78d7f831b795b8845dc930f0eedd039b',1,'bisection(double(*)(double), double, double, const double, double &amp;, int &amp;):&#160;root_finder.cpp'],['../root__finder_8hpp.html#a3564a9b497362286ba47c3575b3323ee',1,'bisection(double(*)(double), double, double, const double, const double, double &amp;):&#160;root_finder.cpp']]],
-  ['bracket_3',['bracket',['../root__finder_8hpp.html#a9927e7e9c5089aa79067219a73e48c6b',1,'root_finder.cpp']]],
+  ['backwarddiff_0',['backwardDiff',['../derivative_8hpp.html#ab4c6feb83cb99d11abe28ce2fa940074',1,'derivative.cpp']]],
+  ['backwarddiff2_1',['backwardDiff2',['../derivative_8hpp.html#a044145234098fa8d542958e490ed880c',1,'derivative.cpp']]],
+  ['bisection_2',['bisection',['../root__finder_8hpp.html#a97c19e046132757d4774e7d7d0bb6e44',1,'bisection(double(*f)(const double &amp;x), double xa, double xb, const double &amp;xtol, const double ftol, double &amp;root, int &amp;ntry):&#160;root_finder.hpp'],['../root__finder_8hpp.html#ab2f5b5d47b5d1f368462a6c29dc82794',1,'bisection(double(*f)(const double &amp;x), double xa, double xb, const double &amp;xtol, double &amp;root):&#160;root_finder.cpp'],['../root__finder_8hpp.html#a7e88347d80b84c6ced922677ab8f9e2b',1,'bisection(double(*f)(const double &amp;x), double xa, double xb, const double &amp;xtol, double &amp;root, int &amp;ntry):&#160;root_finder.cpp'],['../root__finder_8hpp.html#ab0a02ed7e1e46e603a3e41968f12463a',1,'bisection(double(*f)(const double &amp;x), double xa, double xb, const double &amp;xtol, const double &amp;ftol, double &amp;root):&#160;root_finder.cpp']]],
+  ['bracket_3',['bracket',['../root__finder_8hpp.html#a85323ac5e7858a76498abc3ecd602aef',1,'root_finder.cpp']]],
   ['bug_20list_4',['Bug List',['../bug.html',1,'']]]
 ];

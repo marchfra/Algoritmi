@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['time_5ftest_0',['time_test',['../execution__time_8hpp.html#a2b16f5a349ef8227e45adb266f3e8f51',1,'time_test(void(*)(), const std::string &amp;, const long int=1e6, bool=false):&#160;execution_time.cpp'],['../execution__time_8hpp.html#ac03c68a4497223f3fd2a14f0a7b44eff',1,'time_test(void(*)(), const long int=1e6, bool=false):&#160;execution_time.cpp']]],
+  ['timetest_0',['timetest',['../execution__time_8hpp.html#a864e2f52d17b93b8d681d12d7232fbf2',1,'timeTest(void(*f)(), const std::string &amp;fName, const long int executions=1e6, bool print=false):&#160;execution_time.cpp'],['../execution__time_8hpp.html#a565cee45cc2ef0229a0eb3222fcbb248',1,'timeTest(void(*f)(), const long int executions=1e6, bool print=false):&#160;execution_time.cpp']]],
   ['todo_20list_1',['Todo List',['../todo.html',1,'']]],
-  ['trapezoidal_5fquad_2',['trapezoidal_quad',['../quad_8hpp.html#ad24790e14e97fb7ac15caedaebc41195',1,'integral_sin.cpp']]],
+  ['trapezoidalquad_2',['trapezoidalQuad',['../quad_8hpp.html#a43d7b5a4ce4626cf371dbcdc8ed12ae7',1,'quad.cpp']]],
   ['true_3',['TRUE',['../debug_8hpp.html#aa8cecfc5c5c054d2875c03e77b7be15d',1,'debug.hpp']]]
 ];

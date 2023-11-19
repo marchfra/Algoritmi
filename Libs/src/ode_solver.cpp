@@ -1,7 +1,7 @@
 #include "../include/debug.hpp"
 #include "../include/ode_solver.hpp"
 
-void EulerStep(double t, double Y[], void (*RHSFunc)(double, double[], double[]), double dt, int neq) {
+void eulerStep(const double& t, double Y[], void (*RHSFunc)(const double& t, double Y[], double RHS[]), const double& dt, const int& neq) {
 	if (neq > 64) throw std::invalid_argument("neq must be less than 64");
 
 	double rhs[64];
@@ -12,7 +12,7 @@ void EulerStep(double t, double Y[], void (*RHSFunc)(double, double[], double[])
 	}
 }
 
-void RK2Step(double t, double Y[], void (*RHSFunc)(double, double[], double[]), double dt, int neq, bool rule) {
+void rk2Step(const double& t, double Y[], void (*RHSFunc)(const double& t, double Y[], double RHS[]), const double& dt, const int& neq, bool rule) {
 	if (neq > 64) throw std::invalid_argument("neq must be less than 64");
 	double Ystar[64], k1[64], k2[64];
 
@@ -43,7 +43,7 @@ void RK2Step(double t, double Y[], void (*RHSFunc)(double, double[], double[]), 
 	}
 }
 
-void RK4Step(double t, double Y[], void (*RHSFunc)(double, double[], double[]), double dt, int neq) {
+void rk4Step(const double& t, double Y[], void (*RHSFunc)(const double& t, double Y[], double RHS[]), const double& dt, const int& neq) {
 	if (neq > 64) throw std::invalid_argument("neq must be less than 64");
 
 	double Ystar[64], k1[64], k2[64], k3[64], k4[64];
@@ -70,7 +70,7 @@ void RK4Step(double t, double Y[], void (*RHSFunc)(double, double[], double[]), 
 	}
 }
 
-void pVerlet(double t, double Y[], void (*RHSFunc)(double[], double[]), double dt, int neq) {
+void pVerlet(const double& t, double Y[], void (*RHSFunc)(double Y[], double RHS[]), const double& dt, const int& neq) {
 	if (neq > 64)     throw std::invalid_argument("neq must be less than 64");
 	if (neq % 2 != 0) throw std::invalid_argument("neq must be even");
 
@@ -108,7 +108,7 @@ void pVerlet(double t, double Y[], void (*RHSFunc)(double[], double[]), double d
 	}
 }
 
-void vVerlet(double t, double Y[], void (*RHSFunc)(double[], double[]), double dt, int neq) {
+void vVerlet(const double& t, double Y[], void (*RHSFunc)(double Y[], double RHS[]), const double& dt, const int& neq) {
 	if (neq > 64)     throw std::invalid_argument("neq must be less than 64");
 	if (neq % 2 != 0) throw std::invalid_argument("neq must be even");
 

@@ -103,38 +103,40 @@ $(document).ready(function(){initNavTree('ode__solver_8hpp.html',''); initResiza
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af8754f865380a2c0f099ef5327f78602" id="r_af8754f865380a2c0f099ef5327f78602"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ode__solver_8hpp.html#af8754f865380a2c0f099ef5327f78602">EulerStep</a> (double, double[], void(*)(double, double[], double[]), double, int)</td></tr>
-<tr class="memdesc:af8754f865380a2c0f099ef5327f78602"><td class="mdescLeft">&#160;</td><td class="mdescRight">Euler method step.  <br /></td></tr>
-<tr class="separator:af8754f865380a2c0f099ef5327f78602"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99db22fcd965bd8a8901ff941b0f3aee" id="r_a99db22fcd965bd8a8901ff941b0f3aee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ode__solver_8hpp.html#a99db22fcd965bd8a8901ff941b0f3aee">RK2Step</a> (double, double[], void(*)(double, double[], double[]), double, int, bool=false)</td></tr>
-<tr class="memdesc:a99db22fcd965bd8a8901ff941b0f3aee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runge-Kutta 2 method step.  <br /></td></tr>
-<tr class="separator:a99db22fcd965bd8a8901ff941b0f3aee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3679dacd53c2f96dbaecebf71208958e" id="r_a3679dacd53c2f96dbaecebf71208958e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ode__solver_8hpp.html#a3679dacd53c2f96dbaecebf71208958e">RK4Step</a> (double, double[], void(*)(double, double[], double[]), double, int)</td></tr>
-<tr class="memdesc:a3679dacd53c2f96dbaecebf71208958e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runge-Kutta 4 method step.  <br /></td></tr>
-<tr class="separator:a3679dacd53c2f96dbaecebf71208958e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ab79642d47b341f708abf0af4d9a7fe" id="r_a6ab79642d47b341f708abf0af4d9a7fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ode__solver_8hpp.html#a6ab79642d47b341f708abf0af4d9a7fe">pVerlet</a> (double, double[], void(*)(double[], double[]), double, int)</td></tr>
-<tr class="memdesc:a6ab79642d47b341f708abf0af4d9a7fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position Verlet method step.  <br /></td></tr>
-<tr class="separator:a6ab79642d47b341f708abf0af4d9a7fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61759f374e54375227d303f5c36242e1" id="r_a61759f374e54375227d303f5c36242e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ode__solver_8hpp.html#a61759f374e54375227d303f5c36242e1">vVerlet</a> (double, double[], void(*)(double[], double[]), double, int)</td></tr>
-<tr class="memdesc:a61759f374e54375227d303f5c36242e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Velocity Verlet method step.  <br /></td></tr>
-<tr class="separator:a61759f374e54375227d303f5c36242e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cf3984abbdc7c30925710d2c4f40737" id="r_a2cf3984abbdc7c30925710d2c4f40737"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ode__solver_8hpp.html#a2cf3984abbdc7c30925710d2c4f40737">eulerStep</a> (const double &amp;t, double Y[], void(*RHSFunc)(const double &amp;t, double Y[], double RHS[]), const double &amp;dt, const int &amp;neq)</td></tr>
+<tr class="memdesc:a2cf3984abbdc7c30925710d2c4f40737"><td class="mdescLeft">&#160;</td><td class="mdescRight">Euler method step.  <br /></td></tr>
+<tr class="separator:a2cf3984abbdc7c30925710d2c4f40737"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a873e53d640b4ef254daf0fff538c53c1" id="r_a873e53d640b4ef254daf0fff538c53c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ode__solver_8hpp.html#a873e53d640b4ef254daf0fff538c53c1">rk2Step</a> (const double &amp;t, double Y[], void(*RHSFunc)(const double &amp;t, double Y[], double RHS[]), const double &amp;dt, const int &amp;neq, bool rule=false)</td></tr>
+<tr class="memdesc:a873e53d640b4ef254daf0fff538c53c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runge-Kutta 2 method step.  <br /></td></tr>
+<tr class="separator:a873e53d640b4ef254daf0fff538c53c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0019d301583cc837ff92c3b79481279e" id="r_a0019d301583cc837ff92c3b79481279e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ode__solver_8hpp.html#a0019d301583cc837ff92c3b79481279e">rk4Step</a> (const double &amp;t, double Y[], void(*RHSFunc)(const double &amp;t, double Y[], double RHS[]), const double &amp;dt, const int &amp;neq)</td></tr>
+<tr class="memdesc:a0019d301583cc837ff92c3b79481279e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runge-Kutta 4 method step.  <br /></td></tr>
+<tr class="separator:a0019d301583cc837ff92c3b79481279e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a810481d98ae32a84b7cb0545fa223577" id="r_a810481d98ae32a84b7cb0545fa223577"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ode__solver_8hpp.html#a810481d98ae32a84b7cb0545fa223577">pVerlet</a> (const double &amp;t, double Y[], void(*RHSFunc)(double Y[], double RHS[]), const double &amp;dt, const int &amp;neq)</td></tr>
+<tr class="memdesc:a810481d98ae32a84b7cb0545fa223577"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position Verlet method step.  <br /></td></tr>
+<tr class="separator:a810481d98ae32a84b7cb0545fa223577"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad13872a4d07109fa920ebab81fdbb5e2" id="r_ad13872a4d07109fa920ebab81fdbb5e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ode__solver_8hpp.html#ad13872a4d07109fa920ebab81fdbb5e2">vVerlet</a> (const double &amp;t, double Y[], void(*RHSFunc)(double Y[], double RHS[]), const double &amp;dt, const int &amp;neq)</td></tr>
+<tr class="memdesc:ad13872a4d07109fa920ebab81fdbb5e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Velocity Verlet method step.  <br /></td></tr>
+<tr class="separator:ad13872a4d07109fa920ebab81fdbb5e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation of the ODE Solvers step functions. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Fix RK4Step.<br  />
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Fix RK4Step.<br  />
  Improve pVerlet using pointers to improve readability.<br  />
  Fix vVerlet and rewrite using pointers. </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Francesco Marchisotti</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>19/11/2023 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="af8754f865380a2c0f099ef5327f78602" name="af8754f865380a2c0f099ef5327f78602"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8754f865380a2c0f099ef5327f78602">&#9670;&#160;</a></span>EulerStep()</h2>
+<a id="a2cf3984abbdc7c30925710d2c4f40737" name="a2cf3984abbdc7c30925710d2c4f40737"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cf3984abbdc7c30925710d2c4f40737">&#9670;&#160;</a></span>eulerStep()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void EulerStep </td>
+          <td class="memname">void eulerStep </td>
           <td>(</td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>t</em>, </td>
         </tr>
         <tr>
@@ -146,19 +148,19 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void(*)(double, double[], double[])&#160;</td>
+          <td class="paramtype">void(*)(const double &amp;t, double Y[], double RHS[])&#160;</td>
           <td class="paramname"><em>RHSFunc</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>dt</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>neq</em>&#160;</td>
         </tr>
         <tr>
@@ -184,16 +186,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a99db22fcd965bd8a8901ff941b0f3aee" name="a99db22fcd965bd8a8901ff941b0f3aee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99db22fcd965bd8a8901ff941b0f3aee">&#9670;&#160;</a></span>RK2Step()</h2>
+<a id="a873e53d640b4ef254daf0fff538c53c1" name="a873e53d640b4ef254daf0fff538c53c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a873e53d640b4ef254daf0fff538c53c1">&#9670;&#160;</a></span>rk2Step()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void RK2Step </td>
+          <td class="memname">void rk2Step </td>
           <td>(</td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>t</em>, </td>
         </tr>
         <tr>
@@ -205,19 +207,19 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void(*)(double, double[], double[])&#160;</td>
+          <td class="paramtype">void(*)(const double &amp;t, double Y[], double RHS[])&#160;</td>
           <td class="paramname"><em>RHSFunc</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>dt</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>neq</em>, </td>
         </tr>
         <tr>
@@ -250,16 +252,16 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3679dacd53c2f96dbaecebf71208958e" name="a3679dacd53c2f96dbaecebf71208958e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3679dacd53c2f96dbaecebf71208958e">&#9670;&#160;</a></span>RK4Step()</h2>
+<a id="a0019d301583cc837ff92c3b79481279e" name="a0019d301583cc837ff92c3b79481279e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0019d301583cc837ff92c3b79481279e">&#9670;&#160;</a></span>rk4Step()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void RK4Step </td>
+          <td class="memname">void rk4Step </td>
           <td>(</td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>t</em>, </td>
         </tr>
         <tr>
@@ -271,19 +273,19 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void(*)(double, double[], double[])&#160;</td>
+          <td class="paramtype">void(*)(const double &amp;t, double Y[], double RHS[])&#160;</td>
           <td class="paramname"><em>RHSFunc</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>dt</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>neq</em>&#160;</td>
         </tr>
         <tr>
@@ -310,8 +312,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a6ab79642d47b341f708abf0af4d9a7fe" name="a6ab79642d47b341f708abf0af4d9a7fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ab79642d47b341f708abf0af4d9a7fe">&#9670;&#160;</a></span>pVerlet()</h2>
+<a id="a810481d98ae32a84b7cb0545fa223577" name="a810481d98ae32a84b7cb0545fa223577"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a810481d98ae32a84b7cb0545fa223577">&#9670;&#160;</a></span>pVerlet()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -319,7 +321,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void pVerlet </td>
           <td>(</td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>t</em>, </td>
         </tr>
         <tr>
@@ -331,19 +333,19 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void(*)(double[], double[])&#160;</td>
+          <td class="paramtype">void(*)(double Y[], double RHS[])&#160;</td>
           <td class="paramname"><em>RHSFunc</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>dt</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>neq</em>&#160;</td>
         </tr>
         <tr>
@@ -369,8 +371,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a61759f374e54375227d303f5c36242e1" name="a61759f374e54375227d303f5c36242e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a61759f374e54375227d303f5c36242e1">&#9670;&#160;</a></span>vVerlet()</h2>
+<a id="ad13872a4d07109fa920ebab81fdbb5e2" name="ad13872a4d07109fa920ebab81fdbb5e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad13872a4d07109fa920ebab81fdbb5e2">&#9670;&#160;</a></span>vVerlet()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -378,7 +380,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void vVerlet </td>
           <td>(</td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>t</em>, </td>
         </tr>
         <tr>
@@ -390,19 +392,19 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void(*)(double[], double[])&#160;</td>
+          <td class="paramtype">void(*)(double Y[], double RHS[])&#160;</td>
           <td class="paramname"><em>RHSFunc</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>dt</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>neq</em>&#160;</td>
         </tr>
         <tr>

@@ -1,7 +1,7 @@
 #include "../include/debug.hpp"
 #include "../include/quad.hpp"
 
-double rectangular_quad(double (*F)(double), const double a, const double b, const int n) {
+double rectangularQuad(double (*F)(const double& x), const double& a, const double& b, const int& n) {
 	double sum = 0.0;
 	const double h = (b - a) / n;	// Interval width
 	double xi = a;
@@ -14,11 +14,11 @@ double rectangular_quad(double (*F)(double), const double a, const double b, con
 	return sum * h;					// Finalise the calculation and return
 }
 
-double midpoint_quad(double (*F)(double), const double a, const double b, const int n) {
-	return gauss_legendre_quad(F, a, b, n, 1);		// Gauss-Legendre rule converges to midpoint rule for Ng = 1
+double midpointQuad(double (*F)(const double& x), const double& a, const double& b, const int& n) {
+	return gaussLegendreQuad(F, a, b, n, 1);		// Gauss-Legendre rule converges to midpoint rule for Ng = 1
 }
 
-double trapezoidal_quad(double (*F)(double), const double a, const double b, const int n) {
+double trapezoidalQuad(double (*F)(const double& x), const double& a, const double& b, const int& n) {
 	double sum = 0.5 * (F(a) + F(b));	// Take care of the first and last term of the summation
 	const double h = (b - a) / n;		// Interval width
 	double xi = a;
@@ -31,11 +31,10 @@ double trapezoidal_quad(double (*F)(double), const double a, const double b, con
 	return sum * h;						// Finalise the calculation and return
 }
 
-double simpson_quad(double (*F)(double), const double a, const double b, const int n) {
+double simpsonQuad(double (*F)(const double& x), const double& a, const double& b, const int& n) {
 	// n must be even!
 	if (n % 2 != 0) {
-		std::cout << "simpson_quad(): Invalid argument: n must be even." << std::endl;
-		exit(1);
+		throw std::invalid_argument("simpsonQuad(): Invalid argument: n must be even.");
 	}
 	
 	const double h = (b - a) / n;		// Interval width
@@ -52,39 +51,43 @@ double simpson_quad(double (*F)(double), const double a, const double b, const i
 	return sum * h / 3;					// Finalise the calculation and return
 }
 
-double gauss_legendre_quad(double (*F)(double), const double a, const double b, const int N, const int Ng) {
-	double weight[8], root[8];
-
+void setLegendreWeightsAndRoots(double weights[], double roots[], const int& Ng) {
 	switch(Ng) {
 	case 1:
-		root[0] = 0;												weight[0] = 2;
+		roots[0] = 0;												weights[0] = 2;
 		break;
 	case 2:
-		root[0] =  sqrt(1.0 / 3.0);									weight[0] = 1;
-		root[1] = -sqrt(1.0 / 3.0);									weight[1] = 1;
+		roots[0] =  sqrt(1.0 / 3.0);								weights[0] = 1;
+		roots[1] = -sqrt(1.0 / 3.0);								weights[1] = 1;
 		break;
 	case 3:
-		root[0] =  0;												weight[0] = 8.0 / 9.0;
-		root[1] =  sqrt(3.0 / 5.0);									weight[1] = 5.0 / 9.0;
-		root[2] = -sqrt(3.0 / 5.0);									weight[2] = 5.0 / 9.0;
+		roots[0] =  0;												weights[0] = 8.0 / 9.0;
+		roots[1] =  sqrt(3.0 / 5.0);								weights[1] = 5.0 / 9.0;
+		roots[2] = -sqrt(3.0 / 5.0);								weights[2] = 5.0 / 9.0;
 		break;
 	case 4:
-		root[0] =  sqrt(3.0 / 7.0 - 2.0 / 7.0 * sqrt(6.0 / 5.0));	weight[0] = (18 + sqrt(30)) / 36;
-		root[1] = -sqrt(3.0 / 7.0 - 2.0 / 7.0 * sqrt(6.0 / 5.0));	weight[1] = (18 + sqrt(30)) / 36;
-		root[2] =  sqrt(3.0 / 7.0 + 2.0 / 7.0 * sqrt(6.0 / 5.0));	weight[2] = (18 - sqrt(30)) / 36;
-		root[3] = -sqrt(3.0 / 7.0 + 2.0 / 7.0 * sqrt(6.0 / 5.0));	weight[3] = (18 - sqrt(30)) / 36;
+		roots[0] =  sqrt(3.0 / 7.0 - 2.0 / 7.0 * sqrt(6.0 / 5.0));	weights[0] = (18 + sqrt(30)) / 36;
+		roots[1] = -sqrt(3.0 / 7.0 - 2.0 / 7.0 * sqrt(6.0 / 5.0));	weights[1] = (18 + sqrt(30)) / 36;
+		roots[2] =  sqrt(3.0 / 7.0 + 2.0 / 7.0 * sqrt(6.0 / 5.0));	weights[2] = (18 - sqrt(30)) / 36;
+		roots[3] = -sqrt(3.0 / 7.0 + 2.0 / 7.0 * sqrt(6.0 / 5.0));	weights[3] = (18 - sqrt(30)) / 36;
 		break;
 	case 5:
-		root[0] =  0;												weight[0] = 128.0 / 225.0;
-		root[1] =  1.0 / 3.0 * sqrt(5 - 2 * sqrt(10.0 / 7.0));		weight[1] = (322.0 + 13.0 * sqrt(70.0)) / 900.0; 
-		root[2] = -1.0 / 3.0 * sqrt(5 - 2 * sqrt(10.0 / 7.0));		weight[2] = (322.0 + 13.0 * sqrt(70.0)) / 900.0;
-		root[3] =  1.0 / 3.0 * sqrt(5 + 2 * sqrt(10.0 / 7.0));		weight[3] = (322.0 - 13.0 * sqrt(70.0)) / 900.0;
-		root[4] = -1.0 / 3.0 * sqrt(5 + 2 * sqrt(10.0 / 7.0));		weight[4] = (322.0 - 13.0 * sqrt(70.0)) / 900.0;
+		roots[0] =  0;												weights[0] = 128.0 / 225.0;
+		roots[1] =  1.0 / 3.0 * sqrt(5 - 2 * sqrt(10.0 / 7.0));		weights[1] = (322.0 + 13.0 * sqrt(70.0)) / 900.0; 
+		roots[2] = -1.0 / 3.0 * sqrt(5 - 2 * sqrt(10.0 / 7.0));		weights[2] = (322.0 + 13.0 * sqrt(70.0)) / 900.0;
+		roots[3] =  1.0 / 3.0 * sqrt(5 + 2 * sqrt(10.0 / 7.0));		weights[3] = (322.0 - 13.0 * sqrt(70.0)) / 900.0;
+		roots[4] = -1.0 / 3.0 * sqrt(5 + 2 * sqrt(10.0 / 7.0));		weights[4] = (322.0 - 13.0 * sqrt(70.0)) / 900.0;
 		break;
 	default:
-		std::cout << "gauss_legendre_quad(): Invalid argument: Ng must be in [1, 5]." << std::endl;
-		exit(1);
+		throw std::invalid_argument("setLegendreWeightsAndRoots(): Invalid argument: Ng must be in [1, 5].");
 	}
+}
+
+
+double gaussLegendreQuad(double (*F)(const double& x), const double& a, const double& b, const int N, const int Ng) {
+	double weight[8], root[8];
+
+	setLegendreWeightsAndRoots(weights, roots, Ng);
 
 	const double h = (b - a) / N;						// Interval width
 	double sum = 0.0;
@@ -103,39 +106,10 @@ double gauss_legendre_quad(double (*F)(double), const double a, const double b, 
 	return 0.5 * h * sum;								// Finalize calculation and return
 }
 
-double gauss_legendre_quad2D(double (*F)(double, double), const double xa, const double xb, const double ya, const double yb, const int N, const int Ng) {
+double gaussLegendreQuad2D(double (*F)(const double& x, const double& y), const double& xa, const double& xb, const double& ya, const double& yb, const int N, const int Ng) {
 	double weight[8], root[8];
 
-	switch(Ng) {
-	case 1:
-		root[0] = 0;												weight[0] = 2;
-		break;
-	case 2:
-		root[0] =  sqrt(1.0 / 3.0);									weight[0] = 1;
-		root[1] = -sqrt(1.0 / 3.0);									weight[1] = 1;
-		break;
-	case 3:
-		root[0] =  0;												weight[0] = 8.0 / 9.0;
-		root[1] =  sqrt(3.0 / 5.0);									weight[1] = 5.0 / 9.0;
-		root[2] = -sqrt(3.0 / 5.0);									weight[2] = 5.0 / 9.0;
-		break;
-	case 4:
-		root[0] =  sqrt(3.0 / 7.0 - 2.0 / 7.0 * sqrt(6.0 / 5.0));	weight[0] = (18 + sqrt(30)) / 36;
-		root[1] = -sqrt(3.0 / 7.0 - 2.0 / 7.0 * sqrt(6.0 / 5.0));	weight[1] = (18 + sqrt(30)) / 36;
-		root[2] =  sqrt(3.0 / 7.0 + 2.0 / 7.0 * sqrt(6.0 / 5.0));	weight[2] = (18 - sqrt(30)) / 36;
-		root[3] = -sqrt(3.0 / 7.0 + 2.0 / 7.0 * sqrt(6.0 / 5.0));	weight[3] = (18 - sqrt(30)) / 36;
-		break;
-	case 5:
-		root[0] =  0;												weight[0] = 128.0 / 225.0;
-		root[1] =  1.0 / 3.0 * sqrt(5 - 2 * sqrt(10.0 / 7.0));		weight[1] = (322.0 + 13.0 * sqrt(70.0)) / 900.0; 
-		root[2] = -1.0 / 3.0 * sqrt(5 - 2 * sqrt(10.0 / 7.0));		weight[2] = (322.0 + 13.0 * sqrt(70.0)) / 900.0;
-		root[3] =  1.0 / 3.0 * sqrt(5 + 2 * sqrt(10.0 / 7.0));		weight[3] = (322.0 - 13.0 * sqrt(70.0)) / 900.0;
-		root[4] = -1.0 / 3.0 * sqrt(5 + 2 * sqrt(10.0 / 7.0));		weight[4] = (322.0 - 13.0 * sqrt(70.0)) / 900.0;
-		break;
-	default:
-		std::cout << "gauss_legendre_quad(): Invalid argument: Ng must be in [1, 5]." << std::endl;
-		exit(1);
-	}
+	setLegendreWeightsAndRoots(weights, roots, Ng);
 
 	const double xh = (xb - xa) / N;					// Interval width along x
 	const double yh = (yb - ya) / N;					// Interval width along y

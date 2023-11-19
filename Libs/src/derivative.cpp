@@ -1,57 +1,57 @@
 #include "../include/debug.hpp"
 #include "../include/derivative.hpp"
 
-double ForwardDiff(const double (*f)(const double), const double dX, const double dH) {
-	double fxph = f(dX + dH);
-	double fx   = f(dX);
+double forwardDiff(double (*f)(const double& x), const double& x, const double& h) {
+	double fxph = f(x + h);
+	double fx   = f(x);
 	
-	return (fxph - fx) / dH;
+	return (fxph - fx) / h;
 }
 
-double BackwardDiff(const double (*f)(const double), const double dX, const double dH) {
-	double fx   = f(dX);
-	double fxmh = f(dX - dH);
+double backwardDiff(double (*f)(const double& x), const double& x, const double& h) {
+	double fx   = f(x);
+	double fxmh = f(x - h);
 	
-	return (fx - fxmh) / dH;
+	return (fx - fxmh) / h;
 }
 
-double CentralDiff(const double (*f)(const double), const double dX, const double dH) {
-	double fxph = f(dX + dH);
-	double fxmh = f(dX - dH);
+double centralDiff(double (*f)(const double& x), const double& x, const double& h) {
+	double fxph = f(x + h);
+	double fxmh = f(x - h);
 
-	return (fxph - fxmh) / (2.0 * dH);
+	return (fxph - fxmh) / (2.0 * h);
 }
 
-double HigherDiff(const double (*f)(const double), const double dX, const double dH) {
-	double fxpph = f(dX + 2.0 * dH);
-	double fxph  = f(dX + dH);
-	double fxmh  = f(dX - dH);
-	double fxmmh = f(dX - 2.0 * dH);
+double higherDiff(double (*f)(const double& x), const double& x, const double& h) {
+	double fxpph = f(x + 2.0 * h);
+	double fxph  = f(x + h);
+	double fxmh  = f(x - h);
+	double fxmmh = f(x - 2.0 * h);
 
-	return (fxmmh - 8.0 * fxmh + 8.0 * fxph - fxpph) / (12.0 * dH);
+	return (fxmmh - 8.0 * fxmh + 8.0 * fxph - fxpph) / (12.0 * h);
 }
 
-double ForwardDiff2(const double (*f)(const double), const double dX, const double dH) {
-	double fxpph = f(dX + 2.0 * dH);
-	double fxph  = f(dX + dH);
-	double fx    = f(dX);
+double forwardDiff2(double (*f)(const double& x), const double& x, const double& h) {
+	double fxpph = f(x + 2.0 * h);
+	double fxph  = f(x + h);
+	double fx    = f(x);
 
-	return (fxpph - 2.0 * fxph + fx) / (dH*dH);
+	return (fxpph - 2.0 * fxph + fx) / (h*h);
 }
 
-double BackwardDiff2(const double (*f)(const double), const double dX, const double dH) {
-	double fx    = f(dX);
-	double fxmh  = f(dX - dH);
-	double fxmmh = f(dX - 2.0 * dH);
+double backwardDiff2(double (*f)(const double& x), const double& x, const double& h) {
+	double fx    = f(x);
+	double fxmh  = f(x - h);
+	double fxmmh = f(x - 2.0 * h);
 
-	return (fxmmh - 2.0 * fxmh + fx) / (dH*dH);
+	return (fxmmh - 2.0 * fxmh + fx) / (h*h);
 
 }
 
-double CentralDiff2(const double (*f)(const double), const double dX, const double dH) {
-	double fxph = f(dX + dH);
-	double fx = f(dX);
-	double fxmh = f(dX - dH);
+double centralDiff2(double (*f)(const double& x), const double& x, const double& h) {
+	double fxph = f(x + h);
+	double fx = f(x);
+	double fxmh = f(x - h);
 
-	return (fxph - 2.0 * fx + fxmh) / (dH*dH);
+	return (fxph - 2.0 * fx + fxmh) / (h*h);
 }

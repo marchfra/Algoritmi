@@ -1,22 +1,22 @@
 #include "../include/debug.hpp"
 #include "../include/root_finder.hpp"
 
-int find_roots(double (*f)(double), double(*dfdx)(double), const double xa, const double xb, const double tol, double roots[], int& n_roots, const int N, const std::string method) {
+int findRoots(double (*f)(const double& x), double(*dfdx)(const double& x), const double& xa, const double& xb, const double& tol, double roots[], int& nRoots, const int N, const std::string method) {
 	if (N > 128) throw std::invalid_argument("N must be less than 128");
 
 	double xL[128], xR[128];
 
-	bracket(f, xa, xb, xL, xR, N, n_roots);
+	bracket(f, xa, xb, xL, xR, N, nRoots);
 
-	if (n_roots == 0) {
-		std::cerr << "! find_roots(): The interval does not contain any roots:" << std::endl;
+	if (nRoots == 0) {
+		std::cerr << "! findRoots(): The interval does not contain any roots:" << std::endl;
 		return 2;
 	}
 
 	int flag;
-	for (int i = 0; i < n_roots; i++) {
+	for (int i = 0; i < nRoots; i++) {
 		if (method == "bisection") flag = bisection(f, xL[i], xR[i], tol, roots[i]);
-		else if (method == "false_position") flag = false_position(f, xL[i], xR[i], tol, roots[i]);
+		else if (method == "falsePosition") flag = false_position(f, xL[i], xR[i], tol, roots[i]);
 		else if (method == "secant") flag = secant(f, xL[i], xR[i], tol, roots[i]);
 		else if (method == "newton") flag = newton(f, dfdx, xL[i], xR[i], tol, roots[i]);
 		else throw std::invalid_argument("Invalid method argument");
@@ -31,13 +31,13 @@ int find_roots(double (*f)(double), double(*dfdx)(double), const double xa, cons
 	return flag;
 }
 
-int find_roots(double (*f)(double), const double xa, const double xb, const double tol, double roots[], int& n_roots, const int N, const std::string method) {
-	if (method == "newton") throw std::invalid_argument("Newton method is invalid");
+int findRoots(double (*f)(const double& x), const double& xa, const double& xb, const double& tol, double roots[], int& nRoots, const int N, const std::string method) {
+	if (method == "newton") throw std::invalid_argument("Newton method isn't available with this prototype.");
 
-	return find_roots(f, nullptr, xa, xb, tol, roots, n_roots, N, method);
+	return findRoots(f, nullptr, xa, xb, tol, roots, nRoots, N, method);
 }
 
-void bracket(double (*f)(double), const double xa, const double xb, double xL[], double xR[], const int N, int& n_roots) {
+void bracket(double (*f)(const double& x), const double& xa, const double& xb, double xL[], double xR[], const int& N, int& nRoots) {
 	double dx = (xb - xa) / N;
 	double xi = xa;
 	double xi_plus_one = xi + dx;
@@ -63,14 +63,14 @@ void bracket(double (*f)(double), const double xa, const double xb, double xL[],
 		xi_plus_one += dx;
 	}
 
-	n_roots = root_counter;
+	nRoots = root_counter;
 }
 
 // =====================================================================================================================
 // Bisection method
 // =====================================================================================================================
 
-int bisection(double (*f)(double), double xa, double xb, const double xtol, const double ftol, double& root, int& ntry) {
+int bisection(double (*f)(const double& x), double xa, double xb, const double& xtol, const double& ftol, double& root, int& ntry) {
 	int max_ntry = 128;
 	double fa = f(xa);
 	double fb = f(xb);
@@ -137,16 +137,16 @@ int bisection(double (*f)(double), double xa, double xb, const double xtol, cons
 	return 2;
 }
 
-int bisection(double (*f)(double), double xa, double xb, const double xtol, double& root) {
+int bisection(double (*f)(const double& x), double xa, double xb, const double& xtol, double& root) {
 	int n;
 	return bisection(f, xa, xb, xtol, -1.0, root, n);
 }
 
-int bisection(double (*f)(double), double xa, double xb, const double xtol, double& root, int& ntry) {
+int bisection(double (*f)(const double& x), double xa, double xb, const double& xtol, double& root, int& ntry) {
 	return bisection(f, xa, xb, xtol, -1.0, root, ntry);
 }
 
-int bisection(double (*f)(double), double xa, double xb, const double xtol, const double ftol, double& root) {
+int bisection(double (*f)(const double& x), double xa, double xb, const double& xtol, const double& ftol, double& root) {
 	int n;
 	return bisection(f, xa, xb, xtol, ftol, root, n);
 }
@@ -155,7 +155,7 @@ int bisection(double (*f)(double), double xa, double xb, const double xtol, cons
 // False position method
 // =====================================================================================================================
 
-int false_position(double (*f)(double), double xa, double xb, const double xtol, const double ftol, double& root, int& ntry) {
+int falsePosition(double (*f)(const double& x), double xa, double xb, const double& xtol, const double& ftol, double& root, int& ntry) {
 	int max_ntry = 128;
 	double fa = f(xa);
 	double fb = f(xb);
@@ -182,7 +182,7 @@ int false_position(double (*f)(double), double xa, double xb, const double xtol,
 
 			#if DEBUG == TRUE
 			std::cout.setf(std::ios::scientific | std::ios::showpos);
-			std::cout << "false_position(): k = " << std::setw(log10(max_ntry) + 1) << k << "; "
+			std::cout << "falsePosition(): k = " << std::setw(log10(max_ntry) + 1) << k << "; "
 				 << "[a, b] = [" << xa << ", " << xb << "]; xm = " << xm << "; "
 				 << "fm = " << fm << ";\n"
 				 << "                        " << std::setw(log10(max_ntry) + 1) << ""
@@ -209,7 +209,7 @@ int false_position(double (*f)(double), double xa, double xb, const double xtol,
 			}
 		}
 
-		std::cerr << "! false_position(): too many steps\n" << std::endl;
+		std::cerr << "! falsePosition(): too many steps\n" << std::endl;
 		ntry = -1;
 		root = nan("");
 
@@ -217,32 +217,32 @@ int false_position(double (*f)(double), double xa, double xb, const double xtol,
 
 	} 
 
-	std::cerr << "! false_position(): initial interval does not contain any root\n" << std::endl;
+	std::cerr << "! falsePosition(): initial interval does not contain any root\n" << std::endl;
 	ntry = -1;
 	root = nan("");
 
 	return 2;
 }
 
-int false_position(double (*f)(double), double xa, double xb, const double xtol, double& root) {
+int falsePosition(double (*f)(const double& x), double xa, double xb, const double& xtol, double& root) {
 	int n;
-	return false_position(f, xa, xb, xtol, -1.0, root, n);
+	return falsePosition(f, xa, xb, xtol, -1.0, root, n);
 }
 
-int false_position(double (*f)(double), double xa, double xb, const double xtol, double& root, int& ntry) {
-	return false_position(f, xa, xb, xtol, -1.0, root, ntry);
+int falsePosition(double (*f)(const double& x), double xa, double xb, const double& xtol, double& root, int& ntry) {
+	return falsePosition(f, xa, xb, xtol, -1.0, root, ntry);
 }
 
-int false_position(double (*f)(double), double xa, double xb, const double xtol, const double ftol, double& root) {
+int falsePosition(double (*f)(const double& x), double xa, double xb, const double& xtol, const double& ftol, double& root) {
 	int n;
-	return false_position(f, xa, xb, xtol, ftol, root, n);
+	return falsePosition(f, xa, xb, xtol, ftol, root, n);
 }
 
 // =====================================================================================================================
 // Secant method
 // =====================================================================================================================
 
-int secant(double (*f)(double), double xa, double xb, const double xtol, const double ftol, double& root, int& ntry) {
+int secant(double (*f)(const double& x), double xa, double xb, const double& xtol, const double& ftol, double& root, int& ntry) {
 	int max_ntry = 64;
 	double fa = f(xa);
 	double fb = f(xb);
@@ -289,16 +289,16 @@ int secant(double (*f)(double), double xa, double xb, const double xtol, const d
 	return 1;
 }
 
-int secant(double (*f)(double), double xa, double xb, const double xtol, double& root) {
+int secant(double (*f)(const double& x), double xa, double xb, const double& xtol, double& root) {
 	int n;
 	return secant(f, xa, xb, xtol, -1.0, root, n);
 }
 
-int secant(double (*f)(double), double xa, double xb, const double xtol, double& root, int& ntry) {
+int secant(double (*f)(const double& x), double xa, double xb, const double& xtol, double& root, int& ntry) {
 	return secant(f, xa, xb, xtol, -1.0, root, ntry);
 }
 
-int secant(double (*f)(double), double xa, double xb, const double xtol, const double ftol, double& root) {
+int secant(double (*f)(const double& x), double xa, double xb, const double& xtol, const double& ftol, double& root) {
 	int n;
 	return secant(f, xa, xb, xtol, ftol, root, n);
 }
@@ -307,7 +307,7 @@ int secant(double (*f)(double), double xa, double xb, const double xtol, const d
 // Newton's method
 // =====================================================================================================================
 
-int newton(double (*f)(double), double (*dfdx)(double), double xa, double xb, const double xtol, const double ftol, double& root, int& ntry) {
+int newton(double (*f)(const double& x), double (*dfdx)(const double& x), double xa, double xb, const double& xtol, const double& ftol, double& root, int& ntry) {
 	int max_ntry = 16;
 	double fa = f(xa);
 	double fb = f(xb);
@@ -353,16 +353,16 @@ int newton(double (*f)(double), double (*dfdx)(double), double xa, double xb, co
 	return 1;
 }
 
-int newton(double (*f)(double), double(*dfdx)(double), double xa, double xb, const double xtol, double& root) {
+int newton(double (*f)(const double& x), double(*dfdx)(const double& x), double xa, double xb, const double& xtol, double& root) {
 	int n;
 	return newton(f, dfdx, xa, xb, xtol, -1.0, root, n);
 }
 
-int newton(double (*f)(double), double(*dfdx)(double), double xa, double xb, const double xtol, double& root, int& ntry) {
+int newton(double (*f)(const double& x), double(*dfdx)(const double& x), double xa, double xb, const double& xtol, double& root, int& ntry) {
 	return newton(f, dfdx, xa, xb, xtol, -1.0, root, ntry);
 }
 
-int newton(double (*f)(double), double(*dfdx)(double), double xa, double xb, const double xtol, const double ftol, double& root) {
+int newton(double (*f)(const double& x), double(*dfdx)(const double& x), double xa, double xb, const double& xtol, const double& ftol, double& root) {
 	int n;
 	return newton(f, dfdx, xa, xb, xtol, ftol, root, n);
 }

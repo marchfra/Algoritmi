@@ -1,17 +1,23 @@
 /**
  * @file swap.hpp
- * 
- * @brief Implementation of the swap utility function.
+ *
+ * @brief      Implementation of the swap utility function.
+ *
+ * @author     Francesco Marchisotti
+ *
+ * @date       19/11/2023
  */
-
 #pragma once
 
 /**
- * @brief Swap two values.
- * 
+ * @brief      Swap two values.
+ *
  * This function swaps the two values in input.
- * 
- * @tparam a, b The values to be swapped.
+ *
+ * @param      a     The first value.
+ * @param      b     The second value.
+ *
+ * @tparam     T     Type of elements to be swapped.
  */
 template <class T>
 void swap(T& a, T& b) {

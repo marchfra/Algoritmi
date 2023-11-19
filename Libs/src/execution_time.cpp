@@ -1,7 +1,7 @@
 #include "../include/debug.hpp"
 #include "../include/execution_time.hpp"
 
-double time_test(void (*f)(), const std::string& f_name, const long int executions, bool print) {
+double timeTest(void (*f)(), const std::string& f_name, const long int executions, bool print) {
 	auto start = std::chrono::high_resolution_clock::now();
 	for (long int i = 0; i < executions; i++) f();
 	auto stop = std::chrono::high_resolution_clock::now();	
@@ -14,7 +14,7 @@ double time_test(void (*f)(), const std::string& f_name, const long int executio
 	return exec_time;
 }
 
-double time_test(void (*f)(), const long int executions, bool print) {
+double timeTest(void (*f)(), const long int executions, bool print) {
 	auto start = std::chrono::high_resolution_clock::now();
 	for (long int i = 0; i < executions; i++) f();
 	auto stop = std::chrono::high_resolution_clock::now();	

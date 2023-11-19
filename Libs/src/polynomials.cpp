@@ -1,7 +1,7 @@
 #include "../include/debug.hpp"
 #include "../include/polynomials.hpp"
 
-double horner_pol(const double& x, const double a[], const int degree, double& dpdx) {
+double hornerPol(const double& x, const double a[], const int& degree, double& dpdx) {
 	double p = a[degree];
 	dpdx = 0.0;
 	for (int i = degree-1; i >= 0; i--) {
@@ -11,7 +11,7 @@ double horner_pol(const double& x, const double a[], const int degree, double& d
 	return p;
 }
 
-double horner_pol(const double& x, const double a[], const int degree) {
+double hornerPol(const double& x, const double a[], const int& degree) {
 	double p = a[degree];
 	for (int i = degree-1; i >= 0; i--) {
 		p = p * x + a[i];
@@ -19,7 +19,7 @@ double horner_pol(const double& x, const double a[], const int degree) {
 	return p;
 }
 
-double horner_pol(const double& x, const std::vector<double> a, double& dpdx) {
+double hornerPol(const double& x, const std::vector<double> a, double& dpdx) {
 	int degree = a.size();
 	double p = a[degree];
 	dpdx = 0.0;
@@ -30,7 +30,7 @@ double horner_pol(const double& x, const std::vector<double> a, double& dpdx) {
 	return p;
 }
 
-double horner_pol(const double& x, const std::vector<double> a) {
+double hornerPol(const double& x, const std::vector<double> a) {
 	int degree = a.size();
 	double p = a[degree];
 	for (int i = degree-1; i >= 0; i--) {

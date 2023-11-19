@@ -6,7 +6,7 @@
 
 using namespace std;
 
-double rectangular_quad(double (*)(double), double, double, int);
+double rectangularQuad(double (*)(double), double, double, int);
 
 double trapezoidal_quad(double (*)(double), double, double, int);
 
@@ -27,7 +27,7 @@ int main() {
 	double a = 0, b = 1;
 	int N = 4;
 
-	double rect = rectangular_quad(func, a, b, N);
+	double rect = rectangularQuad(func, a, b, N);
 	double trap = trapezoidal_quad(func, a, b, N);
 	double simp = simpson_quad(func, a, b, N);
 
@@ -42,7 +42,7 @@ int main() {
 	cout << "================" << endl;
 	double tol = 1.0e-5;
 	cout << "Rectangular: ";
-	convergence_test(rectangular_quad, func, a, b, tol, N);
+	convergence_test(rectangularQuad, func, a, b, tol, N);
 	cout << "Trapezoidal: ";
 	convergence_test(trapezoidal_quad, func, a, b, tol, N);
 	cout << "Simpson:     ";
@@ -68,7 +68,7 @@ void convergence_test(double (*rule)(double (*)(double), double, double, int), d
 	cout << I_NN << "; N = " << N << endl;
 }
 
-double rectangular_quad(double (*F)(double), double a, double b, int n) {
+double rectangularQuad(double (*F)(double), double a, double b, int n) {
 	double sum = 0.0;
 	double h = (b - a) / n;
 	double xi = a;

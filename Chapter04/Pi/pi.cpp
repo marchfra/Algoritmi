@@ -7,7 +7,7 @@ using namespace std;
 
 // Library functions
 
-double rectangular_quad(double (*)(double), const double, const double, const int);
+double rectangularQuad(double (*)(double), const double, const double, const int);
 
 double midpoint_quad(double (*)(double), const double, const double, const int);
 
@@ -95,7 +95,7 @@ double pi_monte_carlo(int N) {
 // Library functions
 // ==================================================================================================================================================
 
-double rectangular_quad(double (*F)(double), const double a, const double b, const int n) {
+double rectangularQuad(double (*F)(double), const double a, const double b, const int n) {
 	double sum = 0.0;
 	const double h = (b - a) / n;	// Interval width
 	double xi = a;

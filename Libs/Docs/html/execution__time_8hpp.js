@@ -1,5 +1,5 @@
 var execution__time_8hpp =
 [
-    [ "time_test", "execution__time_8hpp.html#a2b16f5a349ef8227e45adb266f3e8f51", null ],
-    [ "time_test", "execution__time_8hpp.html#ac03c68a4497223f3fd2a14f0a7b44eff", null ]
+    [ "timeTest", "execution__time_8hpp.html#a864e2f52d17b93b8d681d12d7232fbf2", null ],
+    [ "timeTest", "execution__time_8hpp.html#a565cee45cc2ef0229a0eb3222fcbb248", null ]
 ];

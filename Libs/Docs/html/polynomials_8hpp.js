@@ -1,7 +1,7 @@
 var polynomials_8hpp =
 [
-    [ "horner_pol", "polynomials_8hpp.html#a970cbc32969647301673fa8d778df03c", null ],
-    [ "horner_pol", "polynomials_8hpp.html#a524cbee6e24f86dffed1d5293b5ec503", null ],
-    [ "horner_pol", "polynomials_8hpp.html#a0f77183d4766cd21402e1e415dcfabac", null ],
-    [ "horner_pol", "polynomials_8hpp.html#a6a104a8e0f20698e4ea39b6650c0d894", null ]
+    [ "hornerPol", "polynomials_8hpp.html#a47a9182b3d78314460e862541328da22", null ],
+    [ "hornerPol", "polynomials_8hpp.html#aeaf08f34cf6bd2bfb7ba5ce48c14e8cd", null ],
+    [ "hornerPol", "polynomials_8hpp.html#a84b54e8a2662275b8aad066c42d8125e", null ],
+    [ "hornerPol", "polynomials_8hpp.html#af4d8990e25fb4b7c78a3080f353edad9", null ]
 ];

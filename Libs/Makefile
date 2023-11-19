@@ -1,7 +1,7 @@
 DEPS = ./obj/*.o
 
 .PHONY: all
-all: $(DEPS) dox
+all: $(DEPS)
 	@echo > /dev/null
 
 CXX = g++
@@ -14,6 +14,10 @@ CFLAGS = -Wall -O2
 .PHONY: dox
 dox:
 	$(MAKE) -C "./Docs"
+
+.PHONY: doxclean
+doxclean:
+	@$(MAKE) clean -C "./Docs"
 
 .PHONY: clean
 clean:

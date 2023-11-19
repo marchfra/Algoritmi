@@ -1,9 +1,9 @@
 /**
  * @file quad.hpp
- * 
- * @brief Implementation of the quadrature methods.
- * 
- * @todo Reformat the functions to throw exceptions.
+ *
+ * @brief      Implementation of the quadrature methods.
+ *
+ * @author     Francesco Marchisotti
  */
 #pragma once
 
@@ -11,85 +11,94 @@
 #include <cmath>
 
 /**
- * @brief Rectangular quad method.
- * 
+ * @brief      Rectangular quad method.
+ *
  * Integrates a function using the rectangular quadrature method.
- * 
- * @param[in] F The integrand function.
- * @param[in] a, b The lower and upper bound for the integral.
- * @param[in] n The number of sub-intervals to use for the integration.
- * 
- * @returns The estimate of the integral.
+ *
+ * @param[in]  F     The integrand function.
+ * @param[in]  a,b   The lower and upper bound for the integral.
+ * @param[in]  n     The number of sub-intervals to use for the integration.
+ *
+ * @return     The estimate of the integral.
  */
-double rectangular_quad(double (*)(double), const double, const double, const int);
+double rectangularQuad(double (*F)(const double& x), const double& a, const double& b, const int& n);
 
 /**
- * @brief Midpoint quad method.
- * 
+ * @brief      Midpoint quad method.
+ *
  * Integrates a function using the midpoint quadrature method.
- * 
- * @param[in] F The integrand function.
- * @param[in] a, b The lower and upper bound for the integral.
- * @param[in] n The number of sub-intervals to use for the integration.
- * 
- * @returns The estimate of the integral.
+ *
+ * @param[in]  F     The integrand function.
+ * @param[in]  a,b   The lower and upper bound for the integral.
+ * @param[in]  n     The number of sub-intervals to use for the integration.
+ *
+ * @return     The estimate of the integral.
  */
-double midpoint_quad(double (*)(double), const double, const double, const int);
+double midpointQuad(double (*F)(const double& x), const double& a, const double& b, const int& n);
 
 /**
- * @brief Trapezoidal quad method.
- * 
+ * @brief      Trapezoidal quad method.
+ *
  * Integrates a function using the trapezoidal quadrature method.
- * 
- * @param[in] F The integrand function.
- * @param[in] a, b The lower and upper bound for the integral.
- * @param[in] n The number of sub-intervals to use for the integration.
- * 
- * @returns The estimate of the integral.
+ *
+ * @param[in]  F     The integrand function.
+ * @param[in]  a,b   The lower and upper bound for the integral.
+ * @param[in]  n     The number of sub-intervals to use for the integration.
+ *
+ * @return     The estimate of the integral.
  */
-double trapezoidal_quad(double (*)(double), const double, const double, const int);
+double trapezoidalQuad(double (*F)(const double& x), const double& a, const double& b, const int& n);
 
 /**
- * @brief Simpson quad method.
- * 
+ * @brief      Simpson quad method.
+ *
  * Integrates a function using the Simpson quadrature method.
- * 
- * @param[in] F The integrand function.
- * @param[in] a, b The lower and upper bound for the integral.
- * @param[in] n The number of sub-intervals to use for the integration. Must be 
- *              even.
- * 
- * @returns The estimate of the integral.
+ *
+ * @param[in]  F     The integrand function.
+ * @param[in]  a,b   The lower and upper bound for the integral.
+ * @param[in]  n     The number of sub-intervals to use for the integration. Must
+ *                   be even.
+ *
+ * @return     The estimate of the integral.
  */
-double simpson_quad(double (*)(double), const double, const double, const int);
+double simpsonQuad(double (*F)(const double& x), const double& a, const double& b, const int& n);
 
 /**
- * @brief Gauss-Legendre quad method.
- * 
+ * @brief         Sets the legendre weights and roots.
+ *
+ * @param[in,out] weights  Array with the legendre weights.
+ * @param[in,out] roots    Array with the legendre roots.
+ * @param[in]     Ng       Number of gaussian points.
+ */
+void setLegendreWeightsAndRoots(double weights[], double roots[], const int& Ng);
+
+/**
+ * @brief      Gauss-Legendre quad method.
+ *
  * Integrates a function using the Gauss-Legendre quadrature method.
  * This method is used with integrals between finite a and b.
- * 
- * @param[in] F The integrand function.
- * @param[in] a, b The lower and upper bound for the integral.
- * @param[in] N The number of sub-intervals to use for the integration.
- * @param[in] Ng The number of gaussian points to use for each interval.
- * 
- * @returns The estimate of the integral.
+ *
+ * @param[in]  F     The integrand function.
+ * @param[in]  a,b   The lower and upper bound for the integral.
+ * @param[in]  N     The number of sub-intervals to use for the integration.
+ * @param[in]  Ng    The number of gaussian points to use for each interval.
+ *
+ * @return     The estimate of the integral.
  */
-double gauss_legendre_quad(double (*)(double), const double, const double, const int = 1, const int = 3);
+double gaussLegendreQuad(double (*F)(const double& x), const double& a, const double& b, const int N = 1, const int Ng = 3);
 
 /**
- * @brief Gauss-Legendre quad method over a rectangle.
- * 
- * Integrates a function using the Gauss-Legendre quadrature method over a 
- * rectangular domain.
- * 
- * @param[in] F The integrand function.
- * @param[in] xa, xb The lower and upper bound along the x-axis for the integral.
- * @param[in] ya, yb The lower and upper bound along the y-axis for the integral.
- * @param[in] N The number of sub-intervals to use for the integration.
- * @param[in] Ng The number of gaussian points to use for each interval.
- * 
- * @returns The estimate of the integral.
+ * @brief      Gauss-Legendre quad method over a rectangle.
+ *
+ * Integrates a function using the Gauss-Legendre quadrature method
+ * over a rectangular domain.
+ *
+ * @param[in]  F      The integrand function.
+ * @param[in]  xa,xb  The lower and upper bound along the x-axis for the integral.
+ * @param[in]  ya,yb  The lower and upper bound along the y-axis for the integral.
+ * @param[in]  N      The number of sub-intervals to use for the integration.
+ * @param[in]  Ng     The number of gaussian points to use for each interval.
+ *
+ * @return     The estimate of the integral.
  */
-double gauss_legendre_quad2D(double (*)(double, double), const double, const double, const double, const double, const int = 1, const int = 3);
+double gaussLegendreQuad2D(double (*F)(const double& x, const double& y), const double& xa, const double& xb, const double& ya, const double& yb, const int N = 1, const int Ng = 3);

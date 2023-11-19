@@ -104,57 +104,60 @@ $(document).ready(function(){initNavTree('quad_8hpp.html',''); initResizable(); 
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a49d2365537c155413914c536df8b5241" id="r_a49d2365537c155413914c536df8b5241"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quad_8hpp.html#a49d2365537c155413914c536df8b5241">rectangular_quad</a> (double(*)(double), const double, const double, const int)</td></tr>
-<tr class="memdesc:a49d2365537c155413914c536df8b5241"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rectangular quad method.  <br /></td></tr>
-<tr class="separator:a49d2365537c155413914c536df8b5241"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69bdcd22cbaf0ec6b7b4c4fbd1b01fc1" id="r_a69bdcd22cbaf0ec6b7b4c4fbd1b01fc1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quad_8hpp.html#a69bdcd22cbaf0ec6b7b4c4fbd1b01fc1">midpoint_quad</a> (double(*)(double), const double, const double, const int)</td></tr>
-<tr class="memdesc:a69bdcd22cbaf0ec6b7b4c4fbd1b01fc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Midpoint quad method.  <br /></td></tr>
-<tr class="separator:a69bdcd22cbaf0ec6b7b4c4fbd1b01fc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad24790e14e97fb7ac15caedaebc41195" id="r_ad24790e14e97fb7ac15caedaebc41195"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quad_8hpp.html#ad24790e14e97fb7ac15caedaebc41195">trapezoidal_quad</a> (double(*)(double), const double, const double, const int)</td></tr>
-<tr class="memdesc:ad24790e14e97fb7ac15caedaebc41195"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trapezoidal quad method.  <br /></td></tr>
-<tr class="separator:ad24790e14e97fb7ac15caedaebc41195"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87795b5898bad09afe52b099335d9394" id="r_a87795b5898bad09afe52b099335d9394"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quad_8hpp.html#a87795b5898bad09afe52b099335d9394">simpson_quad</a> (double(*)(double), const double, const double, const int)</td></tr>
-<tr class="memdesc:a87795b5898bad09afe52b099335d9394"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simpson quad method.  <br /></td></tr>
-<tr class="separator:a87795b5898bad09afe52b099335d9394"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4f4b2245cc18c0e2c78444a17aa22bb" id="r_aa4f4b2245cc18c0e2c78444a17aa22bb"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quad_8hpp.html#aa4f4b2245cc18c0e2c78444a17aa22bb">gauss_legendre_quad</a> (double(*)(double), const double, const double, const int=1, const int=3)</td></tr>
-<tr class="memdesc:aa4f4b2245cc18c0e2c78444a17aa22bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gauss-Legendre quad method.  <br /></td></tr>
-<tr class="separator:aa4f4b2245cc18c0e2c78444a17aa22bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a474377757fb16a303b6b3aa1da0999b4" id="r_a474377757fb16a303b6b3aa1da0999b4"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quad_8hpp.html#a474377757fb16a303b6b3aa1da0999b4">gauss_legendre_quad2D</a> (double(*)(double, double), const double, const double, const double, const double, const int=1, const int=3)</td></tr>
-<tr class="memdesc:a474377757fb16a303b6b3aa1da0999b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gauss-Legendre quad method over a rectangle.  <br /></td></tr>
-<tr class="separator:a474377757fb16a303b6b3aa1da0999b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe69f70be40c5f4bba7659b0a38f2da7" id="r_abe69f70be40c5f4bba7659b0a38f2da7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quad_8hpp.html#abe69f70be40c5f4bba7659b0a38f2da7">rectangularQuad</a> (double(*F)(const double &amp;x), const double &amp;a, const double &amp;b, const int &amp;n)</td></tr>
+<tr class="memdesc:abe69f70be40c5f4bba7659b0a38f2da7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rectangular quad method.  <br /></td></tr>
+<tr class="separator:abe69f70be40c5f4bba7659b0a38f2da7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a581077c334700e06f826da75fa4fabf1" id="r_a581077c334700e06f826da75fa4fabf1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quad_8hpp.html#a581077c334700e06f826da75fa4fabf1">midpointQuad</a> (double(*F)(const double &amp;x), const double &amp;a, const double &amp;b, const int &amp;n)</td></tr>
+<tr class="memdesc:a581077c334700e06f826da75fa4fabf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Midpoint quad method.  <br /></td></tr>
+<tr class="separator:a581077c334700e06f826da75fa4fabf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43d7b5a4ce4626cf371dbcdc8ed12ae7" id="r_a43d7b5a4ce4626cf371dbcdc8ed12ae7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quad_8hpp.html#a43d7b5a4ce4626cf371dbcdc8ed12ae7">trapezoidalQuad</a> (double(*F)(const double &amp;x), const double &amp;a, const double &amp;b, const int &amp;n)</td></tr>
+<tr class="memdesc:a43d7b5a4ce4626cf371dbcdc8ed12ae7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trapezoidal quad method.  <br /></td></tr>
+<tr class="separator:a43d7b5a4ce4626cf371dbcdc8ed12ae7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88579331388a21401cc4f4b88e4b95b1" id="r_a88579331388a21401cc4f4b88e4b95b1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quad_8hpp.html#a88579331388a21401cc4f4b88e4b95b1">simpsonQuad</a> (double(*F)(const double &amp;x), const double &amp;a, const double &amp;b, const int &amp;n)</td></tr>
+<tr class="memdesc:a88579331388a21401cc4f4b88e4b95b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simpson quad method.  <br /></td></tr>
+<tr class="separator:a88579331388a21401cc4f4b88e4b95b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf4bd8867e89efebd38abff85a858eb7" id="r_adf4bd8867e89efebd38abff85a858eb7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quad_8hpp.html#adf4bd8867e89efebd38abff85a858eb7">setLegendreWeightsAndRoots</a> (double weights[], double roots[], const int &amp;Ng)</td></tr>
+<tr class="memdesc:adf4bd8867e89efebd38abff85a858eb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the legendre weights and roots.  <br /></td></tr>
+<tr class="separator:adf4bd8867e89efebd38abff85a858eb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add69241e3770e83c09492d8b80009b89" id="r_add69241e3770e83c09492d8b80009b89"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quad_8hpp.html#add69241e3770e83c09492d8b80009b89">gaussLegendreQuad</a> (double(*F)(const double &amp;x), const double &amp;a, const double &amp;b, const int N=1, const int Ng=3)</td></tr>
+<tr class="memdesc:add69241e3770e83c09492d8b80009b89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gauss-Legendre quad method.  <br /></td></tr>
+<tr class="separator:add69241e3770e83c09492d8b80009b89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a21ace9fe982b54fe73013edb163e1f" id="r_a0a21ace9fe982b54fe73013edb163e1f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="quad_8hpp.html#a0a21ace9fe982b54fe73013edb163e1f">gaussLegendreQuad2D</a> (double(*F)(const double &amp;x, const double &amp;y), const double &amp;xa, const double &amp;xb, const double &amp;ya, const double &amp;yb, const int N=1, const int Ng=3)</td></tr>
+<tr class="memdesc:a0a21ace9fe982b54fe73013edb163e1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gauss-Legendre quad method over a rectangle.  <br /></td></tr>
+<tr class="separator:a0a21ace9fe982b54fe73013edb163e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation of the quadrature methods. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Reformat the functions to throw exceptions. </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Francesco Marchisotti </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a49d2365537c155413914c536df8b5241" name="a49d2365537c155413914c536df8b5241"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a49d2365537c155413914c536df8b5241">&#9670;&#160;</a></span>rectangular_quad()</h2>
+<a id="abe69f70be40c5f4bba7659b0a38f2da7" name="abe69f70be40c5f4bba7659b0a38f2da7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe69f70be40c5f4bba7659b0a38f2da7">&#9670;&#160;</a></span>rectangularQuad()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double rectangular_quad </td>
+          <td class="memname">double rectangularQuad </td>
           <td>(</td>
-          <td class="paramtype">double(*)(double)&#160;</td>
+          <td class="paramtype">double(*)(const double &amp;x)&#160;</td>
           <td class="paramname"><em>F</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const int&#160;</td>
+          <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>n</em>&#160;</td>
         </tr>
         <tr>
@@ -179,34 +182,34 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a69bdcd22cbaf0ec6b7b4c4fbd1b01fc1" name="a69bdcd22cbaf0ec6b7b4c4fbd1b01fc1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69bdcd22cbaf0ec6b7b4c4fbd1b01fc1">&#9670;&#160;</a></span>midpoint_quad()</h2>
+<a id="a581077c334700e06f826da75fa4fabf1" name="a581077c334700e06f826da75fa4fabf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a581077c334700e06f826da75fa4fabf1">&#9670;&#160;</a></span>midpointQuad()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double midpoint_quad </td>
+          <td class="memname">double midpointQuad </td>
           <td>(</td>
-          <td class="paramtype">double(*)(double)&#160;</td>
+          <td class="paramtype">double(*)(const double &amp;x)&#160;</td>
           <td class="paramname"><em>F</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const int&#160;</td>
+          <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>n</em>&#160;</td>
         </tr>
         <tr>
@@ -231,34 +234,34 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ad24790e14e97fb7ac15caedaebc41195" name="ad24790e14e97fb7ac15caedaebc41195"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad24790e14e97fb7ac15caedaebc41195">&#9670;&#160;</a></span>trapezoidal_quad()</h2>
+<a id="a43d7b5a4ce4626cf371dbcdc8ed12ae7" name="a43d7b5a4ce4626cf371dbcdc8ed12ae7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43d7b5a4ce4626cf371dbcdc8ed12ae7">&#9670;&#160;</a></span>trapezoidalQuad()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double trapezoidal_quad </td>
+          <td class="memname">double trapezoidalQuad </td>
           <td>(</td>
-          <td class="paramtype">double(*)(double)&#160;</td>
+          <td class="paramtype">double(*)(const double &amp;x)&#160;</td>
           <td class="paramname"><em>F</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const int&#160;</td>
+          <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>n</em>&#160;</td>
         </tr>
         <tr>
@@ -283,34 +286,34 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a87795b5898bad09afe52b099335d9394" name="a87795b5898bad09afe52b099335d9394"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87795b5898bad09afe52b099335d9394">&#9670;&#160;</a></span>simpson_quad()</h2>
+<a id="a88579331388a21401cc4f4b88e4b95b1" name="a88579331388a21401cc4f4b88e4b95b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88579331388a21401cc4f4b88e4b95b1">&#9670;&#160;</a></span>simpsonQuad()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double simpson_quad </td>
+          <td class="memname">double simpsonQuad </td>
           <td>(</td>
-          <td class="paramtype">double(*)(double)&#160;</td>
+          <td class="paramtype">double(*)(const double &amp;x)&#160;</td>
           <td class="paramname"><em>F</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const int&#160;</td>
+          <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>n</em>&#160;</td>
         </tr>
         <tr>
@@ -335,28 +338,72 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa4f4b2245cc18c0e2c78444a17aa22bb" name="aa4f4b2245cc18c0e2c78444a17aa22bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa4f4b2245cc18c0e2c78444a17aa22bb">&#9670;&#160;</a></span>gauss_legendre_quad()</h2>
+<a id="adf4bd8867e89efebd38abff85a858eb7" name="adf4bd8867e89efebd38abff85a858eb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf4bd8867e89efebd38abff85a858eb7">&#9670;&#160;</a></span>setLegendreWeightsAndRoots()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double gauss_legendre_quad </td>
+          <td class="memname">void setLegendreWeightsAndRoots </td>
           <td>(</td>
-          <td class="paramtype">double(*)(double)&#160;</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>weights</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>roots</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>Ng</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the legendre weights and roots. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">weights</td><td>Array with the legendre weights. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">roots</td><td>Array with the legendre roots. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Ng</td><td>Number of gaussian points. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="add69241e3770e83c09492d8b80009b89" name="add69241e3770e83c09492d8b80009b89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add69241e3770e83c09492d8b80009b89">&#9670;&#160;</a></span>gaussLegendreQuad()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double gaussLegendreQuad </td>
+          <td>(</td>
+          <td class="paramtype">double(*)(const double &amp;x)&#160;</td>
           <td class="paramname"><em>F</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>b</em>, </td>
         </tr>
         <tr>
@@ -394,40 +441,40 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a474377757fb16a303b6b3aa1da0999b4" name="a474377757fb16a303b6b3aa1da0999b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a474377757fb16a303b6b3aa1da0999b4">&#9670;&#160;</a></span>gauss_legendre_quad2D()</h2>
+<a id="a0a21ace9fe982b54fe73013edb163e1f" name="a0a21ace9fe982b54fe73013edb163e1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a21ace9fe982b54fe73013edb163e1f">&#9670;&#160;</a></span>gaussLegendreQuad2D()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double gauss_legendre_quad2D </td>
+          <td class="memname">double gaussLegendreQuad2D </td>
           <td>(</td>
-          <td class="paramtype">double(*)(double, double)&#160;</td>
+          <td class="paramtype">double(*)(const double &amp;x, const double &amp;y)&#160;</td>
           <td class="paramname"><em>F</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>xa</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>xb</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>ya</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>yb</em>, </td>
         </tr>
         <tr>

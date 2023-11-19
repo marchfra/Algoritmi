@@ -233,6 +233,11 @@ double ResZero() {
 	for (int i = 0; i < nRoots; i++) {
 		cout << "root #" << i << " = " << roots[i] << endl;
 	}
+
+	double root;
+	int ntry;
+	bisection(Res, 0.4, 0.6, 1.0e-8, 1.0e-3, root, ntry);
+
 	return roots[0];
 }
 

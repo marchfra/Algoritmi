@@ -66,7 +66,7 @@ int main() {
 		cout << "root[" << i << "] = " << roots[i] << endl;
 	}
 
-	return 1;
+	return 0;
 }
 
 void test_methods(double (*f)(double), double (*dfdx)(double), const double a, const double b, const double tol, double& root, int& n) {
