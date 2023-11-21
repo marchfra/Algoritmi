@@ -3,7 +3,7 @@ var root__finder_8hpp =
     [ "findRoots", "root__finder_8hpp.html#a8123f550bc8c89b47c600743f01ba64c", null ],
     [ "findRoots", "root__finder_8hpp.html#ad57dab717db9e234b66b1cfadfc84b1b", null ],
     [ "bracket", "root__finder_8hpp.html#a85323ac5e7858a76498abc3ecd602aef", null ],
-    [ "bisection", "root__finder_8hpp.html#a97c19e046132757d4774e7d7d0bb6e44", null ],
+    [ "bisection", "root__finder_8hpp.html#abb5fc34f11b6917ac2a556a29541cc89", null ],
     [ "bisection", "root__finder_8hpp.html#ab2f5b5d47b5d1f368462a6c29dc82794", null ],
     [ "bisection", "root__finder_8hpp.html#a7e88347d80b84c6ced922677ab8f9e2b", null ],
     [ "bisection", "root__finder_8hpp.html#ab0a02ed7e1e46e603a3e41968f12463a", null ],

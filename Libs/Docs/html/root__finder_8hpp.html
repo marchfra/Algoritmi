@@ -113,9 +113,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a85323ac5e7858a76498abc3ecd602aef" id="r_a85323ac5e7858a76498abc3ecd602aef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="root__finder_8hpp.html#a85323ac5e7858a76498abc3ecd602aef">bracket</a> (double(*f)(const double &amp;x), const double &amp;xa, const double &amp;xb, double xL[], double xR[], const int &amp;N, int &amp;nRoots)</td></tr>
 <tr class="memdesc:a85323ac5e7858a76498abc3ecd602aef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bracket the roots of a function in a given interval [xa, xb].  <br /></td></tr>
 <tr class="separator:a85323ac5e7858a76498abc3ecd602aef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97c19e046132757d4774e7d7d0bb6e44" id="r_a97c19e046132757d4774e7d7d0bb6e44"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="root__finder_8hpp.html#a97c19e046132757d4774e7d7d0bb6e44">bisection</a> (double(*f)(const double &amp;x), double xa, double xb, const double &amp;xtol, const double ftol, double &amp;root, int &amp;ntry)</td></tr>
-<tr class="memdesc:a97c19e046132757d4774e7d7d0bb6e44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the root of a function f(x) in a given interval [xa, xb] using bisection method.  <br /></td></tr>
-<tr class="separator:a97c19e046132757d4774e7d7d0bb6e44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb5fc34f11b6917ac2a556a29541cc89" id="r_abb5fc34f11b6917ac2a556a29541cc89"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="root__finder_8hpp.html#abb5fc34f11b6917ac2a556a29541cc89">bisection</a> (double(*f)(const double &amp;x), double xa, double xb, const double &amp;xtol, const double &amp;ftol, double &amp;root, int &amp;ntry)</td></tr>
+<tr class="memdesc:abb5fc34f11b6917ac2a556a29541cc89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the root of a function f(x) in a given interval [xa, xb] using bisection method.  <br /></td></tr>
+<tr class="separator:abb5fc34f11b6917ac2a556a29541cc89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2f5b5d47b5d1f368462a6c29dc82794" id="r_ab2f5b5d47b5d1f368462a6c29dc82794"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="root__finder_8hpp.html#ab2f5b5d47b5d1f368462a6c29dc82794">bisection</a> (double(*f)(const double &amp;x), double xa, double xb, const double &amp;xtol, double &amp;root)</td></tr>
 <tr class="memdesc:ab2f5b5d47b5d1f368462a6c29dc82794"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the root of a function f(x) in a given interval [xa, xb] using bisection method.  <br /></td></tr>
 <tr class="separator:ab2f5b5d47b5d1f368462a6c29dc82794"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -431,8 +431,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a97c19e046132757d4774e7d7d0bb6e44" name="a97c19e046132757d4774e7d7d0bb6e44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a97c19e046132757d4774e7d7d0bb6e44">&#9670;&#160;</a></span>bisection() <span class="overload">[1/4]</span></h2>
+<a id="abb5fc34f11b6917ac2a556a29541cc89" name="abb5fc34f11b6917ac2a556a29541cc89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb5fc34f11b6917ac2a556a29541cc89">&#9670;&#160;</a></span>bisection() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -464,7 +464,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>ftol</em>, </td>
         </tr>
         <tr>
@@ -1392,6 +1392,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Add check on |dfdx| &gt; dftol so that we don't shoot too far from the root.</dd></dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>Success. </td></tr>

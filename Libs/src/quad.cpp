@@ -87,7 +87,7 @@ void setLegendreWeightsAndRoots(double weights[], double roots[], const int& Ng)
 double gaussLegendreQuad(double (*F)(const double& x), const double& a, const double& b, const int N, const int Ng) {
 	double weight[8], root[8];
 
-	setLegendreWeightsAndRoots(weights, roots, Ng);
+	setLegendreWeightsAndRoots(weight, root, Ng);
 
 	const double h = (b - a) / N;						// Interval width
 	double sum = 0.0;
@@ -109,7 +109,7 @@ double gaussLegendreQuad(double (*F)(const double& x), const double& a, const do
 double gaussLegendreQuad2D(double (*F)(const double& x, const double& y), const double& xa, const double& xb, const double& ya, const double& yb, const int N, const int Ng) {
 	double weight[8], root[8];
 
-	setLegendreWeightsAndRoots(weights, roots, Ng);
+	setLegendreWeightsAndRoots(weight, root, Ng);
 
 	const double xh = (xb - xa) / N;					// Interval width along x
 	const double yh = (yb - ya) / N;					// Interval width along y

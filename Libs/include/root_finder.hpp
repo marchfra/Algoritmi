@@ -103,7 +103,7 @@ void bracket(double (*f)(const double& x), const double& xa, const double& xb, d
  * @retval     1     Too many steps.
  * @retval     2     Initial interval doesn't contain any root.
  */
-int bisection(double (*f)(const double& x), double xa, double xb, const double& xtol, const double ftol, double& root, int& ntry);
+int bisection(double (*f)(const double& x), double xa, double xb, const double& xtol, const double& ftol, double& root, int& ntry);
 
 /**
  * @overload
@@ -321,6 +321,9 @@ int secant(double (*f)(const double& x), double xa, double xb, const double& xto
  * @param[in]  ftol  f(x)-tolerance: the values of f(x) that are considered 0.
  * @param[out] root  The root of f(x).
  * @param[out] ntry  The number of iterations achieved.
+ *
+ * @todo       Add check on |dfdx| > dftol so that we don't shoot too far from
+ *             the root.
  *
  * @retval     0     Success.
  * @retval     1     Too many steps.

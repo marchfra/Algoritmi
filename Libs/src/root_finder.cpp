@@ -16,7 +16,7 @@ int findRoots(double (*f)(const double& x), double(*dfdx)(const double& x), cons
 	int flag;
 	for (int i = 0; i < nRoots; i++) {
 		if (method == "bisection") flag = bisection(f, xL[i], xR[i], tol, roots[i]);
-		else if (method == "falsePosition") flag = false_position(f, xL[i], xR[i], tol, roots[i]);
+		else if (method == "falsePosition") flag = falsePosition(f, xL[i], xR[i], tol, roots[i]);
 		else if (method == "secant") flag = secant(f, xL[i], xR[i], tol, roots[i]);
 		else if (method == "newton") flag = newton(f, dfdx, xL[i], xR[i], tol, roots[i]);
 		else throw std::invalid_argument("Invalid method argument");

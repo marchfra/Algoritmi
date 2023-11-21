@@ -1,25 +1,74 @@
-DEPS = ./obj/*.o
+# Compiler stuff
+CXX = g++
+CFLAGS = -g -Wall -std=c++17
+
+# Get all necessary files
+SRCDIR = src
+SRCS = $(wildcard $(SRCDIR)/*.cpp)
+
+OBJDIR = obj
+OBJS = $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS))
+
+HDRDIR = include
+HDRS = $(wildcard $(HDRDIR)/*.hpp)
+
+TESTDIR = tests
+TESTS = $(wildcard $(TESTDIR)/*.cpp)
+TESTBINDIR = $(TESTDIR)/bin
+TESTBINS = $(patsubst $(TESTDIR)/%.cpp, $(TESTDIR)/bin/%, $(TESTS))
+
+DOCSDIR = Docs
+
+LIBDIR = lib
+LIBNAME = algo
+LIB = $(LIBDIR)/lib$(LIBNAME).a
+
 
 .PHONY: all
-all: $(DEPS)
-	@echo > /dev/null
+all: $(LIB)
 
-CXX = g++
-CFLAGS = -Wall -O2
+$(LIB): $(LIBDIR) $(OBJDIR) $(OBJS)
+	ar rcs $@ $(OBJS)
 
-./obj/%.o: ./src/%.cpp
-	$(CXX) -std=c++17 -c $(CFLAGS) $(INCLUDE_DIRS) $^
-	@mv *.o obj
 
+# Build object files from sources
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(HDRDIR)/%.hpp
+	$(CXX) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+	$(CXX) $(CFLAGS) -c $< -o $@
+
+
+# Build test binaries from sources
+$(TESTDIR)/bin/%: $(TESTDIR)/%.cpp
+	$(CXX) $(CFLAGS) $< -L$(LIBDIR) -l$(LIBNAME) -o $@
+
+test: $(LIB) $(TESTBINDIR) $(TESTBINS)
+	@for test in $(TESTBINS) ; do echo $${test} && ./$${test} && echo "" ; done
+
+
+# Create directories
+$(OBJDIR):
+	mkdir $@
+
+$(LIBDIR):
+	mkdir $@
+
+$(TESTBINDIR):
+	mkdir $@
+
+
+# Documentation targets
 .PHONY: dox
 dox:
-	$(MAKE) -C "./Docs"
+	$(MAKE) -C $(DOCSDIR)
 
-.PHONY: doxclean
-doxclean:
-	@$(MAKE) clean -C "./Docs"
+.PHONY: cleandox
+cleandox:
+	$(MAKE) clean -C $(DOCSDIR)
+
 
 .PHONY: clean
 clean:
-	@rm -f ./obj/*.o
+	$(RM) -r $(LIBDIR) $(OBJDIR) $(TESTDIR)/bin
 	@echo make clean lib: done
