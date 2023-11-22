@@ -48,26 +48,6 @@ test: $(LIB) $(TESTBINDIR) $(TESTBINS)
 	echo "\n\033[1;34mTesting \c" ; basename $${test%test}.hpp ; \
 	./$${test} ; \
 	done
-# 	echo "\nExit code "$${exit_status}
-# 	@exit_status=1; \
-# 	echo $${exit_status}; \
-# 	(( exit_status=1*$${exit_status} )); \
-# 	echo $${exit_status}
-
-# 	@for test in $(TESTBINS) ; do \
-# 	./$${test} ; \
-# 	echo $$?; \
-# 	done
-
-# 	exit_codes=(15)
-# 	@for test in $(TESTBINS) ; do \
-# 	echo "\033[1;31;34mTesting \c" && \
-# 	basename $${test%test}.hpp && \
-# 	./$${test} && \
-# 	exit_codes+=($$?) \
-# 	echo "exit code $$?\n" ; \
-# 	done
-# 	echo $$exit_codes
 
 
 # Create directories
