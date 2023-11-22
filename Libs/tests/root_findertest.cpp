@@ -1,11 +1,4 @@
-// =============================================================================
-// =============================================================================
-// ================== findRoots() AND bracket() AREN'T TESTED ==================
-// =============================================================================
-// =============================================================================
-
 #include <cmath>
-// #include <limits>
 
 #include "test_config.hpp"
 #include "../include/root_finder.hpp"
@@ -19,6 +12,9 @@ double dfunc2(const double& x);
 
 double func3(const double& x);
 double dfunc3(const double& x);
+
+double func4(const double& x);
+double dfunc4(const double& x);
 
 TEST_CASE("testing bisection function") {
 	double xtol;
@@ -263,6 +259,55 @@ TEST_CASE("testing newton function") {
 	}
 }
 
+TEST_CASE("testing bracke function") {
+	const int N = 10;
+	const double xa = -10.0, xb = 10.0;
+
+	double xL[8], xR[8];
+	int nRoots;
+
+	const double xLExpected[] = {-10.0, -8.0, -4.0, 0.0, 2.0};
+	const double xRExpected[] = {-8.0, -6.0, -2.0, 2.0, 4.0};
+	const int nRootsExpected = 5;
+
+	bracket(func4, xa, xb, xL, xR, N, nRoots);
+
+	REQUIRE(nRoots == nRootsExpected);
+	for (int i = 0; i < nRoots; i++) {
+		CHECK(xL[i] == doctest::Approx(xLExpected[i]));
+		CHECK(xR[i] == doctest::Approx(xRExpected[i]));
+	}
+}
+
+TEST_CASE("testing findRoots function") {
+	const int N = 10;
+	const double xa = -10.0, xb = 10.0;
+	const double tol = 1.0e-7;
+	double roots[8];
+	int nRoots;
+
+	const int nRootsExpected = 5;
+	const double rootsExpected[] = {-8.716925e+00, -6.889594e+00, -2.968485e+00, 4.361680e-01, 2.183971e+00};
+
+	SUBCASE("testing newton implementation") {
+		findRoots(func4, dfunc4, xa, xb, tol, roots, nRoots, N);
+
+		REQUIRE(nRoots == nRootsExpected);
+		for (int i = 0; i < nRoots; i++) {
+			CHECK(roots[i] == doctest::Approx(rootsExpected[i]));
+		}
+	}
+
+	SUBCASE("testing overloaded") {
+		findRoots(func4, xa, xb, tol, roots, nRoots, N);
+
+		REQUIRE(nRoots == nRootsExpected);
+		for (int i = 0; i < nRoots; i++) {
+			CHECK(roots[i] == doctest::Approx(rootsExpected[i]));
+		}
+	}
+}
+
 double func1(const double& x) {
 	return exp(-x) - x;
 }
@@ -291,4 +336,14 @@ double func3(const double& x) {
 
 double dfunc3(const double& x) {
 	return 1 / ((1 + x)*(1 + x)) - exp(1 / (x + 0.5)) / ((x + 0.5)*(x + 0.5));
+}
+
+double func4(const double& x) {
+	double bracket = (0.1 * x)*(0.1 * x) + 0.2 * x + 1.0 / 3;
+	return sin(x) - bracket;
+}
+
+double dfunc4(const double& x) {
+	double bracket = 2.0 * (0.1 * x) * 0.1 + 0.2;
+	return cos(x) - bracket;
 }
