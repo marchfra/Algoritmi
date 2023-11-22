@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['has_5finsertion_5foperator_0',['has_insertion_operator',['../structdoctest_1_1detail_1_1has__insertion__operator.html',1,'doctest::detail']]],
-  ['has_5finsertion_5foperator_3c_20t_2c_20decltype_28operator_3c_3c_28declval_3c_20std_3a_3aostream_20_26_20_3e_28_29_2c_20declval_3c_20const_20t_20_26_20_3e_28_29_29_2c_20void_28_29_29_3e_1',['has_insertion_operator&lt; T, decltype(operator&lt;&lt;(declval&lt; std::ostream &amp; &gt;(), declval&lt; const T &amp; &gt;()), void())&gt;',['../structdoctest_1_1detail_1_1has__insertion__operator_3_01_t_00_01decltype_07operator_3_3_07declvab094f732977dc5a8a6181e0b8269a776.html',1,'doctest::detail']]],
-  ['higherdiff_2',['higherDiff',['../derivative_8hpp.html#a2d0b397bba314b6c69619501678514d0',1,'derivative.cpp']]],
-  ['hornerpol_3',['hornerpol',['../polynomials_8hpp.html#a47a9182b3d78314460e862541328da22',1,'hornerPol(const double &amp;x, const double a[], const int &amp;degree, double &amp;dpdx):&#160;polynomials.cpp'],['../polynomials_8hpp.html#aeaf08f34cf6bd2bfb7ba5ce48c14e8cd',1,'hornerPol(const double &amp;x, const double a[], const int &amp;degree):&#160;polynomials.cpp'],['../polynomials_8hpp.html#a84b54e8a2662275b8aad066c42d8125e',1,'hornerPol(const double &amp;x, const std::vector&lt; double &gt; a, double &amp;dpdx):&#160;polynomials.cpp'],['../polynomials_8hpp.html#af4d8990e25fb4b7c78a3080f353edad9',1,'hornerPol(const double &amp;x, const std::vector&lt; double &gt; a):&#160;polynomials.cpp']]]
+  ['list_0',['list',['../bug.html',1,'Bug List'],['../todo.html',1,'Todo List']]]
 ];

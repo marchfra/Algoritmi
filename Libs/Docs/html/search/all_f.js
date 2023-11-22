@@ -1,15 +1,8 @@
 var searchData=
 [
-  ['rectangularquad_0',['rectangularQuad',['../quad_8hpp.html#abe69f70be40c5f4bba7659b0a38f2da7',1,'quad.cpp']]],
-  ['relationalcomparator_1',['RelationalComparator',['../structdoctest_1_1detail_1_1_relational_comparator.html',1,'doctest::detail']]],
-  ['remove_5fconst_2',['remove_const',['../structdoctest_1_1detail_1_1types_1_1remove__const.html',1,'doctest::detail::types']]],
-  ['remove_5fconst_3c_20const_20t_20_3e_3',['remove_const&lt; const T &gt;',['../structdoctest_1_1detail_1_1types_1_1remove__const_3_01const_01_t_01_4.html',1,'doctest::detail::types']]],
-  ['remove_5freference_4',['remove_reference',['../structdoctest_1_1detail_1_1types_1_1remove__reference.html',1,'doctest::detail::types']]],
-  ['remove_5freference_3c_20t_20_26_20_3e_5',['remove_reference&lt; T &amp; &gt;',['../structdoctest_1_1detail_1_1types_1_1remove__reference_3_01_t_01_6_01_4.html',1,'doctest::detail::types']]],
-  ['remove_5freference_3c_20t_20_26_26_20_3e_6',['remove_reference&lt; T &amp;&amp; &gt;',['../structdoctest_1_1detail_1_1types_1_1remove__reference_3_01_t_01_6_6_01_4.html',1,'doctest::detail::types']]],
-  ['result_7',['Result',['../structdoctest_1_1detail_1_1_result.html',1,'doctest::detail']]],
-  ['resultbuilder_8',['ResultBuilder',['../structdoctest_1_1detail_1_1_result_builder.html',1,'doctest::detail']]],
-  ['rk2step_9',['rk2Step',['../ode__solver_8hpp.html#a873e53d640b4ef254daf0fff538c53c1',1,'ode_solver.cpp']]],
-  ['rk4step_10',['rk4Step',['../ode__solver_8hpp.html#a0019d301583cc837ff92c3b79481279e',1,'ode_solver.cpp']]],
-  ['root_5ffinder_2ehpp_11',['root_finder.hpp',['../root__finder_8hpp.html',1,'']]]
+  ['test_5fconfig_2ehpp_0',['test_config.hpp',['../test__config_8hpp.html',1,'']]],
+  ['timetest_1',['timetest',['../execution__time_8hpp.html#a864e2f52d17b93b8d681d12d7232fbf2',1,'timeTest(void(*f)(), const std::string &amp;fName, const long int executions=1e6, bool print=false):&#160;execution_time.cpp'],['../execution__time_8hpp.html#a565cee45cc2ef0229a0eb3222fcbb248',1,'timeTest(void(*f)(), const long int executions=1e6, bool print=false):&#160;execution_time.cpp']]],
+  ['todo_20list_2',['Todo List',['../todo.html',1,'']]],
+  ['trapezoidalquad_3',['trapezoidalQuad',['../quad_8hpp.html#a43d7b5a4ce4626cf371dbcdc8ed12ae7',1,'quad.cpp']]],
+  ['true_4',['TRUE',['../debug_8hpp.html#aa8cecfc5c5c054d2875c03e77b7be15d',1,'debug.hpp']]]
 ];

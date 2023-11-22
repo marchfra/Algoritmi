@@ -1,14 +1,5 @@
 var searchData=
 [
-  ['false_0',['FALSE',['../debug_8hpp.html#aa93f0eb578d23995850d61f7d61c55c1',1,'debug.hpp']]],
-  ['false_5ftype_1',['false_type',['../structdoctest_1_1detail_1_1types_1_1false__type.html',1,'doctest::detail::types']]],
-  ['falseposition_2',['falseposition',['../root__finder_8hpp.html#a3d366345a17bb44b19e1061101d5b523',1,'falsePosition(double(*f)(const double &amp;x), double xa, double xb, const double &amp;xtol, const double &amp;ftol, double &amp;root, int &amp;ntry):&#160;root_finder.cpp'],['../root__finder_8hpp.html#a0a006a5e0bdd60e85d67e7d0bf1ebf32',1,'falsePosition(double(*f)(const double &amp;x), double xa, double xb, const double &amp;xtol, double &amp;root, int &amp;ntry):&#160;root_finder.cpp'],['../root__finder_8hpp.html#a2320e66d83d075ec440fa5b9b6fc41a3',1,'falsePosition(double(*f)(const double &amp;x), double xa, double xb, const double &amp;xtol, const double &amp;ftol, double &amp;root):&#160;root_finder.cpp'],['../root__finder_8hpp.html#a871a8e94415e5459677b482a6fcb7af0',1,'falsePosition(double(*f)(const double &amp;x), double xa, double xb, const double &amp;xtol, double &amp;root):&#160;root_finder.cpp']]],
-  ['filldata_3',['filldata',['../structdoctest_1_1detail_1_1filldata.html',1,'doctest::detail']]],
-  ['filldata_3c_20const_20char_5bn_5d_3e_4',['filldata&lt; const char[N]&gt;',['../structdoctest_1_1detail_1_1filldata_3_01const_01char_0f_n_0e_4.html',1,'doctest::detail']]],
-  ['filldata_3c_20const_20void_20_2a_20_3e_5',['filldata&lt; const void * &gt;',['../structdoctest_1_1detail_1_1filldata_3_01const_01void_01_5_01_4.html',1,'doctest::detail']]],
-  ['filldata_3c_20t_20_2a_20_3e_6',['filldata&lt; T * &gt;',['../structdoctest_1_1detail_1_1filldata_3_01_t_01_5_01_4.html',1,'doctest::detail']]],
-  ['filldata_3c_20t_5bn_5d_3e_7',['filldata&lt; T[N]&gt;',['../structdoctest_1_1detail_1_1filldata_3_01_t_0f_n_0e_4.html',1,'doctest::detail']]],
-  ['findroots_8',['findroots',['../root__finder_8hpp.html#a8123f550bc8c89b47c600743f01ba64c',1,'findRoots(double(*f)(const double &amp;x), double(*dfdx)(const double &amp;x), const double &amp;xa, const double &amp;xb, const double &amp;tol, double roots[], int &amp;nRoots, const int N=128, const std::string method=&quot;newton&quot;):&#160;root_finder.cpp'],['../root__finder_8hpp.html#ad57dab717db9e234b66b1cfadfc84b1b',1,'findRoots(double(*f)(const double &amp;x), const double &amp;xa, const double &amp;xb, const double &amp;tol, double roots[], int &amp;nRoots, const int N=128, const std::string method=&quot;bisection&quot;):&#160;root_finder.cpp']]],
-  ['forwarddiff_9',['forwardDiff',['../derivative_8hpp.html#a5dd972976160d5b6943387cbd83ccade',1,'derivative.cpp']]],
-  ['forwarddiff2_10',['forwardDiff2',['../derivative_8hpp.html#a4d08c3e6c2e3425e050b7313b44212a5',1,'derivative.cpp']]]
+  ['gausslegendrequad_0',['gaussLegendreQuad',['../quad_8hpp.html#add69241e3770e83c09492d8b80009b89',1,'quad.cpp']]],
+  ['gausslegendrequad2d_1',['gaussLegendreQuad2D',['../quad_8hpp.html#a0a21ace9fe982b54fe73013edb163e1f',1,'quad.cpp']]]
 ];

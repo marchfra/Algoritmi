@@ -25,18 +25,9 @@
 var NAVTREE =
 [
   [ "Numerical Algorithms for Physics Library", "index.html", [
-    [ "Algoritmi", "index.html", null ],
+    [ "Numerical Methods for Physics", "index.html", null ],
     [ "Todo List", "todo.html", null ],
     [ "Bug List", "bug.html", null ],
-    [ "Classes", "annotated.html", [
-      [ "Class List", "annotated.html", "annotated_dup" ],
-      [ "Class Index", "classes.html", null ],
-      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
-      [ "Class Members", "functions.html", [
-        [ "All", "functions.html", null ],
-        [ "Functions", "functions_func.html", null ]
-      ] ]
-    ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
@@ -50,7 +41,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_final_template_2_lib_2include_2mycode_8hpp_source.html"
+"bug.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

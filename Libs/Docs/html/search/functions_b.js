@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['secant_0',['secant',['../root__finder_8hpp.html#a2b7d8cabb7f21c3314a55c6dfdc9c2e3',1,'secant(double(*f)(const double &amp;x), double xa, double xb, const double &amp;xtol, const double &amp;ftol, double &amp;root, int &amp;ntry):&#160;root_finder.cpp'],['../root__finder_8hpp.html#a57813ec617e99376e2838a04cc03de21',1,'secant(double(*f)(const double &amp;x), double xa, double xb, const double &amp;xtol, double &amp;root):&#160;root_finder.cpp'],['../root__finder_8hpp.html#a439285b2fb54f5cc838ab798c1a2be12',1,'secant(double(*f)(const double &amp;x), double xa, double xb, const double &amp;xtol, double &amp;root, int &amp;ntry):&#160;root_finder.cpp'],['../root__finder_8hpp.html#ad3334b941b0e4d8665915d479f00d42d',1,'secant(double(*f)(const double &amp;x), double xa, double xb, const double &amp;xtol, const double &amp;ftol, double &amp;root):&#160;root_finder.cpp']]],
-  ['setlegendreweightsandroots_1',['setLegendreWeightsAndRoots',['../quad_8hpp.html#adf4bd8867e89efebd38abff85a858eb7',1,'quad.cpp']]],
-  ['simpsonquad_2',['simpsonQuad',['../quad_8hpp.html#a88579331388a21401cc4f4b88e4b95b1',1,'quad.cpp']]],
-  ['swap_3',['swap',['../_libs_2include_2swap_8hpp.html#ac2353dbd40ac679cac5ce9213952d284',1,'swap.hpp']]]
+  ['timetest_0',['timetest',['../execution__time_8hpp.html#a864e2f52d17b93b8d681d12d7232fbf2',1,'timeTest(void(*f)(), const std::string &amp;fName, const long int executions=1e6, bool print=false):&#160;execution_time.cpp'],['../execution__time_8hpp.html#a565cee45cc2ef0229a0eb3222fcbb248',1,'timeTest(void(*f)(), const long int executions=1e6, bool print=false):&#160;execution_time.cpp']]],
+  ['trapezoidalquad_1',['trapezoidalQuad',['../quad_8hpp.html#a43d7b5a4ce4626cf371dbcdc8ed12ae7',1,'quad.cpp']]]
 ];

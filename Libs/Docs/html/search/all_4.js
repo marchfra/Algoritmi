@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['enable_5fif_0',['enable_if',['../structdoctest_1_1detail_1_1types_1_1enable__if.html',1,'doctest::detail::types']]],
-  ['enable_5fif_3c_20true_2c_20t_20_3e_1',['enable_if&lt; true, T &gt;',['../structdoctest_1_1detail_1_1types_1_1enable__if_3_01true_00_01_t_01_4.html',1,'doctest::detail::types']]],
-  ['eulerstep_2',['eulerStep',['../ode__solver_8hpp.html#a2cf3984abbdc7c30925710d2c4f40737',1,'ode_solver.cpp']]],
-  ['exceptiontranslator_3',['ExceptionTranslator',['../classdoctest_1_1detail_1_1_exception_translator.html',1,'doctest::detail']]],
-  ['execution_5ftime_2ehpp_4',['execution_time.hpp',['../execution__time_8hpp.html',1,'']]],
-  ['expression_5flhs_5',['Expression_lhs',['../structdoctest_1_1detail_1_1_expression__lhs.html',1,'doctest::detail']]],
-  ['expressiondecomposer_6',['ExpressionDecomposer',['../structdoctest_1_1detail_1_1_expression_decomposer.html',1,'doctest::detail']]]
+  ['false_0',['FALSE',['../debug_8hpp.html#aa93f0eb578d23995850d61f7d61c55c1',1,'debug.hpp']]],
+  ['falseposition_1',['falseposition',['../root__finder_8hpp.html#a3d366345a17bb44b19e1061101d5b523',1,'falsePosition(double(*f)(const double &amp;x), double xa, double xb, const double &amp;xtol, const double &amp;ftol, double &amp;root, int &amp;ntry):&#160;root_finder.cpp'],['../root__finder_8hpp.html#a871a8e94415e5459677b482a6fcb7af0',1,'falsePosition(double(*f)(const double &amp;x), double xa, double xb, const double &amp;xtol, double &amp;root):&#160;root_finder.cpp'],['../root__finder_8hpp.html#a0a006a5e0bdd60e85d67e7d0bf1ebf32',1,'falsePosition(double(*f)(const double &amp;x), double xa, double xb, const double &amp;xtol, double &amp;root, int &amp;ntry):&#160;root_finder.cpp'],['../root__finder_8hpp.html#a2320e66d83d075ec440fa5b9b6fc41a3',1,'falsePosition(double(*f)(const double &amp;x), double xa, double xb, const double &amp;xtol, const double &amp;ftol, double &amp;root):&#160;root_finder.cpp']]],
+  ['findroots_2',['findroots',['../root__finder_8hpp.html#a8123f550bc8c89b47c600743f01ba64c',1,'findRoots(double(*f)(const double &amp;x), double(*dfdx)(const double &amp;x), const double &amp;xa, const double &amp;xb, const double &amp;tol, double roots[], int &amp;nRoots, const int N=128, const std::string method=&quot;newton&quot;):&#160;root_finder.cpp'],['../root__finder_8hpp.html#ad57dab717db9e234b66b1cfadfc84b1b',1,'findRoots(double(*f)(const double &amp;x), const double &amp;xa, const double &amp;xb, const double &amp;tol, double roots[], int &amp;nRoots, const int N=128, const std::string method=&quot;bisection&quot;):&#160;root_finder.cpp']]],
+  ['for_20physics_3',['Numerical Methods for Physics',['../index.html',1,'']]],
+  ['forwarddiff_4',['forwardDiff',['../derivative_8hpp.html#a5dd972976160d5b6943387cbd83ccade',1,'derivative.cpp']]],
+  ['forwarddiff2_5',['forwardDiff2',['../derivative_8hpp.html#a4d08c3e6c2e3425e050b7313b44212a5',1,'derivative.cpp']]]
 ];
