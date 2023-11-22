@@ -44,10 +44,11 @@ $(TESTDIR)/bin/%: $(TESTDIR)/%.cpp
 	$(CXX) $(CFLAGS) $< -L$(LIBDIR) -l$(LIBNAME) -o $@
 
 test: $(LIB) $(TESTBINDIR) $(TESTBINS)
-	@for test in $(TESTBINS) ; do \
-	echo "\033[1;31;34mTesting \c" ; basename $${test%test}.hpp ; \
-	./$${test} ; \
-	exit 2; done
+	exit 1
+# 	@for test in $(TESTBINS) ; do \
+# 	echo "\033[1;31;34mTesting \c" ; basename $${test%test}.hpp ; \
+# 	./$${test} ; \
+# 	exit 1; done
 
 # 	@for test in $(TESTBINS) ; do \
 # 	./$${test} ; \
