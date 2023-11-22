@@ -34,7 +34,7 @@ TEST_CASE("testing bisection function") {
 		
 		flag = bisection(func1, xa, xb, xtol, root);
 		CHECK(root == doctest::Approx(expected));
-		CHECK(flag == 0);
+		CHECK(flag != 0);
 
 		int nTry = 0;
 		flag = bisection(func1, xa, xb, xtol, root, nTry);

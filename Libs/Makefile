@@ -44,7 +44,25 @@ $(TESTDIR)/bin/%: $(TESTDIR)/%.cpp
 	$(CXX) $(CFLAGS) $< -L$(LIBDIR) -l$(LIBNAME) -o $@
 
 test: $(LIB) $(TESTBINDIR) $(TESTBINS)
-	@for test in $(TESTBINS) ; do echo $${test} && ./$${test} && echo "" ; done
+	@for test in $(TESTBINS) ; do \
+	echo "\033[1;31;34mTesting \c" ; basename $${test%test}.hpp ; \
+	./$${test} ; \
+	exit $$?; done
+
+# 	@for test in $(TESTBINS) ; do \
+# 	./$${test} ; \
+# 	echo $$?; \
+# 	done
+
+# 	exit_codes=(15)
+# 	@for test in $(TESTBINS) ; do \
+# 	echo "\033[1;31;34mTesting \c" && \
+# 	basename $${test%test}.hpp && \
+# 	./$${test} && \
+# 	exit_codes+=($$?) \
+# 	echo "exit code $$?\n" ; \
+# 	done
+# 	echo $$exit_codes
 
 
 # Create directories
