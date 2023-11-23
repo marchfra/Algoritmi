@@ -34,14 +34,14 @@ public:
 	 *
 	 * @param[in]  size  The size of the vector.
 	 */
-	Vector(int size);
+	Vector(const int& size);
 	/**
 	 * @brief      Constructs a new instance.
 	 *
 	 * @param[in]  size          The size.
 	 * @param[in]  initialValue  The initial value.
 	 */
-	Vector(int size, T initialValue);
+	Vector(const int& size, T initialValue);
 	/**
 	 * @brief      Constructs a new instance.
 	 *
@@ -54,7 +54,7 @@ public:
 	 * @param[in]  name  The name.
 	 * @param[in]  size  The size.
 	 */
-	Vector(const std::string& name, int size);
+	Vector(const std::string& name, const int& size);
 	/**
 	 * @brief      Constructs a new instance.
 	 *
@@ -62,7 +62,7 @@ public:
 	 * @param[in]  size          The size.
 	 * @param[in]  initialValue  The initial value.
 	 */
-	Vector(const std::string& name, int size, T initialValue);
+	Vector(const std::string& name, const int& size, T initialValue);
 	/**
 	 * @brief      Copy constructor.
 	 *
@@ -83,7 +83,7 @@ public:
 
 	// Getter functions
 	int getSize() const {
-		return nRows;
+		return m_nRows;
 	};
 	/**
 	 * @brief       Gets the name.
@@ -91,7 +91,7 @@ public:
 	 * @param[out]  Name  The name.
 	 */
 	void getName(std::string& name) const {
-		name = this.name;
+		name = m_name;
 	};
 
 	// Setter functions
@@ -101,7 +101,7 @@ public:
 	 * @param[in]  value  The value.
 	 */
 	void set(T value) {
-		for (int i = 0; i < nRows; i++) cells[i] = value;
+		for (int i = 0; i < m_nRows; i++) m_cells[i] = value;
 	}
 	/**
 	 * @brief      Sets the name.
@@ -109,7 +109,7 @@ public:
 	 * @param[in]  Name  The name.
 	 */
 	void setName(const std::string& name) {
-		this.name = name;
+		m_name = name;
 	};
 
 	// Overloaded operators
@@ -120,7 +120,7 @@ public:
 	 *
 	 * @return     The element at `index` index.
 	 */
-	T& operator[] (int index);
+	T& operator[] (const int& index);
 	/**
 	 * @brief      Array indexer operator.
 	 *
@@ -128,9 +128,11 @@ public:
 	 *
 	 * @return     The element at `index` index.
 	 */
-	const T& operator[] (int index) const;
+	const T& operator[] (const int& index) const;
 	/**
-	 * @brief      Assignment operator. Works like the copy constructor.
+	 * @brief      Assignment operator.
+	 *
+	 * Copies all elements of `V` in `this` vector.
 	 *
 	 * @param[in]  V     The other vector.
 	 *
@@ -139,10 +141,9 @@ public:
 	Vector<T>& operator= (const Vector<T>& V);
 
 private:
-	int nRows;			//< Number of rows in the vector.
-	T *cells;			//< Address where the vector of type T is stored \
-							handles error conditions
-	std::string name;	//< The name of the vector.
+	int m_nRows;			//< Number of rows in the vector.
+	T *m_cells;			//< Address where the vector of type T is stored.
+	std::string m_name;	//< The name of the vector.
 	/**
 	 * @brief      Resource cleanup.
 	 */
@@ -153,4 +154,4 @@ private:
 	 * @param[in]  err   The error.
 	 */
 	void errorHandler(Vector<T>::Error err) const;
-}
+};

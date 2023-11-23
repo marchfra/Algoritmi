@@ -1,44 +1,44 @@
-#include <iostream>
-#include <iomanip>
-#include <stdexcept>
+// #include <iostream>
+// #include <iomanip>
+// #include <stdexcept>
 
-#include "Vector.hpp"
+#include "../include/Vector.hpp"
 
 
 // ================================ Constructors ===============================
 template <class T>
 Vector<T>::Vector() {
-	nRows = 0;
-	cells = nullptr;
+	m_nRows = 0;
+	m_cells = nullptr;
 }
 
 template <class T>
-Vector<T>::Vector(int size) {
+Vector<T>::Vector(const int& size) {
 	setSize(size);
-	cells = nullptr;
+	m_cells = nullptr;
 }
 
 template <class T>
-Vector<T>::Vector(int size, T initialValue) {
+Vector<T>::Vector(const int& size, T initialValue) {
 	setSize(size);
 	set(initialValue);
 }
 
 template <class T>
-Vector<T>::Vector(const std::string& name) {`
+Vector<T>::Vector(const std::string& name) {
 	setName(name);
-	cells = nullptr;
+	m_cells = nullptr;
 }
 
 template <class T>
-Vector<T>::Vector(const std::string& name, int size) {
+Vector<T>::Vector(const std::string& name, const int& size) {
 	setName(name);
 	setSize(size);
-	cells = nullptr;
+	m_cells = nullptr;
 }
 
 template <class T>
-Vector<T>::Vector(const std::string& name, int size, T initialValue) {
+Vector<T>::Vector(const std::string& name, const int& size, T initialValue) {
 	setName(name);
 	setSize(size);
 	set(initialValue);
@@ -48,8 +48,8 @@ template <class T>
 Vector<T>::Vector(const Vector<T>& V) {
 	setName(V.name);
 	setSize(V.getSize());
-	for (int i = 0; i < nRows; i++) {
-		cells[i] = V[i];
+	for (int i = 0; i < m_nRows; i++) {
+		m_cells[i] = V[i];
 	}
 }
 
@@ -61,59 +61,59 @@ Vector<T>::~Vector() {
 
 // ============================== Helper functions =============================
 template <class T>
-void Vector<T>::setSize(int size) {
+void Vector<T>::setSize(const int& size) {
 	if (size <= 0) {
-		errorHandler(Vector<T>::error::InvalidSize);
+		errorHandler(Vector<T>::Error::InvalidSize);
 	}
 	release();
 	try {
-		cells = new T[size];
+		m_cells = new T[size];
 	} catch (std::bad_alloc& e) {
-		errorHandler(Vector<T>::error::MemoryAllocation);
+		errorHandler(Vector<T>::Error::MemoryAllocation);
 	}
 
-	nRows = size;
+	m_nRows = size;
 }
 
 template <class T>
-Vector<T>::release() {
-	if (cells != nullptr) {
-		delete[] cells;
-		cells = nullptr;
-		nRows = 0;
+void Vector<T>::release() {
+	if (m_cells != nullptr) {
+		delete[] m_cells;
+		m_cells = nullptr;
+		m_nRows = 0;
 	}
 }
 
 // ============================ Overloaded operators ===========================
 template <class T>
-T& Vector<T>::operator[](int index) {
-	if (index < 0 || index >= nRows) {
-		errorHandler(Vector<T>::error::InvalidIndex);
-		return cells[0];
+T& Vector<T>::operator[](const int& index) {
+	if (index < 0 || index >= m_nRows) {
+		errorHandler(Vector<T>::Error::InvalidIndex);
+		return m_cells[0];
 	} else {
-		return cells[index];
+		return m_cells[index];
 	}
 }
 
 template <class T>
-const T& Vector<T>::operator[](int index) const {
-	if (index < 0 || index >= nRows) {
-		errorHandler(Vector<T>::error::InvalidIndex);
-		return cells[0];
+const T& Vector<T>::operator[](const int& index) const {
+	if (index < 0 || index >= m_nRows) {
+		errorHandler(Vector<T>::Error::InvalidIndex);
+		return m_cells[0];
 	} else {
-		return cells[index];
+		return m_cells[index];
 	}
 }
 
 template <class T>
-T& Vector<T>::operator=(const Vector<T>& V) {
+Vector<T>& Vector<T>::operator=(const Vector<T>& V) {
 	if (this != &V) {	// Protects against self-assignment
-		if (nRows != V.getSize()) {	// Compatible vectors?
-			errorHandler(Vector<T>::error::IncompatibleVectors);
+		if (m_nRows != V.getSize()) {	// Compatible vectors?
+			errorHandler(Vector<T>::Error::IncompatibleVectors);
 			return *this;
 		}
-		for (int i = 0; i < nRows; i++) {
-			cells[i] = V[i];
+		for (int i = 0; i < m_nRows; i++) {
+			m_cells[i] = V[i];
 		}
 	}
 

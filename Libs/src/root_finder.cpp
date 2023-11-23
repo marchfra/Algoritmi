@@ -9,26 +9,23 @@ int findRoots(double (*f)(const double& x), double(*dfdx)(const double& x), cons
 	bracket(f, xa, xb, xL, xR, N, nRoots);
 
 	if (nRoots == 0) {
-		std::cerr << "! findRoots(): The interval does not contain any roots:" << std::endl;
-		return 2;
+		throw std::runtime_error("The supplied interval does not contain any roots.");
 	}
 
-	int flag;
 	for (int i = 0; i < nRoots; i++) {
-		if (method == "bisection") flag = bisection(f, xL[i], xR[i], tol, roots[i]);
-		else if (method == "falsePosition") flag = falsePosition(f, xL[i], xR[i], tol, roots[i]);
-		else if (method == "secant") flag = secant(f, xL[i], xR[i], tol, roots[i]);
-		else if (method == "newton") flag = newton(f, dfdx, xL[i], xR[i], tol, roots[i]);
-		else throw std::invalid_argument("Invalid method argument");
-
+		if (method == "bisection") bisection(f, xL[i], xR[i], tol, roots[i]);
+		else if (method == "falsePosition") falsePosition(f, xL[i], xR[i], tol, roots[i]);
+		else if (method == "secant") secant(f, xL[i], xR[i], tol, roots[i]);
+		else if (method == "newton") newton(f, dfdx, xL[i], xR[i], tol, roots[i]);
+		else throw std::invalid_argument("Invalid method argument.");
 
 		#if DEBUG == TRUE
 			std::cout << "roots[" << i << "] = " << roots[i] << std::endl;
 		#endif
 	}
 
-	std::cout << "Method used: " << method << std::endl;
-	return flag;
+	// std::cout << "Method used: " << method << std::endl;
+	return 0;
 }
 
 int findRoots(double (*f)(const double& x), const double& xa, const double& xb, const double& tol, double roots[], int& nRoots, const int N, const std::string method) {
@@ -126,15 +123,12 @@ int bisection(double (*f)(const double& x), double xa, double xb, const double& 
 
 		}
 
-		std::cerr << "! bisection(): too many steps\n" << std::endl;
 		ntry = -1;
 		root = nan("");
-		return 1;
-
+		throw std::runtime_error("Maximum number of steps exceeded.");
 	} 
 
-	std::cerr << "! bisection(): initial interval does not contain any root\n" << std::endl;
-	return 2;
+	throw std::runtime_error("The supplied interval does not contain any roots.");
 }
 
 int bisection(double (*f)(const double& x), double xa, double xb, const double& xtol, double& root) {
@@ -209,19 +203,12 @@ int falsePosition(double (*f)(const double& x), double xa, double xb, const doub
 			}
 		}
 
-		std::cerr << "! falsePosition(): too many steps\n" << std::endl;
 		ntry = -1;
 		root = nan("");
-
-		return 1;
-
+		throw std::runtime_error("Maximum number of steps exceeded.");
 	} 
 
-	std::cerr << "! falsePosition(): initial interval does not contain any root\n" << std::endl;
-	ntry = -1;
-	root = nan("");
-
-	return 2;
+	throw std::runtime_error("The supplied interval does not contain any roots.");
 }
 
 int falsePosition(double (*f)(const double& x), double xa, double xb, const double& xtol, double& root) {
@@ -283,9 +270,9 @@ int secant(double (*f)(const double& x), double xa, double xb, const double& xto
 		}
 	}
 
-	std::cerr << "! secant(): too many steps\n" << std::endl;
 	ntry = -1;
 	root = nan("");
+	throw std::runtime_error("Maximum number of steps exceeded.");
 	return 1;
 }
 

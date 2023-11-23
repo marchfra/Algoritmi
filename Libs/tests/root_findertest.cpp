@@ -1,4 +1,5 @@
 #include <cmath>
+#include <exception>
 
 #include "test_config.hpp"
 #include "../include/root_finder.hpp"
@@ -17,34 +18,33 @@ double func4(const double& x);
 double dfunc4(const double& x);
 
 TEST_CASE("testing bisection function") {
-	double xtol;
-	double xa, xb;
+	double xtol = 1.0e-7;
+	double xa = -1.0, xb = 1.0;
 
 	double root = 0.0;
-	int flag = -1;
+
+	SUBCASE("testing exceptions") {
+		CHECK_THROWS_WITH_AS(bisection(func1, xa, -xb, xtol, root),
+							 "The supplied interval does not contain any roots.",
+							 std::runtime_error);
+	}
 
 	SUBCASE("roots of func1") {
 		xtol = 1.0e-7;
 		xa = -1.0; xb = 1.0;
 		const double expected = 5.671433e-01;
 		
-		flag = bisection(func1, xa, xb, xtol, root);
+		bisection(func1, xa, xb, xtol, root);
 		CHECK(root == doctest::Approx(expected));
-		CHECK(flag == 0);
 
 		int nTry = 0;
-		flag = bisection(func1, xa, xb, xtol, root, nTry);
+		bisection(func1, xa, xb, xtol, root, nTry);
 		CHECK(root == doctest::Approx(expected));
-		CHECK(flag == 0);
 		CHECK(nTry == 26);
 
 		double ftol = 0.5;
-		flag = bisection(func1, xa, xb, xtol, ftol, root, nTry);
-		CHECK(flag == 0);
+		bisection(func1, xa, xb, xtol, ftol, root, nTry);
 		CHECK(nTry < 26);
-
-		flag = bisection(func1, xa, -xb, xtol, root);
-		CHECK(flag == 2);
 	}
 
 	SUBCASE("roots of func2") {
@@ -53,16 +53,14 @@ TEST_CASE("testing bisection function") {
 		const double expected = -1.0;
 
 		int nTry = 0;
-		flag = bisection(func2, xa, xb, xtol, root, nTry);
+		bisection(func2, xa, xb, xtol, root, nTry);
 		CHECK(root == doctest::Approx(expected));
-		CHECK(flag == 0);
 		CHECK(nTry == 30);
 
 		xa = -2.0; xb = 0.0;
 		nTry = 0;
-		flag = bisection(func2, xa, xb, xtol, root, nTry);
+		bisection(func2, xa, xb, xtol, root, nTry);
 		CHECK(root == doctest::Approx(expected));
-		CHECK(flag == 0);
 		CHECK(nTry == 1);
 	}
 
@@ -72,42 +70,40 @@ TEST_CASE("testing bisection function") {
 		const double expected = 5.235934e-01;
 
 		int nTry = 0;
-		flag = bisection(func3, xa, xb, xtol, root, nTry);
+		bisection(func3, xa, xb, xtol, root, nTry);
 		CHECK(root == doctest::Approx(expected));
-		CHECK(flag == 0);
 		CHECK(nTry == 26);
 	}
 }
 
 TEST_CASE("testing falsePosition function") {
-	double xtol;
-	double xa, xb;
+	double xtol = 1.0e-7;
+	double xa = -1.0, xb = 1.0;
 
 	double root = 0.0;
-	int flag = -1;
+
+	SUBCASE("testing exceptions") {
+		CHECK_THROWS_WITH_AS(falsePosition(func1, xa, -xb, xtol, root),
+							 "The supplied interval does not contain any roots.",
+							 std::runtime_error);
+	}
 
 	SUBCASE("roots of func1") {
 		xtol = 1.0e-7;
 		xa = -1.0; xb = 1.0;
 		const double expected = 5.671433e-01;
 		
-		flag = falsePosition(func1, xa, xb, xtol, root);
+		falsePosition(func1, xa, xb, xtol, root);
 		CHECK(root == doctest::Approx(expected));
-		CHECK(flag == 0);
 
 		int nTry = 0;
-		flag = falsePosition(func1, xa, xb, xtol, root, nTry);
+		falsePosition(func1, xa, xb, xtol, root, nTry);
 		CHECK(root == doctest::Approx(expected));
-		CHECK(flag == 0);
 		CHECK(nTry == 15);
 
 		double ftol = 0.5;
-		flag = falsePosition(func1, xa, xb, xtol, ftol, root, nTry);
-		CHECK(flag == 0);
+		falsePosition(func1, xa, xb, xtol, ftol, root, nTry);
 		CHECK(nTry < 15);
-
-		flag = falsePosition(func1, xa, -xb, xtol, root);
-		CHECK(flag == 2);
 	}
 
 	SUBCASE("roots of func2") {
@@ -116,16 +112,14 @@ TEST_CASE("testing falsePosition function") {
 		const double expected = -1.0;
 
 		int nTry = 0;
-		flag = falsePosition(func2, xa, xb, xtol, root, nTry);
+		falsePosition(func2, xa, xb, xtol, root, nTry);
 		CHECK(root == doctest::Approx(expected));
-		CHECK(flag == 0);
 		CHECK(nTry == 80);
 
 		xa = -2.0; xb = 0.0;
 		nTry = 0;
-		flag = falsePosition(func2, xa, xb, xtol, root, nTry);
+		falsePosition(func2, xa, xb, xtol, root, nTry);
 		CHECK(root == doctest::Approx(expected));
-		CHECK(flag == 0);
 		CHECK(nTry == 22);
 	}
 
@@ -135,9 +129,8 @@ TEST_CASE("testing falsePosition function") {
 		const double expected = 5.235934e-01;
 
 		int nTry = 0;
-		flag = falsePosition(func3, xa, xb, xtol, root, nTry);
+		falsePosition(func3, xa, xb, xtol, root, nTry);
 		CHECK(root == doctest::Approx(expected));
-		CHECK(flag == 0);
 		CHECK(nTry == 55);
 	}
 }
@@ -147,26 +140,32 @@ TEST_CASE("testing secant function") {
 	double xa, xb;
 
 	double root = 0.0;
-	int flag = -1;
+
+
+	SUBCASE("testing exceptions") {
+		xtol = 1.0e-7;
+		xa = 0.0; xb = 2.0;
+
+		CHECK_THROWS_WITH_AS(secant(func3, xa, xb, xtol, root),
+							 "Maximum number of steps exceeded.",
+							 std::runtime_error);
+	}
 
 	SUBCASE("roots of func1") {
 		xtol = 1.0e-7;
 		xa = -1.0; xb = 1.0;
 		const double expected = 5.671438e-01;
 		
-		flag = secant(func1, xa, xb, xtol, root);
+		secant(func1, xa, xb, xtol, root);
 		CHECK(root == doctest::Approx(expected));
-		CHECK(flag == 0);
 
 		int nTry = 0;
-		flag = secant(func1, xa, xb, xtol, root, nTry);
+		secant(func1, xa, xb, xtol, root, nTry);
 		CHECK(root == doctest::Approx(expected));
-		CHECK(flag == 0);
 		CHECK(nTry == 6);
 
 		double ftol = 0.5;
-		flag = secant(func1, xa, xb, xtol, ftol, root, nTry);
-		CHECK(flag == 0);
+		secant(func1, xa, xb, xtol, ftol, root, nTry);
 		CHECK(nTry < 6);
 	}
 
@@ -176,26 +175,15 @@ TEST_CASE("testing secant function") {
 		const double expected = -1.0;
 
 		int nTry = 0;
-		flag = secant(func2, xa, xb, xtol, root, nTry);
+		secant(func2, xa, xb, xtol, root, nTry);
 		CHECK(root == doctest::Approx(expected));
-		CHECK(flag == 0);
 		CHECK(nTry == 12);
 
 		xa = -2.0; xb = 0.0;
 		nTry = 0;
-		flag = secant(func2, xa, xb, xtol, root, nTry);
+		secant(func2, xa, xb, xtol, root, nTry);
 		CHECK(root == doctest::Approx(expected));
-		CHECK(flag == 0);
 		CHECK(nTry == 10);
-	}
-
-	SUBCASE("roots of func3") {
-		xtol = 1.0e-7;
-		xa = 0.0; xb = 2.0;
-
-		int nTry = 0;
-		flag = secant(func3, xa, xb, xtol, root, nTry);
-		CHECK(flag == 1);
 	}
 }
 
@@ -204,26 +192,22 @@ TEST_CASE("testing newton function") {
 	double xa, xb;
 
 	double root = 0.0;
-	int flag = -1;
 
 	SUBCASE("roots of func1") {
 		xtol = 1.0e-7;
 		xa = -1.0; xb = 1.0;
 		const double expected = 5.671433e-01;
 		
-		flag = newton(func1, dfunc1, xa, xb, xtol, root);
+		newton(func1, dfunc1, xa, xb, xtol, root);
 		CHECK(root == doctest::Approx(expected));
-		CHECK(flag == 0);
 
 		int nTry = 0;
-		flag = newton(func1, dfunc1, xa, xb, xtol, root, nTry);
+		newton(func1, dfunc1, xa, xb, xtol, root, nTry);
 		CHECK(root == doctest::Approx(expected));
-		CHECK(flag == 0);
 		CHECK(nTry == 5);
 
 		double ftol = 0.5;
-		flag = newton(func1, dfunc1, xa, xb, xtol, ftol, root, nTry);
-		CHECK(flag == 0);
+		newton(func1, dfunc1, xa, xb, xtol, ftol, root, nTry);
 		CHECK(nTry < 5);
 	}
 
@@ -233,16 +217,14 @@ TEST_CASE("testing newton function") {
 		const double expected = -1.0;
 
 		int nTry = 0;
-		flag = newton(func2, dfunc2, xa, xb, xtol, root, nTry);
+		newton(func2, dfunc2, xa, xb, xtol, root, nTry);
 		CHECK(root == doctest::Approx(expected));
-		CHECK(flag == 0);
 		CHECK(nTry == 6);
 
 		xa = -2.0; xb = 0.0;
 		nTry = 0;
-		flag = newton(func2, dfunc2, xa, xb, xtol, root, nTry);
+		newton(func2, dfunc2, xa, xb, xtol, root, nTry);
 		CHECK(root == doctest::Approx(expected));
-		CHECK(flag == 0);
 		CHECK(nTry == 1);
 	}
 
@@ -252,14 +234,13 @@ TEST_CASE("testing newton function") {
 		const double expected = 5.235934e-01;
 
 		int nTry = 0;
-		flag = newton(func3, dfunc3, xa, xb, xtol, root, nTry);
+		newton(func3, dfunc3, xa, xb, xtol, root, nTry);
 		CHECK(root == doctest::Approx(expected));
-		CHECK(flag == 0);
 		CHECK(nTry == 8);
 	}
 }
 
-TEST_CASE("testing bracke function") {
+TEST_CASE("testing bracket function") {
 	const int N = 10;
 	const double xa = -10.0, xb = 10.0;
 
@@ -280,8 +261,8 @@ TEST_CASE("testing bracke function") {
 }
 
 TEST_CASE("testing findRoots function") {
-	const int N = 10;
-	const double xa = -10.0, xb = 10.0;
+	int N = 10;
+	double xa = -10.0, xb = 10.0;
 	const double tol = 1.0e-7;
 	double roots[8];
 	int nRoots;
@@ -289,10 +270,28 @@ TEST_CASE("testing findRoots function") {
 	const int nRootsExpected = 5;
 	const double rootsExpected[] = {-8.716925e+00, -6.889594e+00, -2.968485e+00, 4.361680e-01, 2.183971e+00};
 
+	SUBCASE("testing exceptions") {
+		N = 1;
+		xa = 0.0; xb = 2.0;
+		CHECK_THROWS_WITH_AS(findRoots(func3, xa, xb, tol, roots, nRoots, N, "secant"),
+							 "Maximum number of steps exceeded.",
+							 std::runtime_error);
+
+		xa = 5.0; xb = 10.0;
+		CHECK_THROWS_WITH_AS(findRoots(func1, xa, xb, tol, roots, nRoots, N),
+							 "The supplied interval does not contain any roots.",
+							 std::runtime_error);
+
+		xa = -10.0; xb = 10.0;
+		CHECK_THROWS_WITH_AS(findRoots(func1, xa, xb, tol, roots, nRoots, N, "gobble"),
+							 "Invalid method argument.",
+							 std::invalid_argument);
+	}
+
 	SUBCASE("testing newton implementation") {
 		findRoots(func4, dfunc4, xa, xb, tol, roots, nRoots, N);
 
-		REQUIRE(nRoots == nRootsExpected);
+		CHECK(nRoots == nRootsExpected);
 		for (int i = 0; i < nRoots; i++) {
 			CHECK(roots[i] == doctest::Approx(rootsExpected[i]));
 		}
@@ -301,7 +300,7 @@ TEST_CASE("testing findRoots function") {
 	SUBCASE("testing overloaded") {
 		findRoots(func4, xa, xb, tol, roots, nRoots, N);
 
-		REQUIRE(nRoots == nRootsExpected);
+		CHECK(nRoots == nRootsExpected);
 		for (int i = 0; i < nRoots; i++) {
 			CHECK(roots[i] == doctest::Approx(rootsExpected[i]));
 		}

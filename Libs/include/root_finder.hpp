@@ -3,8 +3,9 @@
  *
  * @brief      Implementation of the root finder methods.
  *
- * @todo       Reformat the functions to not return a flag and instead throw
+ * @todo       [DONE] Reformat the functions to not return a flag and instead throw
  *             exceptions.
+ * @todo       Adapt documentation.
  *
  * @author     Francesco Marchisotti
  *
@@ -30,12 +31,18 @@
  * @param[out] roots   Array with the roots of f(x).
  * @param[out] nRoots  The number of roots found.
  * @param[in]  N       The number of sub-intervals.
- * @param[in]  method  The root finding method. Accepted values are: `bisection`,
- *                     `falsePosition`, `secant`, `newton`.
+ * @param[in]  method  The root finding method. Accepted values are:
+ *                     `bisection`, `falsePosition`, `secant`, `newton`.
  *
  * @retval     0       Success.
- * @retval     1       Too many steps.
- * @retval     2       Initial interval doesn't contain any root.
+ *
+ * @throws     std::invalid_argument  Thrown if `N` > 128.
+ * @throws     std::invalid_argument  Thrown if `method` is not among the
+ *                                    accepted values.
+ * @throws     std::runtime_error     Thrown if roots can't be found inside the
+ *                                    interval.
+ * @throws     std::runtime_error     Thrown if one of the root finders exceeded
+ *                                    the maximum number of steps.
  */
 int findRoots(double (*f)(const double& x), double (*dfdx)(const double& x), const double& xa, const double& xb, const double& tol, double roots[], int& nRoots, const int N = 128, const std::string method = "newton");
 
@@ -56,14 +63,18 @@ int findRoots(double (*f)(const double& x), double (*dfdx)(const double& x), con
  * @param[out] roots   Array with the roots of f(x).
  * @param[out] nRoots  The number of roots found.
  * @param[in]  N       The number of sub-intervals.
- * @param[in]  method  The root finding method. Accepted values are: `bisection`,
- *                     `falsePosition`, `secant`.
+ * @param[in]  method  The root finding method. Accepted values are:
+ *                     `bisection`, `falsePosition`, `secant`.
  *
  * @retval     0       Success.
- * @retval     1       Too many steps.
- * @retval     2       Initial interval doesn't contain any root.
  *
- * @throws     std::invalid_argument  Thrown if `method` is `"newton"`.
+ * @throws     std::invalid_argument  Thrown if `N` > 128.
+ * @throws     std::invalid_argument  Thrown if `method` is not among the accepted
+ *                                    values.
+ * @throws     std::runtime_error     Thrown if roots can't be found inside the
+ *                                    interval.
+ * @throws     std::runtime_error     Thrown if one of the root finders exceeded
+ *                                    the maximum number of steps.
  */
 int findRoots(double (*f)(const double& x), const double& xa, const double& xb, const double& tol, double roots[], int& nRoots, const int N = 128, const std::string method = "bisection");
 
