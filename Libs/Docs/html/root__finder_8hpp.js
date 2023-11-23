@@ -15,7 +15,7 @@ var root__finder_8hpp =
     [ "secant", "root__finder_8hpp.html#a57813ec617e99376e2838a04cc03de21", null ],
     [ "secant", "root__finder_8hpp.html#a439285b2fb54f5cc838ab798c1a2be12", null ],
     [ "secant", "root__finder_8hpp.html#ad3334b941b0e4d8665915d479f00d42d", null ],
-    [ "newton", "root__finder_8hpp.html#adc7dc20a39bd71317cd3e00200cec1ea", null ],
+    [ "newton", "root__finder_8hpp.html#a1e1b2c39a587d0a169e4a3070246f52a", null ],
     [ "newton", "root__finder_8hpp.html#a4ffd32d96b1d2fbb702ba2c21a77d1b1", null ],
     [ "newton", "root__finder_8hpp.html#a3c4ca37a6f2e5cb8e6f035dd2bea10e4", null ],
     [ "newton", "root__finder_8hpp.html#a0243c1b83f224ad5271725c504a246e9", null ]

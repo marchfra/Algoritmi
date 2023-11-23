@@ -294,7 +294,7 @@ int secant(double (*f)(const double& x), double xa, double xb, const double& xto
 // Newton's method
 // =====================================================================================================================
 
-int newton(double (*f)(const double& x), double (*dfdx)(const double& x), double xa, double xb, const double& xtol, const double& ftol, double& root, int& ntry) {
+int newton(double (*f)(const double& x), double (*dfdx)(const double& x), double xa, double xb, const double& xtol, const double& ftol, const double& dftol, double& root, int& ntry) {
 	int max_ntry = 16;
 	double fa = f(xa);
 	double fb = f(xb);
@@ -312,10 +312,11 @@ int newton(double (*f)(const double& x), double (*dfdx)(const double& x), double
 		return 0;
 	}
 
-	// if (fa * fb < 0) {	// Check that interval contains a solution REMOVE FOR EVEN MULTIPLICITY
 	for (int k = 1; k <= max_ntry; k++) {
 		fc = f(xc);
-		dx = fc / dfdx(xc);
+		double df = dfdx(xc);
+		if (fabs(df) < dftol) throw std::runtime_error("Derivative too small.");
+		dx = fc / df;
 		xc -= dx;
 
 		#if DEBUG == TRUE
@@ -332,24 +333,29 @@ int newton(double (*f)(const double& x), double (*dfdx)(const double& x), double
 			return 0;
 		}
 	}
-	// }
 
-	std::cerr << "! newton(): too many steps\n" << std::endl;
 	ntry = -1;
 	root = nan("");
+	throw std::runtime_error("Maximum number of steps exceeded.");
 	return 1;
 }
 
 int newton(double (*f)(const double& x), double(*dfdx)(const double& x), double xa, double xb, const double& xtol, double& root) {
 	int n;
-	return newton(f, dfdx, xa, xb, xtol, -1.0, root, n);
+	double dftol = 1.0e-3;
+	return newton(f, dfdx, xa, xb, xtol, -1.0, dftol, root, n);
 }
 
-int newton(double (*f)(const double& x), double(*dfdx)(const double& x), double xa, double xb, const double& xtol, double& root, int& ntry) {
-	return newton(f, dfdx, xa, xb, xtol, -1.0, root, ntry);
-}
-
-int newton(double (*f)(const double& x), double(*dfdx)(const double& x), double xa, double xb, const double& xtol, const double& ftol, double& root) {
+int newton(double (*f)(const double& x), double(*dfdx)(const double& x), double xa, double xb, const double& xtol, const double& dftol, double& root) {
 	int n;
-	return newton(f, dfdx, xa, xb, xtol, ftol, root, n);
+	return newton(f, dfdx, xa, xb, xtol, -1.0, dftol, root, n);
+}
+
+int newton(double (*f)(const double& x), double(*dfdx)(const double& x), double xa, double xb, const double& xtol, const double& dftol, double& root, int& ntry) {
+	return newton(f, dfdx, xa, xb, xtol, -1.0, dftol, root, ntry);
+}
+
+int newton(double (*f)(const double& x), double(*dfdx)(const double& x), double xa, double xb, const double& xtol, const double& ftol, const double& dftol, double& root) {
+	int n;
+	return newton(f, dfdx, xa, xb, xtol, ftol, dftol, root, n);
 }

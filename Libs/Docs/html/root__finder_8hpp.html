@@ -149,9 +149,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ad3334b941b0e4d8665915d479f00d42d" id="r_ad3334b941b0e4d8665915d479f00d42d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="root__finder_8hpp.html#ad3334b941b0e4d8665915d479f00d42d">secant</a> (double(*f)(const double &amp;x), double xa, double xb, const double &amp;xtol, const double &amp;ftol, double &amp;root)</td></tr>
 <tr class="memdesc:ad3334b941b0e4d8665915d479f00d42d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the root of a function f(x) in a given interval [xa, xb] using secant method.  <br /></td></tr>
 <tr class="separator:ad3334b941b0e4d8665915d479f00d42d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc7dc20a39bd71317cd3e00200cec1ea" id="r_adc7dc20a39bd71317cd3e00200cec1ea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="root__finder_8hpp.html#adc7dc20a39bd71317cd3e00200cec1ea">newton</a> (double(*f)(const double &amp;x), double(*dfdx)(const double &amp;x), double xa, double xb, const double &amp;xtol, const double &amp;ftol, double &amp;root, int &amp;ntry)</td></tr>
-<tr class="memdesc:adc7dc20a39bd71317cd3e00200cec1ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the root of a function f(x) in a given interval [xa, xb] using Newton-Raphson method.  <br /></td></tr>
-<tr class="separator:adc7dc20a39bd71317cd3e00200cec1ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e1b2c39a587d0a169e4a3070246f52a" id="r_a1e1b2c39a587d0a169e4a3070246f52a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="root__finder_8hpp.html#a1e1b2c39a587d0a169e4a3070246f52a">newton</a> (double(*f)(const double &amp;x), double(*dfdx)(const double &amp;x), double xa, double xb, const double &amp;xtol, const double &amp;ftol, const double &amp;dftol, double &amp;root, int &amp;ntry)</td></tr>
+<tr class="memdesc:a1e1b2c39a587d0a169e4a3070246f52a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the root of a function f(x) in a given interval [xa, xb] using Newton-Raphson method.  <br /></td></tr>
+<tr class="separator:a1e1b2c39a587d0a169e4a3070246f52a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ffd32d96b1d2fbb702ba2c21a77d1b1" id="r_a4ffd32d96b1d2fbb702ba2c21a77d1b1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="root__finder_8hpp.html#a4ffd32d96b1d2fbb702ba2c21a77d1b1">newton</a> (double(*f)(const double &amp;x), double(*dfdx)(const double &amp;x), double xa, double xb, const double &amp;xtol, double &amp;root)</td></tr>
 <tr class="memdesc:a4ffd32d96b1d2fbb702ba2c21a77d1b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the root of a function f(x) in a given interval [xa, xb] using Newton-Raphson method.  <br /></td></tr>
 <tr class="separator:a4ffd32d96b1d2fbb702ba2c21a77d1b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -256,7 +256,9 @@ Functions</h2></td></tr>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">0</td><td>Success.</td></tr>
+    <tr><td class="paramname">0</td><td>Success. </td></tr>
+    <tr><td class="paramname">1</td><td>Too many steps. </td></tr>
+    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root.</td></tr>
   </table>
   </dd>
 </dl>
@@ -352,7 +354,9 @@ Functions</h2></td></tr>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">0</td><td>Success.</td></tr>
+    <tr><td class="paramname">0</td><td>Success. </td></tr>
+    <tr><td class="paramname">1</td><td>Too many steps. </td></tr>
+    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root.</td></tr>
   </table>
   </dd>
 </dl>
@@ -514,7 +518,14 @@ Functions</h2></td></tr>
   <table class="retval">
     <tr><td class="paramname">0</td><td>Success. </td></tr>
     <tr><td class="paramname">1</td><td>Too many steps. </td></tr>
-    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root. </td></tr>
+    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if roots can't be found inside the interval. </td></tr>
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if the maximum number of steps is exceeded. </td></tr>
   </table>
   </dd>
 </dl>
@@ -581,7 +592,14 @@ Functions</h2></td></tr>
   <table class="retval">
     <tr><td class="paramname">0</td><td>Success. </td></tr>
     <tr><td class="paramname">1</td><td>Too many steps. </td></tr>
-    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root. </td></tr>
+    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if roots can't be found inside the interval. </td></tr>
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if the maximum number of steps is exceeded. </td></tr>
   </table>
   </dd>
 </dl>
@@ -655,7 +673,14 @@ Functions</h2></td></tr>
   <table class="retval">
     <tr><td class="paramname">0</td><td>Success. </td></tr>
     <tr><td class="paramname">1</td><td>Too many steps. </td></tr>
-    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root. </td></tr>
+    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if roots can't be found inside the interval. </td></tr>
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if the maximum number of steps is exceeded. </td></tr>
   </table>
   </dd>
 </dl>
@@ -729,7 +754,14 @@ Functions</h2></td></tr>
   <table class="retval">
     <tr><td class="paramname">0</td><td>Success. </td></tr>
     <tr><td class="paramname">1</td><td>Too many steps. </td></tr>
-    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root. </td></tr>
+    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if roots can't be found inside the interval. </td></tr>
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if the maximum number of steps is exceeded. </td></tr>
   </table>
   </dd>
 </dl>
@@ -809,7 +841,14 @@ Functions</h2></td></tr>
   <table class="retval">
     <tr><td class="paramname">0</td><td>Success. </td></tr>
     <tr><td class="paramname">1</td><td>Too many steps. </td></tr>
-    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root. </td></tr>
+    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if roots can't be found inside the interval. </td></tr>
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if the maximum number of steps is exceeded. </td></tr>
   </table>
   </dd>
 </dl>
@@ -876,7 +915,14 @@ Functions</h2></td></tr>
   <table class="retval">
     <tr><td class="paramname">0</td><td>Success. </td></tr>
     <tr><td class="paramname">1</td><td>Too many steps. </td></tr>
-    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root. </td></tr>
+    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if roots can't be found inside the interval. </td></tr>
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if the maximum number of steps is exceeded. </td></tr>
   </table>
   </dd>
 </dl>
@@ -950,7 +996,14 @@ Functions</h2></td></tr>
   <table class="retval">
     <tr><td class="paramname">0</td><td>Success. </td></tr>
     <tr><td class="paramname">1</td><td>Too many steps. </td></tr>
-    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root. </td></tr>
+    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if roots can't be found inside the interval. </td></tr>
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if the maximum number of steps is exceeded. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1024,7 +1077,14 @@ Functions</h2></td></tr>
   <table class="retval">
     <tr><td class="paramname">0</td><td>Success. </td></tr>
     <tr><td class="paramname">1</td><td>Too many steps. </td></tr>
-    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root. </td></tr>
+    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if roots can't be found inside the interval. </td></tr>
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if the maximum number of steps is exceeded. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1103,8 +1163,13 @@ Functions</h2></td></tr>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>Success. </td></tr>
-    <tr><td class="paramname">1</td><td>Too many steps. </td></tr>
-    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root. </td></tr>
+    <tr><td class="paramname">1</td><td>Too many steps.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if the maximum number of steps is exceeded. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1170,8 +1235,13 @@ Functions</h2></td></tr>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>Success. </td></tr>
-    <tr><td class="paramname">1</td><td>Too many steps. </td></tr>
-    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root. </td></tr>
+    <tr><td class="paramname">1</td><td>Too many steps.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if the maximum number of steps is exceeded. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1244,8 +1314,13 @@ Functions</h2></td></tr>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>Success. </td></tr>
-    <tr><td class="paramname">1</td><td>Too many steps. </td></tr>
-    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root. </td></tr>
+    <tr><td class="paramname">1</td><td>Too many steps.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if the maximum number of steps is exceeded. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1318,16 +1393,21 @@ Functions</h2></td></tr>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>Success. </td></tr>
-    <tr><td class="paramname">1</td><td>Too many steps. </td></tr>
-    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root. </td></tr>
+    <tr><td class="paramname">1</td><td>Too many steps.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if the maximum number of steps is exceeded. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="adc7dc20a39bd71317cd3e00200cec1ea" name="adc7dc20a39bd71317cd3e00200cec1ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc7dc20a39bd71317cd3e00200cec1ea">&#9670;&#160;</a></span>newton() <span class="overload">[1/4]</span></h2>
+<a id="a1e1b2c39a587d0a169e4a3070246f52a" name="a1e1b2c39a587d0a169e4a3070246f52a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e1b2c39a587d0a169e4a3070246f52a">&#9670;&#160;</a></span>newton() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1371,6 +1451,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>dftol</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">double &amp;&#160;</td>
           <td class="paramname"><em>root</em>, </td>
         </tr>
@@ -1397,6 +1483,7 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">xb</td><td>Upper bound of the interval. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">xtol</td><td>x-tolerance. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">ftol</td><td>f(x)-tolerance: the values of f(x) that are considered 0. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dftol</td><td>f'(x)-tolerance: protects against obvious divergence. Pass -1 to disable. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">root</td><td>The root of f(x). </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">ntry</td><td>The number of iterations achieved.</td></tr>
   </table>
@@ -1406,11 +1493,18 @@ Functions</h2></td></tr>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>Success. </td></tr>
-    <tr><td class="paramname">1</td><td>Too many steps. </td></tr>
-    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root. </td></tr>
+    <tr><td class="paramname">1</td><td>Too many steps.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if the maximum number of steps is exceeded. </td></tr>
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if the derivative becomes too small (divergence protection).</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>flag </dd></dl>
 
 </div>
 </div>
@@ -1480,8 +1574,13 @@ Functions</h2></td></tr>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>Success. </td></tr>
-    <tr><td class="paramname">1</td><td>Too many steps. </td></tr>
-    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root. </td></tr>
+    <tr><td class="paramname">1</td><td>Too many steps.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if the maximum number of steps is exceeded. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1561,8 +1660,13 @@ Functions</h2></td></tr>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>Success. </td></tr>
-    <tr><td class="paramname">1</td><td>Too many steps. </td></tr>
-    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root. </td></tr>
+    <tr><td class="paramname">1</td><td>Too many steps.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if the maximum number of steps is exceeded. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1642,8 +1746,13 @@ Functions</h2></td></tr>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
     <tr><td class="paramname">0</td><td>Success. </td></tr>
-    <tr><td class="paramname">1</td><td>Too many steps. </td></tr>
-    <tr><td class="paramname">2</td><td>Initial interval doesn't contain any root. </td></tr>
+    <tr><td class="paramname">1</td><td>Too many steps.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>Thrown if the maximum number of steps is exceeded. </td></tr>
   </table>
   </dd>
 </dl>

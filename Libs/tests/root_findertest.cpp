@@ -17,6 +17,10 @@ double dfunc3(const double& x);
 double func4(const double& x);
 double dfunc4(const double& x);
 
+double func5(const double& x);
+double dfunc5_small(const double& x);
+double dfunc5(const double& x);
+
 TEST_CASE("testing bisection function") {
 	double xtol = 1.0e-7;
 	double xa = -1.0, xb = 1.0;
@@ -190,6 +194,7 @@ TEST_CASE("testing secant function") {
 TEST_CASE("testing newton function") {
 	double xtol;
 	double xa, xb;
+	double dftol = 1.0e-3;
 
 	double root = 0.0;
 
@@ -202,12 +207,12 @@ TEST_CASE("testing newton function") {
 		CHECK(root == doctest::Approx(expected));
 
 		int nTry = 0;
-		newton(func1, dfunc1, xa, xb, xtol, root, nTry);
+		newton(func1, dfunc1, xa, xb, xtol, dftol, root, nTry);
 		CHECK(root == doctest::Approx(expected));
 		CHECK(nTry == 5);
 
 		double ftol = 0.5;
-		newton(func1, dfunc1, xa, xb, xtol, ftol, root, nTry);
+		newton(func1, dfunc1, xa, xb, xtol, ftol, dftol, root, nTry);
 		CHECK(nTry < 5);
 	}
 
@@ -217,13 +222,13 @@ TEST_CASE("testing newton function") {
 		const double expected = -1.0;
 
 		int nTry = 0;
-		newton(func2, dfunc2, xa, xb, xtol, root, nTry);
+		newton(func2, dfunc2, xa, xb, xtol, dftol, root, nTry);
 		CHECK(root == doctest::Approx(expected));
 		CHECK(nTry == 6);
 
 		xa = -2.0; xb = 0.0;
 		nTry = 0;
-		newton(func2, dfunc2, xa, xb, xtol, root, nTry);
+		newton(func2, dfunc2, xa, xb, xtol, dftol, root, nTry);
 		CHECK(root == doctest::Approx(expected));
 		CHECK(nTry == 1);
 	}
@@ -234,9 +239,24 @@ TEST_CASE("testing newton function") {
 		const double expected = 5.235934e-01;
 
 		int nTry = 0;
-		newton(func3, dfunc3, xa, xb, xtol, root, nTry);
+		newton(func3, dfunc3, xa, xb, xtol, dftol, root, nTry);
 		CHECK(root == doctest::Approx(expected));
 		CHECK(nTry == 8);
+	}
+
+	SUBCASE("testing derivative tolerance") {
+		xtol = 1.0e-7;
+		xa = 0.0; xb = 2.0;
+		double ftol = -1.0;
+		const double expected = 1.0;
+
+		CHECK_THROWS_WITH_AS(newton(func5, dfunc5_small, xa, xb, xtol, root),
+							 "Derivative too small.",
+							 std::runtime_error);
+
+		int nTry = -1;
+		newton(func5, dfunc5, xa, xb, xtol, ftol, dftol, root, nTry);
+		CHECK(root == expected);
 	}
 }
 
@@ -345,4 +365,16 @@ double func4(const double& x) {
 double dfunc4(const double& x) {
 	double bracket = 2.0 * (0.1 * x) * 0.1 + 0.2;
 	return cos(x) - bracket;
+}
+
+double func5(const double& x) {
+	return x*x - 1.0;
+}
+
+double dfunc5_small(const double& x) {
+	return 1.0e-8;
+}
+
+double dfunc5(const double& x) {
+	return 2.0 * x;
 }

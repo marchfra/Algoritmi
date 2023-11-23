@@ -3,10 +3,6 @@
  *
  * @brief      Implementation of the root finder methods.
  *
- * @todo       [DONE] Reformat the functions to not return a flag and instead throw
- *             exceptions.
- * @todo       Adapt documentation.
- *
  * @author     Francesco Marchisotti
  *
  * @date       19/11/2023
@@ -34,7 +30,11 @@
  * @param[in]  method  The root finding method. Accepted values are:
  *                     `bisection`, `falsePosition`, `secant`, `newton`.
  *
+ * @return     flag
+ *
  * @retval     0       Success.
+ * @retval     1       Too many steps.
+ * @retval     2       Initial interval doesn't contain any root.
  *
  * @throws     std::invalid_argument  Thrown if `N` > 128.
  * @throws     std::invalid_argument  Thrown if `method` is not among the
@@ -66,7 +66,11 @@ int findRoots(double (*f)(const double& x), double (*dfdx)(const double& x), con
  * @param[in]  method  The root finding method. Accepted values are:
  *                     `bisection`, `falsePosition`, `secant`.
  *
+ * @return     flag
+ *
  * @retval     0       Success.
+ * @retval     1       Too many steps.
+ * @retval     2       Initial interval doesn't contain any root.
  *
  * @throws     std::invalid_argument  Thrown if `N` > 128.
  * @throws     std::invalid_argument  Thrown if `method` is not among the accepted
@@ -110,9 +114,16 @@ void bracket(double (*f)(const double& x), const double& xa, const double& xb, d
  * @param[out] root  The root of f(x).
  * @param[out] ntry  The number of iterations achieved.
  *
+ * @return     flag
+ *
  * @retval     0     Success.
  * @retval     1     Too many steps.
  * @retval     2     Initial interval doesn't contain any root.
+ *
+ * @throws     std::runtime_error  Thrown if roots can't be found inside the
+ *                                 interval.
+ * @throws     std::runtime_error  Thrown if the maximum number of steps is
+ *                                 exceeded.
  */
 int bisection(double (*f)(const double& x), double xa, double xb, const double& xtol, const double& ftol, double& root, int& ntry);
 
@@ -128,9 +139,16 @@ int bisection(double (*f)(const double& x), double xa, double xb, const double& 
  * @param[in]  xtol  x-tolerance.
  * @param[out] root  The root of f(x).
  *
+ * @return     flag
+ *
  * @retval     0     Success.
  * @retval     1     Too many steps.
  * @retval     2     Initial interval doesn't contain any root.
+ *
+ * @throws     std::runtime_error  Thrown if roots can't be found inside the
+ *                                 interval.
+ * @throws     std::runtime_error  Thrown if the maximum number of steps is
+ *                                 exceeded.
  */
 int bisection(double (*f)(const double& x), double xa, double xb, const double& xtol, double& root);
 
@@ -147,9 +165,16 @@ int bisection(double (*f)(const double& x), double xa, double xb, const double& 
  * @param[out] root  The root of f(x).
  * @param[out] ntry  The number of iterations achieved.
  *
+ * @return     flag
+ *
  * @retval     0     Success.
  * @retval     1     Too many steps.
  * @retval     2     Initial interval doesn't contain any root.
+ *
+ * @throws     std::runtime_error  Thrown if roots can't be found inside the
+ *                                 interval.
+ * @throws     std::runtime_error  Thrown if the maximum number of steps is
+ *                                 exceeded.
  */
 int bisection(double (*f)(const double& x), double xa, double xb, const double& xtol, double& root, int& ntry);
 
@@ -166,9 +191,16 @@ int bisection(double (*f)(const double& x), double xa, double xb, const double& 
  * @param[in]  ftol  f(x)-tolerance: the values of f(x) that are considered 0.
  * @param[out] root  The root of f(x).
  *
+ * @return     flag
+ *
  * @retval     0     Success.
  * @retval     1     Too many steps.
  * @retval     2     Initial interval doesn't contain any root.
+ *
+ * @throws     std::runtime_error  Thrown if roots can't be found inside the
+ *                                 interval.
+ * @throws     std::runtime_error  Thrown if the maximum number of steps is
+ *                                 exceeded.
  */
 int bisection(double (*f)(const double& x), double xa, double xb, const double& xtol, const double& ftol, double& root);
 
@@ -184,9 +216,16 @@ int bisection(double (*f)(const double& x), double xa, double xb, const double& 
  * @param[out] root  The root of f(x).
  * @param[out] ntry  The number of iterations achieved.
  *
+ * @return     flag
+ *
  * @retval     0     Success.
  * @retval     1     Too many steps.
  * @retval     2     Initial interval doesn't contain any root.
+ *
+ * @throws     std::runtime_error  Thrown if roots can't be found inside the
+ *                                 interval.
+ * @throws     std::runtime_error  Thrown if the maximum number of steps is
+ *                                 exceeded.
  */
 int falsePosition(double (*f)(const double& x), double xa, double xb, const double& xtol, const double& ftol, double& root, int& ntry);
 
@@ -202,9 +241,16 @@ int falsePosition(double (*f)(const double& x), double xa, double xb, const doub
  * @param[in]  xtol  x-tolerance.
  * @param[out] root  The root of f(x).
  *
+ * @return     flag
+ *
  * @retval     0     Success.
  * @retval     1     Too many steps.
  * @retval     2     Initial interval doesn't contain any root.
+ *
+ * @throws     std::runtime_error  Thrown if roots can't be found inside the
+ *                                 interval.
+ * @throws     std::runtime_error  Thrown if the maximum number of steps is
+ *                                 exceeded.
  */
 int falsePosition(double (*f)(const double& x), double xa, double xb, const double& xtol, double& root);
 
@@ -221,9 +267,16 @@ int falsePosition(double (*f)(const double& x), double xa, double xb, const doub
  * @param[out] root  The root of f(x).
  * @param[out] ntry  The number of iterations achieved.
  *
+ * @return     flag
+ *
  * @retval     0     Success.
  * @retval     1     Too many steps.
  * @retval     2     Initial interval doesn't contain any root.
+ *
+ * @throws     std::runtime_error  Thrown if roots can't be found inside the
+ *                                 interval.
+ * @throws     std::runtime_error  Thrown if the maximum number of steps is
+ *                                 exceeded.
  */
 int falsePosition(double (*f)(const double& x), double xa, double xb, const double& xtol, double& root, int& ntry);
 
@@ -240,9 +293,16 @@ int falsePosition(double (*f)(const double& x), double xa, double xb, const doub
  * @param[in]  ftol  f(x)-tolerance: the values of f(x) that are considered 0.
  * @param[out] root  The root of f(x).
  *
+ * @return     flag
+ *
  * @retval     0     Success.
  * @retval     1     Too many steps.
  * @retval     2     Initial interval doesn't contain any root.
+ *
+ * @throws     std::runtime_error  Thrown if roots can't be found inside the
+ *                                 interval.
+ * @throws     std::runtime_error  Thrown if the maximum number of steps is
+ *                                 exceeded.
  */
 int falsePosition(double (*f)(const double& x), double xa, double xb, const double& xtol, const double& ftol, double& root);
 
@@ -258,9 +318,13 @@ int falsePosition(double (*f)(const double& x), double xa, double xb, const doub
  * @param[out] root  The root of f(x).
  * @param[out] ntry  The number of iterations achieved.
  *
+ * @return     flag
+ *
  * @retval     0     Success.
  * @retval     1     Too many steps.
- * @retval     2     Initial interval doesn't contain any root.
+ *
+ * @throws     std::runtime_error  Thrown if the maximum number of steps is
+ *                                 exceeded.
  */
 int secant(double (*f)(const double& x), double xa, double xb, const double& xtol, const double& ftol, double& root, int& ntry);
 
@@ -276,9 +340,13 @@ int secant(double (*f)(const double& x), double xa, double xb, const double& xto
  * @param[in]  xtol  x-tolerance.
  * @param[out] root  The root of f(x).
  *
+ * @return     flag
+ *
  * @retval     0     Success.
  * @retval     1     Too many steps.
- * @retval     2     Initial interval doesn't contain any root.
+ *
+ * @throws     std::runtime_error  Thrown if the maximum number of steps is
+ *                                 exceeded.
  */
 int secant(double (*f)(const double& x), double xa, double xb, const double& xtol, double& root);
 
@@ -295,9 +363,13 @@ int secant(double (*f)(const double& x), double xa, double xb, const double& xto
  * @param[out] root  The root of f(x).
  * @param[out] ntry  The number of iterations achieved.
  *
+ * @return     flag
+ *
  * @retval     0     Success.
  * @retval     1     Too many steps.
- * @retval     2     Initial interval doesn't contain any root.
+ *
+ * @throws     std::runtime_error  Thrown if the maximum number of steps is
+ *                                 exceeded.
  */
 int secant(double (*f)(const double& x), double xa, double xb, const double& xtol, double& root, int& ntry);
 
@@ -314,9 +386,13 @@ int secant(double (*f)(const double& x), double xa, double xb, const double& xto
  * @param[in]  ftol  f(x)-tolerance: the values of f(x) that are considered 0.
  * @param[out] root  The root of f(x).
  *
+ * @return     flag
+ *
  * @retval     0     Success.
  * @retval     1     Too many steps.
- * @retval     2     Initial interval doesn't contain any root.
+ *
+ * @throws     std::runtime_error  Thrown if the maximum number of steps is
+ *                                 exceeded.
  */
 int secant(double (*f)(const double& x), double xa, double xb, const double& xtol, const double& ftol, double& root);
 
@@ -324,23 +400,28 @@ int secant(double (*f)(const double& x), double xa, double xb, const double& xto
  * @brief      Find the root of a function f(x) in a given interval [xa, xb]
  *             using Newton-Raphson method.
  *
- * @param[in]  f     Pointer to the function.
- * @param[in]  dfdx  Pointer to the derivative of the function.
- * @param[in]  xa    Lower bound of the interval.
- * @param[in]  xb    Upper bound of the interval.
- * @param[in]  xtol  x-tolerance.
- * @param[in]  ftol  f(x)-tolerance: the values of f(x) that are considered 0.
- * @param[out] root  The root of f(x).
- * @param[out] ntry  The number of iterations achieved.
+ * @param[in]  f      Pointer to the function.
+ * @param[in]  dfdx   Pointer to the derivative of the function.
+ * @param[in]  xa     Lower bound of the interval.
+ * @param[in]  xb     Upper bound of the interval.
+ * @param[in]  xtol   x-tolerance.
+ * @param[in]  ftol   f(x)-tolerance: the values of f(x) that are considered 0.
+ * @param[in]  dftol  f'(x)-tolerance: protects against obvious divergence. Pass
+ *                    -1 to disable.
+ * @param[out] root   The root of f(x).
+ * @param[out] ntry   The number of iterations achieved.
  *
- * @todo       Add check on |dfdx| > dftol so that we don't shoot too far from
- *             the root.
+ * @return     flag
  *
- * @retval     0     Success.
- * @retval     1     Too many steps.
- * @retval     2     Initial interval doesn't contain any root.
+ * @retval     0      Success.
+ * @retval     1      Too many steps.
+ *
+ * @throws     std::runtime_error  Thrown if the maximum number of steps is
+ *                                 exceeded.
+ * @throws     std::runtime_error  Thrown if the derivative becomes too small
+ *                                 (divergence protection).
  */
-int newton(double (*f)(const double& x), double (*dfdx)(const double &x), double xa, double xb, const double& xtol, const double& ftol, double& root, int& ntry);
+int newton(double (*f)(const double& x), double (*dfdx)(const double &x), double xa, double xb, const double& xtol, const double& ftol, const double& dftol, double& root, int& ntry);
 
 /**
  * @overload
@@ -355,9 +436,18 @@ int newton(double (*f)(const double& x), double (*dfdx)(const double &x), double
  * @param[in]  xtol  x-tolerance.
  * @param[out] root  The root of f(x).
  *
+ * @note       Tolerance on f'(x) is 1e-3. To disable tolerance run `newton()`
+ *             [?/4] with `dftol = -1`.
+ *
+ * @return     flag
+ *
  * @retval     0     Success.
  * @retval     1     Too many steps.
- * @retval     2     Initial interval doesn't contain any root.
+ *
+ * @throws     std::runtime_error  Thrown if the maximum number of steps is
+ *                                 exceeded.
+ * @throws     std::runtime_error  Thrown if the derivative becomes too small
+ *                                 (divergence protection).
  */
 int newton(double (*f)(const double& x), double (*dfdx)(const double &x), double xa, double xb, const double& xtol, double& root);
 
@@ -367,19 +457,26 @@ int newton(double (*f)(const double& x), double (*dfdx)(const double &x), double
  * @brief      Find the root of a function f(x) in a given interval [xa, xb]
  *             using Newton-Raphson method.
  *
- * @param[in]  f     Pointer to the function.
- * @param[in]  dfdx  Pointer to the derivative of the function.
- * @param[in]  xa    Lower bound of the interval.
- * @param[in]  xb    Upper bound of the interval.
- * @param[in]  xtol  x-tolerance.
- * @param[out] root  The root of f(x).
- * @param[out] ntry  The number of iterations achieved.
+ * @param[in]  f      Pointer to the function.
+ * @param[in]  dfdx   Pointer to the derivative of the function.
+ * @param[in]  xa     Lower bound of the interval.
+ * @param[in]  xb     Upper bound of the interval.
+ * @param[in]  xtol   x-tolerance.
+ * @param[in]  dftol  f'(x)-tolerance: protects against obvious divergence. Pass
+ *                    -1 to disable.
+ * @param[out] root   The root of f(x).
  *
- * @retval     0     Success.
- * @retval     1     Too many steps.
- * @retval     2     Initial interval doesn't contain any root.
+ * @return     flag
+ *
+ * @retval     0      Success.
+ * @retval     1      Too many steps.
+ *
+ * @throws     std::runtime_error  Thrown if the maximum number of steps is
+ *                                 exceeded.
+ * @throws     std::runtime_error  Thrown if the derivative becomes too small
+ *                                 (divergence protection).
  */
-int newton(double (*f)(const double& x), double (*dfdx)(const double &x), double xa, double xb, const double& xtol, double& root, int& ntry);
+int newton(double (*f)(const double& x), double (*dfdx)(const double &x), double xa, double xb, const double& xtol, const double& dftol, double& root);
 
 /**
  * @overload
@@ -387,16 +484,52 @@ int newton(double (*f)(const double& x), double (*dfdx)(const double &x), double
  * @brief      Find the root of a function f(x) in a given interval [xa, xb]
  *             using Newton-Raphson method.
  *
- * @param[in]  f     Pointer to the function.
- * @param[in]  dfdx  Pointer to the derivative of the function.
- * @param[in]  xa    Lower bound of the interval.
- * @param[in]  xb    Upper bound of the interval.
- * @param[in]  xtol  x-tolerance.
- * @param[in]  ftol  f(x)-tolerance: the values of f(x) that are considered 0.
- * @param[out] root  The root of f(x).
+ * @param[in]  f      Pointer to the function.
+ * @param[in]  dfdx   Pointer to the derivative of the function.
+ * @param[in]  xa     Lower bound of the interval.
+ * @param[in]  xb     Upper bound of the interval.
+ * @param[in]  xtol   x-tolerance.
+ * @param[in]  dftol  f'(x)-tolerance: protects against obvious divergence. Pass
+ *                    -1 to disable.
+ * @param[out] root   The root of f(x).
+ * @param[out] ntry   The number of iterations achieved.
  *
- * @retval     0     Success.
- * @retval     1     Too many steps.
- * @retval     2     Initial interval doesn't contain any root.
+ * @return     flag
+ *
+ * @retval     0      Success.
+ * @retval     1      Too many steps.
+ *
+ * @throws     std::runtime_error  Thrown if the maximum number of steps is
+ *                                 exceeded.
+ * @throws     std::runtime_error  Thrown if the derivative becomes too small
+ *                                 (divergence protection).
  */
-int newton(double (*f)(const double& x), double (*dfdx)(const double &x), double xa, double xb, const double& xtol, const double& ftol, double& root);
+int newton(double (*f)(const double& x), double (*dfdx)(const double &x), double xa, double xb, const double& xtol, const double& dftol, double& root, int& ntry);
+
+/**
+ * @overload
+ *
+ * @brief      Find the root of a function f(x) in a given interval [xa, xb]
+ *             using Newton-Raphson method.
+ *
+ * @param[in]  f      Pointer to the function.
+ * @param[in]  dfdx   Pointer to the derivative of the function.
+ * @param[in]  xa     Lower bound of the interval.
+ * @param[in]  xb     Upper bound of the interval.
+ * @param[in]  xtol   x-tolerance.
+ * @param[in]  ftol   f(x)-tolerance: the values of f(x) that are considered 0.
+ * @param[in]  dftol  f'(x)-tolerance: protects against obvious divergence. Pass
+ *                    -1 to disable.
+ * @param[out] root   The root of f(x).
+ *
+ * @return     flag
+ *
+ * @retval     0      Success.
+ * @retval     1      Too many steps.
+ *
+ * @throws     std::runtime_error  Thrown if the maximum number of steps is
+ *                                 exceeded.
+ * @throws     std::runtime_error  Thrown if the derivative becomes too small
+ *                                 (divergence protection).
+ */
+int newton(double (*f)(const double& x), double (*dfdx)(const double &x), double xa, double xb, const double& xtol, const double& ftol, const double& dftol, double& root);
