@@ -57,7 +57,7 @@ test:
 
 .PHONY: clean
 clean:
-	$(RM) -r $(OBJDIR) $(BINDIR) $(SRCDIR)/marchisotti_$(CLASSWORK).cpp
+	$(RM) -r $(OBJDIR) $(BINDIR)
 	@echo make clean: done
 
 

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ode_5fsolver_2ehpp_0',['ode_solver.hpp',['../ode__solver_8hpp.html',1,'']]]
+  ['lin_5falg_2ehpp_0',['lin_alg.hpp',['../lin__alg_8hpp.html',1,'']]]
 ];
