@@ -70,6 +70,7 @@ int main() {
 	double x1[N1];
 
 	solveLinSystem(M1, v1, x1, N1);
+	// printMatrix(M1, N1);
 	cout << "Solution of the first system:  x = ";
 	printVector(x1, N1);
 
@@ -89,13 +90,14 @@ int main() {
 
 	M2[0][0] = 1;	M2[0][1] = 2;	M2[0][2] = 1;	M2[0][3] = -1;
 	M2[1][0] = 3;	M2[1][1] = 2;	M2[1][2] = 4;	M2[1][3] = 4;
-	M1[2][0] = 4;	M2[2][1] = 4;	M2[2][2] = 3;	M2[2][3] = 4;
-	M1[3][0] = 2;	M2[3][1] = 0;	M2[3][2] = 1;	M2[3][3] = 5;
+	M2[2][0] = 4;	M2[2][1] = 4;	M2[2][2] = 3;	M2[2][3] = 4;
+	M2[3][0] = 2;	M2[3][1] = 0;	M2[3][2] = 1;	M2[3][3] = 5;
 
 	double v2[N2] = {5, 16, 22, 15};
 	double x2[N2];
 
 	solveLinSystem(M2, v2, x2, N2);
+	// printMatrix(M2, N2);
 	cout << "Solution of the second system: x = ";
 	printVector(x2, N2);
 
