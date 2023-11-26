@@ -84,6 +84,19 @@ void Vector<T>::release() {
 	}
 }
 
+// display vector values
+template <class T>
+void Vector<T>::display(/*const std::string& header*/) const {
+	// display specified header
+	// std::cout << header << std::endl;
+
+	std::cout << "Vector " + m_name << std::endl;
+	for (int i = 0; i < m_nRows; i++) {
+		std::cout << "[" << std::setw(2) << i << "]: " << m_cells[i] << "\n";
+	}
+}
+
+
 // ============================ Overloaded operators ===========================
 template <class T>
 T& Vector<T>::operator[](const int& index) {
@@ -119,6 +132,20 @@ Vector<T>& Vector<T>::operator=(const Vector<T>& V) {
 
 	return *this;
 }
+
+template <class T>
+std::ostream& operator<<(std::ostream& os, const Vector<T>& V) {
+	const int nRows = V.getSize();
+	os << "{";
+	for (int i = 0; i < nRows; i++) {
+		os << V[i]; 
+		if (i != nRows - 1) os << ", ";
+	}
+	os << "}";
+
+	return os;
+}
+
 
 // =============================== Error handler ===============================
 template <class T>

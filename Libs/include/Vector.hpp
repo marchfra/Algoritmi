@@ -1,4 +1,6 @@
 /**
+ * @file       Vector.hpp
+ *
  * @brief      This file implements Vector.
  *
  * @author     Francesco Marchisotti.
@@ -11,6 +13,7 @@
 #include <iostream>
 #include <string>
 #include <exception>
+#include <iomanip>
 
 /**
  * @brief      This class describes a vector.
@@ -81,6 +84,11 @@ public:
 	 */
 	void setSize(const int& size);
 
+	/**
+	 * @brief      Displays the vector.
+	 */
+	void display() const;
+
 	// Getter functions
 	int getSize() const {
 		return m_nRows;
@@ -120,7 +128,7 @@ public:
 	 *
 	 * @return     The element at `index` index.
 	 */
-	T& operator[] (const int& index);
+	T& operator[](const int& index);
 	/**
 	 * @brief      Array indexer operator.
 	 *
@@ -128,7 +136,7 @@ public:
 	 *
 	 * @return     The element at `index` index.
 	 */
-	const T& operator[] (const int& index) const;
+	const T& operator[](const int& index) const;
 	/**
 	 * @brief      Assignment operator.
 	 *
@@ -138,10 +146,21 @@ public:
 	 *
 	 * @return     This vector.
 	 */
-	Vector<T>& operator= (const Vector<T>& V);
+	Vector<T>& operator=(const Vector<T>& V);
+
+	// template <class U>
+	friend std::ostream& operator<<(std::ostream& os, const Vector<T>& V);
+
+	static void errorMessage(Vector<T>::Error err) {
+		try {
+			Vector<T>::errorHandler(err);
+		} catch (const std::exception& e) {
+			std::cout << e.what();
+		}
+	}
 
 private:
-	int m_nRows;			//< Number of rows in the vector.
+	int m_nRows;		//< Number of rows in the vector.
 	T *m_cells;			//< Address where the vector of type T is stored.
 	std::string m_name;	//< The name of the vector.
 	/**
