@@ -5,8 +5,6 @@
  *
  * @author     Francesco Marchisotti
  *
- * @todo       Write tests
- *
  * @date       24/11/2023
  */
 
@@ -149,5 +147,42 @@ void solveLinSystem(T **M, T v[], T x[], const int& nEqs) {
 		T temp = v[i];
 		for (int j = nEqs - 1; j > i; j--) temp -= x[j] * M[i][j];
 		x[i] = temp / M[i][i];
+	}
+}
+
+/**
+ * @brief      Solve a tridiagonal linear system.
+ *
+ * @param[in]  a     The array with the elements M[i][i - 1] (sub-diagonal).
+ * @param[in]  b     The array with the elements M[i][i] (diagonal).
+ * @param[in]  c     The array with the elements M[i][i + 1] (sur-diagonal).
+ * @param[in]  r     The constant vector.
+ * @param[out] x     The variable vector.
+ * @param[in]  nEq   The number of equations
+ *
+ * @tparam     T     Type of the elements in the arrays.
+ */
+template <class T>
+void tridiagonalSolver(T a[], T b[], T c[], T r[], T x[], const int& nEq) {
+	const int maxSize = 64;
+	if (nEq > maxSize) throw std::invalid_argument("Number of equations must not be greater than " + std::to_string(maxSize) + ".");
+	if (!isnan(a[0])) throw std::invalid_argument("The first element of a must be nan(\"\").");
+	if (!isnan(c[nEq - 1])) throw std::invalid_argument("The last element of c must be nan(\"\").");
+	T h[maxSize], p[maxSize];
+
+	h[0] = c[0] / b[0];
+	p[0] = r[0] / b[0];
+
+	// Gaussian elimination
+	for (int i = 1; i < nEq; i++) {
+		T den =  1.0 / (b[i] - a[i] * h[i - 1]);
+		h[i] = c[i] * den;
+		p[i] = (r[i] - a[i] * p[i - 1]) * den;
+	}
+
+	// Backsubsitution
+	x[nEq - 1] = p[nEq - 1];
+	for (int i = nEq - 2; i >= 0; i--) {
+		x[i] = p[i] - h[i] * x[i + 1];
 	}
 }

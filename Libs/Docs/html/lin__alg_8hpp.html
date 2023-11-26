@@ -97,46 +97,58 @@ $(document).ready(function(){initNavTree('lin__alg_8hpp.html',''); initResizable
 
 <p>This file implements linear algorithms.  
 <a href="#details">More...</a></p>
-
+<div class="textblock"><code>#include &quot;<a class="el" href="swap_8hpp_source.html">../include/swap.hpp</a>&quot;</code><br />
+</div>
 <p><a href="lin__alg_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a0c1f94cb19eb0afe5bbd58cb58dbd930" id="r_a0c1f94cb19eb0afe5bbd58cb58dbd930"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lin__alg_8hpp.html#a0c1f94cb19eb0afe5bbd58cb58dbd930">printMatrix</a> (const double **M, const int &amp;n, const int width=8)</td></tr>
-<tr class="memdesc:a0c1f94cb19eb0afe5bbd58cb58dbd930"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a matrix.  <br /></td></tr>
-<tr class="separator:a0c1f94cb19eb0afe5bbd58cb58dbd930"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47db85236f718f23cc49d1cea94d997d" id="r_a47db85236f718f23cc49d1cea94d997d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lin__alg_8hpp.html#a47db85236f718f23cc49d1cea94d997d">printVector</a> (const double v[], const int &amp;nRows)</td></tr>
-<tr class="memdesc:a47db85236f718f23cc49d1cea94d997d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a vector.  <br /></td></tr>
-<tr class="separator:a47db85236f718f23cc49d1cea94d997d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1791bf55fb2139f74516b67bf89bf54f" id="r_a1791bf55fb2139f74516b67bf89bf54f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lin__alg_8hpp.html#a1791bf55fb2139f74516b67bf89bf54f">swapRowsLinSystem</a> (double **M, double v[], const int &amp;nRows, const int &amp;i, const int &amp;j)</td></tr>
-<tr class="memdesc:a1791bf55fb2139f74516b67bf89bf54f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap two rows of a linear system in matrix form.  <br /></td></tr>
-<tr class="separator:a1791bf55fb2139f74516b67bf89bf54f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a150d92130a66cac451b427a1335da39a" id="r_a150d92130a66cac451b427a1335da39a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lin__alg_8hpp.html#a150d92130a66cac451b427a1335da39a">gaussElim</a> (double **M, double v[], const int &amp;nRows)</td></tr>
-<tr class="memdesc:a150d92130a66cac451b427a1335da39a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gauss reduction algorithm.  <br /></td></tr>
-<tr class="separator:a150d92130a66cac451b427a1335da39a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22c7fe7dc7d1230cac8db95c2319a830" id="r_a22c7fe7dc7d1230cac8db95c2319a830"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lin__alg_8hpp.html#a22c7fe7dc7d1230cac8db95c2319a830">partialPivoting</a> (double **M, double v[], const int &amp;nRows, const int &amp;current_row)</td></tr>
-<tr class="memdesc:a22c7fe7dc7d1230cac8db95c2319a830"><td class="mdescLeft">&#160;</td><td class="mdescRight">Partial pivoting algorithm.  <br /></td></tr>
-<tr class="separator:a22c7fe7dc7d1230cac8db95c2319a830"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af53237936febee8df5dde12d990a2f8d" id="r_af53237936febee8df5dde12d990a2f8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lin__alg_8hpp.html#af53237936febee8df5dde12d990a2f8d">solveLinSystem</a> (double **M, double v[], double x[], const int &amp;nEqs)</td></tr>
-<tr class="memdesc:af53237936febee8df5dde12d990a2f8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve a linear system of equations in matrix form.  <br /></td></tr>
-<tr class="separator:af53237936febee8df5dde12d990a2f8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84fb7e9dbe1e1d34f43e67b76b33b3bd" id="r_a84fb7e9dbe1e1d34f43e67b76b33b3bd"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a84fb7e9dbe1e1d34f43e67b76b33b3bd"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lin__alg_8hpp.html#a84fb7e9dbe1e1d34f43e67b76b33b3bd">printMatrix</a> (T **M, const int &amp;n, const int width=8)</td></tr>
+<tr class="memdesc:a84fb7e9dbe1e1d34f43e67b76b33b3bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a matrix.  <br /></td></tr>
+<tr class="separator:a84fb7e9dbe1e1d34f43e67b76b33b3bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2eb52e7307b55ecdfcca255f0165d094" id="r_a2eb52e7307b55ecdfcca255f0165d094"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a2eb52e7307b55ecdfcca255f0165d094"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lin__alg_8hpp.html#a2eb52e7307b55ecdfcca255f0165d094">printVector</a> (T v[], const int &amp;nRows)</td></tr>
+<tr class="memdesc:a2eb52e7307b55ecdfcca255f0165d094"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a vector.  <br /></td></tr>
+<tr class="separator:a2eb52e7307b55ecdfcca255f0165d094"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afeeaedb5b0a92d63391c62f6f22b7daa" id="r_afeeaedb5b0a92d63391c62f6f22b7daa"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:afeeaedb5b0a92d63391c62f6f22b7daa"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lin__alg_8hpp.html#afeeaedb5b0a92d63391c62f6f22b7daa">swapRowsLinSystem</a> (T **M, T v[], const int &amp;nRows, const int &amp;i, const int &amp;j)</td></tr>
+<tr class="memdesc:afeeaedb5b0a92d63391c62f6f22b7daa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swap two rows of a linear system in matrix form.  <br /></td></tr>
+<tr class="separator:afeeaedb5b0a92d63391c62f6f22b7daa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f541c937057a2ba9e1844ce91c8591b" id="r_a2f541c937057a2ba9e1844ce91c8591b"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a2f541c937057a2ba9e1844ce91c8591b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lin__alg_8hpp.html#a2f541c937057a2ba9e1844ce91c8591b">partialPivoting</a> (T **M, T v[], const int &amp;nRows, const int &amp;current_row)</td></tr>
+<tr class="memdesc:a2f541c937057a2ba9e1844ce91c8591b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Partial pivoting algorithm.  <br /></td></tr>
+<tr class="separator:a2f541c937057a2ba9e1844ce91c8591b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a892ff8417613ece3c48bcd3ba0ed73cf" id="r_a892ff8417613ece3c48bcd3ba0ed73cf"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a892ff8417613ece3c48bcd3ba0ed73cf"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lin__alg_8hpp.html#a892ff8417613ece3c48bcd3ba0ed73cf">gaussElim</a> (T **M, T v[], const int &amp;nRows)</td></tr>
+<tr class="memdesc:a892ff8417613ece3c48bcd3ba0ed73cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gauss reduction algorithm.  <br /></td></tr>
+<tr class="separator:a892ff8417613ece3c48bcd3ba0ed73cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af99a0276140c5d279c4da2c3087869bb" id="r_af99a0276140c5d279c4da2c3087869bb"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:af99a0276140c5d279c4da2c3087869bb"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lin__alg_8hpp.html#af99a0276140c5d279c4da2c3087869bb">solveLinSystem</a> (T **M, T v[], T x[], const int &amp;nEqs)</td></tr>
+<tr class="memdesc:af99a0276140c5d279c4da2c3087869bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve a linear system of equations in matrix form.  <br /></td></tr>
+<tr class="separator:af99a0276140c5d279c4da2c3087869bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67c5d5c3470fef69a66dde504defc2ce" id="r_a67c5d5c3470fef69a66dde504defc2ce"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a67c5d5c3470fef69a66dde504defc2ce"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lin__alg_8hpp.html#a67c5d5c3470fef69a66dde504defc2ce">tridiagonalSolver</a> (T a[], T b[], T c[], T r[], T x[], const int &amp;nEq)</td></tr>
+<tr class="memdesc:a67c5d5c3470fef69a66dde504defc2ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve a tridiagonal linear system.  <br /></td></tr>
+<tr class="separator:a67c5d5c3470fef69a66dde504defc2ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file implements linear algorithms. </p>
 <dl class="section author"><dt>Author</dt><dd>Francesco Marchisotti</dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Write tests</dd></dl>
 <dl class="section date"><dt>Date</dt><dd>24/11/2023 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a0c1f94cb19eb0afe5bbd58cb58dbd930" name="a0c1f94cb19eb0afe5bbd58cb58dbd930"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c1f94cb19eb0afe5bbd58cb58dbd930">&#9670;&#160;</a></span>printMatrix()</h2>
+<a id="a84fb7e9dbe1e1d34f43e67b76b33b3bd" name="a84fb7e9dbe1e1d34f43e67b76b33b3bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84fb7e9dbe1e1d34f43e67b76b33b3bd">&#9670;&#160;</a></span>printMatrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void printMatrix </td>
           <td>(</td>
-          <td class="paramtype">const double **&#160;</td>
+          <td class="paramtype">T **&#160;</td>
           <td class="paramname"><em>M</em>, </td>
         </tr>
         <tr>
@@ -164,23 +176,31 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">M</td><td><code>n x n</code> square matrix. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">n</td><td>Size of M. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">width</td><td>Minimum width of the printing area. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">width</td><td>Minimum width of the printing area.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of the elements of the matrix. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a47db85236f718f23cc49d1cea94d997d" name="a47db85236f718f23cc49d1cea94d997d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47db85236f718f23cc49d1cea94d997d">&#9670;&#160;</a></span>printVector()</h2>
+<a id="a2eb52e7307b55ecdfcca255f0165d094" name="a2eb52e7307b55ecdfcca255f0165d094"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2eb52e7307b55ecdfcca255f0165d094">&#9670;&#160;</a></span>printVector()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void printVector </td>
           <td>(</td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>v</em>[], </td>
         </tr>
         <tr>
@@ -201,29 +221,37 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">v</td><td>The vector. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">nRows</td><td>Size of the vector. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nRows</td><td>Size of the vector.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of the elements of the vector. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a1791bf55fb2139f74516b67bf89bf54f" name="a1791bf55fb2139f74516b67bf89bf54f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1791bf55fb2139f74516b67bf89bf54f">&#9670;&#160;</a></span>swapRowsLinSystem()</h2>
+<a id="afeeaedb5b0a92d63391c62f6f22b7daa" name="afeeaedb5b0a92d63391c62f6f22b7daa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afeeaedb5b0a92d63391c62f6f22b7daa">&#9670;&#160;</a></span>swapRowsLinSystem()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void swapRowsLinSystem </td>
           <td>(</td>
-          <td class="paramtype">double **&#160;</td>
+          <td class="paramtype">T **&#160;</td>
           <td class="paramname"><em>M</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>v</em>[], </td>
         </tr>
         <tr>
@@ -259,73 +287,37 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in,out]</td><td class="paramname">v</td><td>The constant vector. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">nRows</td><td>The number of equations in the system. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">i</td><td>The first row to be swapped. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">j</td><td>The second row to be swapped. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">j</td><td>The second row to be swapped.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of the elements in <code>M</code> and <code>v</code>. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a150d92130a66cac451b427a1335da39a" name="a150d92130a66cac451b427a1335da39a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a150d92130a66cac451b427a1335da39a">&#9670;&#160;</a></span>gaussElim()</h2>
+<a id="a2f541c937057a2ba9e1844ce91c8591b" name="a2f541c937057a2ba9e1844ce91c8591b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f541c937057a2ba9e1844ce91c8591b">&#9670;&#160;</a></span>partialPivoting()</h2>
 
 <div class="memitem">
 <div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void gaussElim </td>
-          <td>(</td>
-          <td class="paramtype">double **&#160;</td>
-          <td class="paramname"><em>M</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>v</em>[], </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>nRows</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Gauss reduction algorithm. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">M</td><td>The coefficient matrix. </td></tr>
-    <tr><td class="paramdir">[in,out]</td><td class="paramname">v</td><td>The constant matrix. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">nRows</td><td>The number of equations. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a22c7fe7dc7d1230cac8db95c2319a830" name="a22c7fe7dc7d1230cac8db95c2319a830"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a22c7fe7dc7d1230cac8db95c2319a830">&#9670;&#160;</a></span>partialPivoting()</h2>
-
-<div class="memitem">
-<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void partialPivoting </td>
           <td>(</td>
-          <td class="paramtype">double **&#160;</td>
+          <td class="paramtype">T **&#160;</td>
           <td class="paramname"><em>M</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>v</em>[], </td>
         </tr>
         <tr>
@@ -354,35 +346,95 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in,out]</td><td class="paramname">M</td><td>The coefficient matrix. </td></tr>
     <tr><td class="paramdir">[in,out]</td><td class="paramname">v</td><td>The constant vector. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">nRows</td><td>The number of rows of M and v. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">current_row</td><td>The current row. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">current_row</td><td>The current row.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of the elements in <code>M</code> and <code>v</code>. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="af53237936febee8df5dde12d990a2f8d" name="af53237936febee8df5dde12d990a2f8d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af53237936febee8df5dde12d990a2f8d">&#9670;&#160;</a></span>solveLinSystem()</h2>
+<a id="a892ff8417613ece3c48bcd3ba0ed73cf" name="a892ff8417613ece3c48bcd3ba0ed73cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a892ff8417613ece3c48bcd3ba0ed73cf">&#9670;&#160;</a></span>gaussElim()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void solveLinSystem </td>
+          <td class="memname">void gaussElim </td>
           <td>(</td>
-          <td class="paramtype">double **&#160;</td>
+          <td class="paramtype">T **&#160;</td>
           <td class="paramname"><em>M</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>v</em>[], </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>nRows</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gauss reduction algorithm. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">M</td><td>The coefficient matrix. </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">v</td><td>The constant matrix. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nRows</td><td>The number of equations.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of the elements in <code>M</code> and <code>v</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af99a0276140c5d279c4da2c3087869bb" name="af99a0276140c5d279c4da2c3087869bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af99a0276140c5d279c4da2c3087869bb">&#9670;&#160;</a></span>solveLinSystem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void solveLinSystem </td>
+          <td>(</td>
+          <td class="paramtype">T **&#160;</td>
+          <td class="paramname"><em>M</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>v</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>x</em>[], </td>
         </tr>
         <tr>
@@ -405,7 +457,86 @@ Functions</h2></td></tr>
     <tr><td class="paramdir">[in,out]</td><td class="paramname">M</td><td>The coefficient matrix. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">v</td><td>The constant vector. </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">x</td><td>The variable vector. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">nEqs</td><td>The number of equations. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nEqs</td><td>The number of equations.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of the elements in <code>M</code> and <code>v</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a67c5d5c3470fef69a66dde504defc2ce" name="a67c5d5c3470fef69a66dde504defc2ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67c5d5c3470fef69a66dde504defc2ce">&#9670;&#160;</a></span>tridiagonalSolver()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void tridiagonalSolver </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>a</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>b</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>c</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>r</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>x</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>nEq</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Solve a tridiagonal linear system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">a</td><td>The array with the elements M[i][i - 1] (sub-diagonal). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">b</td><td>The array with the elements M[i][i] (diagonal). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">c</td><td>The array with the elements M[i][i + 1] (sur-diagonal). </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">r</td><td>The constant vector. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">x</td><td>The variable vector. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nEq</td><td>The number of equations</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of the elements in the arrays. </td></tr>
   </table>
   </dd>
 </dl>

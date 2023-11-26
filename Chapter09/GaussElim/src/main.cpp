@@ -17,41 +17,7 @@ using std::cin;
 using std::cerr;
 using std::endl;
 
-// void gaussElim(double **M, double v[], double x[], const int& n);
-
-// void printM(double **M, const int& n, const int width=8);
-
-// void printV(double v[], const int& n);
-
-// void swapRows(double **M, double v[], const int& n, const int& i, const int& j);
-
 int main() {
-	// static const int N = 4;
-	// double **M;
-	// M = new double*[N];
-	// M[0] = new double[N*N];
-	// for (int i = 1; i < N; i++) {
-	// 	M[i] = M[i - 1] + N;
-	// }
-	// M[0][0] = 1;	M[0][1] = 2;	M[0][2] = 1;	M[0][3] = -1;
-	// M[1][0] = 3;	M[1][1] = 2;	M[1][2] = 4;	M[1][3] = 4;
-	// M[2][0] = 4;	M[2][1] = 4;	M[2][2] = 3;	M[2][3] = 4;
-	// M[3][0] = 2;	M[3][1] = 0;	M[3][2] = 1;	M[3][3] = 5;
-
-	// double v[N] = {5, 16, 22, 15};
-
-	// printM(M, N, 4);
-	// printV(v, N);
-
-	// swapRows(M, v, N, 0, 2);
-
-	// printM(M, N, 4);
-	// printV(v, N);
-
-	// delete[] M[0];
-	// delete[] M;
-
-
 	// First system
 	static const int N1 = 3;
 
@@ -71,7 +37,7 @@ int main() {
 
 	solveLinSystem(M1, v1, x1, N1);
 	// printMatrix(M1, N1);
-	cout << "Solution of the first system:  x = ";
+	cout << "Solution of the first system: x = ";
 	printVector(x1, N1);
 
 	delete[] M1[0];
@@ -129,72 +95,19 @@ int main() {
 
 	delete[] M3[0];
 	delete[] M3;
+
+
+	// Tridiagonal system
+	const int nEq = 5;
+	double a[nEq] = {nan(""), 1, 1, 1, 1};
+	double b[nEq] = {2, 2, 2, 2, 2};
+	double c[nEq] = {1, 1, 1, 1, nan("")};
+	double v[nEq] = {1, 0, 3, 1, 0};
+	double x[nEq];
+
+	tridiagonalSolver(a, b, c, v, x, nEq);
+	cout << "Solution of the tridiagonal system: x = ";
+	printVector(x, nEq);
+
 	return 0;
 }
-
-// void gaussElim(double **M, double v[], double x[], const int& n) {
-// 	// Reduce M to upper triangular form
-// 	for (int k = 0; k < n - 1; k++) {
-// 		// Partial pivoting
-// 		double max = fabs(M[k][k]), maxI = k;
-// 		for (int i = k; i < n; i++) {
-// 			if (fabs(M[i][k]) > max) {
-// 				max = fabs(M[i][k]);
-// 				maxI = i;
-// 			}
-// 		}
-// 		if (maxI != k) {
-// 			swapRows(M, v, n, maxI, k);
-// 		}
-// 		for (int i = k + 1; i < n; i++) {
-// 			double g = M[i][k] / M[k][k];
-// 			for (int j = k + 1; j < n; j++) M[i][j] -= g * M[k][j];
-// 			M[i][k] = 0.0;
-// 			v[i] -= g * v[k];
-// 		}
-// 	}
-
-// 	// Solve the system
-// 	for (int i = n - 1; i >= 0; i--) {
-// 		double temp = v[i];
-// 		for (int j = n - 1; j > i; j--) temp -= x[j] * M[i][j];
-// 		x[i] = temp / M[i][i];
-// 	}
-// }
-
-
-// void printM(double **M, const int& n, const int width) {
-// 	for (int i = 0; i < n; i++) {
-// 		cout << std::string(width + 1, '-');
-// 	}
-// 	cout << endl;
-
-// 	for (int i = 0; i < n; i++) {
-// 		for (int j = 0; j < n; j++) {
-// 			cout << std::setw(width) << M[i][j] << " ";
-// 		}
-// 		cout << endl;
-// 	}
-
-// 	for (int i = 0; i < n; i++) {
-// 		cout << std::string(width + 1, '-');
-// 	}
-// 	cout << endl;
-// }
-
-// void printV(double v[], const int& n) {
-// 	cout << "{";
-// 	for (int i = 0; i < n; i++) {
-// 		cout << v[i];
-// 		if (i != n - 1) cout << ", ";
-// 	}
-// 	cout << "}" << endl;
-// }
-
-// void swapRows(double **M, double v[], const int& n, const int& i, const int& j) {
-// 	for (int k = 0; k < n; k++) {
-// 		swap(M[i][k], M[j][k]);
-// 	}
-
-// 	swap(v[i], v[j]);
-// }
