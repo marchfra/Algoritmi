@@ -60,6 +60,8 @@ double trapezoidalQuad(double (*F)(const double& x), const double& a, const doub
  *                   be even.
  *
  * @return     The estimate of the integral.
+ *
+ * @throw      std::invalid_argument Thrown if N is even.
  */
 double simpsonQuad(double (*F)(const double& x), const double& a, const double& b, const int& n);
 

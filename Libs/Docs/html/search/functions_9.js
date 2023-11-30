@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['rectangularquad_0',['rectangularQuad',['../quad_8hpp.html#abe69f70be40c5f4bba7659b0a38f2da7',1,'quad.cpp']]],
-  ['rk2step_1',['rk2Step',['../ode__solver_8hpp.html#a873e53d640b4ef254daf0fff538c53c1',1,'ode_solver.cpp']]],
-  ['rk4step_2',['rk4Step',['../ode__solver_8hpp.html#a0019d301583cc837ff92c3b79481279e',1,'ode_solver.cpp']]]
+  ['partialpivoting_0',['partialPivoting',['../lin__alg_8hpp.html#a2f541c937057a2ba9e1844ce91c8591b',1,'lin_alg.hpp']]],
+  ['printmatrix_1',['printMatrix',['../lin__alg_8hpp.html#a84fb7e9dbe1e1d34f43e67b76b33b3bd',1,'lin_alg.hpp']]],
+  ['printvector_2',['printVector',['../lin__alg_8hpp.html#a2eb52e7307b55ecdfcca255f0165d094',1,'lin_alg.hpp']]],
+  ['pverlet_3',['pVerlet',['../ode__solver_8hpp.html#a810481d98ae32a84b7cb0545fa223577',1,'ode_solver.cpp']]]
 ];

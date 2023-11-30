@@ -27,7 +27,7 @@ LIB = $(LIBDIR)/lib$(LIBNAME).a
 .PHONY: all
 all: $(LIB)
 
-$(LIB): $(LIBDIR) $(OBJDIR) $(OBJS)
+$(LIB): $(LIBDIR) $(OBJDIR) $(OBJS) $(HDRS)
 	ar rcs $@ $(OBJS)
 
 

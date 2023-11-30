@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['midpointquad_0',['midpointQuad',['../quad_8hpp.html#a581077c334700e06f826da75fa4fabf1',1,'quad.cpp']]]
+  ['linearbvp_0',['linearBVP',['../lin__alg_8hpp.html#af7f8c37bf8a38a985f8ecfcb8293fdbd',1,'lin_alg.cpp']]]
 ];

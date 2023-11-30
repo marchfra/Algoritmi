@@ -97,7 +97,9 @@ $(document).ready(function(){initNavTree('lin__alg_8hpp.html',''); initResizable
 
 <p>This file implements linear algorithms.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="swap_8hpp_source.html">../include/swap.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;iomanip&gt;</code><br />
+<code>#include &quot;<a class="el" href="swap_8hpp_source.html">../include/swap.hpp</a>&quot;</code><br />
 </div>
 <p><a href="lin__alg_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -131,6 +133,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a67c5d5c3470fef69a66dde504defc2ce"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="lin__alg_8hpp.html#a67c5d5c3470fef69a66dde504defc2ce">tridiagonalSolver</a> (T a[], T b[], T c[], T r[], T x[], const int &amp;nEq)</td></tr>
 <tr class="memdesc:a67c5d5c3470fef69a66dde504defc2ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve a tridiagonal linear system.  <br /></td></tr>
 <tr class="separator:a67c5d5c3470fef69a66dde504defc2ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7f8c37bf8a38a985f8ecfcb8293fdbd" id="r_af7f8c37bf8a38a985f8ecfcb8293fdbd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lin__alg_8hpp.html#af7f8c37bf8a38a985f8ecfcb8293fdbd">linearBVP</a> (double(*RHS)(const double &amp;x), double y[], const double &amp;xL, const double &amp;xR, const double &amp;yL, const double &amp;yR, const int &amp;nPoints)</td></tr>
+<tr class="memdesc:af7f8c37bf8a38a985f8ecfcb8293fdbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solves a linear boundary value problem in the form y'' = f(x).  <br /></td></tr>
+<tr class="separator:af7f8c37bf8a38a985f8ecfcb8293fdbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file implements linear algorithms. </p>
@@ -536,7 +541,93 @@ template&lt;class T &gt; </div>
 </dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>Type of the elements in the arrays. </td></tr>
+    <tr><td class="paramname">T</td><td>Type of the elements in the arrays.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::invalid_argument</td><td>Thrown if nEq &gt; 4096. </td></tr>
+    <tr><td class="paramname">std::invalid_argument</td><td>Thrown if a[0] isn't NaN. </td></tr>
+    <tr><td class="paramname">std::invalid_argument</td><td>Thrown if c[-1] isn't NaN. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af7f8c37bf8a38a985f8ecfcb8293fdbd" name="af7f8c37bf8a38a985f8ecfcb8293fdbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7f8c37bf8a38a985f8ecfcb8293fdbd">&#9670;&#160;</a></span>linearBVP()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void linearBVP </td>
+          <td>(</td>
+          <td class="paramtype">double(*)(const double &amp;x)&#160;</td>
+          <td class="paramname"><em>RHS</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>y</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>xL</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>xR</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>yL</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>yR</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>nPoints</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Solves a linear boundary value problem in the form y'' = f(x). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">RHS</td><td>The Right Hand Side function (i.e.: f(x)). </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">y</td><td>The array with the solution of the equation. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">xL</td><td>The integration starting value. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">xR</td><td>The integration stopping value. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">yL</td><td>The left boundary condition. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">yR</td><td>The right boundary condition. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">nPoints</td><td>The number of points to use in the integration.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::invalid_argument</td><td>Thrown if nPoints &gt; 4096 (via <a class="el" href="lin__alg_8hpp.html#a67c5d5c3470fef69a66dde504defc2ce" title="Solve a tridiagonal linear system.">tridiagonalSolver()</a>). </td></tr>
   </table>
   </dd>
 </dl>

@@ -10,6 +10,9 @@
 
 #pragma once
 
+#include <iostream>
+#include <iomanip>
+
 #include "../include/swap.hpp"
 
 /**
@@ -161,10 +164,14 @@ void solveLinSystem(T **M, T v[], T x[], const int& nEqs) {
  * @param[in]  nEq   The number of equations
  *
  * @tparam     T     Type of the elements in the arrays.
+ * 
+ * @throw      std::invalid_argument Thrown if nEq > 4096.
+ * @throw      std::invalid_argument Thrown if a[0] isn't NaN.
+ * @throw      std::invalid_argument Thrown if c[-1] isn't NaN.
  */
 template <class T>
 void tridiagonalSolver(T a[], T b[], T c[], T r[], T x[], const int& nEq) {
-	const int maxSize = 64;
+	const int maxSize = 4096;
 	if (nEq > maxSize) throw std::invalid_argument("Number of equations must not be greater than " + std::to_string(maxSize) + ".");
 	if (!isnan(a[0])) throw std::invalid_argument("The first element of a must be nan(\"\").");
 	if (!isnan(c[nEq - 1])) throw std::invalid_argument("The last element of c must be nan(\"\").");
@@ -186,3 +193,19 @@ void tridiagonalSolver(T a[], T b[], T c[], T r[], T x[], const int& nEq) {
 		x[i] = p[i] - h[i] * x[i + 1];
 	}
 }
+
+/**
+ * @brief      Solves a linear boundary value problem in the form y'' = f(x).
+ *
+ * @param[in]  RHS      The Right Hand Side function (i.e.: f(x)).
+ * @param[out] y        The array with the solution of the equation.
+ * @param[in]  xL       The integration starting value.
+ * @param[in]  xR       The integration stopping value.
+ * @param[in]  yL       The left boundary condition.
+ * @param[in]  yR       The right boundary condition.
+ * @param[in]  nPoints  The number of points to use in the integration.
+ *
+ * @throws     std::invalid_argument  Thrown if nPoints > 4096 (via
+ *                                    tridiagonalSolver()).
+ */
+void linearBVP(double (*RHS)(const double& x), double y[], const double& xL, const double& xR, const double& yL, const double& yR, const int& nPoints);

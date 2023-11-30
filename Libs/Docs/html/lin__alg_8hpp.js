@@ -6,5 +6,6 @@ var lin__alg_8hpp =
     [ "partialPivoting", "lin__alg_8hpp.html#a2f541c937057a2ba9e1844ce91c8591b", null ],
     [ "gaussElim", "lin__alg_8hpp.html#a892ff8417613ece3c48bcd3ba0ed73cf", null ],
     [ "solveLinSystem", "lin__alg_8hpp.html#af99a0276140c5d279c4da2c3087869bb", null ],
-    [ "tridiagonalSolver", "lin__alg_8hpp.html#a67c5d5c3470fef69a66dde504defc2ce", null ]
+    [ "tridiagonalSolver", "lin__alg_8hpp.html#a67c5d5c3470fef69a66dde504defc2ce", null ],
+    [ "linearBVP", "lin__alg_8hpp.html#af7f8c37bf8a38a985f8ecfcb8293fdbd", null ]
 ];
