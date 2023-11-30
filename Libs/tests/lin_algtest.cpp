@@ -226,8 +226,8 @@ TEST_CASE("testing tridiagonalSolver function") {
 	}
 
 	SUBCASE("exceptions") {
-		CHECK_THROWS_WITH_AS(tridiagonalSolver(a, b, c, v, x, 73),
-							 "Number of equations must not be greater than 64.",
+		CHECK_THROWS_WITH_AS(tridiagonalSolver(a, b, c, v, x, 5000),
+							 "Number of equations must not be greater than 4096.",
 							 std::invalid_argument);
 
 		double A[] = {0, 1, 1, 1, 1};

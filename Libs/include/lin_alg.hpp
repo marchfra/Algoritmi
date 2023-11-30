@@ -164,10 +164,10 @@ void solveLinSystem(T **M, T v[], T x[], const int& nEqs) {
  * @param[in]  nEq   The number of equations
  *
  * @tparam     T     Type of the elements in the arrays.
- * 
- * @throw      std::invalid_argument Thrown if nEq > 4096.
- * @throw      std::invalid_argument Thrown if a[0] isn't NaN.
- * @throw      std::invalid_argument Thrown if c[-1] isn't NaN.
+ *
+ * @throws     std::invalid_argument  Thrown if nEq > 4096.
+ * @throws     std::invalid_argument  Thrown if a[0] isn't NaN.
+ * @throws     std::invalid_argument  Thrown if c[-1] isn't NaN.
  */
 template <class T>
 void tridiagonalSolver(T a[], T b[], T c[], T r[], T x[], const int& nEq) {

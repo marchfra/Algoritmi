@@ -1,6 +1,9 @@
 #include "../include/lin_alg.hpp"
 
 void linearBVP(double (*RHS)(const double& x), double y[], const double& xL, const double& xR, const double& yL, const double& yR, const int& nPoints) {
+	const int maxSize = 4096;
+	if (nPoints > maxSize) throw std::invalid_argument("Number of equations must not be greater than " + std::to_string(maxSize) + ".");
+
 	y[0] = yL;
 	y[nPoints - 1] = yR;
 	const double dx = (xR - xL) / (nPoints - 1);
