@@ -17,16 +17,16 @@ using std::cerr;
 using std::endl;
 using std::vector;
 
-void R(double t, double Y[], double R[]);
+void R(const double& t, double Y[], double R[]);
 
 void convergence_test();
 
 int main() {
 	const double t0 = 0.0;
-	const double te = 20.0 * M_PI;
+	const double te = 2'000.0 * M_PI;
 	double y0[] = {1.0, 0.0};
 	double y[2];
-	const int nStep = 200;
+	const int nStep = 20'000;
 	const double h = te / nStep;
 
 	// cout << "      t              x(t)            y(t)" << endl; //         abs_err        rel_err" << endl;
@@ -40,7 +40,7 @@ int main() {
 
 
 	std::ofstream out;
-	out.open("data.csv");
+	out.open("data/data.csv");
 	if (!out) exit(1);
 
 	out << "t,x,y,method" << endl;
@@ -49,7 +49,7 @@ int main() {
 	double t = t0;
 	for (int i = 0; i < 2; i++) y[i] = y0[i];
 	for (int i = 0; i < nStep; i++) {
-		EulerStep(t, y, R, h, 2);
+		eulerStep(t, y, R, h, 2);
 		t += h;
 		out << t << "," << y[0] << "," << y[1] << ",Euler" << endl;
 	}
@@ -58,7 +58,7 @@ int main() {
 	t = t0;
 	for (int i = 0; i < 2; i++) y[i] = y0[i];
 	for (int i = 0; i < nStep; i++) {
-		RK2Step(t, y, R, h, 2);
+		rk2Step(t, y, R, h, 2);
 		t += h;
 		out << t << "," << y[0] << "," << y[1] << ",RK2" << endl;
 	}
@@ -67,7 +67,7 @@ int main() {
 	t = t0;
 	for (int i = 0; i < 2; i++) y[i] = y0[i];
 	for (int i = 0; i < nStep; i++) {
-		RK4Step(t, y, R, h, 2);
+		rk4Step(t, y, R, h, 2);
 		t += h;
 		out << t << "," << y[0] << "," << y[1] << ",RK4" << endl;
 	}
@@ -78,7 +78,7 @@ int main() {
 	return 0;
 }
 
-void R(double t, double Y[], double R[]) {
+void R(const double& t, double Y[], double R[]) {
 	double x = Y[0];
 	double y = Y[1];
 	R[0] =  y;
@@ -94,19 +94,19 @@ void convergence_test() {
 	double h = te / nStep;
 
 	std::ofstream out;
-	out.open("convergence.csv");
+	out.open("data/convergence.csv");
 
 	out << "dt,err,method" << endl;
 	out.setf(std::ios::scientific | std::ios::showpos);
 	while (nStep <= 2048) {
 		h = te / nStep;
-		
+
 		// Euler integration
 		double t = t0;
 		double err;
 		for (int i = 0; i < 2; i++) y[i] = y0[i];
 		for (int i = 0; i < nStep; i++) {
-			EulerStep(t, y, R, h, 2);
+			eulerStep(t, y, R, h, 2);
 			t += h;
 		}
 		err = fabs(y[0] - cos(te));
@@ -116,7 +116,7 @@ void convergence_test() {
 		t = t0;
 		for (int i = 0; i < 2; i++) y[i] = y0[i];
 		for (int i = 0; i < nStep; i++) {
-			RK2Step(t, y, R, h, 2);
+			rk2Step(t, y, R, h, 2);
 			t += h;
 		}
 		err = fabs(y[0] - cos(te));
@@ -126,7 +126,7 @@ void convergence_test() {
 		t = t0;
 		for (int i = 0; i < 2; i++) y[i] = y0[i];
 		for (int i = 0; i < nStep; i++) {
-			RK4Step(t, y, R, h, 2);
+			rk4Step(t, y, R, h, 2);
 			t += h;
 		}
 		err = fabs(y[0] - cos(te));

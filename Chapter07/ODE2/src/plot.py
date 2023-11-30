@@ -7,7 +7,7 @@ plt.style.use(['grid', 'science', 'notebook', 'mylegend'])
 
 colors = plt.rcParams['axes.prop_cycle'].by_key()['color']
 
-df = pd.read_csv('data.csv')
+df = pd.read_csv('data/data.csv')
 
 dfgroup = df.groupby(by='method')
 
@@ -27,15 +27,15 @@ ax.set_aspect(1)
 ax.legend()
 
 fig.tight_layout()
-fig.savefig('fig1.png', dpi=200)
+# fig.savefig('fig1.png', dpi=200)
 
 fig2, ax2 = plt.subplots(2, 1, sharex=True, figsize=(8,8))
 ax2[0].plot(dfgroup.get_group('RK4')['t'], dfgroup.get_group('RK4')['x'], label='RK4')
-ax2[0].plot(dfgroup.get_group('RK2')['t'], dfgroup.get_group('RK2')['x'], label='RK2')
-ax2[0].plot(dfgroup.get_group('Euler')['t'][:20], dfgroup.get_group('Euler')['x'][:20], label='Euler')
+# ax2[0].plot(dfgroup.get_group('RK2')['t'], dfgroup.get_group('RK2')['x'], label='RK2')
+# ax2[0].plot(dfgroup.get_group('Euler')['t'][:20], dfgroup.get_group('Euler')['x'][:20], label='Euler')
 ax2[1].plot(dfgroup.get_group('RK4')['t'], dfgroup.get_group('RK4')['y'], label='RK4')
-ax2[1].plot(dfgroup.get_group('RK2')['t'], dfgroup.get_group('RK2')['y'], label='RK2')
-ax2[1].plot(dfgroup.get_group('Euler')['t'][:20], dfgroup.get_group('Euler')['y'][:20], label='Euler')
+# ax2[1].plot(dfgroup.get_group('RK2')['t'], dfgroup.get_group('RK2')['y'], label='RK2')
+# ax2[1].plot(dfgroup.get_group('Euler')['t'][:20], dfgroup.get_group('Euler')['y'][:20], label='Euler')
 
 # ax2.set_xscale('log')
 # ax2.set_yscale('log')
@@ -50,9 +50,9 @@ ax2[0].legend()
 ax2[1].legend()
 
 fig2.tight_layout()
-fig2.savefig('fig2.png', dpi=200)
+# fig2.savefig('fig2.png', dpi=200)
 
-df = pd.read_csv('convergence.csv')
+df = pd.read_csv('data/convergence.csv')
 
 dfgroup = df.groupby(by='method')
 
@@ -71,5 +71,5 @@ ax3.set_ylabel('err')
 ax3.legend(handles=[eul, rk2, rk4])
 
 fig3.tight_layout()
-fig3.savefig('convergence.png', dpi=200)
-# plt.show()
+# fig3.savefig('convergence.png', dpi=200)
+plt.show()
