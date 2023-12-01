@@ -41,5 +41,5 @@ ax.set_aspect(1)
 # ax.legend()
 
 fig.tight_layout()
-# fig.savefig(f'{IMAGES_FOLDER}/figure_name.png', dpi=200)
+fig.savefig(f'{IMAGES_FOLDER}/cylinder_sor.png', dpi=200)
 plt.show()
