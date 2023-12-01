@@ -30,12 +30,12 @@ void solveGaussSeidel(const int& nPoints, const double& xL, const double& xR, co
 void solveSOR(const int& nPoints, const double& xL, const double& xR, const double& yL, const double& yR, const double& tol, const double& h, const double& omega);
 
 int main() {
-	const double xL = 0.0;
-	const double xR = 1.0;
-	const double yL = 0.0;
-	const double yR = 1.0;
+	const double xL = -1.0;
+	const double xR =  1.0;
+	const double yL = -1.0;
+	const double yR =  1.0;
 
-	const int nPoints = 32;
+	const int nPoints = 128;
 	const double tol = 1.0e-7;
 
 	const double omega = 2.0 / (1.0 + M_PI / nPoints);
@@ -327,12 +327,19 @@ void solveSOR(const int& nPoints, const double& xL, const double& xR, const doub
 }
 
 double boundaryCondition(const double& x, const double& y) {
-	return exp(-M_PI * x) * sin(-M_PI * y) + 0.25 * SFunc(x, y) * (x*x + y*y);
+	const double a = 0.1;
+	const double rho0 = 1.0;
+	const double r = sqrt(x*x + y*y);
+	if (r <= a) return -0.25 * rho0 * r*r;
+	else		return -0.5  * rho0 * a*a * (log(r / a) + 0.5);
 }
 
 double SFunc(const double& x, const double& y) {
-	return 0.0;
-	// return 2.0;
+	const double a = 0.1;
+	const double rho0 = 1.0;
+	const double r = sqrt(x*x + y*y);
+	if (r <= a) return -rho0;
+	else		return 0.0;
 }
 
 void assignBoundaryConditions(double **M, double x[], double y[], const int& nx, const int& ny) {
