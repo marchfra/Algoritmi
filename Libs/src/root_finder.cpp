@@ -2,8 +2,6 @@
 
 #include "../include/debug.hpp"
 
-double arr[] = {1, 2, 3, 4, 5.12};
-
 int findRoots(double (*f)(const double& x), double (*dfdx)(const double& x),
               const double& xa, const double& xb, const double& tol,
               double roots[], int& nRoots, const int N,

@@ -71,7 +71,7 @@ cleandox:
 	$(MAKE) clean -C $(DOCSDIR)
 
 
-# clang-format
+# clang-format: https://gist.github.com/dtoma/61468552bbc7c0114b2e700f9247a310
 .PHONY: style
 style:
 	@for src in $(SRCS) ; do \
@@ -79,15 +79,6 @@ style:
 		clang-format -i "$${src}" ; \
 	done
 	@echo "Done"
-# 		clang-tidy -checks='-*,readability-identifier-naming' \
-# 		    -config="{CheckOptions: [ \
-# 		    { key: readability-identifier-naming.NamespaceCase, value: lower_case },\
-# 		    { key: readability-identifier-naming.ClassCase, value: CamelCase  },\
-# 		    { key: readability-identifier-naming.StructCase, value: CamelCase  },\
-# 		    { key: readability-identifier-naming.FunctionCase, value: camelBack },\
-# 		    { key: readability-identifier-naming.VariableCase, value: lower_case },\
-# 		    { key: readability-identifier-naming.GlobalConstantCase, value: UPPER_CASE }\
-# 		    ]}" "$${src}" ; \
 
 .PHONY: check-style
 check-style:

@@ -56,7 +56,7 @@ test:
 	$(MAKE) test -C $(LIBDIR)
 
 
-# clang-format
+# clang-format: https://gist.github.com/dtoma/61468552bbc7c0114b2e700f9247a310
 .PHONY: style
 style:
 	@for src in $(SRCS) ; do \
