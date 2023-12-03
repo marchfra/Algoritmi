@@ -71,6 +71,36 @@ cleandox:
 	$(MAKE) clean -C $(DOCSDIR)
 
 
+# clang-format
+.PHONY: style
+style:
+	@for src in $(SRCS) ; do \
+		echo "Formatting $${src}..." ; \
+		clang-format -i "$${src}" ; \
+	done
+	@echo "Done"
+# 		clang-tidy -checks='-*,readability-identifier-naming' \
+# 		    -config="{CheckOptions: [ \
+# 		    { key: readability-identifier-naming.NamespaceCase, value: lower_case },\
+# 		    { key: readability-identifier-naming.ClassCase, value: CamelCase  },\
+# 		    { key: readability-identifier-naming.StructCase, value: CamelCase  },\
+# 		    { key: readability-identifier-naming.FunctionCase, value: camelBack },\
+# 		    { key: readability-identifier-naming.VariableCase, value: lower_case },\
+# 		    { key: readability-identifier-naming.GlobalConstantCase, value: UPPER_CASE }\
+# 		    ]}" "$${src}" ; \
+
+.PHONY: check-style
+check-style:
+	@for src in $(SRCS) ; do \
+		var=`clang-format "$${src}" | diff "$${src}" - | wc -l` ; \
+		if [ $${var} -ne 0 ] ; then \
+			echo "$${src} does not respect the coding style (diff: $${var} lines)" ; \
+			exit 1 ; \
+		fi ; \
+	done
+	@echo "Style check passed"
+
+
 .PHONY: clean
 clean:
 	$(RM) -r $(LIBDIR) $(OBJDIR) $(TESTDIR)/bin

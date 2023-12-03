@@ -56,6 +56,27 @@ test:
 	$(MAKE) test -C $(LIBDIR)
 
 
+# clang-format
+.PHONY: style
+style:
+	@for src in $(SRCS) ; do \
+		echo "Formatting $${src}..." ; \
+		clang-format -i "$${src}" ; \
+	done
+	@echo "Done"
+
+.PHONY: check-style
+check-style:
+	@for src in $(SRCS) ; do \
+		var=`clang-format "$${src}" | diff "$${src}" - | wc -l` ; \
+		if [ $${var} -ne 0 ] ; then \
+			echo "$${src} does not respect the coding style (diff: $${var} lines)" ; \
+			exit 1 ; \
+		fi ; \
+	done
+	@echo "Style check passed"
+
+
 .PHONY: clean
 clean:
 	$(RM) -r $(OBJDIR) $(BINDIR)

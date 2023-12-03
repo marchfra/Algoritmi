@@ -1,24 +1,29 @@
 #include "../include/lin_alg.hpp"
 
-void linearBVP(double (*RHS)(const double& x), double y[], const double& xL, const double& xR, const double& yL, const double& yR, const int& nPoints) {
+void linearBVP(double (*RHS)(const double& x), double y[], const double& xL,
+               const double& xR, const double& yL, const double& yR,
+               const int& nPoints) {
 	const int maxSize = 4096;
-	if (nPoints > maxSize) throw std::invalid_argument("Number of equations must not be greater than " + std::to_string(maxSize) + ".");
+	if (nPoints > maxSize)
+		throw std::invalid_argument(
+			"Number of equations must not be greater than " +
+			std::to_string(maxSize) + ".");
 
-	y[0] = yL;
-	y[nPoints - 1] = yR;
+	y[0]            = yL;
+	y[nPoints - 1]  = yR;
 	const double dx = (xR - xL) / (nPoints - 1);
 
 	double a[maxSize], b[maxSize], c[maxSize], r[maxSize];
 	for (int i = 0; i < nPoints; i++) {
-		a[i] =  1.0;
+		a[i] = 1.0;
 		b[i] = -2.0;
-		c[i] =  1.0;
-		r[i] = dx*dx * RHS(xL + i * dx);
+		c[i] = 1.0;
+		r[i] = dx * dx * RHS(xL + i * dx);
 	}
 	r[1] -= y[0];
 	r[nPoints - 2] -= y[nPoints - 1];
 	// Required by tridiagonalSolver
-	a[0] = a[1] = nan("");
+	a[0] = a[1]    = nan("");
 	c[nPoints - 1] = c[nPoints - 2] = nan("");
 
 	// Pass arrays + 1  (i.e.: arrays starting as index 1)
