@@ -34,7 +34,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 
 .PHONY: plot
 plot:
-	@echo "\nMaking plot"
+	@echo "Making plot"
 	@$(PYTHON) $(SRCDIR)/plot.py
 
 
