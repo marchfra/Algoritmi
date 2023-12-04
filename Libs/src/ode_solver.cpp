@@ -79,65 +79,54 @@ void rk4Step(const double& t, double Y[],
 
 void pVerlet(const double& t, double Y[],
              void (*RHSFunc)(double Y[], double RHS[]), const double& dt,
-             const int& neq) {
-	if (neq > 64) throw std::invalid_argument("neq must be less than 64");
-	if (neq % 2 != 0) throw std::invalid_argument("neq must be even");
+             const int& nEq) {
+	const int nMax = 64;
+	if (nEq > 64) throw std::invalid_argument("nEq must be less than " + std::to_string(nMax) + ".");
+	if (nEq % 2 != 0) throw std::invalid_argument("nEq must be even");
 
-	double a[32];
+	double a[nMax / 2];
 
-	// int npos = neq / 2;
+	int nParticles = nEq / 2;
 
-	// double *x = Y;
-	// double *v = Y + npos;
+	double *x = Y;
+	double *v = Y + nParticles;
 
-	// for (int i = 0; i < npos; i++) {
-	// 	x[i] += 0.5 * dt * v[i];
-	// }
-
-	// RHSFunc(Y, a);
-
-	// for (int i = 0; i < npos; i++) {
-	// 	v[i] += dt * a[i];
-	// 	x[i] += 0.5 * dt * v[i];
-	// }
-
-
-	int x_start = 0, x_stop = neq / 2;
-	int v_start = x_stop, v_stop = neq;
-
-	for (int i = x_start; i < x_stop; i++) {
-		Y[i] += 0.5 * dt * Y[i + v_start];
+	for (int i = 0; i < nParticles; i++) {
+		x[i] += 0.5 * dt * v[i];
 	}
 
 	RHSFunc(Y, a);
 
-	for (int i = v_start; i < v_stop; i++) {
-		Y[i] += dt * a[i];
-		Y[i - v_start] += 0.5 * dt * Y[i];
+	for (int i = 0; i < nParticles; i++) {
+		v[i] += dt * (a + nParticles)[i];		// Note: index of a is the index of the velocities
+		x[i] += 0.5 * dt * v[i];
 	}
 }
 
 void vVerlet(const double& t, double Y[],
              void (*RHSFunc)(double Y[], double RHS[]), const double& dt,
-             const int& neq) {
-	if (neq > 64) throw std::invalid_argument("neq must be less than 64");
-	if (neq % 2 != 0) throw std::invalid_argument("neq must be even");
+             const int& nEq) {
+	const int nMax = 64;
+	if (nEq > 64) throw std::invalid_argument("nEq must be less than " + std::to_string(nMax) + ".");
+	if (nEq % 2 != 0) throw std::invalid_argument("nEq must be even");
 
-	int x_start = 0, x_stop = neq / 2;
-	int v_start = x_stop, v_stop = neq;
+	double a[nMax / 2];
 
-	double a[64];
+	int nParticles = nEq / 2;
+
+	double *x = Y;
+	double *v = Y + nParticles;
 
 	RHSFunc(Y, a);
 
-	for (int i = v_start; i < v_stop; i++) {
-		Y[i] += 0.5 * dt * a[i - v_start];
-		Y[i - v_start] += dt * Y[i];
+	for (int i = 0; i < nParticles; i++) {
+		v[i] += 0.5 * dt * (a + nParticles)[i];	// Note: index of a is the index of the velocities
+		x[i] += dt * v[i];
 	}
 
 	RHSFunc(Y, a);
 
-	for (int i = v_start; i < v_stop; i++) {
-		Y[i] += 0.5 * dt * a[i - v_start];
+	for (int i = 0; i < nParticles; i++) {
+		v[i] += 0.5 * dt * (a + nParticles)[i];	// Note: index of a is the index of the velocities
 	}
 }

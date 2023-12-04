@@ -20,12 +20,12 @@ const static double gOmega = 2 * M_PI / gT;
 const static double gOmega2 = gOmega*gOmega;
 
 void RHS(double Y[], double R[]);
-void RHS(double t, double Y[], double R[]);
+void RHS(const double& t, double Y[], double R[]);
 
 int main() {
 	std::ofstream out;
-	out.open("data.csv");
-	if (!out) exit(1);
+	out.open("../data/data.csv");
+	if (!out) exit(5);
 
 
 	const double h = 0.02 * gT;
@@ -36,27 +36,25 @@ int main() {
 	double y[2];
 	const int neq = static_cast<int>(sizeof(y0)) / static_cast<int>(sizeof(y0[0]));
 
-	// const double E0 = 0.5 * y0[1]*y0[1];
-
 	out << "t,x,v,E,method" << endl;
 	for (int i = 0; i < neq; i++) y[i] = y0[i];
 	for (int i = 0; i < nStep; i++) {
-		RK2Step(t, y, RHS, h, neq);
+		rk2Step(t, y, RHS, h, neq);
 		t += h;
 
 		double E = 0.5 * (y[1]*y[1] + gOmega2 * y[0]*y[0]);
 		out << t << "," << y[0] << "," << y[1] << "," << E << ",RK2" << endl;
 	}
 
-	// t = 0.0;
-	// for (int i = 0; i < neq; i++) y[i] = y0[i];
-	// for (int i = 0; i < nStep; i++) {
-	// 	RK4Step(t, y, RHS, h, neq);
-	// 	t += h;
+	t = 0.0;
+	for (int i = 0; i < neq; i++) y[i] = y0[i];
+	for (int i = 0; i < nStep; i++) {
+		rk4Step(t, y, RHS, h, neq);
+		t += h;
 
-	// 	double E = 0.5 * (y[1]*y[1] + gOmega2 * y[0]*y[0]);
-	// 	out << t << "," << y[0] << "," << y[1] << "," << E << ",RK4" << endl;
-	// }
+		double E = 0.5 * (y[1]*y[1] + gOmega2 * y[0]*y[0]);
+		out << t << "," << y[0] << "," << y[1] << "," << E << ",RK4" << endl;
+	}
 
 	t = 0.0;
 	for (int i = 0; i < neq; i++) y[i] = y0[i];
@@ -68,15 +66,15 @@ int main() {
 		out << t << "," << y[0] << "," << y[1] << "," << E << ",pVerlet" << endl;
 	}
 
-	// t = 0.0;
-	// for (int i = 0; i < neq; i++) y[i] = y0[i];
-	// for (int i = 0; i < nStep; i++) {
-	// 	vVerlet(t, y, RHS, h, neq);
-	// 	t += h;
+	t = 0.0;
+	for (int i = 0; i < neq; i++) y[i] = y0[i];
+	for (int i = 0; i < nStep; i++) {
+		vVerlet(t, y, RHS, h, neq);
+		t += h;
 
-	// 	double E = 0.5 * (y[1]*y[1] + gOmega2 * y[0]*y[0]);
-	// 	out << t << "," << y[0] << "," << y[1] << "," << E << ",vVerlet" << endl;
-	// }
+		double E = 0.5 * (y[1]*y[1] + gOmega2 * y[0]*y[0]);
+		out << t << "," << y[0] << "," << y[1] << "," << E << ",vVerlet" << endl;
+	}
 
 	out.close();
 
@@ -90,6 +88,6 @@ void RHS(double Y[], double R[]) {
 	R[1] = -gOmega2 * x;
 }
 
-void RHS(double t, double Y[], double R[]) {
+void RHS(const double& t, double Y[], double R[]) {
 	RHS(Y, R);
 }

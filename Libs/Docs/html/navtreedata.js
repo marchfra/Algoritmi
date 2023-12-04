@@ -26,8 +26,6 @@ var NAVTREE =
 [
   [ "Numerical Algorithms for Physics Library", "index.html", [
     [ "Numerical Methods for Physics", "index.html", null ],
-    [ "Todo List", "todo.html", null ],
-    [ "Bug List", "bug.html", null ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
@@ -41,7 +39,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"bug.html"
+"debug_8hpp.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

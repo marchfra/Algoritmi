@@ -121,9 +121,6 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation of the ODE Solvers step functions. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Fix RK4Step.<br  />
- Improve pVerlet using pointers to improve readability.<br  />
- Fix vVerlet and rewrite using pointers. </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Francesco Marchisotti</dd></dl>
 <dl class="section date"><dt>Date</dt><dd>19/11/2023 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
@@ -298,7 +295,6 @@ Functions</h2></td></tr>
 
 <p>Runge-Kutta 4 method step. </p>
 <p>Takes one step in time (or whatever the independent variable is) using Runge-Kutta 4 method. The system of first order ODEs is dY_i/dt = R_i(t, Y).</p>
-<dl class="bug"><dt><b><a class="el" href="bug.html#_bug000001">Bug:</a></b></dt><dd>This method converges rather than diverging.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>The value of time from which to take the step. </td></tr>
