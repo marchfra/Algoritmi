@@ -19,46 +19,45 @@ LIBNAME = algo
 
 
 .PHONY: all
-all: $(BIN)
+all: $(BIN)  ## Build all
 
 # Build binaries
-$(BIN): $(OBJDIR) $(OBJS) $(BINDIR)
+$(BIN): $(OBJDIR) $(OBJS) $(BINDIR)  ## Build binaries
 	$(MAKE) -C $(LIBDIR)
 	$(CXX) $(CFLAGS) $(OBJS) -L$(LIBDIR)/lib -l$(LIBNAME) -o $@
 
 
-# Build objects from sources
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp  ## Build object files from sources
 	$(CXX) $(CFLAGS) -c $< -o $@
 
 
 .PHONY: plot
-plot:
+plot:  ## Create plot
 	@echo "Making plot"
 	@$(PYTHON) $(SRCDIR)/plot.py
 
 
 # Create directories
-$(OBJDIR):
+$(OBJDIR):  ## Create object files directory
 	mkdir $@
 
-$(BINDIR):
+$(BINDIR):  ## Create binaries directory
 	mkdir $@
 
 
 .PHONY: lib
-lib:
+lib:  ## Build library
 	$(MAKE) -C $(LIBDIR)
 
 
 .PHONY: test
-test:
+test:  ## Build and run tests
 	$(MAKE) test -C $(LIBDIR)
 
 
 # clang-format: https://gist.github.com/dtoma/61468552bbc7c0114b2e700f9247a310
 .PHONY: style
-style:
+style:  ## Run clang-format
 	@for src in $(SRCS) ; do \
 		echo "Formatting $${src}..." ; \
 		clang-format -i "$${src}" ; \
@@ -66,7 +65,7 @@ style:
 	@echo "Done"
 
 .PHONY: check-style
-check-style:
+check-style:  ## Check clang-format
 	@for src in $(SRCS) ; do \
 		var=`clang-format "$${src}" | diff "$${src}" - | wc -l` ; \
 		if [ $${var} -ne 0 ] ; then \
@@ -78,11 +77,18 @@ check-style:
 
 
 .PHONY: clean
-clean:
+clean:  ## Clean
 	$(RM) -r $(OBJDIR) $(BINDIR)
 	@echo make clean: done
 
 
 .PHONY: cleanlib
-cleanlib:
+cleanlib:  ## Clean library
 	@$(MAKE) clean -C $(LIBDIR)
+
+
+.PHONY: help
+help:  ## Show this message
+	@grep -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
+	| sed -n 's/^\(.*\): \(.*\)## \(.*\)/\1|||\3/p' \
+	| column -t  -s '|||'
