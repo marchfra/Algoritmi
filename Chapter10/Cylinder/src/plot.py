@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+# from matplotlib.ticker import FormatStrFormatter
 
 # Constants
 IMAGES_FOLDER = 'images'
@@ -29,12 +30,17 @@ cbar = fig.colorbar(data)
 cbar.ax.set_ylabel(r'$\phi(x, y)$')
 cbar.add_lines(contour_lines)
 
+cbar.ax.yaxis.set_major_formatter(mpl.ticker.FormatStrFormatter('%.2g'))
+cbar.ax.invert_yaxis()
+
 # ax.set_xscale('log')
 # ax.set_yscale('log')
 
 ax.set_title('')
 ax.set_xlabel(r'$x$')
 ax.set_ylabel(r'$y$')
+
+ax.yaxis.set_major_formatter(mpl.ticker.FormatStrFormatter('%.1f'))
 
 ax.set_aspect(1)
 

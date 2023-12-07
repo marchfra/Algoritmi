@@ -23,11 +23,11 @@ double boundaryCondition(const double& x, const double& y);
 
 double SFunc(const double& x, const double& y);
 
-void solveJacobi(const int& nPoints, const double& xL, const double& xR, const double& yL, const double& yR, const double& tol, const double& h);
+void solveJacobi(const int& nx, const int& ny, const double& xL, const double& xR, const double& yL, const double& yR, const double& tol, const double& h);
 
-void solveGaussSeidel(const int& nPoints, const double& xL, const double& xR, const double& yL, const double& yR, const double& tol, const double& h);
+void solveGaussSeidel(const int& nx, const int& ny, const double& xL, const double& xR, const double& yL, const double& yR, const double& tol, const double& h);
 
-void solveSOR(const int& nPoints, const double& xL, const double& xR, const double& yL, const double& yR, const double& tol, const double& h, const double& omega);
+void solveSOR(const int& nx, const int& ny, const double& xL, const double& xR, const double& yL, const double& yR, const double& tol, const double& h, const double& omega);
 
 int main() {
 	const double xL = -1.0;
@@ -42,41 +42,44 @@ int main() {
 
 	const double h = (xR - xL) / (nPoints - 1);
 
-	solveJacobi(nPoints, xL, xR, yL, yR, tol, h);
-	solveGaussSeidel(nPoints, xL, xR, yL, yR, tol, h);
-	solveSOR(nPoints, xL, xR, yL, yR, tol, h, omega);
+	solveJacobi(nPoints, nPoints, xL, xR, yL, yR, tol, h);
+	solveGaussSeidel(nPoints, nPoints, xL, xR, yL, yR, tol, h);
+	solveSOR(nPoints, nPoints, xL, xR, yL, yR, tol, h, omega);
 
 	return 0;
 }
 
-void solveJacobi(const int& nPoints, const double& xL, const double& xR, const double& yL, const double& yR, const double& tol, const double& h) {
-	const int iStart = 1, iEnd = nPoints - 1;
-	const int jStart = 1, jEnd = nPoints - 1;
+void solveJacobi(const int& nx, const int& ny, const double& xL, const double& xR, const double& yL, const double& yR, const double& tol, const double& h) {
+	// ny = nRows
+	// nx = nCols
+
+	const int iStart = 1, iEnd = nx - 1;
+	const int jStart = 1, jEnd = ny - 1;
 
 	// Define matrices to store solution value at current and next iteration and source matrix
 	double **mOld;
 	double **mNew;
 	double **S;
-	mOld = new double*[nPoints];
-	mNew = new double*[nPoints];
-	S = new double*[nPoints];
-	mOld[0] = new double[nPoints * nPoints];
-	mNew[0] = new double[nPoints * nPoints];
-	S[0] = new double[nPoints * nPoints];
-	for (int j = 1; j < nPoints; j++) {
-		mOld[j] = mOld[j - 1] + nPoints;
-		mNew[j] = mNew[j - 1] + nPoints;
-		S[j] = S[j - 1] + nPoints;
+	mOld = new double*[ny];
+	mNew = new double*[ny];
+	S = new double*[ny];
+	mOld[0] = new double[ny * nx];
+	mNew[0] = new double[ny * nx];
+	S[0] = new double[ny * nx];
+	for (int j = 1; j < ny; j++) {
+		mOld[j] = mOld[j - 1] + nx;
+		mNew[j] = mNew[j - 1] + nx;
+		S[j] = S[j - 1] + nx;
 	}
 
 	// Define grid points
-	double x[nPoints], y[nPoints];
-	for (int i = 0; i < nPoints; i++)  x[i] = xL + i * h;
-	for (int j = 0; j < nPoints; j++)  y[j] = yL + j * h;
+	double x[nx], y[ny];
+	for (int i = 0; i < nx; i++)  x[i] = xL + i * h;
+	for (int j = 0; j < ny; j++)  y[j] = yL + j * h;
 
 	// Assign source value on the grid
-	for (int i = 0; i < nPoints; i++) {
-		for (int j = 0; j < nPoints; j++) {
+	for (int i = 0; i < nx; i++) {
+		for (int j = 0; j < ny; j++) {
 			S[i][j] = SFunc(x[i], y[j]);
 		}
 	}
@@ -93,7 +96,7 @@ void solveJacobi(const int& nPoints, const double& xL, const double& xR, const d
 	int numIter = 0;
 	while (err > tol) {
 		// Assign boundary condition on mOld
-		assignBoundaryConditions(mOld, x, y, nPoints, nPoints);
+		assignBoundaryConditions(mOld, x, y, nx, ny);
 
 		// Compute new value
 		for (int i = iStart; i < iEnd; i++) {
@@ -103,7 +106,7 @@ void solveJacobi(const int& nPoints, const double& xL, const double& xR, const d
 		}
 
 		// Assign boundary condition on mNew. Necessary for Laplacian error.
-		assignBoundaryConditions(mNew, x, y, nPoints, nPoints);
+		assignBoundaryConditions(mNew, x, y, nx, ny);
 
 		// Compute error
 		err = 0.0;
@@ -134,8 +137,8 @@ void solveJacobi(const int& nPoints, const double& xL, const double& xR, const d
 	if (!out) exit(5);
 
 	out << "x,y,M,S" << endl;
-	for (int i = 0; i < nPoints; i++) {
-		for (int j = 0; j < nPoints; j++) {
+	for (int i = 0; i < nx; i++) {
+		for (int j = 0; j < ny; j++) {
 			out << x[i] << "," << y[j] << "," << mOld[i][j] << "," << S[i][j] << endl;
 		}
 	}
@@ -150,30 +153,30 @@ void solveJacobi(const int& nPoints, const double& xL, const double& xR, const d
 	delete[] S;
 }
 
-void solveGaussSeidel(const int& nPoints, const double& xL, const double& xR, const double& yL, const double& yR, const double& tol, const double& h) {
-	const int iStart = 1, iEnd = nPoints - 1;
-	const int jStart = 1, jEnd = nPoints - 1;
+void solveGaussSeidel(const int& nx, const int& ny, const double& xL, const double& xR, const double& yL, const double& yR, const double& tol, const double& h) {
+	const int iStart = 1, iEnd = nx - 1;
+	const int jStart = 1, jEnd = ny - 1;
 
 	// Define matrix to store solution values and source matrix
 	double **M;
 	double **S;
-	M = new double*[nPoints];
-	S = new double*[nPoints];
-	M[0] = new double[nPoints * nPoints];
-	S[0] = new double[nPoints * nPoints];
-	for (int j = 1; j < nPoints; j++) {
-		M[j] = M[j - 1] + nPoints;
-		S[j] = S[j - 1] + nPoints;
+	M = new double*[ny];
+	S = new double*[ny];
+	M[0] = new double[ny * nx];
+	S[0] = new double[ny * nx];
+	for (int j = 1; j < ny; j++) {
+		M[j] = M[j - 1] + nx;
+		S[j] = S[j - 1] + nx;
 	}
 
 	// Define grid points
-	double x[nPoints], y[nPoints];
-	for (int i = 0; i < nPoints; i++)  x[i] = xL + i * h;
-	for (int j = 0; j < nPoints; j++)  y[j] = yL + j * h;
+	double x[nx], y[ny];
+	for (int i = 0; i < nx; i++)  x[i] = xL + i * h;
+	for (int j = 0; j < ny; j++)  y[j] = yL + j * h;
 
 	// Assign source value on the grid
-	for (int i = 0; i < nPoints; i++) {
-		for (int j = 0; j < nPoints; j++) {
+	for (int i = 0; i < nx; i++) {
+		for (int j = 0; j < ny; j++) {
 			S[i][j] = SFunc(x[i], y[j]);
 		}
 	}
@@ -190,7 +193,7 @@ void solveGaussSeidel(const int& nPoints, const double& xL, const double& xR, co
 	int numIter = 0;
 	while (err > tol) {
 		// Assign boundary condition on M
-		assignBoundaryConditions(M, x, y, nPoints, nPoints);
+		assignBoundaryConditions(M, x, y, nx, ny);
 
 		// Compute new value
 		for (int i = iStart; i < iEnd; i++) {
@@ -200,7 +203,7 @@ void solveGaussSeidel(const int& nPoints, const double& xL, const double& xR, co
 		}
 
 		// Assign boundary condition on M. Necessary for Laplacian error.
-		assignBoundaryConditions(M, x, y, nPoints, nPoints);
+		assignBoundaryConditions(M, x, y, nx, ny);
 
 		// Compute error
 		err = 0.0;
@@ -224,8 +227,8 @@ void solveGaussSeidel(const int& nPoints, const double& xL, const double& xR, co
 	if (!out) exit(5);
 
 	out << "x,y,M,S" << endl;
-	for (int i = 0; i < nPoints; i++) {
-		for (int j = 0; j < nPoints; j++) {
+	for (int i = 0; i < nx; i++) {
+		for (int j = 0; j < ny; j++) {
 			out << x[i] << "," << y[j] << "," << M[i][j] << "," << S[i][j] << endl;
 		}
 	}
@@ -238,30 +241,30 @@ void solveGaussSeidel(const int& nPoints, const double& xL, const double& xR, co
 	delete[] S;
 }
 
-void solveSOR(const int& nPoints, const double& xL, const double& xR, const double& yL, const double& yR, const double& tol, const double& h, const double& omega) {
-	const int iStart = 1, iEnd = nPoints - 1;
-	const int jStart = 1, jEnd = nPoints - 1;
+void solveSOR(const int& nx, const int& ny, const double& xL, const double& xR, const double& yL, const double& yR, const double& tol, const double& h, const double& omega) {
+	const int iStart = 1, iEnd = nx - 1;
+	const int jStart = 1, jEnd = ny - 1;
 
 	// Define matrix to store solution values and source matrix
 	double **M;
 	double **S;
-	M = new double*[nPoints];
-	S = new double*[nPoints];
-	M[0] = new double[nPoints * nPoints];
-	S[0] = new double[nPoints * nPoints];
-	for (int j = 1; j < nPoints; j++) {
-		M[j] = M[j - 1] + nPoints;
-		S[j] = S[j - 1] + nPoints;
+	M = new double*[ny];
+	S = new double*[ny];
+	M[0] = new double[ny * nx];
+	S[0] = new double[ny * nx];
+	for (int j = 1; j < ny; j++) {
+		M[j] = M[j - 1] + nx;
+		S[j] = S[j - 1] + nx;
 	}
 
 	// Define grid points
-	double x[nPoints], y[nPoints];
-	for (int i = 0; i < nPoints; i++)  x[i] = xL + i * h;
-	for (int j = 0; j < nPoints; j++)  y[j] = yL + j * h;
+	double x[nx], y[ny];
+	for (int i = 0; i < nx; i++)  x[i] = xL + i * h;
+	for (int j = 0; j < ny; j++)  y[j] = yL + j * h;
 
 	// Assign source value on the grid
-	for (int i = 0; i < nPoints; i++) {
-		for (int j = 0; j < nPoints; j++) {
+	for (int i = 0; i < nx; i++) {
+		for (int j = 0; j < ny; j++) {
 			S[i][j] = SFunc(x[i], y[j]);
 		}
 	}
@@ -278,7 +281,7 @@ void solveSOR(const int& nPoints, const double& xL, const double& xR, const doub
 	int numIter = 0;
 	while (err > tol) {
 		// Assign boundary condition on M
-		assignBoundaryConditions(M, x, y, nPoints, nPoints);
+		assignBoundaryConditions(M, x, y, nx, ny);
 
 		// Compute new value
 		for (int i = iStart; i < iEnd; i++) {
@@ -288,7 +291,7 @@ void solveSOR(const int& nPoints, const double& xL, const double& xR, const doub
 		}
 
 		// Assign boundary condition on M. Necessary for Laplacian error.
-		assignBoundaryConditions(M, x, y, nPoints, nPoints);
+		assignBoundaryConditions(M, x, y, nx, ny);
 
 		// Compute error
 		err = 0.0;
@@ -312,8 +315,8 @@ void solveSOR(const int& nPoints, const double& xL, const double& xR, const doub
 	if (!out) exit(5);
 
 	out << "x,y,M,S" << endl;
-	for (int i = 0; i < nPoints; i++) {
-		for (int j = 0; j < nPoints; j++) {
+	for (int i = 0; i < nx; i++) {
+		for (int j = 0; j < ny; j++) {
 			out << x[i] << "," << y[j] << "," << M[i][j] << "," << S[i][j] << endl;
 		}
 	}
