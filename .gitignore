@@ -2,7 +2,7 @@
 .DS_store
 .Home/
 Rajan\ Object-Oriented\ Numerical\ Methods\ via\ C++.pdf
-.Test
+.Test/
 **/bin
 **/obj
 *.o
