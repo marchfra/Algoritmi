@@ -1,0 +1,39 @@
+{
+	"makefile.makefilePath": ".",
+	"makefile.configurations": [
+		{
+			"name": "Build",
+		},
+		{
+			"name": "Build & Run",
+			"makeArgs": [
+				"run"
+			]
+		},
+		{
+			"name": "Plot",
+			"makeArgs": [
+				"plot"
+			]
+		},
+		{
+			"name": "Build & Run & Plot",
+			"makeArgs": [
+				"run",
+				"plot"
+			]
+		}
+	],
+	"makefile.launchConfigurations": [
+		{
+			"cwd": "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/ProjectileMotion",
+			"binaryPath": "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/ProjectileMotion/bin/main",
+			"binaryArgs": []
+		},
+		{
+			"cwd": "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/ProjectileMotion/bin",
+			"binaryPath": "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/ProjectileMotion/bin/main",
+			"binaryArgs": []
+		}
+	],
+}

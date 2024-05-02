@@ -31,6 +31,11 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp  ## Build object files from sources
 	$(CXX) $(CFLAGS) -c $< -o $@
 
 
+.PHONY: run
+run:  ## Run all
+	@$(BIN)
+
+
 .PHONY: plot
 plot:  ## Create plot
 	@echo "Making plot"

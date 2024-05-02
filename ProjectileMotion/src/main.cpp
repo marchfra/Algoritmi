@@ -22,7 +22,7 @@ void RHS(double Y[], double R[]);
 
 int main() {
 	std::ofstream out;
-	out.open("../data/data.csv");
+	out.open("data/data.csv");
 	if (!out) exit(5);
 
 	// Integration range
