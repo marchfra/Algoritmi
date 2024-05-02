@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['methods_20for_20physics_0',['Numerical Methods for Physics',['../index.html',1,'']]],
-  ['midpointquad_1',['midpointQuad',['../quad_8hpp.html#a581077c334700e06f826da75fa4fabf1',1,'quad.cpp']]]
+  ['lin_5falg_2ehpp_0',['lin_alg.hpp',['../lin__alg_8hpp.html',1,'']]],
+  ['linearbvp_1',['linearBVP',['../lin__alg_8hpp.html#af7f8c37bf8a38a985f8ecfcb8293fdbd',1,'lin_alg.cpp']]]
 ];

@@ -5,7 +5,7 @@
  *
  * @author     Francesco Marchisotti
  *
- * @date       19/11/2023
+ * @date       01/05/2024
  */
 #pragma once
 
@@ -66,7 +66,8 @@ void rk4Step(const double& t, double Y[], void (*RHSFunc)(const double& t, doubl
  *
  * Takes one step in time using Position Verlet method. The system of first order 
  * ODEs is dY_i/dt = R_i(Y), where all equations are derived from second order
- * ODEs in the form F = ma.
+ * ODEs in the form F = ma. The system of equation must contain in the first half
+ * all the positions and in the second half all the velocities.
  *
  * @param[in]      t        The value of time from which to take the step.
  * @param[in, out] Y        Array containing all the dependent variables.
@@ -83,7 +84,8 @@ void pVerlet(const double& t, double Y[], void (*RHSFunc)(double Y[], double RHS
  *
  * Takes one step in time using Velocity Verlet method. The system of first order
  * ODEs is dY_i/dt = R_i(Y), where all equations are derived from second order
- * ODEs in the form F = ma.
+ * ODEs in the form F = ma. The system of equation must contain in the first half
+ * all the positions and in the second half all the velocities.
  *
  * @param[in]  t        The value of time from which to take the step.
  * @param[in]  Y        Array containing all the dependent variables.

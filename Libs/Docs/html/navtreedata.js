@@ -26,6 +26,9 @@ var NAVTREE =
 [
   [ "Numerical Algorithms for Physics Library", "index.html", [
     [ "Numerical Methods for Physics", "index.html", null ],
+    [ "Project #2: Realistic Projectile Motion", "md__2_users_2francescomarchisotti_2_documents_2_uni_2_anno__4_2_algoritmi_2_projectile_motion_2_assignment.html", [
+      [ "Writing the project", "md__2_users_2francescomarchisotti_2_documents_2_uni_2_anno__4_2_algoritmi_2_projectile_motion_2_assignment.html#autotoc_md1", null ]
+    ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
