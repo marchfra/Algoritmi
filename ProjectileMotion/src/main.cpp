@@ -3,9 +3,7 @@
  *
  * @author Francesco Marchisotti
  *
- * @brief Main file for the final project
- *
- * @version 0.1
+ * @brief Main file for the course's final project
  *
  * @date 2024-05-04
  */

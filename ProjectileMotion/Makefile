@@ -17,6 +17,8 @@ BIN = $(BINDIR)/main
 LIBDIR = /Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs
 LIBNAME = algo
 
+DATADIR = data
+
 
 .PHONY: all
 all: $(BIN)  ## Build all
@@ -32,7 +34,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp  ## Build object files from sources
 
 
 .PHONY: run
-run:  ## Run all
+run: $(DATADIR)  ## Run all
 	@$(BIN)
 
 
@@ -47,6 +49,9 @@ $(OBJDIR):  ## Create object files directory
 	mkdir $@
 
 $(BINDIR):  ## Create binaries directory
+	mkdir $@
+
+$(DATADIR): ## Create output data directory
 	mkdir $@
 
 
@@ -83,7 +88,7 @@ check-style:  ## Check clang-format
 
 .PHONY: clean
 clean:  ## Clean
-	$(RM) -r $(OBJDIR) $(BINDIR) data
+	$(RM) -r $(OBJDIR) $(BINDIR) $(DATADIR)
 	@echo make clean: done
 
 

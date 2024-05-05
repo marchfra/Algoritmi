@@ -2,12 +2,13 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from ticker import multiple_formatter
 
 # Constants
 IMAGES_FOLDER = 'images'
 SAVE_IMAGES = False
-DOWNSAMPLE = 1
-DRAW_LEGENDS = False
+DOWNSAMPLE = 4
+DRAW_LEGENDS = True
 
 # Matplotlib configuration
 plt.style.use(['grid', 'science', 'notebook', 'mylegend'])
@@ -113,7 +114,7 @@ fig, ax = plt.subplots(1, 1)
 for i, g in enumerate(list(groups2)[::DOWNSAMPLE]):
 	x = df2group.get_group(g)['x'].to_numpy()
 	y = df2group.get_group(g)['y'].to_numpy()
-	ax.scatter(x, y, c=colors[i % len(colors)], label=f'{g:.2f} rad')
+	ax.plot(x, y, c=colors[i % len(colors)], label=f'{g:.2f} rad')
 ax.axvline(L, c='k', ls='--', alpha=.7)
 
 ax.set_title(rf'Shooting up to $x = {L}$, $B = {B}$')
@@ -145,9 +146,14 @@ ax.set_title(rf'Residual plot of $y(x={L})$, $B = {B}$')
 ax.set_xlabel(r'$\theta$ [rad]')
 ax.set_ylabel(r'$y(x=1)$ [m]')
 
+ax.xaxis.set_major_locator(plt.MultipleLocator(np.pi / 78))
+ax.xaxis.set_minor_locator(plt.MultipleLocator(np.pi / (78 * 4)))
+ax.xaxis.set_major_formatter(plt.FuncFormatter(multiple_formatter(78)))
+
 fig.tight_layout()
 if SAVE_IMAGES:
 	fig.savefig(f'{IMAGES_FOLDER}/figure_name.png', dpi=200)
+
 
 # +---------------------------------+
 # | STEP 5: INTEGRATING WITH THETA* |
