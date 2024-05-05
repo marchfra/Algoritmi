@@ -65,7 +65,7 @@ if DRAW_LEGENDS:
 
 fig.tight_layout()
 if SAVE_IMAGES:
-	fig.savefig(f'{IMAGES_FOLDER}/figure_name.png', dpi=200)
+	fig.savefig(f'{IMAGES_FOLDER}/Initial shooting.png', dpi=200)
 
 
 # +-----------------------------------+
@@ -95,7 +95,7 @@ if DRAW_LEGENDS:
 
 fig.tight_layout()
 if SAVE_IMAGES:
-	fig.savefig(f'{IMAGES_FOLDER}/figure_name.png', dpi=200)
+	fig.savefig(f'{IMAGES_FOLDER}/Finding t_end.png', dpi=200)
 
 
 # +--------------------------------+
@@ -127,7 +127,7 @@ if DRAW_LEGENDS:
 
 fig.tight_layout()
 if SAVE_IMAGES:
-	fig.savefig(f'{IMAGES_FOLDER}/figure_name.png', dpi=200)
+	fig.savefig(f'{IMAGES_FOLDER}/Second shooting.png', dpi=200)
 
 
 # +----------------------------+
@@ -152,7 +152,7 @@ ax.xaxis.set_major_formatter(plt.FuncFormatter(multiple_formatter(78)))
 
 fig.tight_layout()
 if SAVE_IMAGES:
-	fig.savefig(f'{IMAGES_FOLDER}/figure_name.png', dpi=200)
+	fig.savefig(f'{IMAGES_FOLDER}/Residual.png', dpi=200)
 
 
 # +---------------------------------+
@@ -173,7 +173,7 @@ ax.set_ylabel(r'$y$ [m]')
 
 fig.tight_layout()
 if SAVE_IMAGES:
-	fig.savefig(f'{IMAGES_FOLDER}/figure_name.png', dpi=200)
+	fig.savefig(f'{IMAGES_FOLDER}/Optimal trajectories.png', dpi=200)
 
 
 plt.show()
