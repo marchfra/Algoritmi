@@ -83,7 +83,7 @@ check-style:  ## Check clang-format
 
 .PHONY: clean
 clean:  ## Clean
-	$(RM) -r $(OBJDIR) $(BINDIR)
+	$(RM) -r $(OBJDIR) $(BINDIR) data
 	@echo make clean: done
 
 
