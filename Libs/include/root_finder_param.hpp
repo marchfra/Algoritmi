@@ -23,7 +23,7 @@
  *
  * @param[in]  f       Pointer to the function.
  * @param[in]  dfdx    Pointer to the derivative of the function.
- * @param[in]  k       Additional function parameter.
+ * @param[in]  param   Additional function parameter.
  * @param[in]  xa      Lower bound of the interval.
  * @param[in]  xb      Upper bound of the interval.
  * @param[in]  tol     x-tolerance.
@@ -47,7 +47,7 @@
  * @throws     std::runtime_error     Thrown if one of the root finders exceeded
  *                                    the maximum number of steps.
  */
-int findRoots(double (*f)(const double& x, const double& k), double (*dfdx)(const double& x, const double& k), const double& k, const double& xa, const double& xb, const double& tol, double roots[], int& nRoots, const int N = 128, const std::string method = "newton");
+int findRoots(double (*f)(const double& x, const double& param), double (*dfdx)(const double& x, const double& param), const double& param, const double& xa, const double& xb, const double& tol, double roots[], int& nRoots, const int N = 128, const std::string method = "newton");
 
 /**
  * @overload
@@ -60,7 +60,7 @@ int findRoots(double (*f)(const double& x, const double& k), double (*dfdx)(cons
  * and then applying the method on every sub-interval.
  *
  * @param[in]  f       Pointer to the function.
- * @param[in]  k       Additional function parameter.
+ * @param[in]  param   Additional function parameter.
  * @param[in]  xa      Lower bound of the interval.
  * @param[in]  xb      Upper bound of the interval.
  * @param[in]  tol     x-tolerance.
@@ -84,7 +84,7 @@ int findRoots(double (*f)(const double& x, const double& k), double (*dfdx)(cons
  * @throws     std::runtime_error     Thrown if one of the root finders exceeded
  *                                    the maximum number of steps.
  */
-int findRoots(double (*f)(const double& x, const double& k), const double& k, const double& xa, const double& xb, const double& tol, double roots[], int& nRoots, const int N = 128, const std::string method = "bisection");
+int findRoots(double (*f)(const double& x, const double& param), const double& param, const double& xa, const double& xb, const double& tol, double roots[], int& nRoots, const int N = 128, const std::string method = "bisection");
 
 /**
  * @brief      Bracket the roots of a function in a given interval [xa, xb].
@@ -95,7 +95,7 @@ int findRoots(double (*f)(const double& x, const double& k), const double& k, co
  * (at least) one root.
  *
  * @param[in]  f       Pointer to the function.
- * @param[in]  k       Additional function parameter.
+ * @param[in]  param   Additional function parameter.
  * @param[in]  xa      Lower bound of the interval.
  * @param[in]  xb      Upper bound of the interval.
  * @param[out] xL      Array with the lower bound of the sub-interval containing
@@ -105,7 +105,7 @@ int findRoots(double (*f)(const double& x, const double& k), const double& k, co
  * @param[in]  N       The number of sub-intervals.
  * @param[out] nRoots  The number of roots found.
  */
-void bracket(double (*f)(const double& x, const double& k), const double& k, const double& xa, const double& xb, double xL[], double xR[], const int& N, int& nRoots);
+void bracket(double (*f)(const double& x, const double& param), const double& param, const double& xa, const double& xb, double xL[], double xR[], const int& N, int& nRoots);
 
 /**
  * @overload
@@ -114,7 +114,7 @@ void bracket(double (*f)(const double& x, const double& k), const double& k, con
  *             using bisection method. k is simply passed to the function.
  *
  * @param[in]  f     Pointer to the function.
- * @param[in]  k     Additional function parameter.
+ * @param[in]  param Additional function parameter.
  * @param[in]  xa    Lower bound of the interval.
  * @param[in]  xb    Upper bound of the interval.
  * @param[in]  xtol  x-tolerance.
@@ -133,7 +133,7 @@ void bracket(double (*f)(const double& x, const double& k), const double& k, con
  * @throws     std::runtime_error  Thrown if the maximum number of steps is
  *                                 exceeded.
  */
-int bisection(double (*f)(const double& x, const double& k), const double& k, double xa, double xb, const double& xtol, const double& ftol, double& root, int& ntry);
+int bisection(double (*f)(const double& x, const double& param), const double& param, double xa, double xb, const double& xtol, const double& ftol, double& root, int& ntry);
 
 /**
  * @overload
@@ -142,7 +142,7 @@ int bisection(double (*f)(const double& x, const double& k), const double& k, do
  *             using bisection method. k is simply passed to the function.
  *
  * @param[in]  f     Pointer to the function.
- * @param[in]  k     Additional function parameter.
+ * @param[in]  param Additional function parameter.
  * @param[in]  xa    Lower bound of the interval.
  * @param[in]  xb    Upper bound of the interval.
  * @param[in]  xtol  x-tolerance.
@@ -159,7 +159,7 @@ int bisection(double (*f)(const double& x, const double& k), const double& k, do
  * @throws     std::runtime_error  Thrown if the maximum number of steps is
  *                                 exceeded.
  */
-int bisection(double (*f)(const double& x, const double& k), const double& k, double xa, double xb, const double& xtol, double& root);
+int bisection(double (*f)(const double& x, const double& param), const double& param, double xa, double xb, const double& xtol, double& root);
 
 /**
  * @overload
@@ -168,7 +168,7 @@ int bisection(double (*f)(const double& x, const double& k), const double& k, do
  *             using bisection method. k is simply passed to the function.
  *
  * @param[in]  f     Pointer to the function.
- * @param[in]  k     Additional function parameter.
+ * @param[in]  param Additional function parameter.
  * @param[in]  xa    Lower bound of the interval.
  * @param[in]  xb    Upper bound of the interval.
  * @param[in]  xtol  x-tolerance.
@@ -186,7 +186,7 @@ int bisection(double (*f)(const double& x, const double& k), const double& k, do
  * @throws     std::runtime_error  Thrown if the maximum number of steps is
  *                                 exceeded.
  */
-int bisection(double (*f)(const double& x, const double& k), const double& k, double xa, double xb, const double& xtol, double& root, int& ntry);
+int bisection(double (*f)(const double& x, const double& param), const double& param, double xa, double xb, const double& xtol, double& root, int& ntry);
 
 /**
  * @overload
@@ -195,7 +195,7 @@ int bisection(double (*f)(const double& x, const double& k), const double& k, do
  *             using bisection method. k is simply passed to the function.
  *
  * @param[in]  f     Pointer to the function.
- * @param[in]  k     Additional function parameter.
+ * @param[in]  param Additional function parameter.
  * @param[in]  xa    Lower bound of the interval.
  * @param[in]  xb    Upper bound of the interval.
  * @param[in]  xtol  x-tolerance.
@@ -213,7 +213,7 @@ int bisection(double (*f)(const double& x, const double& k), const double& k, do
  * @throws     std::runtime_error  Thrown if the maximum number of steps is
  *                                 exceeded.
  */
-int bisection(double (*f)(const double& x, const double& k), const double& k, double xa, double xb, const double& xtol, const double& ftol, double& root);
+int bisection(double (*f)(const double& x, const double& param), const double& param, double xa, double xb, const double& xtol, const double& ftol, double& root);
 
 /**
  * @overload
@@ -222,7 +222,7 @@ int bisection(double (*f)(const double& x, const double& k), const double& k, do
  *             using false position method. k is simply passed to the function.
  *
  * @param[in]  f     Pointer to the function.
- * @param[in]  k     Additional function parameter.
+ * @param[in]  param Additional function parameter.
  * @param[in]  xa    Lower bound of the interval.
  * @param[in]  xb    Upper bound of the interval.
  * @param[in]  xtol  x-tolerance.
@@ -241,7 +241,7 @@ int bisection(double (*f)(const double& x, const double& k), const double& k, do
  * @throws     std::runtime_error  Thrown if the maximum number of steps is
  *                                 exceeded.
  */
-int falsePosition(double (*f)(const double& x, const double& k), const double& k, double xa, double xb, const double& xtol, const double& ftol, double& root, int& ntry);
+int falsePosition(double (*f)(const double& x, const double& param), const double& param, double xa, double xb, const double& xtol, const double& ftol, double& root, int& ntry);
 
 /**
  * @overload
@@ -250,7 +250,7 @@ int falsePosition(double (*f)(const double& x, const double& k), const double& k
  *             using false position method. k is simply passed to the function.
  *
  * @param[in]  f     Pointer to the function.
- * @param[in]  k     Additional function parameter.
+ * @param[in]  param Additional function parameter.
  * @param[in]  xa    Lower bound of the interval.
  * @param[in]  xb    Upper bound of the interval.
  * @param[in]  xtol  x-tolerance.
@@ -267,7 +267,7 @@ int falsePosition(double (*f)(const double& x, const double& k), const double& k
  * @throws     std::runtime_error  Thrown if the maximum number of steps is
  *                                 exceeded.
  */
-int falsePosition(double (*f)(const double& x, const double& k), const double& k, double xa, double xb, const double& xtol, double& root);
+int falsePosition(double (*f)(const double& x, const double& param), const double& param, double xa, double xb, const double& xtol, double& root);
 
 /**
  * @overload
@@ -276,7 +276,7 @@ int falsePosition(double (*f)(const double& x, const double& k), const double& k
  *             using false position method. k is simply passed to the function.
  *
  * @param[in]  f     Pointer to the function.
- * @param[in]  k     Additional function parameter.
+ * @param[in]  param Additional function parameter.
  * @param[in]  xa    Lower bound of the interval.
  * @param[in]  xb    Upper bound of the interval.
  * @param[in]  xtol  x-tolerance.
@@ -294,7 +294,7 @@ int falsePosition(double (*f)(const double& x, const double& k), const double& k
  * @throws     std::runtime_error  Thrown if the maximum number of steps is
  *                                 exceeded.
  */
-int falsePosition(double (*f)(const double& x, const double& k), const double& k, double xa, double xb, const double& xtol, double& root, int& ntry);
+int falsePosition(double (*f)(const double& x, const double& param), const double& param, double xa, double xb, const double& xtol, double& root, int& ntry);
 
 /**
  * @overload
@@ -303,7 +303,7 @@ int falsePosition(double (*f)(const double& x, const double& k), const double& k
  *             using false position method. k is simply passed to the function.
  *
  * @param[in]  f     Pointer to the function.
- * @param[in]  k     Additional function parameter.
+ * @param[in]  param Additional function parameter.
  * @param[in]  xa    Lower bound of the interval.
  * @param[in]  xb    Upper bound of the interval.
  * @param[in]  xtol  x-tolerance.
@@ -321,14 +321,14 @@ int falsePosition(double (*f)(const double& x, const double& k), const double& k
  * @throws     std::runtime_error  Thrown if the maximum number of steps is
  *                                 exceeded.
  */
-int falsePosition(double (*f)(const double& x, const double& k), const double& k, double xa, double xb, const double& xtol, const double& ftol, double& root);
+int falsePosition(double (*f)(const double& x, const double& param), const double& param, double xa, double xb, const double& xtol, const double& ftol, double& root);
 
 /**
  * @brief      Find the root of a function f(x, k) in a given interval [xa, xb]
  *             using secant method. k is simply passed to the function.
  *
  * @param[in]  f     Pointer to the function.
- * @param[in]  k     Additional function parameter.
+ * @param[in]  param Additional function parameter.
  * @param[in]  xa    Lower bound of the interval.
  * @param[in]  xb    Upper bound of the interval.
  * @param[in]  xtol  x-tolerance.
@@ -344,7 +344,7 @@ int falsePosition(double (*f)(const double& x, const double& k), const double& k
  * @throws     std::runtime_error  Thrown if the maximum number of steps is
  *                                 exceeded.
  */
-int secant(double (*f)(const double& x, const double& k), const double& k, double xa, double xb, const double& xtol, const double& ftol, double& root, int& ntry);
+int secant(double (*f)(const double& x, const double& param), const double& param, double xa, double xb, const double& xtol, const double& ftol, double& root, int& ntry);
 
 /**
  * @overload
@@ -353,7 +353,7 @@ int secant(double (*f)(const double& x, const double& k), const double& k, doubl
  *             using secant method. k is simply passed to the function.
  *
  * @param[in]  f     Pointer to the function.
- * @param[in]  k     Additional function parameter.
+ * @param[in]  param Additional function parameter.
  * @param[in]  xa    Lower bound of the interval.
  * @param[in]  xb    Upper bound of the interval.
  * @param[in]  xtol  x-tolerance.
@@ -367,7 +367,7 @@ int secant(double (*f)(const double& x, const double& k), const double& k, doubl
  * @throws     std::runtime_error  Thrown if the maximum number of steps is
  *                                 exceeded.
  */
-int secant(double (*f)(const double& x, const double& k), const double& k, double xa, double xb, const double& xtol, double& root);
+int secant(double (*f)(const double& x, const double& param), const double& param, double xa, double xb, const double& xtol, double& root);
 
 /**
  * @overload
@@ -376,7 +376,7 @@ int secant(double (*f)(const double& x, const double& k), const double& k, doubl
  *             using secant method. k is simply passed to the function.
  *
  * @param[in]  f     Pointer to the function.
- * @param[in]  k     Additional function parameter.
+ * @param[in]  param Additional function parameter.
  * @param[in]  xa    Lower bound of the interval.
  * @param[in]  xb    Upper bound of the interval.
  * @param[in]  xtol  x-tolerance.
@@ -391,7 +391,7 @@ int secant(double (*f)(const double& x, const double& k), const double& k, doubl
  * @throws     std::runtime_error  Thrown if the maximum number of steps is
  *                                 exceeded.
  */
-int secant(double (*f)(const double& x, const double& k), const double& k, double xa, double xb, const double& xtol, double& root, int& ntry);
+int secant(double (*f)(const double& x, const double& param), const double& param, double xa, double xb, const double& xtol, double& root, int& ntry);
 
 /**
  * @overload
@@ -400,7 +400,7 @@ int secant(double (*f)(const double& x, const double& k), const double& k, doubl
  *             using secant method. k is simply passed to the function.
  *
  * @param[in]  f     Pointer to the function.
- * @param[in]  k     Additional function parameter.
+ * @param[in]  param Additional function parameter.
  * @param[in]  xa    Lower bound of the interval.
  * @param[in]  xb    Upper bound of the interval.
  * @param[in]  xtol  x-tolerance.
@@ -415,7 +415,7 @@ int secant(double (*f)(const double& x, const double& k), const double& k, doubl
  * @throws     std::runtime_error  Thrown if the maximum number of steps is
  *                                 exceeded.
  */
-int secant(double (*f)(const double& x, const double& k), const double& k, double xa, double xb, const double& xtol, const double& ftol, double& root);
+int secant(double (*f)(const double& x, const double& param), const double& param, double xa, double xb, const double& xtol, const double& ftol, double& root);
 
 /**
  * @brief      Find the root of a function f(x, k) in a given interval [xa, xb]
@@ -423,7 +423,7 @@ int secant(double (*f)(const double& x, const double& k), const double& k, doubl
  *
  * @param[in]  f      Pointer to the function.
  * @param[in]  dfdx   Pointer to the derivative of the function.
- * @param[in]  k      Additional function parameter.
+ * @param[in]  param  Additional function parameter.
  * @param[in]  xa     Lower bound of the interval.
  * @param[in]  xb     Upper bound of the interval.
  * @param[in]  xtol   x-tolerance.
@@ -443,7 +443,7 @@ int secant(double (*f)(const double& x, const double& k), const double& k, doubl
  * @throws     std::runtime_error  Thrown if the derivative becomes too small
  *                                 (divergence protection).
  */
-int newton(double (*f)(const double& x, const double& k), double (*dfdx)(const double &x, const double& k), const double& k, double xa, double xb, const double& xtol, const double& ftol, const double& dftol, double& root, int& ntry);
+int newton(double (*f)(const double& x, const double& param), double (*dfdx)(const double &x, const double& param), const double& param, double xa, double xb, const double& xtol, const double& ftol, const double& dftol, double& root, int& ntry);
 
 /**
  * @overload
@@ -453,7 +453,7 @@ int newton(double (*f)(const double& x, const double& k), double (*dfdx)(const d
  *
  * @param[in]  f     Pointer to the function.
  * @param[in]  dfdx  Pointer to the derivative of the function.
- * @param[in]  k     Additional function parameter.
+ * @param[in]  param Additional function parameter.
  * @param[in]  xa    Lower bound of the interval.
  * @param[in]  xb    Upper bound of the interval.
  * @param[in]  xtol  x-tolerance.
@@ -472,7 +472,7 @@ int newton(double (*f)(const double& x, const double& k), double (*dfdx)(const d
  * @throws     std::runtime_error  Thrown if the derivative becomes too small
  *                                 (divergence protection).
  */
-int newton(double (*f)(const double& x, const double& k), double (*dfdx)(const double &x, const double& k), const double& k, double xa, double xb, const double& xtol, double& root);
+int newton(double (*f)(const double& x, const double& param), double (*dfdx)(const double &x, const double& param), const double& param, double xa, double xb, const double& xtol, double& root);
 
 /**
  * @overload
@@ -482,7 +482,7 @@ int newton(double (*f)(const double& x, const double& k), double (*dfdx)(const d
  *
  * @param[in]  f      Pointer to the function.
  * @param[in]  dfdx   Pointer to the derivative of the function.
- * @param[in]  k      Additional function parameter.
+ * @param[in]  param  Additional function parameter.
  * @param[in]  xa     Lower bound of the interval.
  * @param[in]  xb     Upper bound of the interval.
  * @param[in]  xtol   x-tolerance.
@@ -500,7 +500,7 @@ int newton(double (*f)(const double& x, const double& k), double (*dfdx)(const d
  * @throws     std::runtime_error  Thrown if the derivative becomes too small
  *                                 (divergence protection).
  */
-int newton(double (*f)(const double& x, const double& k), double (*dfdx)(const double &x, const double& k), const double& k, double xa, double xb, const double& xtol, const double& dftol, double& root);
+int newton(double (*f)(const double& x, const double& param), double (*dfdx)(const double &x, const double& param), const double& param, double xa, double xb, const double& xtol, const double& dftol, double& root);
 
 /**
  * @overload
@@ -510,7 +510,7 @@ int newton(double (*f)(const double& x, const double& k), double (*dfdx)(const d
  *
  * @param[in]  f      Pointer to the function.
  * @param[in]  dfdx   Pointer to the derivative of the function.
- * @param[in]  k      Additional function parameter.
+ * @param[in]  param  Additional function parameter.
  * @param[in]  xa     Lower bound of the interval.
  * @param[in]  xb     Upper bound of the interval.
  * @param[in]  xtol   x-tolerance.
@@ -529,7 +529,7 @@ int newton(double (*f)(const double& x, const double& k), double (*dfdx)(const d
  * @throws     std::runtime_error  Thrown if the derivative becomes too small
  *                                 (divergence protection).
  */
-int newton(double (*f)(const double& x, const double& k), double (*dfdx)(const double &x, const double& k), const double& k, double xa, double xb, const double& xtol, const double& dftol, double& root, int& ntry);
+int newton(double (*f)(const double& x, const double& param), double (*dfdx)(const double &x, const double& param), const double& param, double xa, double xb, const double& xtol, const double& dftol, double& root, int& ntry);
 
 /**
  * @overload
@@ -539,7 +539,7 @@ int newton(double (*f)(const double& x, const double& k), double (*dfdx)(const d
  *
  * @param[in]  f      Pointer to the function.
  * @param[in]  dfdx   Pointer to the derivative of the function.
- * @param[in]  k      Additional function parameter.
+ * @param[in]  param  Additional function parameter.
  * @param[in]  xa     Lower bound of the interval.
  * @param[in]  xb     Upper bound of the interval.
  * @param[in]  xtol   x-tolerance.
@@ -558,4 +558,4 @@ int newton(double (*f)(const double& x, const double& k), double (*dfdx)(const d
  * @throws     std::runtime_error  Thrown if the derivative becomes too small
  *                                 (divergence protection).
  */
-int newton(double (*f)(const double& x, const double& k), double (*dfdx)(const double &x, const double& k), const double& k, double xa, double xb, const double& xtol, const double& ftol, const double& dftol, double& root);
+int newton(double (*f)(const double& x, const double& param), double (*dfdx)(const double &x, const double& param), const double& param, double xa, double xb, const double& xtol, const double& ftol, const double& dftol, double& root);

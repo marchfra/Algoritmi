@@ -37,6 +37,7 @@
 		}
 	],
 	"files.associations": {
-		"stdexcept": "cpp"
+		"stdexcept": "cpp",
+		"ostream": "cpp"
 	},
 }
