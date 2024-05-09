@@ -8,11 +8,11 @@
  * @date 2024-05-04
  */
 
-#include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/include/exception.hpp"
-#include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/include/lin_alg.hpp"
-#include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/include/ode_solver.hpp"
-#include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/include/root_finder.hpp"
-#include "/Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs/include/root_finder_param.hpp"
+#include "../../Libs/include/exception.hpp"
+#include "../../Libs/include/lin_alg.hpp"
+#include "../../Libs/include/ode_solver.hpp"
+#include "../../Libs/include/root_finder.hpp"
+#include "../../Libs/include/root_finder_param.hpp"
 
 #include <cmath>
 #include <fstream>
@@ -102,7 +102,8 @@ double Residual(const double& theta);
  * @param[in] dTheta     Angle step size.
  * @param[in] nTheta     Number of angles explored.
  */
-void plot(const double& t0, const double& dt, const int& nStep, const double& theta_min, const double& dTheta, const int& nTheta);
+void plot(const double& t0, const double& dt, const int& nStep,
+          const double& theta_min, const double& dTheta, const int& nTheta);
 
 int main() {
 	std::ofstream out;  //!< Object containing output file
@@ -114,7 +115,7 @@ int main() {
 
 		out << "chi,tau,mu,B,b,V0,Y_targ" << endl;
 		out << chi << "," << tau << "," << mu << "," << B << "," << b << ","
-			<< V0 << "," ˚<< Y_targ << endl;
+			<< V0 << "," << Y_targ << endl;
 
 		out.close();
 	} catch (std::exception& err) {
@@ -135,10 +136,11 @@ int main() {
 	const double dt    = (t_max - t0) / nStep;  //!< Time step size
 
 	// Initial angle
-	const double theta_min    = 0.65;  //!< Min guess for launch angle
+	const double theta_min = 0.65;  //!< Min guess for launch angle
 	const double theta_max = 0.92;  //!< Max value for theta
 	const int nTheta       = 32;    //!< Number of explored thetas
-	const double dTheta = (theta_max - theta_min) / nTheta;  //!< Theta step size
+	const double dTheta =
+		(theta_max - theta_min) / nTheta;  //!< Theta step size
 
 	plot(t0, dt, nStep, theta_min, dTheta, nTheta);
 
@@ -147,7 +149,7 @@ int main() {
 	 * | STEP 1: FINDING ROOTS OF y(x=1) - y_targ |
 	 * +------------------------------------------+ */
 
-	const double eps_theta = 1.0e-7;     //!< Precision for root searching
+	const double eps_theta = 1.0e-7;  //!< Precision for root searching
 
 	double theta_star[4];  //!< Array with the thetas at which y(x=1) = 0
 	int nTheta_star = 1;   //!< Length of theta_star
@@ -193,7 +195,8 @@ int main() {
 			double theta = theta_star[i];  // Select one of the optimal angles
 			double y[]   = {0.0, 0.0, v0 * cos(theta),
 			                v0 * sin(theta)};  // Initialize solution
-			int nEq = static_cast<int>(sizeof(y)) / static_cast<int>(sizeof(y[0]));
+			int nEq =
+				static_cast<int>(sizeof(y)) / static_cast<int>(sizeof(y[0]));
 			out << tau * t << "," << chi * y[0] << "," << chi * y[1] << ","
 				<< chi / tau * y[2] << "," << chi / tau * y[3] << "," << theta
 				<< endl;  // Output initial condition
@@ -316,7 +319,8 @@ double Residual(const double& theta) {
 	return y_star;
 }
 
-void plot(const double& t0, const double& dt, const int& nStep, const double& theta_min, const double& dTheta, const int& nTheta) {
+void plot(const double& t0, const double& dt, const int& nStep,
+          const double& theta_min, const double& dTheta, const int& nTheta) {
 	// Initialisation
 	double t          = t0;  //!< Time variable
 	const double y0[] = {0.0, 0.0, v0 * cos(gTheta),
@@ -339,7 +343,7 @@ void plot(const double& t0, const double& dt, const int& nStep, const double& th
 		if (!out.good()) throw exception("Invalid file.");
 
 		out << "t,x,y,u,v,theta" << endl;  // Output file header
-		gTheta = theta_min;                   // Set theta to min guess
+		gTheta = theta_min;                // Set theta to min guess
 		for (int j = 0; j < nTheta; j++) {
 			t          = t0;  // Reinitialise time
 			double y[] = {0.0, 0.0, v0 * cos(gTheta),
@@ -427,7 +431,7 @@ void plot(const double& t0, const double& dt, const int& nStep, const double& th
 		if (!out.good()) throw exception("Invalid file.");
 
 		out << "t1,y1,theta" << endl;  // Output file header
-		gTheta = theta_min;               // Initialise theta
+		gTheta = theta_min;            // Initialise theta
 		for (int j = 0; j < nTheta; j++) {
 			out << tau * t1[j] << "," << chi * y_t(t1[j], gTheta, true) << ","
 				<< gTheta << endl;
