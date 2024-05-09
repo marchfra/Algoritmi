@@ -20,7 +20,7 @@ def draw_target(ax: mpl.axes._axes.Axes) -> None:
 
 # Constants
 IMAGES_FOLDER = 'images'
-SAVE_IMAGES = False
+SAVE_IMAGES = True
 DOWNSAMPLE = 4
 DRAW_LEGENDS = True
 
@@ -79,7 +79,7 @@ ax.set_xlabel(r'$x$ [m]')
 ax.set_ylabel(r'$y$ [m]')
 
 if DRAW_LEGENDS:
-	ax.legend(title='Initial angle', ncol=int(
+	ax.legend(title='Launch angle', ncol=int(
 		len(groups) / DOWNSAMPLE / 4), fontsize=15)
 
 fig.tight_layout()
@@ -108,7 +108,7 @@ ax.set_xlabel(r'$t$ [s]')
 ax.set_ylabel(r'$x$ [m]')
 
 if DRAW_LEGENDS:
-	ax.legend(title='Initial angle', ncol=int(
+	ax.legend(title='Launch angle', ncol=int(
 		len(groups) / DOWNSAMPLE / 4), fontsize=15)
 
 fig.tight_layout()
@@ -141,7 +141,7 @@ ax.set_xlabel(r'$x$ [m]')
 ax.set_ylabel(r'$y$ [m]')
 
 if DRAW_LEGENDS:
-	ax.legend(title='Initial angle', ncol=int(
+	ax.legend(title='Launch angle', ncol=int(
 		len(groups2) / DOWNSAMPLE / 4), fontsize=15)
 
 fig.tight_layout()
