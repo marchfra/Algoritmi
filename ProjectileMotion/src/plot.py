@@ -161,18 +161,6 @@ fig, ax = plt.subplots(1, 1)
 ax.plot(df_res['theta'], df_res['y1'])
 ax.axhline(0, c='k', ls='--', alpha=0.7)
 
-# def f(x):
-# 	return -20 * (x - 0.787)**2 + 0.19
-
-# ax.plot(df_res['theta'], f(df_res['theta']))
-
-# df_res = pd.read_csv('data/optimal_search.csv')
-# _theta = df_res['theta'].to_numpy()
-# _y = df_res['y1'].to_numpy()
-# ax.quiver(_theta[:-1], _y[:-1], _theta[1:] - _theta[:-1],
-#           _y[1:] - _y[:-1], scale_units='xy', angles='xy')
-# ax.plot(_theta, _y)
-
 ax.set_title(rf'Residual plot of $y(x={L}$ m$)$, $B = {B}$ kg/m')
 ax.set_xlabel(r'$\theta$ [rad]')
 ax.set_ylabel(r'$y(x=1)$ [m]')

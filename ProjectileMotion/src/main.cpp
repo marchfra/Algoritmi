@@ -162,6 +162,10 @@ int main() {
 
 		std::ofstream out2;
 		out2.open("data/optimal_search.csv");
+		if (!out2.good()) {
+			out.close();
+			throw exception("Invalid file.");
+		}
 		out2 << "t1,y1,theta" << endl;
 		out2.close();
 
@@ -373,7 +377,7 @@ void plot(const double& t0, const double& dt, const int& nStep,
 
 
 	/* +-----------------------------------+
-	 * | STEP 2: FINDING ROOTS OF x(t) = 1 |
+	 * | STEP 2: FINDING ROOTS OF x(t) - 1 |
 	 * +-----------------------------------+ */
 
 	const double t_low = 1.0;     //!< Lower bound for root searching
