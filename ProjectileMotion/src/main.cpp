@@ -25,19 +25,20 @@ using std::cout;
 using std::endl;
 
 // Problem data
-const static double B      = 4.0e-5;  //!< Drag coefficient
-const static double V0     = 10.0;    //!< Initial velocity
-const static double L      = 10.0;    //!< Target distance
-const static double y_targ = 0.15;    //!< Target height
+const static double B      = 4.0e-5;  //!< Drag coefficient [kg/m]
+const static double V0     = 9.90;    //!< Initial velocity [m/s]
+const static double L      = 10.0;    //!< Target distance  [m]
+const static double Y_targ = -0.2;    //!< Target height    [m]
 double gTheta;                        //!< Initial launch angle
 
 // Dimensional factors
-const static double chi = L;               //!< Space dimensional factor
-const static double mu  = 1.0;             //!< Mass dimensional factor
-const static double g   = 9.81;            //!< Gravity
-const static double tau = sqrt(chi / g);   //!< Time dimensional factor
-const static double b   = B * chi / mu;    //!< Friction dimensional factor
-const static double v0  = V0 * tau / chi;  //!< Veolocity dimensional factor
+const static double chi    = L;               //!< Space dimensional factor
+const static double mu     = 1.0;             //!< Mass dimensional factor
+const static double g      = 9.81;            //!< Gravity [m/s^2]
+const static double tau    = sqrt(chi / g);   //!< Time dimensional factor
+const static double b      = B * chi / mu;    //!< Adimensional friction
+const static double v0     = V0 * tau / chi;  //!< Adimensional speed
+const static double y_targ = Y_targ / L;      //!< Adimensional target height
 
 /**
  * @brief      Right Hand Side of the system of ODEs.
@@ -99,8 +100,8 @@ int main() {
 		out.open("data/constants.csv");
 		if (!out.good()) throw exception("Invalid file.");
 
-		out << "chi,tau,mu,B,b" << endl;
-		out << chi << "," << tau << "," << mu << "," << B << "," << b << endl;
+		out << "chi,tau,mu,B,b,Y_targ" << endl;
+		out << chi << "," << tau << "," << mu << "," << B << "," << b << "," << Y_targ << endl;
 
 		out.close();
 	} catch (std::exception& err) {
@@ -388,7 +389,7 @@ double y_t(const double& time, const double& theta, const bool print) {
 				<< endl;
 	}
 	out.close();
-	return y[1];
+	return y[1] - y_targ;
 }
 
 double Residual(const double& theta) {

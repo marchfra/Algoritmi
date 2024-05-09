@@ -4,6 +4,15 @@ import numpy as np
 import pandas as pd
 from ticker import multiple_formatter
 
+
+def draw_target(ax: mpl.axes._axes.Axes) -> None:
+	'''
+	This function draws the target on the supplies axis.
+	'''
+	ax.scatter(L, H, c='black', marker='X', s=75, zorder=10)
+	ax.scatter(L, H, c='white', marker='x', s=25, zorder=10)
+
+
 # Constants
 IMAGES_FOLDER = 'images'
 SAVE_IMAGES = False
@@ -25,11 +34,13 @@ tau = float(df['tau'][0])
 mu = float(df['mu'][0])
 B = float(df['B'][0])
 b = float(df['b'][0])
+H = float(df['Y_targ'][0])
 
 print(f'+------------------------------+')
 print(f'|           CONSTANTS          |')
 print(f'+------------------------------+')
 print(f'|         L = {L:<7.1f} m        |')
+print(f'|         H = {H:<7.1f} m        |')
 print(f'|       tau = {tau:<7.5f} s        |')
 print(f'|        mu = {mu:<7.2f} kg       |')
 print(f'|         B = {B:<7.1e} kg/m     |')
@@ -53,7 +64,8 @@ for i, g in enumerate(list(groups)[::DOWNSAMPLE]):
 	x = dfgroup.get_group(g)['x'].to_numpy()
 	y = dfgroup.get_group(g)['y'].to_numpy()
 	ax.plot(x, y, c=colors[i % len(colors)], label=f'{g} rad')
-ax.axvline(L, c='k', ls='--', alpha=.7)
+# ax.axvline(L, c='k', ls='--', alpha=.7)
+draw_target(ax)
 
 ax.set_title(rf'Shooting up to $x = ({L} + \epsilon)$ m, $B = {B}$ kg/m')
 ax.set_xlabel(r'$x$ [m]')
@@ -74,7 +86,6 @@ if SAVE_IMAGES:
 
 # Import data
 t1 = pd.read_csv('data/x_t.csv')['t1'].to_numpy()
-
 
 # Create figure
 fig, ax = plt.subplots(1, 1)
@@ -115,7 +126,8 @@ for i, g in enumerate(list(groups2)[::DOWNSAMPLE]):
 	x = df2group.get_group(g)['x'].to_numpy()
 	y = df2group.get_group(g)['y'].to_numpy()
 	ax.plot(x, y, c=colors[i % len(colors)], label=f'{g:.2f} rad')
-ax.axvline(L, c='k', ls='--', alpha=.7)
+# ax.axvline(L, c='k', ls='--', alpha=.7)
+draw_target(ax)
 
 ax.set_title(rf'Shooting up to $x = {L}$ m, $B = {B}$ kg/m')
 ax.set_xlabel(r'$x$ [m]')
@@ -182,7 +194,8 @@ for g in groups:
 	x = df.get_group(g)['x']
 	y = df.get_group(g)['y']
 	ax.plot(x, y, label=f'{g:.2f} rad')
-ax.axvline(L, c='k', ls='--', alpha=0.7)
+# ax.axvline(L, c='k', ls='--', alpha=0.7)
+draw_target(ax)
 
 ax.set_title(rf'Optimal trajectory, $B = {B}$ kg/m')
 ax.set_xlabel(r'$x$ [m]')
