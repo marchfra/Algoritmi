@@ -122,7 +122,7 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation of the ODE Solvers step functions. </p>
 <dl class="section author"><dt>Author</dt><dd>Francesco Marchisotti</dd></dl>
-<dl class="section date"><dt>Date</dt><dd>19/11/2023 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>01/05/2024 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a2cf3984abbdc7c30925710d2c4f40737" name="a2cf3984abbdc7c30925710d2c4f40737"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2cf3984abbdc7c30925710d2c4f40737">&#9670;&#160;</a></span>eulerStep()</h2>
@@ -353,7 +353,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Position Verlet method step. </p>
-<p>Takes one step in time using Position Verlet method. The system of first order ODEs is dY_i/dt = R_i(Y), where all equations are derived from second order ODEs in the form F = ma.</p>
+<p>Takes one step in time using Position Verlet method. The system of first order ODEs is dY_i/dt = R_i(Y), where all equations are derived from second order ODEs in the form F = ma. The system of equation must contain in the first half all the positions and in the second half all the velocities.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>The value of time from which to take the step. </td></tr>
@@ -412,7 +412,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Velocity Verlet method step. </p>
-<p>Takes one step in time using Velocity Verlet method. The system of first order ODEs is dY_i/dt = R_i(Y), where all equations are derived from second order ODEs in the form F = ma.</p>
+<p>Takes one step in time using Velocity Verlet method. The system of first order ODEs is dY_i/dt = R_i(Y), where all equations are derived from second order ODEs in the form F = ma. The system of equation must contain in the first half all the positions and in the second half all the velocities.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">t</td><td>The value of time from which to take the step. </td></tr>

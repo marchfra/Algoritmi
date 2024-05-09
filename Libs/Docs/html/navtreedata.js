@@ -29,11 +29,22 @@ var NAVTREE =
     [ "Project #2: Realistic Projectile Motion", "md__2_users_2francescomarchisotti_2_documents_2_uni_2_anno__4_2_algoritmi_2_projectile_motion_2_assignment.html", [
       [ "Writing the project", "md__2_users_2francescomarchisotti_2_documents_2_uni_2_anno__4_2_algoritmi_2_projectile_motion_2_assignment.html#autotoc_md1", null ]
     ] ],
+    [ "Classes", "annotated.html", [
+      [ "Class List", "annotated.html", "annotated_dup" ],
+      [ "Class Index", "classes.html", null ],
+      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
+      [ "Class Members", "functions.html", [
+        [ "All", "functions.html", null ],
+        [ "Functions", "functions_func.html", null ],
+        [ "Variables", "functions_vars.html", null ]
+      ] ]
+    ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
         [ "All", "globals.html", null ],
         [ "Functions", "globals_func.html", null ],
+        [ "Variables", "globals_vars.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
@@ -42,7 +53,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"debug_8hpp.html"
+"_projectile_motion_2src_2main_8cpp.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

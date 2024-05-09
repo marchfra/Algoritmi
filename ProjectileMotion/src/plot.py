@@ -9,8 +9,13 @@ def draw_target(ax: mpl.axes._axes.Axes) -> None:
 	'''
 	This function draws the target on the supplies axis.
 	'''
-	ax.scatter(L, H, c='black', marker='X', s=75, zorder=10)
-	ax.scatter(L, H, c='white', marker='x', s=25, zorder=10)
+	ax.scatter(L, H, c='black', marker='o', s=360)
+	ax.scatter(L, H, c='white', marker='o', s=350)
+	ax.scatter(L, H, c='black', marker='o', s=200)
+	ax.scatter(L, H, c='dodgerblue', marker='o', s=100)
+	ax.scatter(L, H, c='red', marker='o', s=40)
+	ax.scatter(L, H, c='yellow', marker='o', s=10)
+	ax.scatter(L, H, c='black', marker='.', s=0.5)
 
 
 # Constants
@@ -34,6 +39,7 @@ tau = float(df['tau'][0])
 mu = float(df['mu'][0])
 B = float(df['B'][0])
 b = float(df['b'][0])
+V0 = float(df['V0'][0])
 H = float(df['Y_targ'][0])
 
 print(f'+------------------------------+')
@@ -41,6 +47,7 @@ print(f'|           CONSTANTS          |')
 print(f'+------------------------------+')
 print(f'|         L = {L:<7.1f} m        |')
 print(f'|         H = {H:<7.1f} m        |')
+print(f'|        V0 = {V0:<7.2f} m/s     |')
 print(f'|       tau = {tau:<7.5f} s        |')
 print(f'|        mu = {mu:<7.2f} kg       |')
 print(f'|         B = {B:<7.1e} kg/m     |')
