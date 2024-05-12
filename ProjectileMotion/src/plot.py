@@ -20,7 +20,7 @@ def draw_target(ax: mpl.axes._axes.Axes) -> None:
 
 # Constants
 IMAGES_FOLDER = 'images'
-SAVE_IMAGES = True
+SAVE_IMAGES = False
 DOWNSAMPLE = 4
 DRAW_LEGENDS = True
 

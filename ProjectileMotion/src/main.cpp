@@ -24,6 +24,8 @@ using std::cin;
 using std::cout;
 using std::endl;
 
+int numIntegrations = 0;
+
 // Problem data
 const static double B      = 4.0e-5;  //!< Drag coefficient [kg/m]
 const static double V0     = 9.90;    //!< Initial velocity [m/s]
@@ -131,9 +133,9 @@ int main() {
 
 	// Integration range
 	const double t0    = 0.0;                   //!< Starting point
-	const double t_max = 10.0;                  //!< Ending point
+	const double t_max = 3.0;                   //!< Ending point
 	const int nStep    = 1000;                  //!< Number of steps
-	const double dt    = (t_max - t0) / nStep;  //!< Time step size
+	double dt          = (t_max - t0) / nStep;  //!< Time step size
 
 	// Initial angle
 	const double theta_min = 0.65;  //!< Min guess for launch angle
@@ -144,6 +146,7 @@ int main() {
 
 	plot(t0, dt, nStep, theta_min, dTheta, nTheta);
 
+	numIntegrations = 0;
 
 	/* +------------------------------------------+
 	 * | STEP 1: FINDING ROOTS OF y(x=1) - y_targ |
@@ -185,6 +188,37 @@ int main() {
 	}
 
 
+	cout << "Number of integrations: " << numIntegrations << endl;
+
+
+	/* +------------------------------------+
+	 * | STEP 2: FINDING t1 FOR EACH THETA* |
+	 * +------------------------------------+ */
+
+	const double t_low = 1.0;     //!< Lower bound for root searching
+	const double t_upp = 2.0;     //!< Upper bound for root searching
+	const double eps_t = 1.0e-7;  //!< Precision for root searching
+
+	double t_imp[4];  //!< Array with the time of impact for each launch angle
+
+	// Finding roots of x(t) - 1
+	for (int i = 0; i < nTheta_star; i++) {
+		double roots[2];
+		int nRoots;
+		double theta = theta_star[i];
+		try {
+			findRoots(x_t, theta, t_low, t_upp, eps_t, roots, nRoots, 2,
+			          "secant");
+		} catch (std::exception& err) {
+			cerr << "Caught " << typeid(err).name() << " : " << err.what()
+				 << endl;
+		} catch (...) {
+			cerr << "Sorry, could not catch the error whatever it is." << endl;
+		}
+
+		t_imp[i] = roots[0];
+	}
+
 	/* +---------------------------------+
 	 * | STEP 2: INTEGRATING WITH THETA* |
 	 * +---------------------------------+ */
@@ -195,25 +229,24 @@ int main() {
 
 		out << "t,x,y,u,v,theta" << endl;  // Output file header
 		for (int i = 0; i < nTheta_star; i++) {
-			double t     = t0;             // Reinitialise time
+			double t = t0;                 // Reinitialise time
+			dt = (t_imp[i] - t0) / nStep;  // Set dt to exactly reach target
 			double theta = theta_star[i];  // Select one of the optimal angles
 			double y[]   = {0.0, 0.0, v0 * cos(theta),
-			                v0 * sin(theta)};  // Initialize solution
+			                v0 * sin(theta)};  // Initialise solution
 			int nEq =
 				static_cast<int>(sizeof(y)) / static_cast<int>(sizeof(y[0]));
 			out << tau * t << "," << chi * y[0] << "," << chi * y[1] << ","
 				<< chi / tau * y[2] << "," << chi / tau * y[3] << "," << theta
 				<< endl;  // Output initial condition
 			// Integration
-			int ctr = 0;  // Eternal loop exit condition
-			while (y[0] < 1.0 && ctr < nStep) {
+			for (int j = 0; j < nStep; j++) {
 				pVerlet(t, y, RHS, dt, nEq);
 				t += dt;
 
 				out << tau * t << "," << chi * y[0] << "," << chi * y[1] << ","
 					<< chi / tau * y[2] << "," << chi / tau * y[3] << ","
 					<< theta << endl;
-				ctr++;
 			}
 		}
 		out.close();
@@ -257,6 +290,8 @@ double x_t(const double& time, const double& theta) {
 		t += dt;
 	}
 
+	numIntegrations++;
+
 	return y[0] - 1.0;
 }
 
@@ -291,6 +326,7 @@ double y_t(const double& time, const double& theta, const bool print) {
 				<< chi / tau * y[2] << "," << chi / tau * y[3] << "," << theta
 				<< endl;
 	}
+	numIntegrations++;
 	out.close();
 	return y[1] - y_targ;
 }
@@ -351,7 +387,7 @@ void plot(const double& t0, const double& dt, const int& nStep,
 		for (int j = 0; j < nTheta; j++) {
 			t          = t0;  // Reinitialise time
 			double y[] = {0.0, 0.0, v0 * cos(gTheta),
-			              v0 * sin(gTheta)};  // Initialize solution
+			              v0 * sin(gTheta)};  // Initialise solution
 			out << tau * t << "," << chi * y[0] << "," << chi * y[1] << ","
 				<< chi / tau * y[2] << "," << chi / tau * y[3] << "," << gTheta
 				<< endl;  // Output initial condition
