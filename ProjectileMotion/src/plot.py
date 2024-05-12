@@ -192,7 +192,7 @@ for g in groups:
 # ax.axvline(L, c='k', ls='--', alpha=0.7)
 draw_target(ax)
 
-ax.set_title(rf'Optimal trajectory, $B = {B}$ kg/m')
+ax.set_title(rf'Final trajectory, $B = {B}$ kg/m')
 ax.set_xlabel(r'$x$ [m]')
 ax.set_ylabel(r'$y$ [m]')
 
@@ -200,7 +200,58 @@ ax.legend(title='Launch angle')
 
 fig.tight_layout()
 if SAVE_IMAGES:
-	fig.savefig(f'{IMAGES_FOLDER}/Optimal trajectories.png', dpi=200)
+	fig.savefig(f'{IMAGES_FOLDER}/Final trajectories.png', dpi=200)
+
+
+# +-------------------------------------+
+# | COMPARISON WITH ANALYTICAL SOLUTION |
+# +-------------------------------------+ */
+
+# def analytical(x, V0, sol_number):
+# 	'''
+# 	This function returns the y-position for a projectile launched with speed v0.
+
+# 	Params:
+# 	-------
+# 	x          : the x-position of the projectile (dimensional)
+# 	V0         : the initial speed (adimensional)
+# 	sol_number : whether return the solution or π/2 - the solution
+# 	'''
+
+# 	if sol_number != 0 and sol_number != 1:
+# 		raise ("Error")
+
+# 	x = x / L
+# 	angle = 0.5 * np.arcsin(1 / V0**2)
+# 	theta = angle if sol_number == 0 else 0.5 * np.pi - angle
+# 	u0 = V0 * np.cos(theta)
+# 	v0 = V0 * np.sin(theta)
+# 	return -0.5 * (x / u0)**2 + v0 / u0 * x
+
+
+# # Import data
+# df = pd.read_csv('data/analytical_solution.csv')
+# df = df.groupby(by=df['theta'])
+# groups = df.groups.keys()
+
+# # Create figure
+# fig, ax = plt.subplots(1, 1)
+# v0 = V0 * tau / L
+# for i, g in enumerate(groups):
+# 	x = df.get_group(g)['x']
+# 	y = df.get_group(g)['y']
+# 	ax.plot(x, abs(y - L * analytical(x, v0, i)), label=f'{g:.2f} rad')
+# draw_target(ax)
+
+# ax.set_title(rf'Comparison with analytical solution')
+# ax.set_xlabel(r'$x$ [m]')
+# ax.set_ylabel(r'$y$ [m]')
+
+# ax.legend(title='Launch angle')
+
+# fig.tight_layout()
+# if SAVE_IMAGES:
+# 	fig.savefig(f'{IMAGES_FOLDER}/Analytical trajectories.png', dpi=200)
 
 
 plt.show()

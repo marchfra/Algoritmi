@@ -35,10 +35,11 @@ const static double Y_targ = -0.2;    //!< Target height    [m]
 double gTheta;                        //!< Initial launch angle
 
 // Dimensional factors
-const static double chi    = L;               //!< Space dimensional factor
-const static double mu     = 1.0;             //!< Mass dimensional factor
-const static double g      = 9.81;            //!< Gravity [m/s^2]
-const static double tau    = sqrt(chi / g);   //!< Time dimensional factor
+const static double chi = L;              //!< Space dimensional factor [m]
+const static double mu  = 1.0;            //!< Mass dimensional factor [kg]
+const static double g   = 9.81;           //!< Gravity [m/s^2]
+const static double tau = sqrt(chi / g);  //!< Time dimensional factor [s]
+
 const static double b      = B * chi / mu;    //!< Adimensional friction
 const static double v0     = V0 * tau / chi;  //!< Adimensional speed
 const static double y_targ = Y_targ / L;      //!< Adimensional target height
@@ -192,9 +193,9 @@ int main() {
 	cout << "Number of integrations: " << numIntegrations << endl;
 
 
-	/* +------------------------------------+
-	 * | STEP 2: FINDING t1 FOR EACH THETA* |
-	 * +------------------------------------+ */
+	/* +---------------------------------------+
+	 * | STEP 2: FINDING t_imp FOR EACH THETA* |
+	 * +---------------------------------------+ */
 
 	const double t_low = 1.0;     //!< Lower bound for root searching
 	const double t_upp = 2.0;     //!< Upper bound for root searching
@@ -221,7 +222,7 @@ int main() {
 	}
 
 	/* +---------------------------------+
-	 * | STEP 2: INTEGRATING WITH THETA* |
+	 * | STEP 3: INTEGRATING WITH THETA* |
 	 * +---------------------------------+ */
 
 	try {
