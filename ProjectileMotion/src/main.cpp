@@ -24,7 +24,8 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-int numIntegrations = 0;
+int numIntegrations =
+	0;  //!< Number of integrations of the ODEs performed to reach a solution
 
 // Problem data
 const static double B      = 4.0e-5;  //!< Drag coefficient [kg/m]
