@@ -254,4 +254,37 @@ if SAVE_IMAGES:
 # 	fig.savefig(f'{IMAGES_FOLDER}/Analytical trajectories.png', dpi=200)
 
 
+# +-------------------+
+# | CONVERGENCE STUDY |
+# +-------------------+ */
+
+
+# Import data
+df = pd.read_csv('data/convergence.csv')
+df = df.groupby(by=df['theta'])
+groups = df.groups.keys()
+
+# Create figure
+fig, ax = plt.subplots(1, 1)
+for i, g in enumerate(groups):
+	nStep = df.get_group(g)['nStep']
+	yEnd = df.get_group(g)['yEnd']
+	ax.scatter(nStep, yEnd, label=f'{g:.2f} rad')
+# n = np.array([2**n for n in range(2, 11)])
+# ax.plot(n, -4 * np.log(n))
+
+ax.set_xscale('log')
+# ax.set_yscale('log')
+
+ax.set_title(rf'Convergence')
+ax.set_xlabel(r'nStep')
+ax.set_ylabel(r'$y(x = 1)$ [m]')
+
+ax.legend(title='Launch angle')
+
+fig.tight_layout()
+if SAVE_IMAGES:
+	fig.savefig(f'{IMAGES_FOLDER}/Convergence.png', dpi=200)
+
+
 plt.show()

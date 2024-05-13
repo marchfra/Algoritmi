@@ -25,13 +25,13 @@ using std::cout;
 using std::endl;
 
 int numIntegrations =
-	0;  //!< Number of integrations of the ODEs performed to reach a solution
+	-1;  //!< Number of integrations of the ODEs performed to reach a solution
 
 // Problem data
-const static double B      = 4.0e-5;  //!< Drag coefficient [kg/m]
-const static double V0     = 9.90;    //!< Initial velocity [m/s]
+const static double B      = 0.0;  // 4.0e-5;  //!< Drag coefficient [kg/m]
+const static double V0     = 10.0;  // 9.90;    //!< Initial velocity [m/s]
 const static double L      = 10.0;    //!< Target distance  [m]
-const static double Y_targ = -0.2;    //!< Target height    [m]
+const static double Y_targ = 0.0;  // -0.2;    //!< Target height    [m]
 double gTheta;                        //!< Initial launch angle
 
 // Dimensional factors
@@ -250,6 +250,10 @@ int main() {
 					<< chi / tau * y[2] << "," << chi / tau * y[3] << ","
 					<< theta << endl;
 			}
+			// std::ofstream out2;
+			// out2.open("data/convergence.csv", std::ios_base::app);
+			// out2 << "1000," << y[1] << "," << theta << endl;
+			// out2.close();
 		}
 		out.close();
 	} catch (std::exception& err) {
