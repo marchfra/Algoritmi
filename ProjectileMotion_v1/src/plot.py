@@ -89,7 +89,7 @@ if SAVE_IMAGES:
 
 # +-----------------------------------+
 # | STEP 2: FINDING ROOTS OF x(t) = L |
-# +-----------------------------------+ */
+# +-----------------------------------+
 
 # Import data
 t1 = pd.read_csv('data/x_t.csv')['t1'].to_numpy()
@@ -151,7 +151,7 @@ if SAVE_IMAGES:
 
 # +----------------------------+
 # | STEP 3: RESIDUAL OF y(x=L) |
-# +----------------------------+ */
+# +----------------------------+
 
 # Import data
 df_res = pd.read_csv('data/residual.csv')
@@ -176,7 +176,7 @@ if SAVE_IMAGES:
 
 # +---------------------------------+
 # | STEP 5: INTEGRATING WITH THETA* |
-# +---------------------------------+ */
+# +---------------------------------+
 
 # Import data
 df = pd.read_csv('data/final_trajectories.csv')
@@ -205,58 +205,60 @@ if SAVE_IMAGES:
 
 # +-------------------------------------+
 # | COMPARISON WITH ANALYTICAL SOLUTION |
-# +-------------------------------------+ */
+# +-------------------------------------+
 
-# def analytical(x, V0, sol_number):
-# 	'''
-# 	This function returns the y-position for a projectile launched with speed v0.
+def analytical(x, V0, sol_number):
+	'''
+	This function returns the y-position for a projectile launched with speed v0.
 
-# 	Params:
-# 	-------
-# 	x          : the x-position of the projectile (dimensional)
-# 	V0         : the initial speed (adimensional)
-# 	sol_number : whether return the solution or π/2 - the solution
-# 	'''
+	Params:
+	-------
+	x          : the x-position of the projectile (dimensional)
+	V0         : the initial speed (dimensional)
+	sol_number : whether return the solution or π/2 - the solution
+	'''
 
-# 	if sol_number != 0 and sol_number != 1:
-# 		raise ("Error")
+	if sol_number != 0 and sol_number != 1:
+		raise ("Error")
 
-# 	x = x / L
-# 	angle = 0.5 * np.arcsin(1 / V0**2)
-# 	theta = angle if sol_number == 0 else 0.5 * np.pi - angle
-# 	u0 = V0 * np.cos(theta)
-# 	v0 = V0 * np.sin(theta)
-# 	return -0.5 * (x / u0)**2 + v0 / u0 * x
+	x = x / L
+	V0 = V0 * tau / L
+	angle = 0.5 * np.arcsin(1 / V0**2)
+	theta = angle if sol_number == 0 else 0.5 * np.pi - angle
+	u0 = V0 * np.cos(theta)
+	v0 = V0 * np.sin(theta)
+	return L * (-0.5 * (x / u0)**2 + v0 / u0 * x)
 
 
-# # Import data
-# df = pd.read_csv('data/analytical_solution.csv')
-# df = df.groupby(by=df['theta'])
-# groups = df.groups.keys()
+# Import data
+df = pd.read_csv('data/analytical_solution.csv')
+df = df.groupby(by=df['theta'])
+groups = df.groups.keys()
 
-# # Create figure
-# fig, ax = plt.subplots(1, 1)
-# v0 = V0 * tau / L
-# for i, g in enumerate(groups):
-# 	x = df.get_group(g)['x']
-# 	y = df.get_group(g)['y']
-# 	ax.plot(x, abs(y - L * analytical(x, v0, i)), label=f'{g:.2f} rad')
-# draw_target(ax)
+# Create figure
+fig, ax = plt.subplots(1, 1)
+for i, g in enumerate(groups):
+	x = df.get_group(g)['x']
+	y = df.get_group(g)['y']
+	ax.plot(x, abs(y - analytical(x, V0, i)), label=f'{g:.2f} rad')
+	# ax.plot(x, y, label=f'{g:.2f} rad')
+	# ax.plot(x, analytical(x, V0, i), label=f'{g:.2f} rad')
+draw_target(ax)
 
-# ax.set_title(rf'Comparison with analytical solution')
-# ax.set_xlabel(r'$x$ [m]')
-# ax.set_ylabel(r'$y$ [m]')
+ax.set_title(rf'Comparison with analytical solution')
+ax.set_xlabel(r'$x$ [m]')
+ax.set_ylabel(r'$y$ [m]')
 
-# ax.legend(title='Launch angle')
+ax.legend(title='Launch angle')
 
-# fig.tight_layout()
-# if SAVE_IMAGES:
-# 	fig.savefig(f'{IMAGES_FOLDER}/Analytical trajectories.png', dpi=200)
+fig.tight_layout()
+if SAVE_IMAGES:
+	fig.savefig(f'{IMAGES_FOLDER}/Comparison with analytical.png', dpi=200)
 
 
 # +-------------------+
 # | CONVERGENCE STUDY |
-# +-------------------+ */
+# +-------------------+
 
 
 # Import data
@@ -268,8 +270,10 @@ groups = df.groups.keys()
 fig, ax = plt.subplots(1, 1)
 for i, g in enumerate(groups):
 	nStep = df.get_group(g)['nStep']
-	yEnd = df.get_group(g)['yEnd']
-	ax.scatter(nStep, yEnd, label=f'{g:.2f} rad')
+	xHalf = df.get_group(g)['xHalf']
+	yHalf = df.get_group(g)['yHalf']
+	ax.scatter(nStep, np.abs(yHalf - analytical(xHalf, V0, i)),
+	           label=f'{g:.2f} rad')
 # n = np.array([2**n for n in range(2, 11)])
 # ax.plot(n, -4 * np.log(n))
 
@@ -278,7 +282,8 @@ ax.set_xscale('log')
 
 ax.set_title(rf'Convergence')
 ax.set_xlabel(r'nStep')
-ax.set_ylabel(r'$y(x = 1)$ [m]')
+ax.set_ylabel(
+	rf'$\Delta y(x = {df.get_group(list(groups)[0])['xHalf'][0]:.2f})$ [m]')
 
 ax.legend(title='Launch angle')
 
