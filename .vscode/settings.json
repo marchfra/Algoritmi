@@ -108,4 +108,5 @@
 		"thread": "cpp",
 		"cinttypes": "cpp"
 	},
+	"python.analysis.typeCheckingMode": "basic",
 }

@@ -19,6 +19,8 @@ LIBNAME = algo
 
 DATADIR = data
 
+IMAGESDIR = images
+
 
 .PHONY: all
 all: $(BIN)  ## Build all
@@ -39,7 +41,7 @@ run: $(DATADIR)  ## Run all
 
 
 .PHONY: plot
-plot:  ## Create plot
+plot: $(IMAGESDIR)  ## Create plot
 	@echo "Making plot"
 	@$(PYTHON) $(SRCDIR)/plot.py
 
@@ -52,6 +54,9 @@ $(BINDIR):  ## Create binaries directory
 	mkdir $@
 
 $(DATADIR): ## Create output data directory
+	mkdir $@
+
+$(IMAGESDIR): ## Create images directory
 	mkdir $@
 
 
@@ -88,7 +93,7 @@ check-style:  ## Check clang-format
 
 .PHONY: clean
 clean:  ## Clean
-	$(RM) -r $(OBJDIR) $(BINDIR) $(DATADIR)
+	$(RM) -r $(OBJDIR) $(BINDIR) $(DATADIR) $(IMAGESDIR)
 	@echo make clean: done
 
 

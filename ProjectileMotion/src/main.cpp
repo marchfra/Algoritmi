@@ -22,14 +22,24 @@ using std::cin;
 using std::cout;
 using std::endl;
 
+#define FRICTION 0
+
 int numIntegrations = 0;  //!< Number of integrations of the ODEs performed
 
 // Problem data
+#if FRICTION
 const static double B      = 4.0e-5;  //!< Drag coefficient [kg/m]
 const static double V0     = 9.90;    //!< Initial velocity [m/s]
 const static double L      = 10.0;    //!< Target distance  [m]
 const static double Y_targ = -0.2;    //!< Target height    [m]
 double gTheta;                        //!< Initial launch angle
+#else
+const static double B      = 0.0;   //!< Drag coefficient [kg/m]
+const static double V0     = 10.0;  //!< Initial velocity [m/s]
+const static double L      = 10.0;  //!< Target distance  [m]
+const static double Y_targ = 0.0;   //!< Target height    [m]
+double gTheta;                      //!< Initial launch angle
+#endif
 
 // Dimensional factors
 const static double chi = L;              //!< Space dimensional factor [m]
@@ -39,6 +49,7 @@ const static double tau = sqrt(chi / g);  //!< Time dimensional factor [s]
 
 const static double b      = B * chi / mu;    //!< Adimensional friction
 const static double v0     = V0 * tau / chi;  //!< Adimensional speed
+const static double x_targ = 1.0;             //!< Adimensional target distance
 const static double y_targ = Y_targ / L;      //!< Adimensional target height
 
 /**
@@ -155,12 +166,27 @@ void integrate(double y[], const double& theta);
 double Residual(const double& theta);
 
 int main() {
+#if FRICTION
+	cout << "===== FRICTION =====" << endl << endl;
+#else
+	cout << "===== NO FRICTION =====" << endl << endl;
+#endif
+
 	printConstants();
 
 	const double thetaMin = 0.65;    // Minimum launch angle
 	const double thetaMax = 0.92;    // Maximum launch angle
 	const int nTheta      = 32;      // Number of launch angles explored
 	const double thetaTol = 1.0e-7;  // Tolerance for root searching
+
+	// std::ofstream linInterp;
+	// linInterp.open("data/linear.csv");
+	// linInterp << "x,y" << endl;
+	// for (int i = 0; i < 100; i++) {
+	// 	double x = -10.0 + 0.2 * i;
+	// 	linInterp << x << "," << linearInterp(x, -3, 4, 2, 1.5) << endl;
+	// }
+	// linInterp.close();
 
 	shootingPlot(thetaMin, thetaMax, nTheta);
 
@@ -173,7 +199,8 @@ int main() {
 
 		cout << "Integrations performed: " << numIntegrations << endl;
 
-		cout << "Optimal thetas [rad]: ";
+		cout.precision(7);
+		cout << "Optimal thetas [rad] (+/- " << thetaTol << "): ";
 		printVector(roots, nRoots);
 	} catch (std::exception& err) {
 		cerr << "Caught " << typeid(err).name() << " : " << err.what() << endl;
@@ -182,16 +209,36 @@ int main() {
 	}
 
 	std::ofstream finalTrajectories;
+#if FRICTION
 	finalTrajectories.open("data/finalTrajectories.csv");
-	// finalTrajectories.open("data/noFriction.csv");
+#else
+	finalTrajectories.open("data/noFriction.csv");
+#endif
 	finalTrajectories << "t,x,y,u,v,theta" << endl;
 
 	for (int i = 0; i < nRoots; i++) {
 		double y[4];
 		integrate(y, roots[i], finalTrajectories);
 	}
-
 	finalTrajectories.close();
+
+	std::ofstream out;
+	out.open("data/data.csv");
+	out << "t,x,y,u,v,theta" << endl;
+
+	double y[] = {0.0, 0.0, v0 * cos(M_PI / 4), v0 * sin(M_PI / 4)};
+	double t = 0.0;
+	double dt = 1.0e-3;
+	for (int i = 0; i < 1000; i++) {
+		rk4Step(t, y, RHS, dt, 4);
+		t += dt;
+
+		out << t << "," << y[0] << "," << y[1] << "," << y[2] << "," << y[3] << endl;
+	}
+
+	out.close();
+
+
 	return 0;
 }
 
@@ -299,7 +346,7 @@ void integration(void (*RHSFunc)(const double& t, double* Y, double* RHS),
 		outFile << t << "," << y[0] << "," << y[1] << "," << y[2] << "," << y[3]
 				<< "," << theta << endl;
 
-		if (xLast < 1.0 && y[0] > 1.0) exitCondition = true;
+		if (xLast < x_targ && y[0] > x_targ) exitCondition = true;
 	}
 }
 
@@ -322,5 +369,5 @@ double Residual(const double& theta) {
 
 	double xCurrent = y[0], yCurrent = y[1];
 
-	return linearInterp(1.0, xLast, yLast, xCurrent, yCurrent) - y_targ;
+	return linearInterp(x_targ, xLast, yLast, xCurrent, yCurrent) - y_targ;
 }
