@@ -216,6 +216,29 @@ def linear_plot() -> None:
 	savefig(fig, 'linear')
 
 
+def quadratic_plot() -> None:
+	# Import data
+	df = pd.read_csv(f'{DATA_FOLDER}/quadratic.csv')
+
+	# Manipulate data
+	x = df['x'].to_numpy()
+	y = df['y'].to_numpy()
+
+	# Create figure
+	fig, ax = plt.subplots(1, 1)
+	ax.plot(x, y)
+	ax.scatter(-3, 4, c='k')
+	ax.scatter(2, 1.5, c='k')
+	ax.scatter(1.1, 2.3, c='k')
+
+	ax.set_title('Quadratic interpolation test')
+	ax.set_xlabel(r'$x$ [m]')
+	ax.set_ylabel(r'$y$ [m]')
+
+	fig.tight_layout()
+	savefig(fig, 'linear')
+
+
 def testing_plot() -> None:
 	# Import data
 	df = pd.read_csv(f'{DATA_FOLDER}/data.csv')
@@ -277,6 +300,7 @@ def convergence_plot() -> None:
 def main() -> None:
 	# print_constants()
 	# linear_plot()
+	# quadratic_plot()
 	# shooting_plot()
 	residual_plot()
 	# final_plot()
