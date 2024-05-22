@@ -6,9 +6,6 @@
  * @brief Main file for the course's final project.
  *
  * @date 2024-05-15
- *
- * @todo quadraticInterp using Gaussian elimination to solve the system of
- * equations
  */
 
 #include "../../Libs/include/exception.hpp"
@@ -79,24 +76,6 @@ void RHS(const double& t, double Y[], double R[]);
  */
 double linearInterp(const double& x, const double& x1, const double& y1,
                     const double& x2, const double& y2);
-
-/**
- * @brief     This function returns the quadratic interpolation between three
- * 			  points evaluated at a certain x.
- *
- * @param[in] x   The point at which to evaluate the interpolation.
- * @param[in] x1  The x-coordinate of the first point.
- * @param[in] y1  The y-coordinate of the first point.
- * @param[in] x2  The x-coordinate of the second point.
- * @param[in] y2  The y-coordinate of the second point.
- * @param[in] x3  The x-coordinate of the third point.
- * @param[in] y3  The y-coordinate of the third point.
- *
- * @return    The interpolated parabola evaluated at x.
- */
-double quadraticInterp(const double& x, const double& x1, const double& y1,
-                       const double& x2, const double& y2, const double& x3,
-                       const double& y3);
 
 /**
  * @brief          Function that performs the integration and prints to file.
@@ -290,38 +269,6 @@ double linearInterp(const double& x, const double& x1, const double& y1,
 	double q = y1 - m * x1;
 	double y = m * x + q;
 	return y;
-}
-
-double quadraticInterp(const double& x, const double& x1, const double& y1,
-                       const double& x2, const double& y2, const double& x3,
-                       const double& y3) {
-	const int nPoints = 3;
-
-	double** M;
-	M    = new double*[nPoints];
-	M[0] = new double[nPoints * nPoints];
-	for (int i = 1; i < nPoints; i++) M[i] = M[i - 1] + nPoints;
-
-	// Define coefficient matrix
-	M[0][0] = x1 * x1;
-	M[0][1] = x1;
-	M[0][2] = 1;
-	M[1][0] = x2 * x2;
-	M[1][1] = x2;
-	M[1][2] = 1;
-	M[2][0] = x3 * x3;
-	M[2][1] = x3;
-	M[2][2] = 1;
-
-	double v[nPoints] = {y1, y2, y3};
-	double coeffs[nPoints];  //<! Array with the coefficients of the parabola
-
-	solveLinSystem(M, v, coeffs, nPoints);
-
-	delete[] M[0];
-	delete[] M;
-
-	return coeffs[0] * x*x + coeffs[1] * x + coeffs[2];
 }
 
 void printConstants() {
