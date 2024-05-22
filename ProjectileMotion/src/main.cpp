@@ -64,7 +64,7 @@ const static double y_targ = Y_targ / L;      //!< Adimensional target height
  * @param[in]  Y  The input values of the variables.
  * @param[out] R  The output values of the variables.
  */
-void RHS(const double& t, double Y[], double R[]);
+void RHS(const double &t, double Y[], double R[]);
 
 /**
  * @brief     This function returns the linear interpolation between two points
@@ -78,8 +78,8 @@ void RHS(const double& t, double Y[], double R[]);
  *
  * @return    The interpolated line evaluated at x.
  */
-double linearInterp(const double& x, const double& x1, const double& y1,
-                    const double& x2, const double& y2);
+double linearInterp(const double &x, const double &x1, const double &y1,
+                    const double &x2, const double &y2);
 
 /**
  * @brief     This function returns the quadratic interpolation between three
@@ -95,9 +95,9 @@ double linearInterp(const double& x, const double& x1, const double& y1,
  *
  * @return    The interpolated parabola evaluated at x.
  */
-double quadraticInterp(const double& x, const double& x1, const double& y1,
-                       const double& x2, const double& y2, const double& x3,
-                       const double& y3);
+double quadraticInterp(const double &x, const double &x1, const double &y1,
+                       const double &x2, const double &y2, const double &x3,
+                       const double &y3);
 
 /**
  * @brief          Function that performs the integration and prints to file.
@@ -115,10 +115,10 @@ double quadraticInterp(const double& x, const double& x1, const double& y1,
  * @param[in]      maxStep     Maximum number of integration steps.
  * @param[in]      outFile  Output file.
  */
-void integration(void (*RHSFunc)(const double& t, double* Y, double* RHS),
-                 double y[], const int& nEq, double t, const double& dt,
-                 const double& theta, double xLast[], double yLast[],
-                 const int& order, const int& maxStep, std::ofstream& outFile);
+void integration(void (*RHSFunc)(const double &t, double* Y, double* RHS),
+                 double y[], const int &nEq, double t, const double &dt,
+                 const double &theta, double xLast[], double yLast[],
+                 const int &order, const int &maxStep, std::ofstream &outFile);
 
 /**
  * @brief Prints problem data and dimensional constants to file.
@@ -132,8 +132,8 @@ void printConstants();
  * @param[in] thetaMax  Upper bound for launch angle.
  * @param[in] nTheta    Number of launch angles explored.
  */
-void shootingPlot(const double& thetaMin, const double& thetaMax,
-                  const double& nTheta);
+void shootingPlot(const double &thetaMin, const double &thetaMax,
+                  const double &nTheta);
 
 /**
  * @brief          Integration interface.
@@ -145,8 +145,8 @@ void shootingPlot(const double& thetaMin, const double& thetaMax,
  * @param[in]      order    Numer of previous times to save.
  * @param[in]      outFile  Output file.
  */
-void integrate(double y[], const double& theta, double xLast[], double yLast[],
-               const int& order, std::ofstream& outFile);
+void integrate(double y[], const double &theta, double xLast[], double yLast[],
+               const int &order, std::ofstream &outFile);
 
 /**
  * @overload
@@ -159,7 +159,7 @@ void integrate(double y[], const double& theta, double xLast[], double yLast[],
  * @param[out]     yLast  Array with y-position at previous time step.
  * @param[in]      order  Numer of previous times to save.
  */
-void integrate(double y[], const double& theta, double& xLast, double& yLast);
+void integrate(double y[], const double &theta, double &xLast, double &yLast);
 
 /**
  * @overload
@@ -170,7 +170,7 @@ void integrate(double y[], const double& theta, double& xLast, double& yLast);
  * @param[in]      theta    Launch angle.
  * @param[in]      outFile  Output file.
  */
-void integrate(double y[], const double& theta, std::ofstream& outFile);
+void integrate(double y[], const double &theta, std::ofstream &outFile);
 
 /**
  * @overload
@@ -180,7 +180,7 @@ void integrate(double y[], const double& theta, std::ofstream& outFile);
  * @param[in,out]  y      Array with the variables.
  * @param[in]      theta  Launch angle.
  */
-void integrate(double y[], const double& theta);
+void integrate(double y[], const double &theta);
 
 /**
  * @brief     Residual function for the BVP.
@@ -189,7 +189,7 @@ void integrate(double y[], const double& theta);
  *
  * @return    y(x = 1) - y_targ
  */
-double Residual(const double& theta);
+double Residual(const double &theta);
 
 int main() {
 #if FRICTION
@@ -237,7 +237,7 @@ int main() {
 		cout.precision(7);
 		cout << "Optimal thetas [rad] (+/- " << thetaTol << "): ";
 		printVector(roots, nRoots);
-	} catch (std::exception& err) {
+	} catch (std::exception &err) {
 		cerr << "Caught " << typeid(err).name() << " : " << err.what() << endl;
 	} catch (...) {
 		cerr << "Sorry, could not recognise the error." << endl;
@@ -279,17 +279,17 @@ int main() {
 	return 0;
 }
 
-double linearInterp(const double& x, const double& x1, const double& y1,
-                    const double& x2, const double& y2) {
+double linearInterp(const double &x, const double &x1, const double &y1,
+                    const double &x2, const double &y2) {
 	double m = (y2 - y1) / (x2 - x1);
 	double q = y1 - m * x1;
 	double y = m * x + q;
 	return y;
 }
 
-double quadraticInterp(const double& x, const double& x1, const double& y1,
-                       const double& x2, const double& y2, const double& x3,
-                       const double& y3) {
+double quadraticInterp(const double &x, const double &x1, const double &y1,
+                       const double &x2, const double &y2, const double &x3,
+                       const double &y3) {
 	const int nPoints = 3;
 
 	double** M;
@@ -330,7 +330,7 @@ void printConstants() {
 			<< V0 << "," << Y_targ << endl;
 
 		out.close();
-	} catch (std::exception& err) {
+	} catch (std::exception &err) {
 		cerr << "Caught " << typeid(err).name() << " : " << err.what() << endl;
 	} catch (...) {
 		cerr << "Sorry, could not recognise the error." << endl;
@@ -339,8 +339,8 @@ void printConstants() {
 	out.close();
 }
 
-void shootingPlot(const double& thetaMin, const double& thetaMax,
-                  const double& nTheta) {
+void shootingPlot(const double &thetaMin, const double &thetaMax,
+                  const double &nTheta) {
 	const double dTheta = (thetaMax - thetaMin) / nTheta;
 
 	std::ofstream shooting, residual;
@@ -360,8 +360,8 @@ void shootingPlot(const double& thetaMin, const double& thetaMax,
 	residual.close();
 }
 
-void integrate(double y[], const double& theta, double xLast[], double yLast[],
-               const int& order, std::ofstream& outFile) {
+void integrate(double y[], const double &theta, double xLast[], double yLast[],
+               const int &order, std::ofstream &outFile) {
 	const double y0[] = {0.0, 0.0, v0 * cos(theta), v0 * sin(theta)};
 	const int nEq =
 		static_cast<int>(sizeof(y0)) / static_cast<int>(sizeof(y0[0]));
@@ -375,34 +375,34 @@ void integrate(double y[], const double& theta, double xLast[], double yLast[],
 	            outFile);
 }
 
-void integrate(double y[], const double& theta, double xLast[], double yLast[],
-               const int& order) {
+void integrate(double y[], const double &theta, double xLast[], double yLast[],
+               const int &order) {
 	std::ofstream dummyOutfile;
 	integrate(y, theta, xLast, yLast, order, dummyOutfile);
 }
 
-void integrate(double y[], const double& theta, std::ofstream& outFile) {
+void integrate(double y[], const double &theta, std::ofstream &outFile) {
 	double dummyLast[2];
 	integrate(y, theta, dummyLast, dummyLast, 1, outFile);
 }
 
-void integrate(double y[], const double& theta) {
+void integrate(double y[], const double &theta) {
 	std::ofstream dummyOutfile;
 	double dummyLast[2];
 	integrate(y, theta, dummyLast, dummyLast, 1, dummyOutfile);
 }
 
-void integration(void (*RHSFunc)(const double& t, double* Y, double* RHS),
-                 double y[], const int& nEq, double t, const double& dt,
-                 const double& theta, double xLast[], double yLast[],
-                 const int& order, const int& maxStep, std::ofstream& outFile) {
+void integration(void (*RHSFunc)(const double &t, double* Y, double* RHS),
+                 double y[], const int &nEq, double t, const double &dt,
+                 const double &theta, double xLast[], double yLast[],
+                 const int &order, const int &maxStep, std::ofstream &outFile) {
 	outFile << t << "," << y[0] << "," << y[1] << "," << y[2] << "," << y[3]
 			<< "," << theta << endl;
 
 	numIntegrations++;
 	int stepCounter    = 0;
 	bool exitCondition = false;
-	while (stepCounter < maxStep && !exitCondition) {
+	while (stepCounter < maxStep & &!exitCondition) {
 		switch (order) {
 		case 1:
 			xLast[0] = y[0];  // Store x-position at previous time step
@@ -424,11 +424,11 @@ void integration(void (*RHSFunc)(const double& t, double* Y, double* RHS),
 		outFile << t << "," << y[0] << "," << y[1] << "," << y[2] << "," << y[3]
 				<< "," << theta << endl;
 
-		if (xLast[0] < x_targ && y[0] > x_targ) exitCondition = true;
+		if (xLast[0] < x_targ & &y[0] > x_targ) exitCondition = true;
 	}
 }
 
-void RHS(const double& t, double Y[], double R[]) {
+void RHS(const double &t, double Y[], double R[]) {
 	double u = Y[2];
 	double v = Y[3];
 
@@ -440,7 +440,7 @@ void RHS(const double& t, double Y[], double R[]) {
 	R[3] = -1.0 - b * u * mod_v;
 }
 
-double Residual(const double& theta) {
+double Residual(const double &theta) {
 	double y[4];
 	double xLast[2], yLast[2];
 	integrate(y, theta, xLast, yLast, gOrder);
