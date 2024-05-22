@@ -6,6 +6,9 @@
  * @brief Main file for the course's final project.
  *
  * @date 2024-05-15
+ *
+ * @todo quadraticInterp using Gaussian elimination to solve the system of
+ * equations
  */
 
 #include "../../Libs/include/exception.hpp"
@@ -25,6 +28,8 @@ using std::endl;
 #define FRICTION 0
 
 int numIntegrations = 0;  //!< Number of integrations of the ODEs performed
+
+double g_dt = 1.0e-3;
 
 // Problem data
 #if FRICTION
@@ -74,6 +79,24 @@ void RHS(const double& t, double Y[], double R[]);
  */
 double linearInterp(const double& x, const double& x1, const double& y1,
                     const double& x2, const double& y2);
+
+/**
+ * @brief     This function returns the quadratic interpolation between three
+ * 			  points evaluated at a certain x.
+ *
+ * @param[in] x   The point at which to evaluate the interpolation.
+ * @param[in] x1  The x-coordinate of the first point.
+ * @param[in] y1  The y-coordinate of the first point.
+ * @param[in] x2  The x-coordinate of the second point.
+ * @param[in] y2  The y-coordinate of the second point.
+ * @param[in] x3  The x-coordinate of the third point.
+ * @param[in] y3  The y-coordinate of the third point.
+ *
+ * @return    The interpolated parabola evaluated at x.
+ */
+double quadraticInterp(const double& x, const double& x1, const double& y1,
+                       const double& x2, const double& y2, const double& x3,
+                       const double& y3);
 
 /**
  * @brief          Function that performs the integration and prints to file.
@@ -194,7 +217,7 @@ int main() {
 	double roots[4];
 	int nRoots = -1;
 	try {
-		findRoots(Residual, thetaMin, thetaMax, thetaTol, roots, nRoots, 2,
+		findRoots(Residual, thetaMin, thetaMax, thetaTol, roots, nRoots, 4,
 		          "secant");
 
 		cout << "Integrations performed: " << numIntegrations << endl;
@@ -208,6 +231,22 @@ int main() {
 		cerr << "Sorry, could not recognise the error." << endl;
 	}
 
+	/*
+	 *  Convergence
+	 */
+
+	// std::ofstream out2;
+	// out2.open("data/convergence.csv", std::ios_base::app);
+	// out2 << "dt,theta1,theta2" << endl;
+	// out2 << g_dt << "," << roots[0] << "," << roots[1] << endl;
+
+	// for (int i = 0; i < nRoots; i++) {
+	// 	out2 << g_dt << "," << Residual(roots[i]) << "," << roots[i] << endl;
+	// }
+
+	// out2.close();
+
+
 	std::ofstream finalTrajectories;
 #if FRICTION
 	finalTrajectories.open("data/finalTrajectories.csv");
@@ -216,28 +255,31 @@ int main() {
 #endif
 	finalTrajectories << "t,x,y,u,v,theta" << endl;
 
+	// roots[0] = 0.6877629863480418;
+	// roots[1] = 0.8830333404468548;
+
 	for (int i = 0; i < nRoots; i++) {
 		double y[4];
 		integrate(y, roots[i], finalTrajectories);
 	}
 	finalTrajectories.close();
 
-	std::ofstream out;
-	out.open("data/data.csv");
-	out << "t,x,y,u,v,theta" << endl;
+	// std::ofstream out;
+	// out.open("data/data.csv");
+	// out << "t,x,y,u,v,theta" << endl;
 
-	double y[] = {0.0, 0.0, v0 * cos(M_PI / 4), v0 * sin(M_PI / 4)};
-	double t = 0.0;
-	double dt = 1.0e-3;
-	for (int i = 0; i < 1000; i++) {
-		rk4Step(t, y, RHS, dt, 4);
-		t += dt;
+	// double y[] = {0.0, 0.0, v0 * cos(M_PI / 4), v0 * sin(M_PI / 4)};
+	// double t = 0.0;
+	// double dt = 1.0e-3;
+	// for (int i = 0; i < 1000; i++) {
+	// 	rk4Step(t, y, RHS, dt, 4);
+	// 	t += dt;
 
-		out << t << "," << y[0] << "," << y[1] << "," << y[2] << "," << y[3] << endl;
-	}
+	// 	out << t << "," << y[0] << "," << y[1] << "," << y[2] << "," << y[3] <<
+	// endl;
+	// }
 
-	out.close();
-
+	// out.close();
 
 	return 0;
 }
@@ -248,6 +290,38 @@ double linearInterp(const double& x, const double& x1, const double& y1,
 	double q = y1 - m * x1;
 	double y = m * x + q;
 	return y;
+}
+
+double quadraticInterp(const double& x, const double& x1, const double& y1,
+                       const double& x2, const double& y2, const double& x3,
+                       const double& y3) {
+	const int nPoints = 3;
+
+	double** M;
+	M    = new double*[nPoints];
+	M[0] = new double[nPoints * nPoints];
+	for (int i = 1; i < nPoints; i++) M[i] = M[i - 1] + nPoints;
+
+	// Define coefficient matrix
+	M[0][0] = x1 * x1;
+	M[0][1] = x1;
+	M[0][2] = 1;
+	M[1][0] = x2 * x2;
+	M[1][1] = x2;
+	M[1][2] = 1;
+	M[2][0] = x3 * x3;
+	M[2][1] = x3;
+	M[2][2] = 1;
+
+	double v[nPoints] = {y1, y2, y3};
+	double coeffs[nPoints];  //<! Array with the coefficients of the parabola
+
+	solveLinSystem(M, v, coeffs, nPoints);
+
+	delete[] M[0];
+	delete[] M;
+
+	return coeffs[0] * x*x + coeffs[1] * x + coeffs[2];
 }
 
 void printConstants() {
@@ -299,8 +373,8 @@ void integrate(double y[], const double& theta, double& xLast, double& yLast,
 	for (int i = 0; i < nEq; i++) y[i] = y0[i];
 
 	double t0         = 0.0;
-	const double dt   = 1.0e-2;
-	const int maxStep = 10000;
+	const double dt   = g_dt;
+	const int maxStep = int(2 / dt);
 
 	integration(RHS, y, nEq, t0, dt, theta, xLast, yLast, maxStep, outFile);
 }
@@ -325,9 +399,6 @@ void integration(void (*RHSFunc)(const double& t, double* Y, double* RHS),
                  double y[], const int& nEq, double t, const double& dt,
                  const double& theta, double& xLast, double& yLast,
                  const int& maxStep, std::ofstream& outFile) {
-	xLast = y[0];  // Store x-position at previous time step
-	yLast = y[1];  // Store y-position at previous time step
-
 	outFile << t << "," << y[0] << "," << y[1] << "," << y[2] << "," << y[3]
 			<< "," << theta << endl;
 
@@ -336,8 +407,8 @@ void integration(void (*RHSFunc)(const double& t, double* Y, double* RHS),
 	int stepCounter    = 0;
 	bool exitCondition = false;
 	while (stepCounter < maxStep && !exitCondition) {
-		xLast = y[0];
-		yLast = y[1];
+		xLast = y[0];  // Store x-position at previous time step
+		yLast = y[1];  // Store y-position at previous time step
 
 		rk4Step(t, y, RHSFunc, dt, nEq);
 		t += dt;

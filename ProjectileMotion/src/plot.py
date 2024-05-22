@@ -7,7 +7,7 @@ import pandas as pd
 IMAGES_FOLDER = 'images'
 DATA_FOLDER = 'data'
 SAVE_IMAGES = False
-DOWNSAMPLE = 4
+DOWNSAMPLE = 8
 
 # Matplotlib configuration
 plt.style.use(['grid', 'science', 'notebook', 'mylegend'])
@@ -88,15 +88,22 @@ def residual_plot() -> None:
 	# Import data
 	df = pd.read_csv(f'{DATA_FOLDER}/residual.csv')
 
+	thetas = pd.read_csv(
+		f'{DATA_FOLDER}/noFriction.csv')['theta'].to_numpy()
+
 	# Create figure
 	fig, ax = plt.subplots(1, 1)
-	x = df['theta'].to_numpy()
+	theta = df['theta'].to_numpy()
 	res = df['res'].to_numpy() * L
-	ax.plot(x, res)
+	ax.plot(theta, res, marker='o')
 	ax.axhline(0, c='k', ls='--', alpha=0.7)
 
-	ax.axvline(0.6877629863480418, c='k', ls='--')
-	ax.axvline(0.8830333404468548, c='k', ls='--')
+	ax.axvline(0.6877629863480418, c='tab:orange',
+	           ls='--', label='analytical zero')
+	ax.axvline(0.8830333404468548, c='tab:orange',
+	           ls='--', label='analytical zero')
+	for theta in thetas:
+		ax.axvline(theta, c='tab:red', ls='--', label='numerical zero')
 
 	ax.set_title('Residual')
 	ax.set_xlabel(r'$\theta$ [rad]')
@@ -137,15 +144,15 @@ def analytical(x: np.ndarray | float, sol_number: int) -> np.ndarray | float:
 	if sol_number not in range(2):
 		raise ValueError('sol_number must be either 0 or 1')
 
-	x = x  # / L
+	x = x / L
 	v0 = 10.0 * tau / L
 	# print(f'{v0=}')
-	# theta = 0.5 * (sol_number * np.pi + (-1)**sol_number * np.arcsin(1 / v0**2))
-	# print(f'Ana theta{sol_number + 1} = {theta:.7f}')
-	theta = np.pi / 4
+	theta = 0.5 * (sol_number * np.pi + (-1)**sol_number * np.arcsin(1 / v0**2))
+	print(f'Ana theta{sol_number + 1} = {theta:.7f}')
+	# theta = np.pi / 4
 	u0 = v0 * np.cos(theta)
 	v0 = v0 * np.sin(theta)
-	return (-0.5 * (x / u0)**2 + v0 / u0 * x)  # * L
+	return (-0.5 * (x / u0)**2 + v0 / u0 * x) * L
 
 
 def comparison_plot() -> None:
@@ -159,12 +166,19 @@ def comparison_plot() -> None:
 	# Create figure
 	fig, ax = plt.subplots(1, 1)
 	for i, g in enumerate(groups):
+		# if i == 1:
+		# 	break
 		print(f'\nNum theta{i + 1} = {g:.7f}')
 		curr_df = df.get_group(g)
 		x = curr_df['x'].to_numpy() * L
 		y = curr_df['y'].to_numpy() * L
 		exact = analytical(x, i)
 		ax.plot(x, abs(y - exact), label=f'{g:.2f} rad')
+		# ax.plot(x, y, label='num', marker='o')
+		# x = np.linspace(9.9, 10.1, 1000)
+		# exact = analytical(x, i)
+		# ax.plot(x, exact, label='exact')
+	# ax.scatter(10.0, 0.0, c='tab:red')
 	draw_target(ax, 10.0, 0.0)
 
 	ax.ticklabel_format(axis='y', style='sci', scilimits=(0, 0))
@@ -231,14 +245,44 @@ def testing_plot() -> None:
 	savefig(fig, 'testing')
 
 
+def convergence_plot() -> None:
+	# Import data
+	df = pd.read_csv(f'{DATA_FOLDER}/convergence.csv')
+
+	# Manipulate data
+	# df = df.groupby(by=df['theta'])
+	# groups = list(df.groups.keys())
+
+	# Create figure
+	fig, ax = plt.subplots(1, 1)
+	# for g in enumerate(groups):
+	# dfcurr = df.get_group(g)
+	ax.scatter(df['dt'], df['difference'])  # , label=f'{g:.2f} rad')
+
+	ax.set_xscale('log')
+	ax.set_yscale('log')
+
+	# ax.ticklabel_format(axis='y', style='sci', scilimits=(0, 0))
+
+	ax.set_title('Convergence')
+	ax.set_xlabel(r'$dt$ [s]')
+	ax.set_ylabel(r'$\Delta y$ [m]')
+
+	# ax.legend(title='Launch angle', ncol=2)
+
+	fig.tight_layout()
+	savefig(fig, 'convergence')
+
+
 def main() -> None:
 	# print_constants()
 	# linear_plot()
 	# shooting_plot()
 	residual_plot()
 	# final_plot()
-	# comparison_plot()
+	comparison_plot()
 	# testing_plot()
+	# convergence_plot()
 	plt.show()
 
 
