@@ -243,22 +243,24 @@ int main() {
 	}
 	finalTrajectories.close();
 
-	// std::ofstream out;
-	// out.open("data/data.csv");
-	// out << "t,x,y,u,v,theta" << endl;
+	/* Test
+	std::ofstream out;
+	out.open("data/data.csv");
+	out << "t,x,y,u,v,theta" << endl;
 
-	// double y[] = {0.0, 0.0, v0 * cos(M_PI / 4), v0 * sin(M_PI / 4)};
-	// double t = 0.0;
-	// double dt = 1.0e-3;
-	// for (int i = 0; i < 1000; i++) {
-	// 	rk4Step(t, y, RHS, dt, 4);
-	// 	t += dt;
+	double y[] = {0.0, 0.0, v0 * cos(M_PI / 4), v0 * sin(M_PI / 4)};
+	double t = 0.0;
+	double dt = 1.0e-3;
+	for (int i = 0; i < 1000; i++) {
+		rk4Step(t, y, RHS, dt, 4);
+		t += dt;
 
-	// 	out << t << "," << y[0] << "," << y[1] << "," << y[2] << "," << y[3] <<
-	// endl;
-	// }
+		out << t << "," << y[0] << "," << y[1] << "," << y[2] << "," << y[3] <<
+	endl;
+	}
 
-	// out.close();
+	out.close();
+	*/
 
 	return 0;
 }
