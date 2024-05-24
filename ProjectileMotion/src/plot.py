@@ -7,7 +7,7 @@ import pandas as pd
 IMAGES_FOLDER = 'images'
 DATA_FOLDER = 'data'
 SAVE_IMAGES = False
-DOWNSAMPLE = 8
+DOWNSAMPLE = 4
 
 # Matplotlib configuration
 plt.style.use(['grid', 'science', 'notebook', 'mylegend'])
