@@ -23,7 +23,7 @@ using std::cout;
 using std::endl;
 
 #define FRICTION 0
-const static int gOrder = 1;  //<! Selects linear or quadratic interpolation
+const static int gOrder = 2;  //<! Selects linear or quadratic interpolation
 
 int numIntegrations = 0;  //!< Number of integrations of the ODEs performed
 
@@ -31,17 +31,17 @@ double g_dt = 1.0e-3;
 
 // Problem data
 #if FRICTION
-const static double B      = 4.0e-5;  //!< Drag coefficient [kg/m]
-const static double V0     = 9.90;    //!< Initial velocity [m/s]
-const static double L      = 10.0;    //!< Target distance  [m]
-const static double Y_targ = -0.2;    //!< Target height    [m]
-double gTheta;                        //!< Initial launch angle
+const static double B     = 4.0e-5;  //!< Drag coefficient [kg/m]
+const static double V0    = 9.90;    //!< Initial velocity [m/s]
+const static double L     = 10.0;    //!< Target distance  [m]
+const static double YTarg = -0.2;    //!< Target height    [m]
+double gTheta;                       //!< Initial launch angle
 #else
-const static double B      = 0.0;   //!< Drag coefficient [kg/m]
-const static double V0     = 10.0;  //!< Initial velocity [m/s]
-const static double L      = 10.0;  //!< Target distance  [m]
-const static double Y_targ = 0.0;   //!< Target height    [m]
-double gTheta;                      //!< Initial launch angle
+const static double B     = 0.0;   //!< Drag coefficient [kg/m]
+const static double V0    = 10.0;  //!< Initial velocity [m/s]
+const static double L     = 10.0;  //!< Target distance  [m]
+const static double YTarg = 0.0;   //!< Target height    [m]
+double gTheta;                     //!< Initial launch angle
 #endif
 
 // Dimensional factors
@@ -50,10 +50,10 @@ const static double mu  = 1.0;            //!< Mass dimensional factor [kg]
 const static double g   = 9.81;           //!< Gravity [m/s^2]
 const static double tau = sqrt(chi / g);  //!< Time dimensional factor [s]
 
-const static double b      = B * chi / mu;    //!< Adimensional friction
-const static double v0     = V0 * tau / chi;  //!< Adimensional speed
-const static double x_targ = 1.0;             //!< Adimensional target distance
-const static double y_targ = Y_targ / L;      //!< Adimensional target height
+const static double b     = B * chi / mu;    //!< Adimensional friction
+const static double v0    = V0 * tau / chi;  //!< Adimensional speed
+const static double xTarg = 1.0;             //!< Adimensional target distance
+const static double yTarg = YTarg / L;       //!< Adimensional target height
 
 /**
  * @brief Prints problem data and dimensional constants to file.
@@ -92,6 +92,24 @@ double linearInterp(const double &x, const double &x1, const double &y1,
 double quadraticInterp(const double &x, const double &x1, const double &y1,
                        const double &x2, const double &y2, const double &x3,
                        const double &y3);
+
+/**
+ * @brief               This function returns the polinomial interpolation
+ * 						between a sufficient number of points evaluated at a
+ * 						certain x.
+ *
+ * @param[in] x         The point at which to evaluate the interpolation.
+ * @param[in] xLast     The x-coordinates of the first ``order`` points.
+ * @param[in] yLast     The y-coordinates of the first ``order`` points.
+ * @param[in] xCurrent  The x-coordinate of the last point.
+ * @param[in] yCurrent  The y-coordinate of the last point.
+ * @param[in] order     The order or the polynomial.
+ *
+ * @return    The interpolated line evaluated at x.
+ */
+double polInterp(const double &x, double xLast[], double yLast[],
+                 const double &xCurrent, const double &yCurrent,
+                 const int &order);
 
 /**
  * @brief Tests linearInterp function.
@@ -194,7 +212,7 @@ void integration(void (*RHSFunc)(const double &t, double *Y, double *RHS),
  *
  * @param[in] theta  Launch angle.
  *
- * @return    y(x = 1) - y_targ
+ * @return    y(x = 1) - yTarg
  */
 double Residual(const double &theta);
 
@@ -235,6 +253,14 @@ int main() {
 		cerr << "Sorry, could not recognise the error." << endl;
 	}
 
+	// std::ofstream interp;
+	// interp.open("data/interpolationOrder.csv", std::ios_base::app);
+	// for (int i = 0; i < nRoots; i++) {
+	// 	interp.precision(17);
+	// 	interp << gOrder << "," << roots[i] << "," << i + 1 << endl;
+	// }
+	// interp.close();
+
 
 	std::ofstream finalTrajectories;
 #if FRICTION
@@ -264,7 +290,7 @@ void printConstants() {
 
 		out << "chi,tau,mu,B,b,V0,Y_targ" << endl;
 		out << chi << "," << tau << "," << mu << "," << B << "," << b << ","
-			<< V0 << "," << Y_targ << endl;
+			<< V0 << "," << YTarg << endl;
 
 		out.close();
 	} catch (std::exception &err) {
@@ -314,6 +340,48 @@ double quadraticInterp(const double &x, const double &x1, const double &y1,
 	delete[] M;
 
 	return coeffs[0] * x * x + coeffs[1] * x + coeffs[2];
+}
+
+double polInterp(const double &x, double xLast[], double yLast[],
+                 const double &xCurrent, const double &yCurrent,
+                 const int &order) {
+	const int nPoints = order + 1;
+
+	double **M;
+	M    = new double *[nPoints];
+	M[0] = new double[nPoints * nPoints];
+	for (int i = 1; i < nPoints; i++) M[i] = M[i - 1] + nPoints;
+
+	double *v;
+	v = new double[nPoints];
+
+	// Define coefficient matrix
+	for (int i = 0; i < nPoints; i++) {
+		M[i][nPoints - 1] = 1;
+		if (i != nPoints - 1) v[i] = yLast[i];
+		else v[i] = yCurrent;
+		for (int j = nPoints - 2; j >= 0; j--)
+			if (i != nPoints - 1) M[i][j] = M[i][j + 1] * xLast[i];
+			else M[i][j] = M[i][j + 1] * xCurrent;
+	}
+
+	double *coeffs;  //<! Array with the coefficients of the polynomial
+	coeffs = new double[nPoints];
+
+	solveLinSystem(M, v, coeffs, nPoints);
+
+	delete[] M[0];
+	delete[] M;
+	delete[] v;
+
+	double value    = 0.0;
+	double powerOfX = 1.0;
+	for (int i = nPoints - 1; i >= 0; i--) {
+		value += coeffs[i] * powerOfX;
+		powerOfX *= x;
+	}
+
+	return value;
 }
 
 void linearInterpTest() {
@@ -415,19 +483,12 @@ void integration(void (*RHSFunc)(const double &t, double *Y, double *RHS),
 	int stepCounter    = 0;
 	bool exitCondition = false;
 	while (stepCounter < maxStep && !exitCondition) {
-		switch (order) {
-		case 1:
-			xLast[0] = y[0];  // Store x-position at previous time step
-			yLast[0] = y[1];  // Store y-position at previous time step
-			break;
-		case 2:
-			xLast[0] = xLast[1];
-			yLast[0] = yLast[1];
-			xLast[1] = y[0];
-			yLast[1] = y[1];
-			break;
-		default: throw exception("order must be either 1 or 2"); break;
+		for (int i = 0; i < order - 1; i++) {
+			xLast[i] = xLast[i + 1];
+			yLast[i] = yLast[i + 1];
 		}
+		xLast[order - 1] = y[0];
+		yLast[order - 1] = y[1];
 
 		rk4Step(t, y, RHSFunc, dt, nEq);
 		t += dt;
@@ -436,27 +497,17 @@ void integration(void (*RHSFunc)(const double &t, double *Y, double *RHS),
 		outFile << t << "," << y[0] << "," << y[1] << "," << y[2] << "," << y[3]
 				<< "," << theta << endl;
 
-		if (xLast[0] < x_targ && y[0] > x_targ) exitCondition = true;
+		if (xLast[0] < xTarg && y[0] > xTarg) exitCondition = true;
 	}
 }
 
 double Residual(const double &theta) {
 	double y[4];
-	double xLast[2], yLast[2];
+	double xLast[64], yLast[64];
+	if (gOrder > 64) throw exception("gOrder must be at most 64.");
 	integrate(y, theta, xLast, yLast, gOrder);
 
 	double xCurrent = y[0], yCurrent = y[1];
 
-	switch (gOrder) {
-	case 1:
-		return linearInterp(x_targ, xLast[0], yLast[0], xCurrent, yCurrent) -
-		       y_targ;
-		break;
-	case 2:
-		return quadraticInterp(x_targ, xLast[0], yLast[0], xLast[1], yLast[1],
-		                       xCurrent, yCurrent) -
-		       y_targ;
-		break;
-	default: throw exception("gOrder must be either 1 or 2."); break;
-	}
+	return polInterp(xTarg, xLast, yLast, xCurrent, yCurrent, gOrder) - yTarg;
 }

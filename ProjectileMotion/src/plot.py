@@ -297,12 +297,42 @@ def convergence_plot() -> None:
 	savefig(fig, 'convergence')
 
 
+def interpolation_plot() -> None:
+	# Import data
+	df = pd.read_csv(f'{DATA_FOLDER}/interpolationOrder.csv')
+
+	# Manipulate data
+	df = df.groupby(by=df['sol_number'])
+	groups = df.groups.keys()
+
+	# Create figure
+	fig, ax = plt.subplots(1, 1)
+	for g in groups:
+		dfcurr = df.get_group(g)
+		theta = dfcurr['theta'].to_numpy()
+		theta_shift = theta - np.mean(theta)
+		ax.plot(dfcurr['order'], theta_shift, marker='o', label=g)
+
+	ax.set_xscale('log')
+	# ax.set_yscale('log')
+
+	ax.set_title('Interpolation order')
+	ax.set_xlabel(r'order')
+	ax.set_ylabel(r'$\theta - < \theta >$ [rad]')
+
+	ax.legend(title='Solution number')
+
+	fig.tight_layout()
+	savefig(fig, 'interpolation')
+
+
 def main() -> None:
+	interpolation_plot()
 	# print_constants()
 	# linear_plot()
 	# quadratic_plot()
 	# shooting_plot()
-	residual_plot()
+	# residual_plot()
 	# final_plot()
 	comparison_plot()
 	# testing_plot()

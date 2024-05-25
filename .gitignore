@@ -6,5 +6,5 @@ Rajan\ Object-Oriented\ Numerical\ Methods\ via\ C++.pdf
 **/bin
 **/obj
 *.o
-# ProjectileMotion/*.pdf
+ProjectileMotion/*.pdf
 **/__pycache__
