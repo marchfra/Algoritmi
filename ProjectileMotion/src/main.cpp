@@ -76,24 +76,6 @@ double linearInterp(const double &x, const double &x1, const double &y1,
                     const double &x2, const double &y2);
 
 /**
- * @brief     This function returns the quadratic interpolation between three
- *            points evaluated at a certain x.
- *
- * @param[in] x   The point at which to evaluate the interpolation.
- * @param[in] x1  The x-coordinate of the first point.
- * @param[in] y1  The y-coordinate of the first point.
- * @param[in] x2  The x-coordinate of the second point.
- * @param[in] y2  The y-coordinate of the second point.
- * @param[in] x3  The x-coordinate of the third point.
- * @param[in] y3  The y-coordinate of the third point.
- *
- * @return    The interpolated line evaluated at x.
- */
-double quadraticInterp(const double &x, const double &x1, const double &y1,
-                       const double &x2, const double &y2, const double &x3,
-                       const double &y3);
-
-/**
  * @brief               This function returns the polinomial interpolation
  * 						between a sufficient number of points evaluated at a
  * 						certain x.
@@ -112,12 +94,12 @@ double polInterp(const double &x, double xLast[], double yLast[],
                  const int &order);
 
 /**
- * @brief Tests linearInterp function.
+ * @brief Tests polInterp function with degree 1.
  */
-void linearInterpTest();
+void linInterpTest();
 
 /**
- * @brief Tests linearInterp function.
+ * @brief Tests polInterp function with degree 2.
  */
 void quadraticInterpTest();
 
@@ -230,7 +212,7 @@ int main() {
 	const int nTheta      = 32;      // Number of launch angles explored
 	const double thetaTol = 1.0e-7;  // Tolerance for root searching
 
-	linearInterpTest();
+	linInterpTest();
 	quadraticInterpTest();
 
 	shootingPlot(thetaMin, thetaMax, nTheta);
@@ -310,38 +292,6 @@ double linearInterp(const double &x, const double &x1, const double &y1,
 	return y;
 }
 
-double quadraticInterp(const double &x, const double &x1, const double &y1,
-                       const double &x2, const double &y2, const double &x3,
-                       const double &y3) {
-	const int nPoints = 3;
-
-	double **M;
-	M    = new double *[nPoints];
-	M[0] = new double[nPoints * nPoints];
-	for (int i = 1; i < nPoints; i++) M[i] = M[i - 1] + nPoints;
-
-	// Define coefficient matrix
-	M[0][0] = x1 * x1;
-	M[0][1] = x1;
-	M[0][2] = 1;
-	M[1][0] = x2 * x2;
-	M[1][1] = x2;
-	M[1][2] = 1;
-	M[2][0] = x3 * x3;
-	M[2][1] = x3;
-	M[2][2] = 1;
-
-	double v[nPoints] = {y1, y2, y3};
-	double coeffs[nPoints];  //<! Array with the coefficients of the parabola
-
-	solveLinSystem(M, v, coeffs, nPoints);
-
-	delete[] M[0];
-	delete[] M;
-
-	return coeffs[0] * x * x + coeffs[1] * x + coeffs[2];
-}
-
 double polInterp(const double &x, double xLast[], double yLast[],
                  const double &xCurrent, const double &yCurrent,
                  const int &order) {
@@ -384,13 +334,15 @@ double polInterp(const double &x, double xLast[], double yLast[],
 	return value;
 }
 
-void linearInterpTest() {
+void linInterpTest() {
 	std::ofstream linInterp;
 	linInterp.open("data/linear.csv");
 	linInterp << "x,y" << endl;
+	double xL[] = {-3.0}, yL[] = {4.0};
+	double xC = 2.0, yC = 1.5;
 	for (int i = 0; i < 100; i++) {
 		double x = -10.0 + 0.2 * i;
-		linInterp << x << "," << linearInterp(x, -3, 4, 2, 1.5) << endl;
+		linInterp << x << "," << polInterp(x, xL, yL, xC, yC, 1) << endl;
 	}
 	linInterp.close();
 }
@@ -399,10 +351,11 @@ void quadraticInterpTest() {
 	std::ofstream quadrInterp;
 	quadrInterp.open("data/quadratic.csv");
 	quadrInterp << "x,y" << endl;
+	double xL[] = {-3.0, 2.0}, yL[] = {4.0, 1.5};
+	double xC = 1.1, yC = 2.3;
 	for (int i = 0; i < 100; i++) {
 		double x = -10.0 + 0.2 * i;
-		quadrInterp << x << "," << quadraticInterp(x, -3, 4, 2, 1.5, 1.1, 2.3)
-					<< endl;
+		quadrInterp << x << "," << polInterp(x, xL, yL, xC, yC, 2) << endl;
 	}
 	quadrInterp.close();
 }

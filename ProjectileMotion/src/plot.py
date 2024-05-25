@@ -204,7 +204,6 @@ def linear_plot() -> None:
 	# Create figure
 	fig, ax = plt.subplots(1, 1)
 	ax.plot(x, y)
-	ax.plot(x, 0.5 * (5 - x))
 	ax.scatter(-3, 4, c='k')
 	ax.scatter(2, 1.5, c='k')
 
@@ -327,7 +326,6 @@ def interpolation_plot() -> None:
 
 
 def main() -> None:
-	interpolation_plot()
 	# print_constants()
 	# linear_plot()
 	# quadratic_plot()
@@ -335,6 +333,7 @@ def main() -> None:
 	# residual_plot()
 	# final_plot()
 	comparison_plot()
+	interpolation_plot()
 	# testing_plot()
 	# convergence_plot()
 	plt.show()
