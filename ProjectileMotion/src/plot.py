@@ -6,7 +6,7 @@ import pandas as pd
 # Constants
 IMAGES_FOLDER = 'images'
 DATA_FOLDER = 'data'
-SAVE_IMAGES = False
+SAVE_IMAGES = True
 DOWNSAMPLE = 4
 
 # Matplotlib configuration
@@ -110,7 +110,7 @@ def residual_plot() -> None:
 	ax.set_ylabel(r'$\Delta y$ [m]')
 
 	fig.tight_layout()
-	savefig(fig, 'shooting')
+	savefig(fig, 'residual')
 
 
 def final_plot() -> None:
@@ -326,16 +326,16 @@ def interpolation_plot() -> None:
 
 
 def main() -> None:
-	# print_constants()
-	# linear_plot()
-	# quadratic_plot()
-	# shooting_plot()
-	# residual_plot()
-	# final_plot()
+	print_constants()
+	linear_plot()
+	quadratic_plot()
+	shooting_plot()
+	residual_plot()
+	final_plot()
 	comparison_plot()
-	# interpolation_plot()
-	# testing_plot()
-	# convergence_plot()
+	interpolation_plot()
+	testing_plot()
+	convergence_plot()
 	plt.show()
 
 
