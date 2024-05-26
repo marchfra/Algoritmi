@@ -270,7 +270,7 @@ void printConstants() {
 		out.open("data/constants.csv");
 		if (!out.good()) throw exception("Invalid file.");
 
-		out << "chi,tau,mu,B,b,V0,Y_targ" << endl;
+		out << "chi,tau,mu,B,b,V0,YTarg" << endl;
 		out << chi << "," << tau << "," << mu << "," << B << "," << b << ","
 			<< V0 << "," << YTarg << endl;
 

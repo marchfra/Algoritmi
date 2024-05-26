@@ -22,7 +22,7 @@ mu = float(constants['mu'][0])
 B = float(constants['B'][0])
 b = float(constants['b'][0])
 V0 = float(constants['V0'][0])
-h = float(constants['Y_targ'][0])
+h = float(constants['YTarg'][0])
 
 
 def savefig(fig, figure_name: str) -> None:
@@ -327,15 +327,15 @@ def interpolation_plot() -> None:
 
 def main() -> None:
 	print_constants()
-	linear_plot()
-	quadratic_plot()
+	# linear_plot()
+	# quadratic_plot()
 	shooting_plot()
 	residual_plot()
 	final_plot()
-	comparison_plot()
-	interpolation_plot()
-	testing_plot()
-	convergence_plot()
+	# comparison_plot()
+	# interpolation_plot()
+	# testing_plot()
+	# convergence_plot()
 	plt.show()
 
 
