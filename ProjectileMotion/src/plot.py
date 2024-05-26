@@ -173,7 +173,7 @@ def comparison_plot() -> None:
 		x = curr_df['x'].to_numpy() * L
 		y = curr_df['y'].to_numpy() * L
 		exact = analytical(x, i)
-		ax.plot(x, abs(y - exact), label=f'{g:.2f} rad')
+		ax.plot(x[:-1], abs(y - exact)[:-1], label=f'{g:.2f} rad')
 		# ax.plot(x, y, label='num', marker='o')
 		# x = np.linspace(9.9, 10.1, 1000)
 		# exact = analytical(x, i)
@@ -312,7 +312,7 @@ def interpolation_plot() -> None:
 		theta_shift = theta - np.mean(theta)
 		ax.plot(dfcurr['order'], theta_shift, marker='o', label=g)
 
-	ax.set_xscale('log')
+	ax.set_xscale('log', base=2)
 	# ax.set_yscale('log')
 
 	ax.set_title('Interpolation order')
@@ -333,7 +333,7 @@ def main() -> None:
 	# residual_plot()
 	# final_plot()
 	comparison_plot()
-	interpolation_plot()
+	# interpolation_plot()
 	# testing_plot()
 	# convergence_plot()
 	plt.show()

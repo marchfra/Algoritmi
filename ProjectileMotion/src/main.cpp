@@ -23,7 +23,7 @@ using std::cout;
 using std::endl;
 
 #define FRICTION 0
-const static int gOrder = 2;  //<! Selects linear or quadratic interpolation
+const static int gOrder = 2;  //<! Selects order of polynomial interpolation
 
 int numIntegrations = 0;  //!< Number of integrations of the ODEs performed
 
