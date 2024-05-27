@@ -6,7 +6,7 @@ import pandas as pd
 # Constants
 IMAGES_FOLDER = 'images'
 DATA_FOLDER = 'data'
-SAVE_IMAGES = True
+SAVE_IMAGES = False
 DOWNSAMPLE = 4
 
 # Matplotlib configuration
@@ -332,7 +332,7 @@ def main() -> None:
 	shooting_plot()
 	residual_plot()
 	final_plot()
-	# comparison_plot()
+	comparison_plot()
 	# interpolation_plot()
 	# testing_plot()
 	# convergence_plot()
