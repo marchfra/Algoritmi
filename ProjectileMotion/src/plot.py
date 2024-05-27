@@ -98,12 +98,12 @@ def residual_plot() -> None:
 	ax.plot(theta, res, marker='o')
 	ax.axhline(0, c='k', ls='--', alpha=0.7)
 
-	ax.axvline(0.6877629863480418, c='tab:orange',
-	           ls='--', label='analytical zero')
-	ax.axvline(0.8830333404468548, c='tab:orange',
-	           ls='--', label='analytical zero')
-	for theta in thetas:
-		ax.axvline(theta, c='tab:red', ls='--', label='numerical zero')
+	# ax.axvline(0.6877629863480418, c='tab:orange',
+	#            ls='--', label='analytical zero')
+	# ax.axvline(0.8830333404468548, c='tab:orange',
+	#            ls='--', label='analytical zero')
+	# for theta in thetas:
+	# 	ax.axvline(theta, c='tab:red', ls='--', label='numerical zero')
 
 	ax.set_title('Residual')
 	ax.set_xlabel(r'$\theta$ [rad]')
@@ -326,13 +326,13 @@ def interpolation_plot() -> None:
 
 
 def main() -> None:
-	print_constants()
+	# print_constants()
 	# linear_plot()
 	# quadratic_plot()
-	shooting_plot()
+	# shooting_plot()
 	residual_plot()
-	final_plot()
-	comparison_plot()
+	# final_plot()
+	# comparison_plot()
 	# interpolation_plot()
 	# testing_plot()
 	# convergence_plot()
