@@ -23,11 +23,11 @@ using std::cout;
 using std::endl;
 
 #define FRICTION 0
-const static int gOrder = 3;  //<! Selects order of polynomial interpolation
+const static int gOrder = 2;  //<! Selects order of polynomial interpolation
 
 int numIntegrations = 0;  //!< Number of integrations of the ODEs performed
 
-double g_dt = 1.0e-3;
+double g_dt = 1.0e-5;
 
 // Problem data
 #if FRICTION
@@ -109,7 +109,27 @@ void interpolationOrderErrorPlot(double roots[], const int &nRoots);
  */
 void RHS(const double &t, double Y[], double R[]);
 
+/**
+ * @brief     Computes the exact trajectory.
+ *
+ * @param[in] x          The point at which to evaluate the trajectory.
+ * @param[in] solNumber  The number of the solution.
+ *                       - 0: the solution with theta < π / 4
+ *                       - 1: the solution with theta > π / 4
+ *
+ * @return    double
+ */
 double exact(const double &x, const int &solNumber);
+
+/**
+ * @brief     Produces the convergence plot.
+ *
+ * @param[in] dt_0     The first (and largest) value of dt.
+ * @param[in] nPoints  The number of dts to explore.
+ * @param[in] factor   The factor that scales dt.
+ */
+void convergence(const double &dt_0, const int &nPoints,
+                 const double factor = 0.5);
 
 /**
  * @brief     Generates data for shooting plot.
@@ -218,20 +238,23 @@ void integration(void (*RHSFunc)(const double &t, double *Y, double *RHS),
 double Residual(const double &theta);
 
 int main() {
+	// convergence(0.5, 20);
+
+	// return 0;
 #if FRICTION
 	cout << "===== FRICTION =====" << endl << endl;
 #else
 	cout << "===== NO FRICTION =====" << endl << endl;
 #endif
 
-	printConstants();
+	// printConstants();
 
 	const double thetaMin = 0.65;    // Minimum launch angle
 	const double thetaMax = 0.92;    // Maximum launch angle
 	const int nTheta      = 32;      // Number of launch angles explored
 	const double thetaTol = 1.0e-7;  // Tolerance for root searching
 
-	shootingPlot(thetaMin, thetaMax, nTheta);
+	// shootingPlot(thetaMin, thetaMax, nTheta);
 
 	/* +------------------+
 	 * | Problem solution |
@@ -378,6 +401,44 @@ double exact(const double &x, const int &solNumber) {
 	                      (solNumber == 0 ? 1.0 : -1.0) * asin(1 / (v0 * v0)));
 	double u0    = v0 * cos(theta);
 	return (-0.5 * (x / u0) * (x / u0) + tan(theta) * x);
+}
+
+void convergence(const double &dt_0, const int &nPoints, const double factor) {
+	double store_g_dt = g_dt;
+	g_dt              = dt_0;
+	std::ofstream conv;
+	conv.open("data/dt_search.csv");
+	conv << "dt,theta1,theta2" << endl;
+	for (int i = 0; i < nPoints; i++) {
+		const double thetaMin = 0.65;    // Minimum launch angle
+		const double thetaMax = 0.92;    // Maximum launch angle
+		const double thetaTol = 1.0e-7;  // Tolerance for root searching
+
+		/* +------------------+
+		 * | Problem solution |
+		 * +------------------+ */
+		double roots[4];
+		int nRoots = -1;
+		try {
+			findRoots(Residual, thetaMin, thetaMax, thetaTol, roots, nRoots, 4,
+			          "secant");
+
+			conv.precision(12);
+			conv << g_dt << "," << roots[0] << "," << roots[1] << endl;
+
+			cout << "dt = " << g_dt << " roots = ";
+			printVector(roots, nRoots);
+		} catch (std::exception &err) {
+			cerr << "Caught " << typeid(err).name() << " : " << err.what()
+				 << endl;
+		} catch (...) {
+			cerr << "Sorry, could not recognise the error." << endl;
+		}
+
+		g_dt *= factor;
+	}
+	conv.close();
+	g_dt = store_g_dt;
 }
 
 void shootingPlot(const double &thetaMin, const double &thetaMax,

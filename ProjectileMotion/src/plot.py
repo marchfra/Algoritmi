@@ -130,21 +130,6 @@ def final_plot() -> None:
 	savefig(fig, 'final')
 
 
-def analytical(x: np.ndarray | float, sol_number: int) -> np.ndarray | float:
-	if sol_number not in range(2):
-		raise ValueError('sol_number must be either 0 or 1')
-
-	x = x / L
-	v0 = 10.0 * tau / L
-	# print(f'{v0=}')
-	theta = 0.5 * (sol_number * np.pi + (-1)**sol_number * np.arcsin(1 / v0**2))
-	print(f'Ana theta{sol_number + 1} = {theta:.7f}')
-	# theta = np.pi / 4
-	u0 = v0 * np.cos(theta)
-	v0 = v0 * np.sin(theta)
-	return (-0.5 * (x / u0)**2 + v0 / u0 * x) * L
-
-
 def comparison_plot() -> None:
 	# Import data
 	df = pd.read_csv(f'{DATA_FOLDER}/noFriction.csv')
@@ -232,12 +217,60 @@ def interpolation_plot() -> None:
 	savefig(fig, 'interpolation')
 
 
+def dt_search() -> None:
+	df = pd.read_csv(f'{DATA_FOLDER}/dt_search.csv')
+
+	fig, ax = plt.subplots(1, 1)
+	for i, theta in enumerate(df.columns[1:]):
+		theta = df[theta].to_numpy()
+		mean = np.mean(theta)
+		ax.plot(df['dt'], theta - mean, marker='o', label=i)
+		ax.scatter(df['dt'][4], (theta - mean)[4], marker='o', s=400)
+		ax.scatter(df['dt'][4], (theta - mean)[4], marker='o', s=300, c='white')
+
+	ax.set_xscale('log', base=2)
+
+	ax.set_title('Time step size search')
+	ax.set_xlabel(r'time step size')
+	ax.set_ylabel(r'$\theta - < \theta >$ [rad]')
+
+	ax.legend(title='Solution number')
+
+	fig.tight_layout()
+	savefig(fig, 'dt_search')
+
+
+def order_search() -> None:
+	df = pd.read_csv(f'{DATA_FOLDER}/order_search.csv')
+
+	fig, ax = plt.subplots(1, 1)
+	for i, theta in enumerate(df.columns[1:]):
+		theta = df[theta].to_numpy()
+		mean = np.mean(theta)
+		ax.plot(df['order'], theta - mean, marker='o', label=i)
+		# ax.scatter(df['order'][4], (theta - mean)[4], marker='o', s=400)
+		# ax.scatter(df['order'][4], (theta - mean)[4], marker='o', s=300, c='white')
+
+	# ax.set_xscale('log', base=2)
+
+	ax.set_title('Polynomial fit order search')
+	ax.set_xlabel(r'order')
+	ax.set_ylabel(r'$\theta - < \theta >$ [rad]')
+
+	ax.legend(title='Solution number')
+
+	fig.tight_layout()
+	savefig(fig, 'order_search')
+
+
 def main() -> None:
 	# print_constants()
 	# shooting_plot()
+	# dt_search()
+	# order_search()
 	# residual_plot()
 	# final_plot()
-	comparison_plot()
+	# comparison_plot()
 	plt.show()
 
 
