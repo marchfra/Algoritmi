@@ -37,10 +37,6 @@ public:
    */
   virtual const char* what() const noexcept { return msg_.c_str(); }
 
-  void donaldFauntleroyDuck() {
-    std::cout << "https://en.wikipedia.org/wiki/Donald_Duck" << std::endl;
-  }
-
 protected:
   std::string msg_;  //!< Error message
 };

@@ -3,7 +3,7 @@
  *
  * @brief   Implementation of the root finder methods.
  *
- * @author  Francesco Marchisotti
+ * @author  Paolino Paperino
  *
  * @date    2023-11-19
  */

@@ -23,7 +23,7 @@ using std::cout;
 using std::endl;
 
 #define FRICTION 0
-const static int gOrder = 2;  //<! Selects order of polynomial interpolation
+const static int gOrder = 3;  //<! Selects order of polynomial interpolation
 
 int numIntegrations = 0;  //!< Number of integrations of the ODEs performed
 
@@ -94,14 +94,12 @@ double polInterp(const double &x, double xLast[], double yLast[],
                  const int &order);
 
 /**
- * @brief Tests polInterp function with degree 1.
+ * @brief     Generate plot data for interpolation order error.
+ *
+ * @param[in] roots   Array with the roots found.
+ * @param[in] nRoots  Number of roots found.
  */
-void linInterpTest();
-
-/**
- * @brief Tests polInterp function with degree 2.
- */
-void quadraticInterpTest();
+void interpolationOrderErrorPlot(double roots[], const int &nRoots);
 
 /**
  * @brief      Right Hand Side of the system of ODEs.
@@ -110,6 +108,8 @@ void quadraticInterpTest();
  * @param[out] R  The output values of the variables.
  */
 void RHS(const double &t, double Y[], double R[]);
+
+double exact(const double &x, const int &solNumber);
 
 /**
  * @brief     Generates data for shooting plot.
@@ -190,6 +190,25 @@ void integration(void (*RHSFunc)(const double &t, double *Y, double *RHS),
                  const int &order, const int &maxStep, std::ofstream &outFile);
 
 /**
+ * @overload
+ *
+ * @brief          Function that performs the integration and prints to file
+ *                 with exact difference.
+ *
+ * @param[in]      RHSFunc     Right Hand Side of the system of ODEs.
+ * @param[in]      exactFunc   Exact trajectory.
+ * @param[in, out] y           Array with the variables. Should be already
+ *                             initialised.
+ * @param[in]      sol_number  Solution number.
+ * @param[in]      theta       Launch angle.
+ * @param[in]      outFile  Output file.
+ */
+void integration(void (*RHSFunc)(const double &t, double *Y, double *RHS),
+                 double (*exactFunc)(const double &x, const int &sol_number),
+                 double y[], const int &sol_number, const double &theta,
+                 std::ofstream &outFile);
+
+/**
  * @brief     Residual function for the BVP.
  *
  * @param[in] theta  Launch angle.
@@ -212,11 +231,11 @@ int main() {
 	const int nTheta      = 32;      // Number of launch angles explored
 	const double thetaTol = 1.0e-7;  // Tolerance for root searching
 
-	linInterpTest();
-	quadraticInterpTest();
-
 	shootingPlot(thetaMin, thetaMax, nTheta);
 
+	/* +------------------+
+	 * | Problem solution |
+	 * +------------------+ */
 	numIntegrations = 0;
 	double roots[4];
 	int nRoots = -1;
@@ -235,31 +254,26 @@ int main() {
 		cerr << "Sorry, could not recognise the error." << endl;
 	}
 
-	// std::ofstream interp;
-	// interp.open("data/interpolationOrder.csv", std::ios_base::app);
-	// for (int i = 0; i < nRoots; i++) {
-	// 	interp.precision(17);
-	// 	interp << gOrder << "," << roots[i] << "," << i + 1 << endl;
-	// }
-	// interp.close();
+	// interpolationOrderErrorPlot(roots, nRoots);
 
-
-	std::ofstream finalTrajectories;
+	std::ofstream finTraj;
 #if FRICTION
-	finalTrajectories.open("data/finalTrajectories.csv");
-#else
-	finalTrajectories.open("data/noFriction.csv");
-#endif
-	finalTrajectories << "t,x,y,u,v,theta" << endl;
-
-	// roots[0] = 0.6877629863480418;
-	// roots[1] = 0.8830333404468548;
+	finTraj.open("data/finTraj.csv");
+	finTraj << "t,x,y,u,v,theta" << endl;
 
 	for (int i = 0; i < nRoots; i++) {
 		double y[4];
-		integrate(y, roots[i], finalTrajectories);
+		integrate(y, roots[i], finTraj);
 	}
-	finalTrajectories.close();
+#else
+	finTraj.open("data/noFriction.csv");
+	finTraj << "t,x,delta_y,u,v,theta" << endl;
+	for (int i = 0; i < nRoots; i++) {
+		double y[4];
+		integration(RHS, exact, y, i, roots[i], finTraj);
+	}
+#endif
+	finTraj.close();
 
 	return 0;
 }
@@ -334,30 +348,14 @@ double polInterp(const double &x, double xLast[], double yLast[],
 	return value;
 }
 
-void linInterpTest() {
-	std::ofstream linInterp;
-	linInterp.open("data/linear.csv");
-	linInterp << "x,y" << endl;
-	double xL[] = {-3.0}, yL[] = {4.0};
-	double xC = 2.0, yC = 1.5;
-	for (int i = 0; i < 100; i++) {
-		double x = -10.0 + 0.2 * i;
-		linInterp << x << "," << polInterp(x, xL, yL, xC, yC, 1) << endl;
+void interpolationOrderErrorPlot(double roots[], const int &nRoots) {
+	std::ofstream interp;
+	interp.open("data/interpolationOrder.csv", std::ios_base::app);
+	for (int i = 0; i < nRoots; i++) {
+		interp.precision(17);
+		interp << gOrder << "," << roots[i] << "," << i + 1 << endl;
 	}
-	linInterp.close();
-}
-
-void quadraticInterpTest() {
-	std::ofstream quadrInterp;
-	quadrInterp.open("data/quadratic.csv");
-	quadrInterp << "x,y" << endl;
-	double xL[] = {-3.0, 2.0}, yL[] = {4.0, 1.5};
-	double xC = 1.1, yC = 2.3;
-	for (int i = 0; i < 100; i++) {
-		double x = -10.0 + 0.2 * i;
-		quadrInterp << x << "," << polInterp(x, xL, yL, xC, yC, 2) << endl;
-	}
-	quadrInterp.close();
+	interp.close();
 }
 
 void RHS(const double &t, double Y[], double R[]) {
@@ -370,6 +368,16 @@ void RHS(const double &t, double Y[], double R[]) {
 	R[1] = v;
 	R[2] = -b * u * mod_v;
 	R[3] = -1.0 - b * u * mod_v;
+}
+
+double exact(const double &x, const int &solNumber) {
+	if (solNumber != 0 && solNumber != 1)
+		throw std::invalid_argument("solNumber must be 0 or 1");
+
+	double theta = 0.5 * (solNumber * M_PI +
+	                      (solNumber == 0 ? 1.0 : -1.0) * asin(1 / (v0 * v0)));
+	double u0    = v0 * cos(theta);
+	return (-0.5 * (x / u0) * (x / u0) + tan(theta) * x);
 }
 
 void shootingPlot(const double &thetaMin, const double &thetaMax,
@@ -451,6 +459,39 @@ void integration(void (*RHSFunc)(const double &t, double *Y, double *RHS),
 				<< "," << theta << endl;
 
 		if (xLast[0] < xTarg && y[0] > xTarg) exitCondition = true;
+	}
+}
+
+void integration(void (*RHSFunc)(const double &t, double *Y, double *RHS),
+                 double (*exactFunc)(const double &x, const int &sol_number),
+                 double y[], const int &sol_number, const double &theta,
+                 std::ofstream &outFile) {
+	const double y0[] = {0.0, 0.0, v0 * cos(theta), v0 * sin(theta)};
+	const int nEq =
+		static_cast<int>(sizeof(y0)) / static_cast<int>(sizeof(y0[0]));
+	for (int i = 0; i < nEq; i++) y[i] = y0[i];
+
+	double t          = 0.0;
+	const double dt   = g_dt;
+	const int maxStep = int(2 / dt);
+
+	outFile << t << "," << y[0] << ","
+			<< fabs(y[1] - exactFunc(y[0], sol_number)) << "," << y[2] << ","
+			<< y[3] << "," << theta << endl;
+
+	numIntegrations++;
+	int stepCounter    = 0;
+	bool exitCondition = false;
+	while (stepCounter < maxStep && !exitCondition) {
+		rk4Step(t, y, RHSFunc, dt, nEq);
+		t += dt;
+		stepCounter++;
+
+		outFile << t << "," << y[0] << ","
+				<< fabs(y[1] - exactFunc(y[0], sol_number)) << "," << y[2]
+				<< "," << y[3] << "," << theta << endl;
+
+		if (y[0] > xTarg) exitCondition = true;
 	}
 }
 
