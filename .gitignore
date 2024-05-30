@@ -8,3 +8,4 @@ Rajan\ Object-Oriented\ Numerical\ Methods\ via\ C++.pdf
 *.o
 ProjectileMotion/*.pdf
 **/__pycache__
+ProjectileMotion/LaTeX_files

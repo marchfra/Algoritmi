@@ -22,7 +22,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-#define FRICTION 0
+#define FRICTION 1
 const static int gOrder = 2;  //<! Selects order of polynomial interpolation
 
 int numIntegrations = 0;  //!< Number of integrations of the ODEs performed
@@ -239,12 +239,19 @@ double Residual(const double &theta);
 
 int main() {
 	// convergence(0.5, 20);
-
 	// return 0;
+
 #if FRICTION
 	cout << "===== FRICTION =====" << endl << endl;
 #else
 	cout << "===== NO FRICTION =====" << endl << endl;
+	for (int i = 0; i < 2; i++) {
+		double theta = 0.5 * (i * M_PI +
+	                      (i == 0 ? 1.0 : -1.0) * asin(1 / (v0 * v0)));
+		cout.precision(16);
+		cout << "Analytical theta" << i << " = " << theta << endl;
+	}
+	cout << endl;
 #endif
 
 	// printConstants();
@@ -268,7 +275,7 @@ int main() {
 
 		cout << "Integrations performed: " << numIntegrations << endl;
 
-		cout.precision(7);
+		cout.precision(16);
 		cout << "Optimal thetas [rad] (+/- " << thetaTol << "): ";
 		printVector(roots, nRoots);
 	} catch (std::exception &err) {
