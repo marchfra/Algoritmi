@@ -12,7 +12,7 @@
 ProjectileMotion/LaTeX_files
 
 # Ignore generated docs
-**/html/
+html/
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos,c++,c,visualstudiocode
