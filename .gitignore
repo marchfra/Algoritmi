@@ -14,7 +14,6 @@ ProjectileMotion/LaTeX_files
 # Ignore generated docs
 html/
 
-
 # Created by https://www.toptal.com/developers/gitignore/api/macos,c++,c,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,c++,c,visualstudiocode
 
