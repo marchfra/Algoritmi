@@ -6,14 +6,13 @@
 !ProjectileMotion.pdf
 
 .Test/
-**/bin
-**/obj
+**/bin/
+**/obj/
 **/__pycache__
 ProjectileMotion/LaTeX_files
 
 # Ignore generated docs
-**/html
-*.html
+**/html/
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos,c++,c,visualstudiocode
