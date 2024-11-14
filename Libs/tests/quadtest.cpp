@@ -12,6 +12,10 @@ TEST_CASE("testing rectangularQuad function") {
 	int N = 4;
 	const double xa = 0.0, xb = 1.0;
 
+	SUBCASE("test on empty interval") {
+		CHECK(rectangularQuad(func1, xa, xa, N) == doctest::Approx(0.0));
+	}
+
 	SUBCASE("fixed subinterval number") {
 		const double expected = 7.144244988813e-01;
 		
@@ -42,6 +46,10 @@ TEST_CASE("testing trapezoidalQuad function") {
 	int N = 4;
 	const double xa = 0.0, xb = 1.0;
 
+	SUBCASE("test on empty interval") {
+		CHECK(trapezoidalQuad(func1, xa, xa, N) == doctest::Approx(0.0));
+	}
+
 	SUBCASE("fixed subinterval number") {
 		const double expected = 6.354094290277e-01;
 		
@@ -71,6 +79,10 @@ TEST_CASE("testing trapezoidalQuad function") {
 TEST_CASE("testing simpsonQuad function") {
 	int N = 4;
 	double xa = 0.0, xb = 1.0;
+
+	SUBCASE("test on empty interval") {
+		CHECK(simpsonQuad(func1, xa, xa, N) == doctest::Approx(0.0));
+	}
 
 	SUBCASE("parity of the number of subintervals") {
 		N = 3;
@@ -166,6 +178,10 @@ TEST_CASE("testing gaussLegendreQuad function") {
 	
 	const double expected = 4.666829051581e+00;
 
+	SUBCASE("test on empty interval") {
+		CHECK(gaussLegendreQuad(func1, xa, xa, N, Ng) == doctest::Approx(0.0));
+	}
+
 	SUBCASE("test on function 2: sqrt(1 + x)") {
 		CHECK(gaussLegendreQuad(func2, xa, xb, N, Ng) == doctest::Approx(expected));
 	}
@@ -186,6 +202,12 @@ TEST_CASE("testing gaussLegendreQuad2D function") {
 	const int Ng = 3;
 
 	const double expected = 412.0 / 45.0;
+
+	SUBCASE("test on empty interval") {
+		CHECK(gaussLegendreQuad2D(func3, xa, xa, ya, yb, N, Ng) == doctest::Approx(0.0));
+		CHECK(gaussLegendreQuad2D(func3, xa, xb, ya, ya, N, Ng) == doctest::Approx(0.0));
+		CHECK(gaussLegendreQuad2D(func3, xa, xa, ya, ya, N, Ng) == doctest::Approx(0.0));
+	}
 
 	SUBCASE("test on function 2: sqrt(1 + x)") {
 		CHECK(gaussLegendreQuad2D(func3, xa, xb, ya, yb, N, Ng) == doctest::Approx(expected));
