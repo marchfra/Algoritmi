@@ -1,16 +1,5 @@
 ---
 triple:          'x86_64-apple-darwin'
 binary-path:     'tests/bin/quadtest'
-relocations:
-  - { offset: 0x551E1, size: 0x8, addend: 0x0, symName: __Z15rectangularQuadPFdRKdES0_S0_RKi, symObjAddr: 0x0, symBinAddr: 0x1000464F0, symSize: 0xB0 }
-  - { offset: 0x5A7D5, size: 0x8, addend: 0x0, symName: __Z15rectangularQuadPFdRKdES0_S0_RKi, symObjAddr: 0x0, symBinAddr: 0x1000464F0, symSize: 0xB0 }
-  - { offset: 0x5A87B, size: 0x8, addend: 0x0, symName: __Z12midpointQuadPFdRKdES0_S0_RKi, symObjAddr: 0xB0, symBinAddr: 0x1000465A0, symSize: 0x40 }
-  - { offset: 0x5A8D6, size: 0x8, addend: 0x0, symName: __Z17gaussLegendreQuadPFdRKdES0_S0_ii, symObjAddr: 0xF0, symBinAddr: 0x1000465E0, symSize: 0x210 }
-  - { offset: 0x5A9E3, size: 0x8, addend: 0x0, symName: __Z15trapezoidalQuadPFdRKdES0_S0_RKi, symObjAddr: 0x300, symBinAddr: 0x1000467F0, symSize: 0xD0 }
-  - { offset: 0x5AA89, size: 0x8, addend: 0x0, symName: __Z11simpsonQuadPFdRKdES0_S0_RKi, symObjAddr: 0x3D0, symBinAddr: 0x1000468C0, symSize: 0x180 }
-  - { offset: 0x5AB41, size: 0x8, addend: 0x0, symName: __ZNSt16invalid_argumentC1B7v160006EPKc, symObjAddr: 0x550, symBinAddr: 0x100046A40, symSize: 0x30 }
-  - { offset: 0x5AB7A, size: 0x8, addend: 0x0, symName: __Z26setLegendreWeightsAndRootsPdS_RKi, symObjAddr: 0x580, symBinAddr: 0x100046A70, symSize: 0x550 }
-  - { offset: 0x5ABC2, size: 0x8, addend: 0x0, symName: __Z4sqrtB7v160006IiENSt3__19enable_ifIXsr3std11is_integralIT_EE5valueEdE4typeES2_, symObjAddr: 0xAD0, symBinAddr: 0x100046FC0, symSize: 0x20 }
-  - { offset: 0x5ABFC, size: 0x8, addend: 0x0, symName: __Z19gaussLegendreQuad2DPFdRKdS0_ES0_S0_S0_S0_ii, symObjAddr: 0xAF0, symBinAddr: 0x100046FE0, symSize: 0x360 }
-  - { offset: 0x5AD96, size: 0x8, addend: 0x0, symName: __ZNSt16invalid_argumentC2B7v160006EPKc, symObjAddr: 0xE50, symBinAddr: 0x100047340, symSize: 0x39 }
+relocations:     []
 ...
