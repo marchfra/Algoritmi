@@ -81,10 +81,8 @@ void pVerlet(const double &t, double Y[],
 	RHSFunc(Y, a);
 
 	for (int i = 0; i < nParticles; i++) {
-		v[i] +=
-			dt *
-			(a +
-		     nParticles)[i];  // Note: index of a is the index of the velocities
+		// Note: index of a is the index of the velocities
+		v[i] += dt * (a + nParticles)[i];
 		x[i] += 0.5 * dt * v[i];
 	}
 }
@@ -108,19 +106,15 @@ void vVerlet(const double &t, double Y[],
 	RHSFunc(Y, a);
 
 	for (int i = 0; i < nParticles; i++) {
-		v[i] +=
-			0.5 * dt *
-			(a +
-		     nParticles)[i];  // Note: index of a is the index of the velocities
+		// Note: index of a is the index of the velocities
+		v[i] += 0.5 * dt * (a + nParticles)[i];
 		x[i] += dt * v[i];
 	}
 
 	RHSFunc(Y, a);
 
 	for (int i = 0; i < nParticles; i++) {
-		v[i] +=
-			0.5 * dt *
-			(a +
-		     nParticles)[i];  // Note: index of a is the index of the velocities
+		// Note: index of a is the index of the velocities
+		v[i] += 0.5 * dt * (a + nParticles)[i];
 	}
 }
