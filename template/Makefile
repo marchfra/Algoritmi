@@ -14,7 +14,7 @@ OBJS = $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS))
 BINDIR = bin
 BIN = $(BINDIR)/main
 
-LIBDIR = /Users/francescomarchisotti/Documents/Uni/Anno_4/Algoritmi/Libs
+LIBDIR = /Users/francescomarchisotti/Documents/Uni/Magistrale/Algoritmi/Libs
 LIBNAME = algo
 
 DATADIR = data
