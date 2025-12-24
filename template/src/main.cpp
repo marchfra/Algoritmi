@@ -1,7 +1,7 @@
-#include <iostream>
+#include <cmath>
 #include <fstream>
 #include <iomanip>
-#include <cmath>
+#include <iostream>
 
 // #include "../../Libs/include/swap.hpp"
 // #include "../../Libs/include/quad.hpp"
@@ -11,9 +11,9 @@
 // #include "../../Libs/include/ode_solver.hpp"
 // #include "../../Libs/include/lin_alg.hpp"
 
-using std::cout;
-using std::cin;
 using std::cerr;
+using std::cin;
+using std::cout;
 using std::endl;
 
 int main() {
